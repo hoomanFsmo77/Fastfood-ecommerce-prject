@@ -1,5 +1,5 @@
 const database=require('../database/database')
-const {responseHandler}=require('../helper')
+const {responseHandler}=require('../utils')
 
 module.exports=(req,res,next)=>{
     if(req.originalUrl!=='/api/access' && !req.originalUrl.includes('/storage/image')){

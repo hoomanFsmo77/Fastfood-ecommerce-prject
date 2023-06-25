@@ -5,7 +5,7 @@ const bodyParser=require('body-parser')
 router.use(bodyParser.urlencoded({
     extended:true
 }));
-const {responseHandler}=require('../helper')
+const {responseHandler}=require('../utils')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const {nanoid} = require('nanoid')

@@ -20,13 +20,15 @@ const bannerRoute=require('./routes/banner')
 const productRoute=require('./routes/product')
 //// category route
 const categoryRoute=require('./routes/category')
-
+//// menu route
+const menuRoute=require('./routes/menu')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
 app.use('/api/banner',bannerRoute)
-app.use('/api/product',productRoute)
+app.use('/api/products',productRoute)
 app.use('/api/category',categoryRoute)
+app.use('/api/menu',menuRoute)
 
 
 

@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({
 
 ///////////////////////////// multer
 const multer  = require('multer')
-const {responseHandler,addImageBase} = require("../helper");
+const {responseHandler,addImageBase} = require("../utils");
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "./src/storage/");
