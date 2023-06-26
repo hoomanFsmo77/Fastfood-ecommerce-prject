@@ -2,6 +2,7 @@ const database = require("./database/database");
 const _ = require("lodash");
 const imageBase=process.env.IMAGE_PATH;
 const apiBase=process.env.API_BASE
+const pageRegx=/page=\d+/g
 ////////////////////////////////////////////////////
 const querySerialize = (obj) => {
   return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&');
@@ -52,9 +53,22 @@ const sortByCategory = (arr) => {
 
 const addImageBase = (source,key) => {
     const imageBase=process.env.IMAGE_PATH
-    return source.map(item=>{
-        return {...item,[key]:imageBase+item[key]}
-    })
+    if(typeof key==='object'){
+        let result=[...source];
+        key.forEach(k=>{
+            result= result.map(item=>{
+                return {
+                    ...item,
+                    [k]:imageBase+item[k]
+                }
+            })
+        });
+        return result;
+    }else{
+        return source.map(item=>{
+            return {...item,[key]:imageBase+item[key]}
+        })
+    }
 }
 
 const getAllProductFilter = async () => {
@@ -65,8 +79,17 @@ const getAllProductFilter = async () => {
 
 const getProductByLinkFilter = async (link) => {
     const product=await database('product').join('category','category.id','=','product.categoryID').select('product.*','category.name as category').where({link:link});
-    const images = await database('product_image').select().where({productID:product[0].id} )
-    const target={...product[0],images}
+    const images = await database('product_image').select().where({productID:product[0].id} );
+    const comments = await database('comments').join('users','comments.userID','=','users.id').select('comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:0} );
+    const replies=await database('comments').join('users','comments.userID','=','users.id').select('comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:1} );
+    addImageBase(replies,'author_image').forEach(reply=>{
+        comments.forEach(comment=>{
+            if(reply.replyID===comment.id){
+                comment.reply=comment.reply ? comment.reply.push(reply) : [reply]
+            }
+        })
+    });
+    const target={...product[0],images,comments};
     const changeNumberToBoolean=changeToBoolean([target],['status','off']);
     const result=addImageBase(changeNumberToBoolean,'primary_image').map(item=>{
         if(item.images){
@@ -74,7 +97,10 @@ const getProductByLinkFilter = async (link) => {
                 ...item,
                 images:item.images.map(sub_item=>{
                     return {...sub_item,image:imageBase+sub_item.image}
-                })
+                }),
+                comments:item.comments.map(sub_item=>{
+                    return {...sub_item,author_image:imageBase+sub_item.author_image}
+                }),
             }
         }else{
             return item
@@ -112,41 +138,41 @@ const transferProductToReadable = async (products) => {
 /// 3 => best sellers
 /// 4 => with off
 
-const getProductByCondition = async (search,categoryID,sortBy) => {
+const getProductByCondition = async (search,categoryName,sortBy) => {
     let products;
-    if(!categoryID && sortBy!==4 && typeof sortBy==='number'){
+    if(!categoryName && sortBy!==4 && typeof sortBy==='number'){
          products=await database('product').
          join('category','category.id','=','product.categoryID').
          select('product.*','category.name as category').
          whereILike(`title`,`${search.toLowerCase()}%`).
          orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
-    }else if(sortBy===4 && !categoryID){
+    }else if(sortBy===4 && !categoryName){
         products=await database('product').
         join('category','category.id','=','product.categoryID').
         select('product.*','category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
         where({off:1})
-    }else if(categoryID && sortBy!==4 && typeof sortBy==='number'){
+    }else if(categoryName && sortBy!==4 && typeof sortBy==='number'){
         products=await database('product').
         join('category','category.id','=','product.categoryID').
         select('product.*','category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        where({categoryID}).
+        whereILike('category.name',`${categoryName.toLowerCase()}%`).
         orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
-    }else if(categoryID && sortBy===4){
+    }else if(categoryName && sortBy===4){
         products=await database('product').
         join('category','category.id','=','product.categoryID').
         select('product.*','category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        where({categoryID}).
+        whereILike('category.name',`${categoryName.toLowerCase()}%`).
         where({off:1})
-    }else if (!sortBy && categoryID){
+    }else if (!sortBy && categoryName){
         products=await database('product').
         join('category','category.id','=','product.categoryID').
         select('product.*','category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        where({categoryID})
-    }else if(!sortBy && !categoryID){
+        whereILike('category.name',`${categoryName.toLowerCase()}%`)
+    }else if(!sortBy && !categoryName){
         products=await database('product').
         join('category','category.id','=','product.categoryID').
         select('product.*','category.name as category').
@@ -162,41 +188,25 @@ const getRandomProduct =async (limit) => {
     return transferProductToReadable(product)
 }
 
-const pagination = (source,page,per_page,originalUrl) => {
-  const rg=/page=\d+/g
-  if(source.length>6){
-      const totalPage=Math.ceil(source.length/per_page)
-      const startIdx=(page*per_page)-per_page
-      const endIdx=startIdx+per_page
-      return {
-            products:source.slice(startIdx,endIdx),
-          meta:{
-              current_page:page,
-              total:totalPage
-          },
-          links:{
-              "first":apiBase+ originalUrl.replace(rg,'page='+'1') ,
-              "last": apiBase+originalUrl.replace(rg,'page='+totalPage),
-              "prev": page>1 ? `${apiBase}${originalUrl.replace(rg,'page='+(page-1))}` : `${apiBase}${originalUrl.replace(rg,'page='+totalPage)}`,
-              "next":page>=totalPage ? apiBase+originalUrl.replace(rg,'page='+'1') : apiBase+originalUrl.replace(rg,'page='+(page+1))
-          }
-      }
-
-  }else{
-      return {
-          products:source,
-          meta:{
-              current_page:1,
-              total:1
-          },
-          links:{
-              "first":apiBase+ originalUrl.replace(rg,'page='+'1'),
-              "last": apiBase+originalUrl.replace(rg,'page='+'1'),
-              "prev": apiBase+originalUrl.replace(rg,'page='+'1'),
-              "next": apiBase+originalUrl.replace(rg,'page='+'1')
-          }
-      };
-  }
+const pagination = (source,page,per_page,originalUrl,key) => {
+    const url=page ? originalUrl : originalUrl.includes('?') ? originalUrl+'&page=1' : originalUrl+'?page=1';
+    const validPage=page || 1;
+    const totalPage=Math.ceil(source.length/per_page)
+    const startIdx=(validPage*per_page)-per_page
+    const endIdx=startIdx+per_page
+    return {
+        [key]:source.slice(startIdx,endIdx),
+        meta:{
+            current_page:validPage,
+            total:totalPage
+        },
+        links:{
+            "first":apiBase+ url.replace(pageRegx,'page='+'1') ,
+            "last": apiBase+url.replace(pageRegx,'page='+totalPage),
+            "prev": validPage>1 ? `${apiBase}${url.replace(pageRegx,'page='+(validPage-1))}` : `${apiBase}${url.replace(pageRegx,'page='+totalPage)}`,
+            "next":validPage>=totalPage ? apiBase+url.replace(pageRegx,'page='+'1') : apiBase+url.replace(pageRegx,'page='+(validPage+1))
+        }
+    }
 }
 
 

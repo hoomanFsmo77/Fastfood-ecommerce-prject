@@ -87,7 +87,6 @@ router.post('/image',upload.single('image'),(req,res)=>{
     }else{
         res.status(200).send(responseHandler(true,'productID or file is not valid!',null))
     }
-
 })
 ////////////////// end add product image  ///////////////////////
 
@@ -107,6 +106,11 @@ router.get('/:link',param('link').notEmpty(),async (req,res)=>{
 
 ///////////////// end get product by link //////////////////
 
+//////////////// start add exclusive product ////////////////
+
+
+
+//////////////// end add exclusive product ////////////////
 
 
 

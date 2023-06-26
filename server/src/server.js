@@ -22,6 +22,12 @@ const productRoute=require('./routes/product')
 const categoryRoute=require('./routes/category')
 //// menu route
 const menuRoute=require('./routes/menu')
+//// comments route
+const commentsRoute=require('./routes/comments')
+//// users route
+const usersRoute=require('./routes/users')
+//// blog route
+const blogRoute=require('./routes/blog')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -29,6 +35,9 @@ app.use('/api/banner',bannerRoute)
 app.use('/api/products',productRoute)
 app.use('/api/category',categoryRoute)
 app.use('/api/menu',menuRoute)
+app.use('/api/comments',commentsRoute)
+app.use('/api/users',usersRoute)
+app.use('/api/blog',blogRoute)
 
 
 
