@@ -22,13 +22,16 @@ const productCategoryRoute=require('./routes/product_category')
 const productCommentsRoute=require('./routes/product_comments')
 //// menu route
 const menuRoute=require('./routes/menu')
-//// users route
-const usersRoute=require('./routes/users')
 //// blog route
 const blogRoute=require('./routes/blog')
 const blogCategoryRoute=require('./routes/blog_category')
 const blogCommentsRoute=require('./routes/blog_comments')
-
+//// contact us
+const contactUsRoute=require('./routes/contact_us')
+//// gallery route
+const galleryRoute=require('./routes/gallery')
+//// auth route
+const authRoute=require('./routes/auth')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -37,10 +40,12 @@ app.use('/api/products',productRoute)
 app.use('/api/product-category',productCategoryRoute)
 app.use('/api/menu',menuRoute)
 app.use('/api/product-comments',productCommentsRoute)
-app.use('/api/users',usersRoute)
 app.use('/api/blog',blogRoute)
 app.use('/api/blog-category',blogCategoryRoute)
 app.use('/api/blog-comments',blogCommentsRoute)
+app.use('/api/contact-us',contactUsRoute)
+app.use('/api/gallery',galleryRoute)
+app.use('/api/auth',authRoute)
 
 
 

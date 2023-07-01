@@ -3,33 +3,12 @@ const router=express.Router();
 const {body ,validationResult,matchedData} = require('express-validator');
 const bodyParser=require('body-parser');
 const database=require('../database/database')
+const {responseHandler,addImageBase} = require("../utils");
+const upload=require('../database/upload')
 router.use(bodyParser.urlencoded({
     extended:true
 }));
-
-///////////////////////////// multer
-const multer  = require('multer')
-const {responseHandler,addImageBase} = require("../utils");
-const multerStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./src/storage/");
-    },
-    filename: (req, file, cb) => {
-        const ext = file.mimetype.split("/")[1];
-        cb(null, `${Date.now()}.${ext}`);
-    },
-});
-
-const multerFilter = (req, file, cb) => {
-    if (file.mimetype.split("/")[1] === "jpeg" || file.mimetype.split("/")[1] === "jpg" || file.mimetype.split("/")[1] === "png" || file.mimetype.split("/")[1] === "svg") {
-        cb(null, true);
-    } else {
-        cb("Not a jpeg|jpg|png|svg File!!", false);
-    }
-};
-const upload = multer({storage: multerStorage, fileFilter: multerFilter})
-
-////////////////////////////////////
+////////////////////////////////////////////////////////
 
 //// insert banner
 const bodyValidation=()=>body(['caption','first_text','middle_text','last_text']).notEmpty();

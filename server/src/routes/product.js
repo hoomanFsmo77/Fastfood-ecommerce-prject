@@ -1,36 +1,12 @@
 const express=require('express');
 const router=express.Router();
 const bodyParser=require('body-parser')
-router.use(bodyParser.urlencoded({extended:true}));
 const database=require('../database/database');
 const {responseHandler,getAllProductFilter,getProductByLinkFilter}=require('../utils');
 const _ = require('lodash');
 const {body, validationResult, matchedData,param,query} = require("express-validator");
-
-
-
-
-
-/////////////
-const multer  = require('multer')
-const multerStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./src/storage/");
-    },
-    filename: (req, file, cb) => {
-        const ext = file.mimetype.split("/")[1];
-        cb(null, `${Date.now()}.${ext}`);
-    },
-});
-const multerFilter = (req, file, cb) => {
-    if (file.mimetype.split("/")[1] === "jpeg" || file.mimetype.split("/")[1] === "jpg" || file.mimetype.split("/")[1] === "png" || file.mimetype.split("/")[1] === "svg") {
-        cb(null, true);
-    } else {
-        cb("Not a jpeg|jpg|png|svg File!!", false);
-    }
-};
-const upload = multer({storage: multerStorage, fileFilter: multerFilter})
-///////////////////////////
+const upload=require('../database/upload')
+router.use(bodyParser.urlencoded({extended:true}));
 
 ////////////////// start get product tab ////////////////////////
 router.get('/tab',async (req,res)=>{
