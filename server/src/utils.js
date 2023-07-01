@@ -72,16 +72,16 @@ const addImageBase = (source,key) => {
 }
 
 const getAllProductFilter = async () => {
-    const products=await database('product').join('category','category.id','=','product.categoryID').select('product.*','category.name as category');
+    const products=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category');
     const result= await transferProductToReadable(products)
     return sortByCategory(result)
 }
 
 const getProductByLinkFilter = async (link) => {
-    const product=await database('product').join('category','category.id','=','product.categoryID').select('product.*','category.name as category').where({link:link});
+    const product=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category').where({link:link});
     const images = await database('product_image').select().where({productID:product[0].id} );
-    const comments = await database('comments').join('users','comments.userID','=','users.id').select('comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:0} );
-    const replies=await database('comments').join('users','comments.userID','=','users.id').select('comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:1} );
+    const comments = await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:0} );
+    const replies=await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:1} );
     addImageBase(replies,'author_image').forEach(reply=>{
         comments.forEach(comment=>{
             if(reply.replyID===comment.id){
@@ -108,6 +108,35 @@ const getProductByLinkFilter = async (link) => {
     })
     return result[0]
 }
+const getBlogByLinkFilter = async (link) => {
+    const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('users','blog.userID','=','users.id').select('blog.*','blog_category.name as category','users.lastname as author_lastname','users.username as author_username','users.firstname as author_firstname').where({link:link});
+    const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:0} );
+    const content = await database('blog').join('blog_content','blog_content.blogID','=','blog.id').select('blog_content.*').where({blogID:blog[0].id} );
+    const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:1} );
+   addImageBase(replies,['author_image']).forEach(reply=>{
+        comments.forEach(comment=>{
+            if(reply.replyID===comment.id){
+                comment.reply=comment.reply ? comment.reply.push(reply) : [reply]
+            }
+        })
+    });
+    const target={...blog[0],comments:addImageBase(comments,'author_image'),content}
+    const result=addImageBase([target],['image_sm','image_xs','image_lg']).map(item=>{
+        if(item.images){
+            return {
+                ...item,
+                comments:item.comments.map(sub_item=>{
+                    return {...sub_item,author_image:imageBase+sub_item.author_image}
+                }),
+            }
+        }else{
+            return item
+        }
+    })
+    return result[0]
+}
+
+
 
 const transferProductToReadable = async (products) => {
     const productsIds=_.map(products, (el) => el.id);
@@ -142,40 +171,40 @@ const getProductByCondition = async (search,categoryName,sortBy) => {
     let products;
     if(!categoryName && sortBy!==4 && typeof sortBy==='number'){
          products=await database('product').
-         join('category','category.id','=','product.categoryID').
-         select('product.*','category.name as category').
+         join('product_category','product_category.id','=','product.categoryID').
+         select('product.*','product_category.name as category').
          whereILike(`title`,`${search.toLowerCase()}%`).
          orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
     }else if(sortBy===4 && !categoryName){
         products=await database('product').
-        join('category','category.id','=','product.categoryID').
-        select('product.*','category.name as category').
+        join('product_category','product_category.id','=','product.categoryID').
+        select('product.*','product_category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
         where({off:1})
     }else if(categoryName && sortBy!==4 && typeof sortBy==='number'){
         products=await database('product').
-        join('category','category.id','=','product.categoryID').
-        select('product.*','category.name as category').
+        join('product_category','product_category.id','=','product.categoryID').
+        select('product.*','product_category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('category.name',`${categoryName.toLowerCase()}%`).
+        whereILike('product_category.name',`${categoryName.toLowerCase()}%`).
         orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
     }else if(categoryName && sortBy===4){
         products=await database('product').
-        join('category','category.id','=','product.categoryID').
-        select('product.*','category.name as category').
+        join('product_category','product_category.id','=','product.categoryID').
+        select('product.*','product_category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('category.name',`${categoryName.toLowerCase()}%`).
+        whereILike('product_category.name',`${categoryName.toLowerCase()}%`).
         where({off:1})
     }else if (!sortBy && categoryName){
         products=await database('product').
-        join('category','category.id','=','product.categoryID').
-        select('product.*','category.name as category').
+        join('product_category','product_category.id','=','product.categoryID').
+        select('product.*','product_category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('category.name',`${categoryName.toLowerCase()}%`)
+        whereILike('product_category.name',`${categoryName.toLowerCase()}%`)
     }else if(!sortBy && !categoryName){
         products=await database('product').
-        join('category','category.id','=','product.categoryID').
-        select('product.*','category.name as category').
+        join('product_category','product_category.id','=','product.categoryID').
+        select('product.*','product_category.name as category').
         whereILike(`title`,`${search.toLowerCase()}%`)
     }
 
@@ -211,5 +240,5 @@ const pagination = (source,page,per_page,originalUrl,key) => {
 
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter
 }

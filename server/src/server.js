@@ -18,26 +18,29 @@ const accessRoute=require('./routes/access')
 const bannerRoute=require('./routes/banner')
 //// product route
 const productRoute=require('./routes/product')
-//// category route
-const categoryRoute=require('./routes/category')
+const productCategoryRoute=require('./routes/product_category')
+const productCommentsRoute=require('./routes/product_comments')
 //// menu route
 const menuRoute=require('./routes/menu')
-//// comments route
-const commentsRoute=require('./routes/comments')
 //// users route
 const usersRoute=require('./routes/users')
 //// blog route
 const blogRoute=require('./routes/blog')
+const blogCategoryRoute=require('./routes/blog_category')
+const blogCommentsRoute=require('./routes/blog_comments')
+
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
 app.use('/api/banner',bannerRoute)
 app.use('/api/products',productRoute)
-app.use('/api/category',categoryRoute)
+app.use('/api/product-category',productCategoryRoute)
 app.use('/api/menu',menuRoute)
-app.use('/api/comments',commentsRoute)
+app.use('/api/product-comments',productCommentsRoute)
 app.use('/api/users',usersRoute)
 app.use('/api/blog',blogRoute)
+app.use('/api/blog-category',blogCategoryRoute)
+app.use('/api/blog-comments',blogCommentsRoute)
 
 
 

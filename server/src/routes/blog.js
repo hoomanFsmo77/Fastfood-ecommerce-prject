@@ -3,7 +3,7 @@ const router=express.Router();
 const database=require('../database/database')
 const bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({extended:true}));
-const {responseHandler, addImageBase}=require('../utils')
+const {responseHandler, addImageBase, getBlogByLinkFilter}=require('../utils')
 const {query, validationResult, matchedData, body} = require("express-validator");
 
 //////////////////////////////////////////////////////////////////
@@ -27,48 +27,6 @@ const multerFilter = (req, file, cb) => {
 const upload = multer({storage: multerStorage, fileFilter: multerFilter})
 
 
-/////////////////////////////////////////////////////
-///// get all category
-router.get('/category',(req,res)=>{
-    database('blog_category').select('*').then(response=>{
-        res.status(200).send(responseHandler(false,null,response))
-    }).catch(err=>{
-        res.status(503).send('error in db!')
-    })
-})
-///// add new category
-router.post('/category',query(['category']).notEmpty(),(req,res)=>{
-    const result = validationResult(req);
-    if (result.isEmpty()) {
-        const query = matchedData(req);
-        database('blog_category').
-        insert({name:query.category}).
-        then(response=>{
-            res.status(200).send(responseHandler(false,'category added',null))
-        }).catch(err=>{
-            res.status(503).send('error in db')
-        })
-    }else{
-        res.status(200).send(responseHandler(true,result.array() ,null));
-    }
-})
-////// update a category
-router.put('/',query(['id','category']).notEmpty(),(req,res)=>{
-    const result = validationResult(req);
-    if (result.isEmpty()) {
-        const query = matchedData(req);
-        database('blog_category').
-        where({id:query.id}).
-        update({name:query.category}).
-        then(response=>{
-            res.status(200).send(responseHandler(false,'category updated',null))
-        }).catch(err=>{
-            res.status(503).send('error in db')
-        })
-    }else{
-        res.status(200).send(responseHandler(true,result.array() ,null));
-    }
-})
 
 
 ////////////////// start add blog ////////////////////////
@@ -128,17 +86,10 @@ router.get('/news',(req,res)=>{
 ////////////////// start get news ////////////////////////
 
 ////////////////// start get blogs ////////////////////////
-router.get('/',(req,res)=>{
+router.get('/',async (req,res)=>{
     const link=req?.query?.link?.toLowerCase() || '';
-    database('blog').
-    join('blog_category','blog.categoryID','=','blog_category.id').
-    select('blog.*','blog_category.name as category').
-    whereILike('blog.link',`${link}%`).
-    then(response=>{
-        res.status(200).send(responseHandler(false,null,addImageBase(response,['image_sm','image_xs','image_lg'])))
-    }).catch(err=>{
-        res.status(503).send('error in db')
-    })
+    const target=await getBlogByLinkFilter(link)
+    res.status(200).send(responseHandler(false,null,target))
 
 })
 ////////////////// start get blogs ////////////////////////
