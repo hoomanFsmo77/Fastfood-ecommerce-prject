@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router();
 const database=require('../database/database')
-const {body, validationResult, matchedData} = require("express-validator");
+const {body,header, validationResult, matchedData} = require("express-validator");
 const upload = require("../database/upload");
 const {responseHandler,addImageBase,changeToBoolean} = require("../utils");
 const {nanoid} = require('nanoid')
@@ -82,13 +82,13 @@ router.post('/login',body('email').isEmail(),body('password').notEmpty(),async (
 
 })
 
-router.get('/me',body('token').notEmpty(),(req,res)=>{
+router.get('/me',header('token').notEmpty(),(req,res)=>{
     const result =  validationResult(req);
     if(result.isEmpty()) {
-        const body = matchedData(req);
+        const header = matchedData(req);
         database('users').
         select(['firstname','lastname','username','profile_image','phone','email','isAdmin']).
-        where({token:body.token}).
+        where({token:header.token}).
         then(response=>{
             if(response.length>0){
                 res.status(200).send(responseHandler(false,null,changeToBoolean(addImageBase(response,'profile_image'),'isAdmin')))

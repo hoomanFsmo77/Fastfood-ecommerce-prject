@@ -2,7 +2,6 @@ require('dotenv').config()
 const express=require('express')
 const bodyParser=require('body-parser')
 const cors=require('cors')
-// const database=require('./database/database')
 const app=express()
 app.use(bodyParser.json());
 app.use(cors());
@@ -32,6 +31,10 @@ const contactUsRoute=require('./routes/contact_us')
 const galleryRoute=require('./routes/gallery')
 //// auth route
 const authRoute=require('./routes/auth')
+//// profile route
+const profileRoute=require('./routes/profile')
+//// location route
+const locationRoute=require('./routes/location')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -46,6 +49,8 @@ app.use('/api/blog-comments',blogCommentsRoute)
 app.use('/api/contact-us',contactUsRoute)
 app.use('/api/gallery',galleryRoute)
 app.use('/api/auth',authRoute)
+app.use('/api/profile',profileRoute)
+app.use('/api/loc',locationRoute)
 
 
 
