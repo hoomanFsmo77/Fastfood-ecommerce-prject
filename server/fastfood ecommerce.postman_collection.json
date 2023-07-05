@@ -1,0 +1,1524 @@
+{
+	"info": {
+		"_postman_id": "fe5b9cce-7c78-4b8d-8ebb-cd2aa5c5a6c4",
+		"name": "fastfood ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22525055"
+	},
+	"item": [
+		{
+			"name": "App",
+			"item": [
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "get tab product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/products/tab",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products",
+										"tab"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get product by link",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/products/:link",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products",
+										":link"
+									],
+									"variable": [
+										{
+											"key": "link",
+											"value": "spicy-pepperoni"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get menu",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/menu",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"menu"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "meat",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "1",
+											"description": "1 => most expensive  2 => less expensive  3 => best sellers  4 => with off",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "salad",
+											"description": "category name",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "2",
+											"description": "default : 6",
+											"disabled": true
+										},
+										{
+											"key": "count",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add product image",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "productID",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/products/image",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products",
+										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add product tab",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "primary_image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "categoryID",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "caption",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "brief",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "specification",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/products",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product category",
+					"item": [
+						{
+							"name": "get all category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-category",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-category?id=9",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-category"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add new category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-category?category=",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-category"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "",
+											"description": "category name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-category?id=&category=",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-category"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "categroy id"
+										},
+										{
+											"key": "category",
+											"value": "",
+											"description": "new name"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api key",
+					"item": [
+						{
+							"name": "registeration for api key",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "",
+											"description": "valid email address",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"description": "between 6 and 12 characters",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/access",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"access"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "banner",
+					"item": [
+						{
+							"name": "get all banner",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/banner",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"banner"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add banner",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "caption",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "first_text",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "middle_text",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "last_text",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/banner",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"banner"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "register user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "profile_image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "username",
+											"value": "hooman_77",
+											"type": "text"
+										},
+										{
+											"key": "firstname",
+											"value": "hooman",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "mousavi",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "09921929653",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "13777731Ho@",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "hoomanmousavi77@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/auth/register",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "hoomanmousavi77@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "13777731Ho@",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/auth/login",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "me",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/auth/me",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blog",
+					"item": [
+						{
+							"name": "get latest news",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog/news",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog",
+										"news"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all blogs and by link",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog?link=5-way-to-increase-neutrients-in-fast-food",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog"
+									],
+									"query": [
+										{
+											"key": "link",
+											"value": "5-way-to-increase-neutrients-in-fast-food",
+											"description": "optional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add blog",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image_sm",
+											"description": "optional",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "image_xs",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "image_lg",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "categoryID",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "brief",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "userID",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/blog",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blog category",
+					"item": [
+						{
+							"name": "get all blog category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-category",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add new blog category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-category?category=",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-category"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-category?id=&category=",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-category"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "categroy id"
+										},
+										{
+											"key": "category",
+											"value": "",
+											"description": "new name"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blog comments",
+					"item": [
+						{
+							"name": "add comments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":0,\r\n    \"date\":\"\",\r\n    \"blogID\":9,\r\n    \"body\":\"\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base}}/blog-comments",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comment by user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-comments/user/:id",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-comments",
+										"user",
+										":id"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all comments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-comments",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"description": "default : 6",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change comment status (accept or reject)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog-comments/change-status/:commentID/:status",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog-comments",
+										"change-status",
+										":commentID",
+										":status"
+									],
+									"variable": [
+										{
+											"key": "commentID",
+											"value": "11"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"description": "0:reject   1:accept"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product comments",
+					"item": [
+						{
+							"name": "add comments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":2,\r\n    \"date\":\"\",\r\n    \"productID\":8,\r\n    \"rating\":5,\r\n    \"body\":\"\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base}}/product-comments",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comment by user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-comments/user/:id",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-comments",
+										"user",
+										":id"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all comments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-comments",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"description": "default : 6",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change comment status (accept or reject)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/product-comments/change-status/:commentID/:status",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"product-comments",
+										"change-status",
+										":commentID",
+										":status"
+									],
+									"variable": [
+										{
+											"key": "commentID",
+											"value": ""
+										},
+										{
+											"key": "status",
+											"value": "",
+											"description": "0:reject   1:accept"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "contact us",
+					"item": [
+						{
+							"name": "contact us",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "subject",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/contact-us",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"contact-us"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "gallery",
+					"item": [
+						{
+							"name": "get gallery",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/gallery",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"gallery"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add gallery",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "title",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/gallery",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"gallery"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "info",
+							"item": [
+								{
+									"name": "get info",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/profile/info",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update info",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "firstname",
+													"value": "hooman",
+													"type": "text"
+												},
+												{
+													"key": "lastname",
+													"value": "mousavi",
+													"type": "text"
+												},
+												{
+													"key": "username",
+													"value": "hooman_77",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09921929653",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "hoomanmousavi77@gmail.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_base}}/profile/info",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"info"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "address",
+							"item": [
+								{
+									"name": "add address",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Workeee",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ",
+													"type": "text"
+												},
+												{
+													"key": "provinceID",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "cityID",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "postal_code",
+													"value": "1234",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09921929653",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_base}}/profile/address",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get address",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/profile/address",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"address"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "2",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update address",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Work",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ",
+													"type": "text"
+												},
+												{
+													"key": "provinceID",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "cityID",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "postal_code",
+													"value": "1234",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09921929653",
+													"type": "text"
+												},
+												{
+													"key": "addressID",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_base}}/profile/address",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete address",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "token",
+												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/profile/address/:addressID",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"profile",
+												"address",
+												":addressID"
+											],
+											"variable": [
+												{
+													"key": "addressID",
+													"value": "4"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "location",
+					"item": [
+						{
+							"name": "get province",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/loc/provinces",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"loc",
+										"provinces"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get city",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/loc/city/:provinceID",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"loc",
+										"city",
+										":provinceID"
+									],
+									"variable": [
+										{
+											"key": "provinceID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Panel",
+			"item": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{access_key}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "access_key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_base",
+			"value": "http://localhost:3001/api",
+			"type": "string"
+		},
+		{
+			"key": "access_key",
+			"value": "JFXILU1j0zi99YlgaF0w1zlcCMEseKG6GoNeK89KaMAV1X_t",
+			"type": "string"
+		}
+	]
+}
