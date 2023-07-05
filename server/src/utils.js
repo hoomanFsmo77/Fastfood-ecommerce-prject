@@ -237,8 +237,17 @@ const pagination = (source,page,per_page,originalUrl,key) => {
         }
     }
 }
+const calculateSum = (source,key) => {
+  let sum=0
+    source.forEach(item=>{
+        sum+=item[key]
+    })
+    return sum
+}
+const date=new Date()
+const today=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today
 }

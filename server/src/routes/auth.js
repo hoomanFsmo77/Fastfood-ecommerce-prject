@@ -58,15 +58,13 @@ router.post('/login',body('email').isEmail(),body('password').notEmpty(),async (
     if(result.isEmpty()) {
         const body = matchedData(req);
         database('users').
-        select(['password','token']).
+        select('*').
         where({email:body.email}).
         then(response=>{
             if(response.length>0){
                 bcrypt.compare(body.password, response[0].password, function(err, result) {
                     if(result){
-                        res.status(200).send(responseHandler(false,null,{
-                            token:response[0].token
-                        }))
+                        res.status(200).send(responseHandler(false,null,response[0]))
                     }else{
                         res.status(200).send(responseHandler(true,'password is incorrect.',null))
                     }
@@ -87,7 +85,7 @@ router.get('/me',header('token').notEmpty(),(req,res)=>{
     if(result.isEmpty()) {
         const header = matchedData(req);
         database('users').
-        select(['firstname','lastname','username','profile_image','phone','email','isAdmin']).
+        select(['firstname','lastname','username','profile_image','phone','email','isAdmin','id']).
         where({token:header.token}).
         then(response=>{
             if(response.length>0){
