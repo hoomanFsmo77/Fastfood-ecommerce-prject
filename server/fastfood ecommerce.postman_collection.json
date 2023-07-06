@@ -556,7 +556,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+										"value": "{{token}}",
 										"type": "text"
 									}
 								],
@@ -1154,7 +1154,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1178,7 +1178,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1237,7 +1237,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1296,7 +1296,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1327,7 +1327,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1391,7 +1391,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
+												"value": "{{token}}",
 												"type": "text"
 											}
 										],
@@ -1416,6 +1416,371 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "basket",
+							"item": [
+								{
+									"name": "add basket",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "productID",
+													"value": "12",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_base}}/basket",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "increase or decrease",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/basket?status=decrease&id=103",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "decrease",
+													"description": "increase|decrease|delete"
+												},
+												{
+													"key": "id",
+													"value": "103"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get basket",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/basket",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remove basket",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/basket",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "orders",
+							"item": [
+								{
+									"name": "get orders",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/orders",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"orders"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "2",
+													"disabled": true
+												},
+												{
+													"key": "per",
+													"value": "2",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get basket by order",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/orders?orderID=43",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"orders"
+											],
+											"query": [
+												{
+													"key": "orderID",
+													"value": "43"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "register coupon",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/orders/register-coupon?code=g678d@&orderID=46",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"orders",
+												"register-coupon"
+											],
+											"query": [
+												{
+													"key": "code",
+													"value": "g678d@"
+												},
+												{
+													"key": "orderID",
+													"value": "46"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "choose address",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/orders/address-payment?addressID=2&orderID=46",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"orders",
+												"address-payment"
+											],
+											"query": [
+												{
+													"key": "addressID",
+													"value": "2"
+												},
+												{
+													"key": "orderID",
+													"value": "46"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "transaction",
+							"item": [
+								{
+									"name": "submit transaction",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/transaction?tracking_number=ab65b59788f048d51b17a895d6350cfa&orderID=46&status=7",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"transaction"
+											],
+											"query": [
+												{
+													"key": "tracking_number",
+													"value": "ab65b59788f048d51b17a895d6350cfa"
+												},
+												{
+													"key": "orderID",
+													"value": "46"
+												},
+												{
+													"key": "status",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get transaction",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/transaction",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"transaction"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "submit payment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_base}}/payment?orderID=46",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"payment"
+									],
+									"query": [
+										{
+											"key": "orderID",
+											"value": "46"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1459,6 +1824,110 @@
 										{
 											"key": "provinceID",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "coupons",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/coupons",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"coupons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check validation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/coupons/valid?code=g678d@",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"coupons",
+										"valid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "g678d@"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add coupon",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{api_base}}/coupons?code=44@@fr&percent=10&expired_at=2023-12-28 13:05:41",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"coupons"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "44@@fr"
+										},
+										{
+											"key": "percent",
+											"value": "10"
+										},
+										{
+											"key": "expired_at",
+											"value": "2023-12-28 13:05:41"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete coupon",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/coupons?id=6",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"coupons"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "6"
 										}
 									]
 								}
@@ -1518,6 +1987,11 @@
 		{
 			"key": "access_key",
 			"value": "JFXILU1j0zi99YlgaF0w1zlcCMEseKG6GoNeK89KaMAV1X_t",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d",
 			"type": "string"
 		}
 	]
