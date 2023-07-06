@@ -2,7 +2,7 @@ const database=require('../database/database')
 const {responseHandler}=require('../utils')
 
 module.exports=(req,res,next)=>{
-    if(req.originalUrl!=='/api/access' && !req.originalUrl.includes('/storage/image')){
+    if(req.originalUrl!=='/api/access' && req.originalUrl!=='/api/payment/verify' && !req.originalUrl.includes('/storage/image')){
         const access_key=req.headers.access_key;
         database('registered').where({token:access_key}).then(response=>{
             if(response.length>0){

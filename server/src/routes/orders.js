@@ -52,7 +52,6 @@ router.put('/register-coupon',query(['code','orderID']).notEmpty(),async (req,re
                     payment_amount:(Number(targetOrder[0].total_amount)*targetCoupon[0].percent)/100
                 }).
                 then(response=>{
-                    console.log(response)
                     if(response===0){
                         res.status(200).send(responseHandler(true,'you already used another coupon!',null))
                     }else{
@@ -95,10 +94,6 @@ router.put('/address-payment',query(['addressID','orderID']).notEmpty(),(req,res
     }else{
         res.status(200).send(responseHandler(true,result.array() ,null));
     }
-
-
-
-
 })
 
 

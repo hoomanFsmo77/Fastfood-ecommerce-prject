@@ -41,6 +41,10 @@ const couponRoute=require('./routes/coupons')
 const ordersRoute=require('./routes/orders')
 //// basket route
 const basketRoute=require('./routes/basket')
+//// payment route
+const paymentRoute=require('./routes/payment')
+//// transaction route
+const transactionRoute=require('./routes/transaction')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -60,6 +64,8 @@ app.use('/api/loc',locationRoute)
 app.use('/api/coupons',couponRoute)
 app.use('/api/orders',ordersRoute)
 app.use('/api/basket',basketRoute)
+app.use('/api/payment',paymentRoute)
+app.use('/api/transaction',transactionRoute)
 
 
 
