@@ -37,8 +37,10 @@ const profileRoute=require('./routes/profile')
 const locationRoute=require('./routes/location')
 //// coupons route
 const couponRoute=require('./routes/coupons')
-//// basket route
+//// order route
 const ordersRoute=require('./routes/orders')
+//// basket route
+const basketRoute=require('./routes/basket')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -57,6 +59,7 @@ app.use('/api/profile',profileRoute)
 app.use('/api/loc',locationRoute)
 app.use('/api/coupons',couponRoute)
 app.use('/api/orders',ordersRoute)
+app.use('/api/basket',basketRoute)
 
 
 
