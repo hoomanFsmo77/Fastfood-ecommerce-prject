@@ -1,11 +1,11 @@
 const express=require('express')
 const router=express.Router();
-const database=require('../database/database')
+const database=require('../../database/database')
 const bodyParser=require('body-parser')
 router.use(bodyParser.urlencoded({
     extended:true
 }));
-const {responseHandler}=require('../utils')
+const {responseHandler}=require('../../utils')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const {nanoid} = require('nanoid')

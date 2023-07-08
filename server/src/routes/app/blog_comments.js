@@ -1,8 +1,8 @@
 const express=require('express')
 const router=express.Router();
-const database=require('../database/database')
+const database=require('../../database/database')
 const {body, validationResult, matchedData, param, query} = require("express-validator");
-const {responseHandler, addImageBase, changeToBoolean, pagination} = require("../utils");
+const {responseHandler, addImageBase, changeToBoolean, pagination} = require("../../utils");
 
 
 

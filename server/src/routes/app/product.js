@@ -1,11 +1,11 @@
 const express=require('express');
 const router=express.Router();
 const bodyParser=require('body-parser')
-const database=require('../database/database');
-const {responseHandler,getAllProductFilter,getProductByLinkFilter}=require('../utils');
+const database=require('../../database/database');
+const {responseHandler,getAllProductFilter,getProductByLinkFilter}=require('../../utils');
 const _ = require('lodash');
 const {body, validationResult, matchedData,param,query} = require("express-validator");
-const upload=require('../database/upload')
+const upload=require('../../database/upload')
 router.use(bodyParser.urlencoded({extended:true}));
 
 ////////////////// start get product tab ////////////////////////

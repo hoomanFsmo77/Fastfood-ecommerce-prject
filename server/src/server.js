@@ -10,41 +10,46 @@ app.use(cors());
 const mw=require('./middleware/auth')
 app.use(mw)
 //// storage route
-const storageRoute=require('./routes/storage')
+const storageRoute=require('./routes/app/storage')
 //// access route
-const accessRoute=require('./routes/access')
+const accessRoute=require('./routes/app/access')
 //// banner route
-const bannerRoute=require('./routes/banner')
+const bannerRoute=require('./routes/app/banner')
 //// product route
-const productRoute=require('./routes/product')
-const productCategoryRoute=require('./routes/product_category')
-const productCommentsRoute=require('./routes/product_comments')
+const productRoute=require('./routes/app/product')
+const productCategoryRoute=require('./routes/app/product_category')
+const productCommentsRoute=require('./routes/app/product_comments')
 //// menu route
-const menuRoute=require('./routes/menu')
+const menuRoute=require('./routes/app/menu')
 //// blog route
-const blogRoute=require('./routes/blog')
-const blogCategoryRoute=require('./routes/blog_category')
-const blogCommentsRoute=require('./routes/blog_comments')
+const blogRoute=require('./routes/app/blog')
+const blogCategoryRoute=require('./routes/app/blog_category')
+const blogCommentsRoute=require('./routes/app/blog_comments')
 //// contact us
-const contactUsRoute=require('./routes/contact_us')
+const contactUsRoute=require('./routes/app/contact_us')
 //// gallery route
-const galleryRoute=require('./routes/gallery')
+const galleryRoute=require('./routes/app/gallery')
 //// auth route
-const authRoute=require('./routes/auth')
+const authRoute=require('./routes/app/auth')
 //// profile route
-const profileRoute=require('./routes/profile')
+const profileRoute=require('./routes/app/profile')
 //// location route
-const locationRoute=require('./routes/location')
+const locationRoute=require('./routes/app/location')
 //// coupons route
-const couponRoute=require('./routes/coupons')
+const couponRoute=require('./routes/app/coupons')
 //// order route
-const ordersRoute=require('./routes/orders')
+const ordersRoute=require('./routes/app/orders')
 //// basket route
-const basketRoute=require('./routes/basket')
+const basketRoute=require('./routes/app/basket')
 //// payment route
-const paymentRoute=require('./routes/payment')
+const paymentRoute=require('./routes/app/payment')
 //// transaction route
-const transactionRoute=require('./routes/transaction')
+const transactionRoute=require('./routes/app/transaction')
+//// favorite route
+const favoriteRoute=require('./routes/app/favorite')
+//// panel routes
+const panelAuthRoute=require('./routes/panel/auth')
+const panelUsersRoute=require('./routes/panel/users')
 ////
 app.use('/storage/image',storageRoute)
 app.use('/api/access',accessRoute)
@@ -66,6 +71,9 @@ app.use('/api/orders',ordersRoute)
 app.use('/api/basket',basketRoute)
 app.use('/api/payment',paymentRoute)
 app.use('/api/transaction',transactionRoute)
+app.use('/api/favorite',favoriteRoute)
+app.use('/panel/auth',panelAuthRoute)
+app.use('/panel/users',panelUsersRoute)
 
 
 

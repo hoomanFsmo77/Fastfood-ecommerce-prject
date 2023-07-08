@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router();
-const database=require('../database/database')
-const {responseHandler} = require("../utils");
+const database=require('../../database/database')
+const {responseHandler} = require("../../utils");
 const {query, validationResult, matchedData} = require("express-validator");
 
 

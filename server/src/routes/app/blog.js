@@ -1,9 +1,9 @@
 const express=require('express')
 const router=express.Router();
-const database=require('../database/database')
+const database=require('../../database/database')
 const bodyParser = require("body-parser");
-const upload=require('../database/upload')
-const {responseHandler, addImageBase, getBlogByLinkFilter}=require('../utils')
+const upload=require('../../database/upload')
+const {responseHandler, addImageBase, getBlogByLinkFilter,getAllBlogs, pagination,getBlogByCategory}=require('../../utils')
 const {query, validationResult, matchedData, body} = require("express-validator");
 router.use(bodyParser.urlencoded({extended:true}));
 
@@ -66,12 +66,40 @@ router.get('/news',(req,res)=>{
 
 ////////////////// start get blogs ////////////////////////
 router.get('/',async (req,res)=>{
+    const categoryID=req.query.categoryID;
     const link=req?.query?.link?.toLowerCase() || '';
-    const target=await getBlogByLinkFilter(link)
-    res.status(200).send(responseHandler(false,null,target))
+    const page=Number(req.query.page) || 1;
+    const per_page=Number(req.query.per) || 6;
+    if(link){
+        const target=await getBlogByLinkFilter(link)
+        res.status(200).send(responseHandler(false,null,target))
+    }else if(categoryID){
+        const target=await getBlogByCategory(categoryID)
+        res.status(200).send(responseHandler(false,null,target))
+    }else{
+        const allBlogs=await getAllBlogs();
+        const target=addImageBase(allBlogs,['image_sm','image_xs','image_lg']);
+        res.status(200).send(responseHandler(false,null,pagination(target,page,per_page,req.originalUrl,'blogs')))
+    }
 
+
+    // if(categoryID){
+    //     database('blog').
+    //     join('blog_category','blog.categoryID','=','blog_category.id').
+    //     join('users','blog.userID','=','users.id').
+    //     where({'blog.categoryID':categoryID}).
+    //     select('blog.*','blog_category.name as category_name','').
+    //       then(response=>{
+    //         res.status(200).send(responseHandler(false,null,response))
+    //     }).catch(err=>{
+    //         res.status(200).send(responseHandler(false,'error in db',null))
+    //     })
+    // }else{
+    //
+    // }
 })
 ////////////////// start get blogs ////////////////////////
+
 
 
 module.exports=router

@@ -1,8 +1,8 @@
 const express=require('express');
 const router=express.Router();
-const database=require('../database/database');
+const database=require('../../database/database');
 const {body, validationResult, matchedData, query, param} = require("express-validator");
-const {responseHandler,changeToBoolean,addImageBase, pagination} = require("../utils");
+const {responseHandler,changeToBoolean,addImageBase, pagination} = require("../../utils");
 
 ///////////// start add comment /////////////
 const addCommentBodyValidation=()=>body(['userID','date','productID','rating','body']).notEmpty();

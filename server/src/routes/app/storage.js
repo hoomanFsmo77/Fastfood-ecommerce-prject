@@ -3,7 +3,7 @@ const fs = require("fs");
 const path=require('path')
 const router=express.Router()
 const bodyParser=require('body-parser')
-const upload=require('../database/upload')
+const upload=require('../../database/upload')
 router.use(bodyParser.urlencoded({extended: true,}))
 ///////////////////////////////////////////////////////
 

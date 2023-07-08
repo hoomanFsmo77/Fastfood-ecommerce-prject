@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
 const bodyParser=require('body-parser');
-const database=require('../database/database')
+const database=require('../../database/database')
 router.use(bodyParser.urlencoded({extended:true}))
 const {body ,validationResult,matchedData} = require('express-validator');
-const {responseHandler} = require("../utils");
+const {responseHandler} = require("../../utils");
 
 
 router.post('/',body('email').isEmail(),body(['name','subject','message']).notEmpty(),(req,res)=>{

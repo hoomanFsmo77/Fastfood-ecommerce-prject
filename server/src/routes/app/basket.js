@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
-const database=require('../database/database')
+const database=require('../../database/database')
 const {body ,validationResult,matchedData, param,query} = require('express-validator');
-const {responseHandler,addImageBase,changeToBoolean,calculateSum,today,pagination} = require("../utils");
+const {responseHandler,addImageBase,changeToBoolean,calculateSum,today,pagination} = require("../../utils");
 const bodyParser = require("body-parser");
-const mw=require('../middleware/profile')
+const mw=require('../../middleware/profile')
 router.use(bodyParser.urlencoded({extended:true}));
 
 

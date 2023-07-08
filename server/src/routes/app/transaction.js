@@ -1,11 +1,11 @@
 const express=require('express');
 const f=require('node-fetch')
 const router=express.Router();
-const database=require('../database/database')
+const database=require('../../database/database')
 const bodyParser=require('body-parser')
 const {query, validationResult, matchedData} = require("express-validator");
-const {responseHandler} = require("../utils");
-const mw=require('../middleware/profile')
+const {responseHandler} = require("../../utils");
+const mw=require('../../middleware/profile')
 ////////// middleware
 router.use(mw)
 

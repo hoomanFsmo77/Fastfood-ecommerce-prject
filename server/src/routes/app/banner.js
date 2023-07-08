@@ -2,9 +2,9 @@ const express=require('express')
 const router=express.Router();
 const {body ,validationResult,matchedData} = require('express-validator');
 const bodyParser=require('body-parser');
-const database=require('../database/database')
-const {responseHandler,addImageBase} = require("../utils");
-const upload=require('../database/upload')
+const database=require('../../database/database')
+const {responseHandler,addImageBase} = require("../../utils");
+const upload=require('../../database/upload')
 router.use(bodyParser.urlencoded({
     extended:true
 }));

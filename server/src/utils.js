@@ -136,7 +136,15 @@ const getBlogByLinkFilter = async (link) => {
     return result[0]
 }
 
+const getAllBlogs =async () => {
+    return database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('users', 'blog.userID', '=', 'users.id').select('blog.*', 'blog_category.name as category', 'users.lastname as author_lastname', 'users.username as author_username', 'users.firstname as author_firstname');
+}
 
+const getBlogByCategory =async (id) => {
+    const target=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('users', 'blog.userID', '=', 'users.id').select('blog.*', 'blog_category.name as category', 'users.lastname as author_lastname', 'users.username as author_username', 'users.firstname as author_firstname').where({'blog.categoryID':id});
+
+    return addImageBase(target,['image_sm','image_xs','image_lg']);
+}
 
 const transferProductToReadable = async (products) => {
     const productsIds=_.map(products, (el) => el.id);
@@ -249,5 +257,5 @@ const today=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory
 }
