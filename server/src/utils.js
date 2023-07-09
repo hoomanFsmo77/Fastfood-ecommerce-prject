@@ -255,7 +255,32 @@ const calculateSum = (source,key) => {
 const date=new Date()
 const today=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
+const transferTransactionStatus = (source) => {
+    return source.map(item=>{
+        return {
+            ...item,
+            transaction_status:item.transaction_status==='1' ? 'success' : 'failed'
+        }
+    })
+}
+
+const transferOrderStatus = (source) => {
+    return source.map(item=>{
+        return {
+            ...item,
+            order_status:item.order_status===1 ? 'Processing' : 'Awaiting Payment'
+        }
+    })
+}
+const transferPaymentStatus = (source) => {
+    return source.map(item=>{
+        return {
+            ...item,
+            payment_status:item.payment_status===1 ? 'success' : item.payment_status===2 ?   'failed' : 'unpaid'
+        }
+    })
+}
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus
 }

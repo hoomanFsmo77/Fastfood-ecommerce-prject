@@ -41,6 +41,7 @@ const panelUsersRoute=require('./routes/panel/users')
 const productsRoute=require('./routes/panel/products')
 const productsCategoryRoute=require('./routes/panel/product_category')
 const blogsCategoryRoute=require('./routes/panel/blog_category')
+const transactionsRoute=require('./routes/panel/transactions')
 
 //// app routes
 app.use('/storage/image',storageRoute)
@@ -71,6 +72,7 @@ app.use('/panel/users',panelUsersRoute)
 app.use('/panel/products',productsRoute)
 app.use('/panel/product-category',productsCategoryRoute)
 app.use('/panel/blog-category',blogsCategoryRoute)
+app.use('/panel/transactions',transactionsRoute)
 
 
 
