@@ -11,69 +11,62 @@ const mw=require('./middleware/auth')
 app.use(mw)
 //// storage route
 const storageRoute=require('./routes/app/storage')
-//// access route
+
+//// app routes
 const accessRoute=require('./routes/app/access')
-//// banner route
 const bannerRoute=require('./routes/app/banner')
-//// product route
 const productRoute=require('./routes/app/product')
 const productCategoryRoute=require('./routes/app/product_category')
 const productCommentsRoute=require('./routes/app/product_comments')
-//// menu route
 const menuRoute=require('./routes/app/menu')
-//// blog route
 const blogRoute=require('./routes/app/blog')
 const blogCategoryRoute=require('./routes/app/blog_category')
 const blogCommentsRoute=require('./routes/app/blog_comments')
-//// contact us
 const contactUsRoute=require('./routes/app/contact_us')
-//// gallery route
 const galleryRoute=require('./routes/app/gallery')
-//// auth route
 const authRoute=require('./routes/app/auth')
-//// profile route
 const profileRoute=require('./routes/app/profile')
-//// location route
 const locationRoute=require('./routes/app/location')
-//// coupons route
 const couponRoute=require('./routes/app/coupons')
-//// order route
 const ordersRoute=require('./routes/app/orders')
-//// basket route
 const basketRoute=require('./routes/app/basket')
-//// payment route
 const paymentRoute=require('./routes/app/payment')
-//// transaction route
 const transactionRoute=require('./routes/app/transaction')
-//// favorite route
 const favoriteRoute=require('./routes/app/favorite')
+
+
 //// panel routes
 const panelAuthRoute=require('./routes/panel/auth')
 const panelUsersRoute=require('./routes/panel/users')
-////
+const productsRoute=require('./routes/panel/products')
+
+//// app routes
 app.use('/storage/image',storageRoute)
-app.use('/api/access',accessRoute)
-app.use('/api/banner',bannerRoute)
-app.use('/api/products',productRoute)
-app.use('/api/product-category',productCategoryRoute)
-app.use('/api/menu',menuRoute)
-app.use('/api/product-comments',productCommentsRoute)
-app.use('/api/blog',blogRoute)
-app.use('/api/blog-category',blogCategoryRoute)
-app.use('/api/blog-comments',blogCommentsRoute)
-app.use('/api/contact-us',contactUsRoute)
-app.use('/api/gallery',galleryRoute)
-app.use('/api/auth',authRoute)
-app.use('/api/profile',profileRoute)
-app.use('/api/loc',locationRoute)
-app.use('/api/coupons',couponRoute)
-app.use('/api/orders',ordersRoute)
-app.use('/api/basket',basketRoute)
-app.use('/api/payment',paymentRoute)
-app.use('/api/transaction',transactionRoute)
-app.use('/api/favorite',favoriteRoute)
+app.use('/app/access',accessRoute)
+app.use('/app/banner',bannerRoute)
+app.use('/app/products',productRoute)
+app.use('/app/product-category',productCategoryRoute)
+app.use('/app/menu',menuRoute)
+app.use('/app/product-comments',productCommentsRoute)
+app.use('/app/blog',blogRoute)
+app.use('/app/blog-category',blogCategoryRoute)
+app.use('/app/blog-comments',blogCommentsRoute)
+app.use('/app/contact-us',contactUsRoute)
+app.use('/app/gallery',galleryRoute)
+app.use('/app/auth',authRoute)
+app.use('/app/profile',profileRoute)
+app.use('/app/loc',locationRoute)
+app.use('/app/coupons',couponRoute)
+app.use('/app/orders',ordersRoute)
+app.use('/app/basket',basketRoute)
+app.use('/app/payment',paymentRoute)
+app.use('/app/transaction',transactionRoute)
+app.use('/app/favorite',favoriteRoute)
+
+//// panel routes
 app.use('/panel/auth',panelAuthRoute)
 app.use('/panel/users',panelUsersRoute)
+app.use('/panel/products',productsRoute)
 
 
 

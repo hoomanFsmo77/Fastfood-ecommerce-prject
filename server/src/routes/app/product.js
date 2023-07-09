@@ -15,37 +15,7 @@ router.get('/tab',async (req,res)=>{
 })
 ////////////////// end get product tab ////////////////////////
 
-////////////////// start add product tab ////////////////////////
-const addProductBodyValidation=()=>body(['categoryID','title','caption','price','description','brief','specification','link','quantity']).notEmpty();
 
-router.post('/',upload.single('primary_image'),addProductBodyValidation(),(req,res)=>{
-    const result = validationResult(req);
-    if(result.isEmpty() && req?.file?.filename) {
-        const body = matchedData(req);
-        database('product').
-        insert({
-            ...body,
-            primary_image:req.file.filename
-        }).
-        then(response=>{
-            res.status(200).send(responseHandler(false,'product added',null))
-        }).catch(err=>{
-            res.status(503).send('error in db')
-        });
-    }else{
-        if(result.array().length>0 && req?.file?.filename){
-            res.status(200).send(responseHandler(true,result.array(),null))
-        }else{
-            res.status(200).send(responseHandler(true,[...result.array(),{
-                "type": "field",
-                "msg": "Invalid value",
-                "path": "primary_image",
-                "location": "body"
-            }],null));
-        }
-    }
-})
-////////////////// end add product tab ////////////////////////
 
 
 ////////////////// start add product image  ///////////////////////
@@ -82,11 +52,6 @@ router.get('/:link',param('link').notEmpty(),async (req,res)=>{
 
 ///////////////// end get product by link //////////////////
 
-//////////////// start add exclusive product ////////////////
-
-
-
-//////////////// end add exclusive product ////////////////
 
 
 
