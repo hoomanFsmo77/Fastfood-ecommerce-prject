@@ -443,74 +443,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "add blog",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "image_sm",
-											"description": "optional",
-											"type": "file",
-											"src": []
-										},
-										{
-											"key": "image_xs",
-											"type": "file",
-											"src": []
-										},
-										{
-											"key": "image_lg",
-											"type": "file",
-											"src": []
-										},
-										{
-											"key": "categoryID",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "title",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "date",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "brief",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "link",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "userID",
-											"value": "",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{api_base}}/blog",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"blog"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -539,32 +471,6 @@
 				{
 					"name": "blog comments",
 					"item": [
-						{
-							"name": "add comments",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"userID\":0,\r\n    \"date\":\"\",\r\n    \"blogID\":9,\r\n    \"body\":\"\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api_base}}/blog-comments",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"blog-comments"
-									]
-								}
-							},
-							"response": []
-						},
 						{
 							"name": "get comment by user",
 							"request": {
@@ -603,10 +509,19 @@
 							"response": []
 						},
 						{
-							"name": "get all comments",
+							"name": "add comment",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":10,\r\n    \"date\":\"Aug. 20 2020\",\r\n    \"blogID\":9,\r\n    \"body\":\"goood\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{api_base}}/blog-comments",
 									"host": [
@@ -614,50 +529,6 @@
 									],
 									"path": [
 										"blog-comments"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "per",
-											"value": "6",
-											"description": "default : 6",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change comment status (accept or reject)",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{api_base}}/blog-comments/change-status/:commentID/:status",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"blog-comments",
-										"change-status",
-										":commentID",
-										":status"
-									],
-									"variable": [
-										{
-											"key": "commentID",
-											"value": "11"
-										},
-										{
-											"key": "status",
-											"value": "1",
-											"description": "0:reject   1:accept"
-										}
 									]
 								}
 							},
@@ -675,7 +546,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"userID\":2,\r\n    \"date\":\"\",\r\n    \"productID\":8,\r\n    \"rating\":5,\r\n    \"body\":\"\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
+									"raw": "{\r\n    \"userID\":2,\r\n    \"date\":\"dede\",\r\n    \"productID\":8,\r\n    \"rating\":5,\r\n    \"body\":\"dede\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -725,67 +596,6 @@
 										{
 											"key": "id",
 											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get all comments",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{api_base}}/product-comments",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"product-comments"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "per",
-											"value": "6",
-											"description": "default : 6",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "change comment status (accept or reject)",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"url": {
-									"raw": "{{api_base}}/product-comments/change-status/:commentID/:status",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"product-comments",
-										"change-status",
-										":commentID",
-										":status"
-									],
-									"variable": [
-										{
-											"key": "commentID",
-											"value": ""
-										},
-										{
-											"key": "status",
-											"value": "",
-											"description": "0:reject   1:accept"
 										}
 									]
 								}
@@ -1709,22 +1519,22 @@
 									"urlencoded": [
 										{
 											"key": "username",
-											"value": "hooman_77",
+											"value": "nasir_jalali",
 											"type": "text"
 										},
 										{
 											"key": "firstname",
-											"value": "hooman",
+											"value": "Nasir",
 											"type": "text"
 										},
 										{
 											"key": "lastname",
-											"value": "mousavi",
+											"value": "Jalali",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "hoomanmousavi77@gmail.com",
+											"value": "nasir@gmail.com",
 											"type": "text"
 										},
 										{
@@ -2772,6 +2582,640 @@
 											"key": "id",
 											"value": "9"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blogs",
+					"item": [
+						{
+							"name": "add blog",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image_sm",
+											"description": "optional",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0001.jpg"
+										},
+										{
+											"key": "image_xs",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0002.jpg"
+										},
+										{
+											"key": "image_lg",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0008.jpg"
+										},
+										{
+											"key": "categoryID",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2023-11-5",
+											"type": "text"
+										},
+										{
+											"key": "brief",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/blog",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update blog",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image_sm",
+											"description": "optional",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0002.jpg"
+										},
+										{
+											"key": "image_xs",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0010.jpg"
+										},
+										{
+											"key": "image_lg",
+											"type": "file",
+											"src": "/C:/Users/hooman/Documents/IMG_20230216_0012.jpg"
+										},
+										{
+											"key": "categoryID",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "test2",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2023-11-5",
+											"type": "text"
+										},
+										{
+											"key": "brief",
+											"value": "test2",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "test2",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/blog/:id",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all blogs and by link or categoy Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/blog?categoryID=3",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog"
+									],
+									"query": [
+										{
+											"key": "link",
+											"value": "5-way-to-increase-neutrients-in-fast-food",
+											"description": "optional",
+											"disabled": true
+										},
+										{
+											"key": "categoryID",
+											"value": "3",
+											"description": "optional"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "optional",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "2",
+											"description": "optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove blog",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/blog?id=15",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add content",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"col\":6,\r\n        \"title\":\"title\",\r\n        \"text\":\"text\"\r\n    },\r\n    {\r\n        \"col\":12,\r\n        \"title\":\"title 2\",\r\n        \"text\":\"text 2\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/blog/content?id=15",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog",
+										"content"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "blog comments",
+					"item": [
+						{
+							"name": "get all comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/blog-comments",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog-comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"description": "default : 6",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accept comment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/blog-comments/change-status/:commentID",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog-comments",
+										"change-status",
+										":commentID"
+									],
+									"variable": [
+										{
+											"key": "commentID",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/blog-comments?id=13",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"blog-comments"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product comments",
+					"item": [
+						{
+							"name": "get all comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/product-comments",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"product-comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"description": "default : 6",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accept comment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/product-comments/change-status/:commentID",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"product-comments",
+										"change-status",
+										":commentID"
+									],
+									"variable": [
+										{
+											"key": "commentID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/product-comments?id=37",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"product-comments"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "37"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "chart",
+					"item": [
+						{
+							"name": "sales",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/charts/sales",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"charts",
+										"sales"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "visitors",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/charts/visitors",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"charts",
+										"visitors"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "statistic",
+					"item": [
+						{
+							"name": "total",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/statistic/total",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"statistic",
+										"total"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/statistic/orders",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"statistic",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transactions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/statistic/transactions",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"statistic",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "popular",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/statistic/popular",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"statistic",
+										"popular"
 									]
 								}
 							},

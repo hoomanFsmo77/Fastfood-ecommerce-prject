@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 05:21 PM
+-- Generation Time: Jul 11, 2023 at 03:59 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,7 +42,12 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `token`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES
-(1, 'GGgtfwWc79_swmz_O0F_c6snpWp6pkKeyv4GNHUkbRRp2VZ8', 'hooman_77', 'hooman', 'mousavi', 'hoomanmousavi77@gmail.com', '$2b$10$z1Sutk6U6uMEdnPQXuAXB.ET3E6m3UhAUEW0ITjoB0hQuybIA0Asu');
+(1, 'GGgtfwWc79_swmz_O0F_c6snpWp6pkKeyv4GNHUkbRRp2VZ8', 'hooman_77', 'hooman', 'mousavi', 'hoomanmousavi77@gmail.com', '$2b$10$z1Sutk6U6uMEdnPQXuAXB.ET3E6m3UhAUEW0ITjoB0hQuybIA0Asu'),
+(2, 'QhsJi9zg7gdSm1W4Y9s3x4Nx3rEhrlYOemq4RkQ_fzXtDhXx', 'steven_rich', 'Steven', 'Rich', 'steven@gmail.com', '$2b$10$7NXxUVT.kXfMjAydJ3JKKOvsmp14CS2w8g8YhSuSxe/FwJEiz79Qe'),
+(3, 'yLZQ4Qt5b_RZ0RkpiFagVmqQwDwezSNvTlIqk5Zo26zIMsYV', 'william_cobus', 'William', 'Cobus', 'william@gmail.com', '$2b$10$cUWEhCNMZQd3PKHbR4.ANuRy9yol8/DKFcay5sgzagkOhjQ/Yhq5G'),
+(4, 'mcEFNVeMcJzp5X5XJncAxsBg1iWRonqM_K_2Wr8bLvkOh8s6', 'george_Belley', 'Belly', 'George', 'belly@gmail.com', '$2b$10$AKNveJiyPT6jp7osK6IjQe/6XERf9rv5AMclbrFyPGmi1z9/9nxfe'),
+(5, 'CETjYtPkd6QwIy-RUX5RuwMaJivJjf_H9VKH-E-El0Jluamm', 'adam_smith', 'Adam', 'Smith', 'adam@gmail.com', '$2b$10$gBw97L086v2or8QXTrAa1eVitAzeAOt8qs8wGrREqlEfTDM5Ef50W'),
+(6, '0dJDUTjrqKvMXB-Po4XX5O9veeFENuLqR_DvAIs9j6cRwHx6', 'nasir_jalali', 'Nasir', 'Jalali', 'nasir@gmail.com', '$2b$10$2WgRi0NL..QGLhKgD4g.tu2J7gY97tgYuv352gyDdyYtpJHVvCiEq');
 
 -- --------------------------------------------------------
 
@@ -95,7 +100,8 @@ INSERT INTO `basket` (`id`, `userID`, `productID`, `price`, `quantity`, `subtota
 (104, 10, 13, 19, 1, 8, 43),
 (105, 10, 13, 19, 1, 8, 44),
 (108, 10, 11, 35, 1, 35, 46),
-(109, 10, 12, 25, 3, 75, 46);
+(109, 10, 12, 25, 3, 75, 46),
+(110, 10, 13, 19, 1, 8, 44);
 
 -- --------------------------------------------------------
 
@@ -113,7 +119,7 @@ CREATE TABLE `blog` (
   `image_xs` varchar(200) NOT NULL,
   `image_lg` varchar(200) NOT NULL,
   `categoryID` int(100) NOT NULL,
-  `userID` int(100) NOT NULL,
+  `adminID` int(100) NOT NULL,
   `isLatest` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -121,14 +127,14 @@ CREATE TABLE `blog` (
 -- Dumping data for table `blog`
 --
 
-INSERT INTO `blog` (`id`, `title`, `date`, `brief`, `link`, `image_sm`, `image_xs`, `image_lg`, `categoryID`, `userID`, `isLatest`) VALUES
-(4, '5 way to increase neutrients in fast food', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', '5-way-to-increase-neutrients-in-fast-food', '', '1687805724284.jpeg', '1687805724285.jpeg', 2, 2, 0),
-(5, 'New formular of pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-pizza', '', '1687805842051.jpeg', '1687805842052.jpeg', 3, 3, 1),
-(6, 'New formular of burger', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-burger', '', '1687805923222.jpeg', '1687805923223.jpeg', 4, 3, 1),
+INSERT INTO `blog` (`id`, `title`, `date`, `brief`, `link`, `image_sm`, `image_xs`, `image_lg`, `categoryID`, `adminID`, `isLatest`) VALUES
+(4, '5 way to increase neutrients in fast food', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', '5-way-to-increase-neutrients-in-fast-food', '', '1687805724284.jpeg', '1687805724285.jpeg', 2, 4, 0),
+(5, 'New formular of pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-pizza', '', '1687805842051.jpeg', '1687805842052.jpeg', 3, 2, 1),
+(6, 'New formular of burger', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-burger', '', '1687805923222.jpeg', '1687805923223.jpeg', 4, 1, 1),
 (7, 'Family gather', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'family-gather', '', '1687805986695.jpeg', '1687805986696.jpeg', 1, 2, 1),
-(8, 'Sceintific facts about pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'Sceintific -facts-about -pizza', '1687806056356.jpeg', '1687806056356.jpeg', '1687806056357.jpeg', 5, 2, 1),
-(9, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 3, 1),
-(10, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 3, 1);
+(8, 'Sceintific facts about pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'Sceintific -facts-about -pizza', '1687806056356.jpeg', '1687806056356.jpeg', '1687806056357.jpeg', 5, 3, 1),
+(9, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 5, 1),
+(10, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -526,7 +532,7 @@ CREATE TABLE `product_comments` (
 --
 
 INSERT INTO `product_comments` (`id`, `userID`, `date`, `productID`, `rating`, `body`, `isAccept`, `isReply`, `replyID`) VALUES
-(2, 2, 'Sep 17, 2023', 8, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 0, 0, 0),
+(2, 2, 'Sep 17, 2023', 8, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
 (3, 2, 'Sep 17, 2023', 9, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
 (4, 2, 'Sep 17, 2023', 10, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
 (5, 2, 'Sep 17, 2023', 11, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
@@ -672,6 +678,36 @@ INSERT INTO `registered` (`token`, `email`, `password`, `id`, `expiresAt`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales_chart`
+--
+
+CREATE TABLE `sales_chart` (
+  `id` int(11) NOT NULL,
+  `month` varchar(100) NOT NULL,
+  `sale_amount` bigint(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales_chart`
+--
+
+INSERT INTO `sales_chart` (`id`, `month`, `sale_amount`) VALUES
+(1, 'January', 10000),
+(2, 'February', 18000),
+(3, 'March', 9000),
+(4, 'April', 19000),
+(5, 'May', 35000),
+(6, 'June', 30000),
+(7, 'July', 2000),
+(8, 'Augest', 50000),
+(9, 'September', 18000),
+(10, 'October', 22000),
+(11, 'November', 32000),
+(12, 'December', 15000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transactions`
 --
 
@@ -750,6 +786,36 @@ INSERT INTO `user_address` (`id`, `title`, `address`, `provinceID`, `cityID`, `p
 (2, 'Home', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ', 1, 1, 1234, '09921929653', 10),
 (3, 'Work', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ', 2, 5, 1234, '09921929653', 10);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors_chart`
+--
+
+CREATE TABLE `visitors_chart` (
+  `id` int(11) NOT NULL,
+  `month` varchar(100) NOT NULL,
+  `visitors_amount` bigint(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `visitors_chart`
+--
+
+INSERT INTO `visitors_chart` (`id`, `month`, `visitors_amount`) VALUES
+(1, 'January', 65000),
+(2, 'February', 80000),
+(3, 'March', 55000),
+(4, 'April', 32000),
+(5, 'May', 120000),
+(6, 'June', 88000),
+(7, 'July', 72000),
+(8, 'Augest', 92000),
+(9, 'September', 130000),
+(10, 'October', 15000),
+(11, 'November', 56000),
+(12, 'December', 59000);
+
 --
 -- Indexes for dumped tables
 --
@@ -780,8 +846,8 @@ ALTER TABLE `basket`
 --
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userID` (`userID`),
-  ADD KEY `categoryID` (`categoryID`);
+  ADD KEY `categoryID` (`categoryID`),
+  ADD KEY `adminID` (`adminID`);
 
 --
 -- Indexes for table `blog_category`
@@ -901,6 +967,12 @@ ALTER TABLE `registered`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sales_chart`
+--
+ALTER TABLE `sales_chart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -923,6 +995,12 @@ ALTER TABLE `user_address`
   ADD KEY `provinceID` (`provinceID`);
 
 --
+-- Indexes for table `visitors_chart`
+--
+ALTER TABLE `visitors_chart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -930,7 +1008,7 @@ ALTER TABLE `user_address`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `banner`
@@ -942,13 +1020,13 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `blog_category`
@@ -960,13 +1038,13 @@ ALTER TABLE `blog_category`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `blog_content`
 --
 ALTER TABLE `blog_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -1032,7 +1110,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `product_image`
@@ -1053,6 +1131,12 @@ ALTER TABLE `registered`
   MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `sales_chart`
+--
+ALTER TABLE `sales_chart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -1071,6 +1155,12 @@ ALTER TABLE `user_address`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `visitors_chart`
+--
+ALTER TABLE `visitors_chart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -1086,8 +1176,8 @@ ALTER TABLE `basket`
 -- Constraints for table `blog`
 --
 ALTER TABLE `blog`
-  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `blog_category` (`id`);
+  ADD CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `blog_category` (`id`),
+  ADD CONSTRAINT `blog_ibfk_3` FOREIGN KEY (`adminID`) REFERENCES `admins` (`id`);
 
 --
 -- Constraints for table `blog_comments`
