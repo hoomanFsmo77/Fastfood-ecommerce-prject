@@ -109,7 +109,7 @@ const getProductByLinkFilter = async (link) => {
     return result[0]
 }
 const getBlogByLinkFilter = async (link) => {
-    const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('users','blog.userID','=','users.id').select('blog.*','blog_category.name as category','users.lastname as author_lastname','users.username as author_username','users.firstname as author_firstname').where({link:link});
+    const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('admins','blog.adminID','=','admins.id').select('blog.*','blog_category.name as category','admins.lastname as author_lastname','admins.username as author_username','admins.firstname as author_firstname').where({link:link});
     const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:0} );
     const content = await database('blog').join('blog_content','blog_content.blogID','=','blog.id').select('blog_content.*').where({blogID:blog[0].id} );
     const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:1} );
@@ -137,11 +137,11 @@ const getBlogByLinkFilter = async (link) => {
 }
 
 const getAllBlogs =async () => {
-    return database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('users', 'blog.userID', '=', 'users.id').select('blog.*', 'blog_category.name as category', 'users.lastname as author_lastname', 'users.username as author_username', 'users.firstname as author_firstname');
+    return database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname');
 }
 
 const getBlogByCategory =async (id) => {
-    const target=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('users', 'blog.userID', '=', 'users.id').select('blog.*', 'blog_category.name as category', 'users.lastname as author_lastname', 'users.username as author_username', 'users.firstname as author_firstname').where({'blog.categoryID':id});
+    const target=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname').where({'blog.categoryID':id});
 
     return addImageBase(target,['image_sm','image_xs','image_lg']);
 }

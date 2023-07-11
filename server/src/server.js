@@ -42,6 +42,11 @@ const productsCategoryRoute=require('./routes/panel/product_category')
 const blogsCategoryRoute=require('./routes/panel/blog_category')
 const transactionsRoute=require('./routes/panel/transactions')
 const couponsRoute=require('./routes/panel/coupons')
+const blogsRoute=require('./routes/panel/blogs')
+const blogCommentRoute=require('./routes/panel/blog_comments')
+const productCommentRoute=require('./routes/panel/product_comments')
+const chartsRoute=require('./routes/panel/charts')
+const statisticRoute=require('./routes/panel/statistic')
 
 //// app routes
 app.use('/storage/image',storageRoute)
@@ -73,6 +78,11 @@ app.use('/panel/product-category',productsCategoryRoute)
 app.use('/panel/blog-category',blogsCategoryRoute)
 app.use('/panel/transactions',transactionsRoute)
 app.use('/panel/coupons',couponsRoute)
+app.use('/panel/blog',blogsRoute)
+app.use('/panel/blog-comments',blogCommentRoute)
+app.use('/panel/product-comments',productCommentRoute)
+app.use('/panel/charts',chartsRoute)
+app.use('/panel/statistic',statisticRoute)
 
 
 
