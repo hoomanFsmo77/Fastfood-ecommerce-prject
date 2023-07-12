@@ -35,6 +35,13 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss', '@nuxtjs/eslint-module','nuxt-icon'
     ],
+    runtimeConfig:{
+        api_base:process.env.API_BASE,
+        access_key:process.env.ACCESS_KEY,
+    },
+    eslint: {
+        exclude:'./src/directives/vClickOutside.ts'
+    }
 })

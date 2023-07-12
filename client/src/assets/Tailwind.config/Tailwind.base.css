@@ -6,5 +6,27 @@
     body{
         @apply bg-primary-light-1 overflow-x-hidden
     }
+    *,::before,::after{
+        box-sizing: border-box!important;
+    }
+
+    h1,.h1{
+        @apply  md:text-2.5 text-1.7 capitalize
+    }
+    h2,.h2{
+        @apply md:text-2 text-1.6 capitalize
+    }
+    h3,.h3{
+        @apply text-1.7 capitalize
+    }
+    h4,.h4{
+        @apply md:text-1.4 text-1 capitalize
+    }
+    h5,.h5{
+        @apply text-1.2 capitalize
+    }
+    h6,.h6{
+        @apply md:text-1 text-0.9 capitalize
+    }
 }
 
