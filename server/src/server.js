@@ -10,7 +10,7 @@ app.use(cors());
 const mw=require('./middleware/auth')
 app.use(mw)
 //// storage route
-const storageRoute=require('./routes/app/storage')
+const storageRoute=require('./routes/storage')
 
 //// app routes
 const accessRoute=require('./routes/app/access')

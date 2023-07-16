@@ -15,7 +15,6 @@ router.get('/:image',(req,res)=>{
     const imageName=req.params.image;
     const rootPath=path.join(__dirname,'../')
     const imagePath=rootPath+'/storage/'+imageName;
-	console.log(imagePath)
     fs.readFile(imagePath,{},(error,image)=>{
         if(error){
             res.status(404).end()

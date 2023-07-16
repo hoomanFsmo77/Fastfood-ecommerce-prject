@@ -1,2 +1,3 @@
 @import "../components/conatiner.css";
+@import '../components/topbar.css';
 @tailwind components;

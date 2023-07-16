@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss', '@nuxtjs/eslint-module','nuxt-icon'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon'
     ],
     runtimeConfig:{
         api_base:process.env.API_BASE,

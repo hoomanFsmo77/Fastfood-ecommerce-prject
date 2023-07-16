@@ -7,7 +7,8 @@
 <script lang="ts" setup>
 definePageMeta({
   name:'SHOPPING_CART',
-  path:'/shopping-cart'
+  path:'/shopping-cart',
+  layout:false
 });
 </script>
 
