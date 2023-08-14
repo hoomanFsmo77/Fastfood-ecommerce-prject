@@ -6,7 +6,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'AUTH',
-  path:'/authentication'
+  path:'/authentication',
+  layout:'pages'
 });
 
 

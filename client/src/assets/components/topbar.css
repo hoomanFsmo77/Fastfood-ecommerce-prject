@@ -1,8 +1,9 @@
 @tailwind components;
 @layer components{
-    #topbar{
-        @apply bg-primary-dark-2 py-1;
+    #header-topbar{
+        @apply bg-primary-dark-2 py-1 relative   before:bg-[url("/menu-separator.webp")] before:bg-repeat-x before:w-full  before:animate-topbar before:block before:absolute  before:bottom-[6px]  before:right-0 before:left-0 before:h-[3px] ;
     }
+
     .topbar-icon{
         @apply text-primary-light-3 mr-1.3 text-1 transition-all hover:text-white cursor-pointer
     }
@@ -38,10 +39,10 @@
         @apply absolute bg-white rounded-full right-[155px] flex justify-end bottom-[-53px] p-0.5 z-20;
     }
     .search-box .search-item{
-        @apply  cursor-pointer relative transition-all block   overflow-hidden border-b-[1px] border-b-gray-400/40 hover:border-[1px] hover:!border-r-0 hover:border-secondary-light-2/20
+        @apply  cursor-pointer relative transition-all block   overflow-hidden border-b-[1px] border-b-gray-400/40 hover:border-y-[1px]  hover:border-secondary-light-2/20
     }
     .search-box .search-item:hover .search-item-bg{
-        @apply right-[15%]
+        @apply right-[15%] blur-0
     }
     .search-box .search-item-bg{
         @apply absolute top-0 right-[10%] w-14 h-full blur-[2px] transition-all flex items-center
@@ -55,4 +56,8 @@
     .badge-content{
         @apply absolute top-0 right-0 text-0.7 text-white text-center rotate-[44deg] translate-x-[5px] translate-y-[3px]
     }
+    .search-item-cover{
+        @apply absolute right-0 h-full top-0 transition-all duration-500 ease-in-out w-0 bg-secondary-light-2
+    }
+
 }

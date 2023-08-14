@@ -1,7 +1,7 @@
 <template>
-  <LayoutTopbar/>
-  <LayoutNavbar/>
-  <LayoutDetail />
+  <LayoutHeader>
+    <LayoutDetail />
+  </LayoutHeader>
   <div><slot/></div>
 </template>
 

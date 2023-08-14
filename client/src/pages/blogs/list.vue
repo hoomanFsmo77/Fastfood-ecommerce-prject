@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'BLOG_LIST',
-  path:'/blogs/list'
+  path:'/blogs/list',
+  layout:'pages'
 });
 </script>
 

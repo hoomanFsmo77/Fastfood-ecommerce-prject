@@ -32,3 +32,9 @@ export interface IProduct {
 }
 
 
+export interface Navbar {
+    title: string,
+    link: {name: string,query?:any},
+    hasSub: boolean,
+    sub?:Navbar[]
+}

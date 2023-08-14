@@ -8,7 +8,9 @@
 definePageMeta({
   name:'ABOUT_US',
   path:'/about-us',
+  layout:false
 })
+
 </script>
 
 <style scoped>

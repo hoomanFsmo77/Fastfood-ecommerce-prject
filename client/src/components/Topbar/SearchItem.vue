@@ -1,15 +1,15 @@
 <script setup lang="ts">
 defineProps<{
-  status:string
+  status:boolean
   link:string
   primary_image:string
   title:string
   category:string
   caption:string
-  quantity:string
-  off:string
-  price:string
-  off_percent:string,
+  quantity:number
+  off:boolean
+  price:number
+  off_percent:number,
   brief:string
 
 }>();
@@ -28,7 +28,6 @@ const {$calculate_off_price}=useNuxtApp();
       <span  class="triangle text-0.7"></span>
       <span class="badge-content">not <br/> available</span>
     </div>
-
     <div class="search-item-inside">
       <div class="flex items-center">
         <div class="flex flex-col justify-center items-center">

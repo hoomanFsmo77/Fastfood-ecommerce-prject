@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'CLASSIC_MENU',
-  path:'/menu/classic'
+  path:'/menu/classic',
+  layout:'pages'
 });
 
 </script>

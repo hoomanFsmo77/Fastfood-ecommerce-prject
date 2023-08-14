@@ -4,7 +4,6 @@ import {IResponse,IProduct} from "~/utils/types";
 
 export const useSearch=()=>{
 
-
     //// states
     const searchData=shallowReactive({
         openSearchBoxFlag:false as boolean,
@@ -33,17 +32,20 @@ export const useSearch=()=>{
             this.searchResult=[]
             this.loaderFlag=false
             this.showResultFlag=false
+        },
+        toggleSearchBox(){
+            this.openSearchBoxFlag=!this.openSearchBoxFlag
         }
 
     })
 
 
     /// close search popup by changing route
-    const nuxtApp = useNuxtApp()
-    nuxtApp.hook("page:finish", () =>searchData.reset());
+    const router=useRouter()
+    router.afterEach(()=>searchData.reset())
 
-    //// functions
-    const toggleSearchBox=()=>searchData.openSearchBoxFlag=!searchData.openSearchBoxFlag
+
+
 
     const initSearch = async () => {
         if(searchData.searchContext.length>0){
@@ -67,6 +69,6 @@ export const useSearch=()=>{
 
 
     return{
-        toggleSearchBox,initSearch,searchData
+       initSearch,searchData
     }
 }

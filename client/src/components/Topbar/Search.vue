@@ -1,15 +1,15 @@
 <template>
-    <div @click="toggleSearchBox" class="topbar-icon mr-0">
+    <div @click="searchData.toggleSearchBox()" class="topbar-icon mr-0">
         <Icon name="bi:search" size="1.1rem"/>
     </div>
     <teleport to='body' >
         <transition name="search">
 <!--            main content-->
-            <div @click.self="toggleSearchBox" v-if="searchData.openSearchBoxFlag" class="search-popup">
+            <div @click.self="searchData.toggleSearchBox()" v-if="searchData.openSearchBoxFlag" class="search-popup">
 
 
 <!--               close button-->
-                <div @click="toggleSearchBox" class="close-button">
+                <div @click="searchData.toggleSearchBox()" class="close-button">
                   <Icon name="icon-park-solid:big-x" size="1.1rem"/>
                 </div>
 
@@ -43,7 +43,7 @@
                   </div>
 
 <!--                  no result-->
-                  <p v-else-if="!searchData.loaderFlag && searchData.searchResult.length===0" class="text-center h6 relative bottom-[-13px]">
+                  <p v-else-if="!searchData.loaderFlag && searchData.searchResult &&searchData.searchResult.length===0" class="text-center h6 relative bottom-[-13px]">
                     no search result found!
                   </p>
                   <template v-else>
@@ -91,7 +91,7 @@
 <script setup lang="ts">
 import { CirclesToRhombusesSpinner } from 'epic-spinners'
 import {useSearch} from "~/composables/useSearch";
-const {toggleSearchBox,initSearch,searchData}=useSearch();
+const {initSearch,searchData}=useSearch();
 
 </script>
 

@@ -1,12 +1,11 @@
 <template>
-    <NuxtLayout name="pages">
-        search
-    </NuxtLayout>
+
+  search
 
 </template>
 <script setup lang="ts">
 definePageMeta({
-    layout:false
+  layout:'pages'
 })
 
 

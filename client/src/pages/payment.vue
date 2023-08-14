@@ -1,13 +1,13 @@
 <template>
-  <NuxtLayout name="pages">
-    payment
-  </NuxtLayout>
+
+  payment
 </template>
 
 <script lang="ts" setup>
 definePageMeta({
   name:'PAYMENT_VERIFY',
-  path:'/payment/verify'
+  path:'/payment/verify',
+  layout:'pages'
 });
 </script>
 

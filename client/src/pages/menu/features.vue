@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'FEATURE_MENU',
-  path:'/menu/features'
+  path:'/menu/features',
+  layout:'pages'
 });
 
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <NuxtLayout name="pages">
-    contact us
-  </NuxtLayout>
+
+  contact us
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   name:'CONTACT_US',
-  path:'/contact-us'
+  path:'/contact-us',
+  layout:'pages'
 });
 
 

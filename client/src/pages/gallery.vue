@@ -1,13 +1,13 @@
 <template>
-  <NuxtLayout name="pages">
-    gallery
-  </NuxtLayout>
+
+  gallery
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   name:'GALLERY',
-  path:'/gallery'
+  path:'/gallery',
+  layout:'pages'
 });
 
 

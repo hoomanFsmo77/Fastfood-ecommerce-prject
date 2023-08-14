@@ -194,7 +194,17 @@ module.exports = {
     },
 
     extend:{
-      colors:colors
+      colors:colors,
+      animation: {
+        'topbar': '10s linear 0s infinite normal none running topbar-movement',
+        'navbar': '25s linear 0s infinite normal none running topbar-movement',
+      },
+      keyframes: {
+        'topbar-movement': {
+          '0%': { 'background-position-x':'0' },
+          '100%': { 'background-position-x':'100%' }
+        }
+      }
     }
   },
   plugins: [

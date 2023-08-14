@@ -1,13 +1,11 @@
 <template>
-  <NuxtLayout name="pages">
-    <NuxtPage/>
-  </NuxtLayout>
+  <NuxtPage/>
 </template>
 
-<script>
-export default {
-  name: "index"
-}
+<script setup lang="js">
+definePageMeta({
+  layout:'pages'
+})
 </script>
 
 <style scoped>

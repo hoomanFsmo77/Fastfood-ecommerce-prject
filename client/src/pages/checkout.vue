@@ -1,13 +1,12 @@
 <template>
-  <NuxtLayout name="pages">
-    checkout
-  </NuxtLayout>
+  checkout
 </template>
 
 <script lang="ts" setup>
 definePageMeta({
   name:'CHECKOUT',
-  path:'/checkout'
+  path:'/checkout',
+  layout:'pages'
 });
 </script>
 

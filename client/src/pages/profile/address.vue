@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'PROFILE_ADDRESS',
-  path:'/profile/address'
+  path:'/profile/address',
+  layout:'pages'
 });
 </script>
 

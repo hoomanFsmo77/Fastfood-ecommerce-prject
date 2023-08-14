@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'PROFILE_TRANSACTIONS',
-  path:'/profile/transactions'
+  path:'/profile/transactions',
+  layout:'pages'
 });
 </script>
 

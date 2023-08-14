@@ -1,14 +1,13 @@
 <template>
-  <NuxtLayout name="pages">
-    cart
-  </NuxtLayout>
+
+  cart
 </template>
 
 <script lang="ts" setup>
 definePageMeta({
   name:'SHOPPING_CART',
   path:'/shopping-cart',
-  layout:false
+  layout:'pages'
 });
 </script>
 

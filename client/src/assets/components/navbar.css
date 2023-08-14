@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+    #header-navbar{
+        @apply bg-secondary-light-5 before:bg-[url("/wave.webp")] before:h-[18px] before:absolute relative before:bg-repeat-x before:w-full  before:animate-navbar before:block before:bottom-[-18px]   before:right-0 before:left-0
+    }
+    #header-navbar .logo{
+        @apply absolute top-0 left-0;
+    }
+    .navbar-items-container{
+        @apply flex;
+    }
+    .navbar-item{
+        @apply ml-1.5
+    }
+    .navbar-item-link{
+        @apply py-2 px-0.5 block text-primary-light-5 font-500 text-1.1
+    }
+}

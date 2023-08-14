@@ -1,5 +1,5 @@
 <template>
-    <section id="topbar">
+    <div id="header-topbar">
         <v-container >
             <v-row>
                 <v-column col="12" lg="6" md="8" class="sm:flex-row sm:justify-start flex-col justify-center items-center">
@@ -34,7 +34,7 @@
                 </v-column>
             </v-row>
         </v-container>
-    </section>
+    </div>
 </template>
 
 <script setup lang="ts">

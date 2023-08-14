@@ -1,6 +1,7 @@
 <template>
-  <LayoutTopbar/>
-  <LayoutNavbar/>
+  <LayoutHeader>
+    <HomeIntro />
+  </LayoutHeader>
   <div><slot/></div>
 </template>
 

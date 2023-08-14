@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'PROFILE_FAVORITE',
-  path:'/profile/favorite'
+  path:'/profile/favorite',
+  layout:'pages'
 });
 </script>
 

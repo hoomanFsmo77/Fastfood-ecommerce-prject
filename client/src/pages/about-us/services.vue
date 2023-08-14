@@ -1,13 +1,13 @@
 <template>
-  <NuxtLayout name="pages">
-    services
-  </NuxtLayout>
+
+  services
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   name:'SERVICES',
-  path:'/about-us/services'
+  path:'/about-us/services',
+  layout:'pages'
 });
 
 

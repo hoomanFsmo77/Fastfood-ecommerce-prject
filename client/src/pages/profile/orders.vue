@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'PROFILE_ORDERS',
-  path:'/profile/orders'
+  path:'/profile/orders',
+  layout:'pages'
 });
 </script>
 

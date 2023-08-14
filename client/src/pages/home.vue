@@ -7,7 +7,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'HOME',
-  path:'/home'
+  path:'/home',
+  layout:'default'
 });
 
 

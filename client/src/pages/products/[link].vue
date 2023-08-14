@@ -5,7 +5,8 @@
 <script setup lang="ts">
 definePageMeta({
   name:'PRODUCT_DETAIL',
-  path:'/products/:link'
+  path:'/products/:link',
+  layout:'pages'
 });
 </script>
 
