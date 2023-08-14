@@ -15,10 +15,12 @@
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18.17.0",
     "autoprefixer": "^10.4.14",
+    "epic-spinners": "^2.0.0",
+    "nprogress": "^0.2.0",
     "nuxt": "^3.6.5",
+    "nuxt-icon": "^0.4.2",
     "pinia": "^2.1.6",
     "postcss": "^8.4.27",
-    "sass": "^1.64.1",
-"nuxt-icon": "^0.4.2"
+    "sass": "^1.64.1"
   }
 }

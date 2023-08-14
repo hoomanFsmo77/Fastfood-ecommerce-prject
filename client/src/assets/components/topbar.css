@@ -34,4 +34,25 @@
     .search-result-box{
         @apply absolute w-[55%] left-[177px] min-h-[70%] bg-white top-[100px] rounded-4 max-h-[13rem] overflow-y-auto
     }
+    .search-box .close-box-btn{
+        @apply absolute bg-white rounded-full right-[155px] flex justify-end bottom-[-53px] p-0.5 z-20;
+    }
+    .search-box .search-item{
+        @apply  cursor-pointer relative transition-all block   overflow-hidden border-b-[1px] border-b-gray-400/40 hover:border-[1px] hover:!border-r-0 hover:border-secondary-light-2/20
+    }
+    .search-box .search-item:hover .search-item-bg{
+        @apply right-[15%]
+    }
+    .search-box .search-item-bg{
+        @apply absolute top-0 right-[10%] w-14 h-full blur-[2px] transition-all flex items-center
+    }
+    .search-item-inside{
+        @apply flex justify-between items-center py-1.5 px-1 relative
+    }
+    .badge-container{
+        @apply absolute top-0 right-0
+    }
+    .badge-content{
+        @apply absolute top-0 right-0 text-0.7 text-white text-center rotate-[44deg] translate-x-[5px] translate-y-[3px]
+    }
 }

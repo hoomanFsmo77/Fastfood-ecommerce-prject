@@ -1,6 +1,6 @@
 
-export interface IResponse {
-    data:any,
+export interface IResponse<T> {
+    data:T,
     error:boolean,
     errors:null|string[]
 }
@@ -30,3 +30,5 @@ export interface IProduct {
         image:string
     }[]
 }
+
+

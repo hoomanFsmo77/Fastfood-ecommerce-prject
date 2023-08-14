@@ -3,10 +3,12 @@
         <v-container >
             <v-row>
                 <v-column col="12" lg="6" md="8" class="sm:flex-row sm:justify-start flex-col justify-center items-center">
-                    <h6 
-                    class="text-primary-light-3 font-500 text-left">
-                    Serving to whole New York
-                   </h6>
+                    <NuxtLink :to="{name:'HOME'}">
+                      <h6
+                          class="text-primary-light-3 font-500 text-left">
+                        Serving to whole New York
+                      </h6>
+                    </NuxtLink>
                    <a 
                    href="mailto:hoomanmousavi77@gmail.com"
                    class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-1.5">
@@ -27,8 +29,8 @@
                     <a class="topbar-icon" href="#">
                              <Icon name="bi:linkedin"/>
                     </a>
-                    <HomeBasketIcon />
-                    <HomeSearch />
+                    <TopbarBasketIcon />
+                    <TopbarSearch />
                 </v-column>
             </v-row>
         </v-container>
