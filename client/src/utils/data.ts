@@ -45,109 +45,89 @@ export const navbar:Navbar[]=[
     },
     {
         title:'About Us',
-        link:{name: 'HOME'},
+        link:{name: 'ABOUT_US'},
         hasSub:true,
         sub:[
             {
                 title: 'About Us',
-                link: {name:'HOME'},
+                link: {name:'ABOUT_US'},
                 hasSub: false,
             },
             {
                 title: 'Services',
-                link: {name:'HOME'},
+                link: {name:'SERVICES'},
                 hasSub: false,
             },
             {
                 title: 'Testimonials',
-                link: {name:'HOME'},
+                link: {name:'TESTIMONIAL'},
                 hasSub: false,
             },
             {
                 title: "Faq's",
-                link: {name:'HOME'},
+                link: {name:'FAQ'},
                 hasSub: false,
-            },
-            {
-                title: "Coming soon",
-                link: {name:'HOME'},
-                hasSub: false,
-            },
+            }
         ]
     },
 
     {
         title:'Our Offers',
-        link:{name: 'HOME'},
+        link:{name: 'CLASSIC_MENU'},
         hasSub:true,
         sub:[
             {
                 title: 'Classic menu',
-                link: {name:'HOME'},
+                link: {name:'CLASSIC_MENU'},
                 hasSub: false,
             },
             {
-                title: 'Classic menu',
-                link: {name:'HOME'},
-                hasSub: false,
-            },
-            {
-                title: 'Classic menu',
-                link: {name:'HOME'},
+                title: 'Feature menu',
+                link: {name:'FEATURE_MENU'},
                 hasSub: false,
             },
         ]
     },{
         title:'Gallery',
         hasSub:false,
-        link:{name:'HOME'}
+        link:{name:'GALLERY'}
     },{
         title:'Blog',
-        link:{name:'HOME'},
+        link:{name:'BLOG_GRID'},
         hasSub:true,
         sub:[
             {
                 title:'Blogs grid',
                 hasSub:false,
-                link:{name:'HOME'}
+                link:{name:'BLOG_GRID'}
             },
             {
-                title:'Blogs grid',
+                title:'Blogs list',
                 hasSub:false,
-                link:{name:'HOME'}
-            },
-            {
-                title:'Blogs grid',
-                hasSub:false,
-                link:{name:'HOME'}
-            },
+                link:{name:'BLOG_LIST'}
+            }
         ]
     },
     {
         title:'Shop',
-        link:{name:'HOME'},
+        link:{name:'PRODUCT_LIST'},
         hasSub:true,
         sub:[
             {
                 title:'Our Products',
                 hasSub:false,
-                link:{name:'HOME'}
+                link:{name:'PRODUCT_LIST'}
             },
             {
-                title:'Our Products',
+                title:'Shopping Cart',
                 hasSub:false,
-                link:{name:'HOME'}
-            },
-            {
-                title:'Our Products',
-                hasSub:false,
-                link:{name:'HOME'}
+                link:{name:'SHOPPING_CART'}
             },
         ]
     },
     {
         title:'Contact',
         hasSub:false,
-        link:{name:'HOME'}
+        link:{name:'CONTACT_US'}
     }
 ]
