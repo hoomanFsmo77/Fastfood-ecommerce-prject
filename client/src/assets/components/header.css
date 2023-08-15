@@ -1,0 +1,10 @@
+@tailwind components;
+
+@layer components {
+    #main-header-content{
+        @apply bg-[url("/slider-bg.webp")] bg-no-repeat bg-scroll bg-center bg-cover
+    }
+    #intro-slider{
+        @apply h-[650px]
+    }
+}

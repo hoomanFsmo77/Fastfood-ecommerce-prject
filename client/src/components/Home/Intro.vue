@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  intro
+  <div id="intro-slider">
+
+  </div>
 </template>
 
 <style scoped>

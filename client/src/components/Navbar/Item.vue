@@ -14,7 +14,7 @@ defineProps<Props>()
 <!--    //// first sub-->
     <VDropdown direction="down"  :hasSub="hasSub">
       <template #top>
-        <NuxtLink class="navbar-item-link" active-class="navbar-active"  :to="link">
+        <NuxtLink class="navbar-item-link" active-class="navbar-active" exact-active-class="navbar-active"  :to="link">
           {{title}}
         </NuxtLink>
       </template>

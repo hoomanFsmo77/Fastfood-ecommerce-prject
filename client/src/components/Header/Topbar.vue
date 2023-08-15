@@ -1,4 +1,24 @@
 <template>
+  <nav v-sticky id="navbar-sticky">
+    <v-row>
+      <v-column col="5" >
+        <NuxtLink  :to="{name:'HOME'}" class="p-1 block w-full h-full">
+          <nuxt-img  src="/logo-small.webp" class="block h-full"/>
+        </NuxtLink>
+      </v-column>
+      <v-column col="7">
+        <ul class="navbar-items-container " >
+          <NavbarItem
+              v-for="item in navbar"
+              :title="item.title"
+              :link="item.link"
+              :hasSub="item.hasSub"
+              :sub="item.sub"
+          />
+        </ul>
+      </v-column>
+    </v-row>
+  </nav>
     <div id="header-topbar">
         <v-container >
             <v-row>

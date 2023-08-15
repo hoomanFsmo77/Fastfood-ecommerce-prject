@@ -4,7 +4,6 @@ export default {
     'primary-light-2':'#7d7d7d',
     'primary-light-3':'#b1b1b1',
     'primary-light-4':'#187a8f',
-    'primary-light-5':'#fff',
     'primary-dark-1':'#242424', /// text
     'primary-dark-2':'#0f1924', /// btn
     'secondary-light-1':'#f7b82d',

@@ -2,4 +2,11 @@
 @import '../components/topbar.css';
 @import "../components/navbar.css";
 @import "../components/dropdown.css";
+@import "../components/header.css";
 @tailwind components;
+
+@layer components {
+    .horizontal-line{
+        @apply w-[1px] h-full bg-gray-200/40
+    }
+}
