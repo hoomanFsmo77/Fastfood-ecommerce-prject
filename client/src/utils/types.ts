@@ -38,3 +38,11 @@ export interface Navbar {
     hasSub: boolean,
     sub?:Navbar[]
 }
+
+export interface Banner{
+    image:string
+    caption:string
+    first_text:string
+    middle_text:string
+    last_text:string
+}
