@@ -3,6 +3,7 @@
 @import "../components/navbar.css";
 @import "../components/dropdown.css";
 @import "../components/header.css";
+@import "../components/form.css";
 @tailwind components;
 
 @layer components {

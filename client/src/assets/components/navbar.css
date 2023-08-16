@@ -8,7 +8,7 @@
         @apply bg-secondary-light-5 before:bg-[url("/wave.webp")] before:h-[18px] before:absolute relative before:bg-repeat-x before:w-full  before:animate-navbar before:block before:bottom-[-18px]   before:right-0 before:left-0
     }
     #header-navbar .logo{
-        @apply absolute top-0 left-0;
+        @apply absolute top-0 left-0 z-[99999];
     }
     .navbar-items-container{
         @apply flex;

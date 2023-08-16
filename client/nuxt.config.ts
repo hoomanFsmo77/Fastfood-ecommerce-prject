@@ -15,6 +15,7 @@ export default defineNuxtConfig({
         '~/assets/Tailwind.config/Tailwind.base.css',
         '~/assets/Tailwind.config/Tailwind.component.css',
         '~/assets/Tailwind.config/Tailwind.utilities.css',
+        'animate.css/animate.min.css'
     ],
     app:{
         rootId:'v-app',
@@ -35,7 +36,7 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon'
     ],
     runtimeConfig:{
         api_base:process.env.API_BASE,

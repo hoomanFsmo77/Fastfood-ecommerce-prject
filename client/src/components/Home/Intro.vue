@@ -1,76 +1,64 @@
 <script setup lang="ts">
 import {IResponse,Banner} from "~/utils/types";
+import {useCarousel} from "~/composables/useCarousel";
 const {data:banner_data,pending}=await useFetch<IResponse<Banner[]>>('/api/intro')
-const myCarousel = ref<any>(null)
-const next = () => {
-  myCarousel.value.next()
-}
-const prev = () => {
-  myCarousel.value.prev()
-}
-
-const nextImageSrc = computed(()=>{
-  if(banner_data.value && myCarousel.value && myCarousel.value.data){
-    if(myCarousel.value.data.currentSlide.value +1 === banner_data.value.data.length ){
-      return banner_data.value.data[0].image
-    }else if(myCarousel.value.data.currentSlide.value < banner_data.value.data.length){
-      return  banner_data.value.data[myCarousel.value.data.currentSlide.value+1].image
-    }else{
-      return  banner_data.value.data[1].image
-    }
-  }
-  return  'nok'
-})
-
-const prevImageSrc = computed(()=>{
-  if(banner_data.value && myCarousel.value && myCarousel.value.data){
-    if(myCarousel.value.data.currentSlide.value-1  < 0 ){
-      return banner_data.value.data[banner_data.value.data.length-1].image
-    }else if(myCarousel.value.data.currentSlide.value < banner_data.value.data.length){
-      return  banner_data.value.data[myCarousel.value.data.currentSlide.value-1].image
-    }else{
-      return  banner_data.value.data[1].image
-    }
-  }
-  return  'nok'
-})
-
+const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,currentSlide,changeSlideHandler,textClasses,rowClass}= useCarousel(banner_data);
 </script>
 
 <template>
-  <div v-if="!pending" id="intro-slider">
-    <carousel ref="myCarousel" :items-to-show="1" :wrapAround="true" :autoplay="10000"  >
-      <slide v-for="slide in banner_data.data" :key="slide.id">
-        <v-row class="items-center">
-          <v-column col="6">
-            <div class="pl-6">
-              <h1 class="font-playFair capitalize italic text-secondary-light-1 text-left">{{slide.caption}}</h1>
-              <h1 class="font-playFair capitalize mb-0.5 text-3.5 text-primary-light-1 text-left">{{slide.first_text}}</h1>
-              <h3 class="font-playFair capitalize text-primary-light-1 text-left">{{slide.middle_text}}</h3>
-              <h5 class="font-playFair mt-0.5 capitalize italic text-primary-light-1 text-left">{{slide.last_text}}</h5>
-            </div>
-          </v-column>
 
-          <v-column col="6">
-            <nuxt-img width="550" :src="slide.image"/>
+  <v-container v-if="!pending" class="relative h-full !m-0 !ml-auto ">
+    <v-row  v-for="(slide,index) in banner_data.data" :key="slide.id" v-bind="rowClass(index)">
+      <v-column col="7" class="flex-col items-start">
+        <div class="relative">
+          <p  v-bind="textClasses(index)"
+              class=" text-secondary-light-1 italic text-2 font-600"
+          >
+            {{slide.caption}}
+          </p>
 
-          </v-column>
-        </v-row>
+          <h1 v-bind="textClasses(index)" class="text-4.5 text-primary-light-1 font-600 mb-0.5 ">
+            {{slide.first_text}}
+          </h1>
 
-      </slide>
-      <template #addons>
-        <button class="carousel__next carousel-btn" @click="next">
-          <Icon name="ri:arrow-right-s-line" size="2.2rem" class="text-primary-light-1"/>
-          <nuxt-img class="carousel-btn-image" :src="nextImageSrc"/>
-        </button>
-        <button class="carousel__prev carousel-btn " @click="prev">
-          <Icon name="ri:arrow-left-s-line" size="2.2rem" class="text-primary-light-1"/>
-          <nuxt-img class="carousel-btn-image" :src="prevImageSrc"/>
+          <h3 v-bind="textClasses(index)" class="text-primary-light-1 mb-1  ">
+            {{slide.middle_text}}
+          </h3>
+
+          <h5 v-bind="textClasses(index)" class="text-primary-light-1 mb-2.5 italic">{{slide.last_text}}</h5>
+          <div v-carousel="changeSlideHandler" class="carousel-cover"></div>
+        </div>
+        <button v-bind="textClasses(index)"  class="btn btn-primary !font-poppins">
+          order now
         </button>
 
-      </template>
-    </carousel>
-  </div>
+      </v-column>
+
+      <v-column  col="5" class="flex justify-end relative">
+        <nuxt-img v-bind="imageClasses(index)"  width="500" :src="slide.image"/>
+        <div v-carousel="changeSlideHandler" class="carousel-cover"></div>
+      </v-column>
+
+
+    </v-row>
+
+  </v-container>
+
+
+
+  <v-container class="absolute left-0 right-0 top-[50%] flex justify-between items-center ">
+    <button class=" carousel-btn " @click="prevSlide">
+      <Icon name="ri:arrow-left-s-line" size="2.2rem" class="text-primary-light-1"/>
+      <nuxt-img class="carousel-btn-image" :src="prevImageSrc"/>
+    </button>
+    <button class=" carousel-btn" @click="nextSlide">
+      <Icon name="ri:arrow-right-s-line" size="2.2rem" class="text-primary-light-1"/>
+      <nuxt-img class="carousel-btn-image" :src="nextImageSrc"/>
+    </button>
+
+  </v-container>
+
+
 </template>
 
 <style scoped>

@@ -6,7 +6,7 @@
           <nuxt-img width="150" class="logo" src="/logo.webp"/>
         </v-column>
 
-        <v-column col="9" class="py-1">
+        <v-column col="9" class="py-0.5">
 
             <ul class="navbar-items-container" >
               <NavbarItem

@@ -1,3 +1,7 @@
+:root {
+    --animate-delay: 0.5s;
+}
+
 body .scroller{
     scrollbar-width:thin;
     scrollbar-color: #ccc #fff;

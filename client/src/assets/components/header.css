@@ -2,22 +2,24 @@
 
 @layer components {
     #main-header-content{
-        @apply bg-[url("/slider-bg.webp")] bg-no-repeat bg-scroll bg-center bg-cover
+        @apply bg-[url("/slider-bg.webp")] bg-no-repeat relative bg-scroll bg-center bg-cover h-[650px] py-4
     }
-    #intro-slider{
-        @apply h-[650px] py-4 px-1
-    }
+
 
     #main-header-content:hover .carousel-btn{
         @apply opacity-100 visible
     }
     .carousel-btn{
-        @apply !w-5 !h-5 !rounded-full !bg-primary-dark-2/10 opacity-0 invisible transition-all duration-500 ease-in-out flex justify-center items-center relative
+        @apply !w-5 !h-5 !rounded-full !bg-primary-dark-2/10 opacity-0 invisible transition-all duration-500 ease-in-out flex justify-center items-center relative z-[99]
     }
     .carousel-btn-image{
-        @apply opacity-0 invisible transition-all  duration-500 ease-in-out absolute
+        @apply scale-0 invisible transition-all  duration-500 ease-in-out absolute
     }
     .carousel-btn:hover .carousel-btn-image{
-        @apply opacity-100 visible
+        @apply scale-100 visible
     }
+    .carousel-cover{
+        @apply absolute inset-0 w-full h-full z-[99]
+    }
+
 }
