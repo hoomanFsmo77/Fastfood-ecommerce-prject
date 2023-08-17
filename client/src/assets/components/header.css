@@ -2,7 +2,7 @@
 
 @layer components {
     #main-header-content{
-        @apply bg-[url("/slider-bg.webp")] bg-no-repeat relative bg-scroll bg-center bg-cover h-[650px] py-4
+        @apply bg-[url("/slider-bg.webp")] bg-no-repeat relative bg-scroll bg-center bg-cover h-[600px] py-4
     }
 
 

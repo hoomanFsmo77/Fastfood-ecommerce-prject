@@ -13,7 +13,7 @@ defineProps<{
   brief:string
 
 }>();
-const {$calculate_off_price}=useNuxtApp();
+
 
 
 

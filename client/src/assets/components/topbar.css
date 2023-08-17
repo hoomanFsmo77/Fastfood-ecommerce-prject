@@ -1,7 +1,7 @@
 @tailwind components;
 @layer components{
     #header-topbar{
-        @apply bg-primary-dark-2 py-1 relative   before:bg-[url("/menu-separator.webp")] before:bg-repeat-x before:w-full  before:animate-topbar before:block before:absolute  before:bottom-[6px]  before:right-0 before:left-0 before:h-[3px] ;
+        @apply bg-primary-dark-2 py-1 relative   before:bg-[url("/menu-separator.webp")] before:bg-repeat-x before:w-full  before:animate-topbar before:block before:absolute  before:bottom-[6px]  before:right-0 before:left-0 before:h-[3px];
     }
 
     .topbar-icon{
@@ -14,7 +14,7 @@
         @apply  w-[15px] h-[15px] rounded-full flex justify-center items-center text-0.7 absolute top-[-26%] right-[-50%] bg-primary-light-3
     }
     .search-popup{
-        @apply fixed  left-0 bottom-0 w-[100vw] h-[100vh] bg-[rgba(0,0,0,0.6)] z-20 flex flex-col
+        @apply fixed  left-0 bottom-0 w-[100vw] h-[100vh] bg-[rgba(0,0,0,0.6)] z-[9999] flex flex-col
     }
     .close-button{
         @apply mt-3 bg-white p-0.5 rounded-4 flex justify-end self-end mr-1 cursor-pointer hover:bg-white/70 transition-all

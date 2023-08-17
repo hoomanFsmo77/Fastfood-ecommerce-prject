@@ -4,10 +4,31 @@
 @import "../components/dropdown.css";
 @import "../components/header.css";
 @import "../components/form.css";
+@import "../components/home.css";
+@import "../components/card.css";
 @tailwind components;
 
 @layer components {
     .horizontal-line{
         @apply w-[1px] h-full bg-gray-200/40
     }
+    .preloader{
+        @apply fixed inset-0 w-full h-full z-[9999999999] bg-primary-light-1 flex justify-center items-center
+    }
+    .spinner-wrapper{
+        @apply block w-8 h-8 rounded-full border-8 border-secondary-light-1 relative
+    }
+    .spinner-inner{
+        @apply absolute bg-primary-light-1 w-2 h-10 top-[-16px] left-[36px] animate-spin
+    }
+    .underline-active-hover{
+        @apply before:absolute relative before:bottom-0 before:w-0 before:h-[3px] before:bg-secondary-light-3 before:left-0 before:transition-all hover:before:w-full before:duration-500 before:ease-in-out hover:text-secondary-light-3 transition-all duration-500 ease-in-out
+    }
+    .underline-active-hover.active{
+        @apply before:!w-full  !text-secondary-light-3
+    }
+    .underline-active{
+        @apply before:absolute relative before:bottom-0 before:w-5 before:h-[4px] before:bg-secondary-light-3 before:left-[calc(50%-2.5rem)]
+    }
+
 }

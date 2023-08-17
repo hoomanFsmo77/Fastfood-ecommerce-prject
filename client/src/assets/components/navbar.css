@@ -2,10 +2,10 @@
 
 @layer components {
     #navbar-sticky{
-        @apply transition-all duration-300 ease-in-out bg-primary-light-1  fixed top-0 left-0 w-full
+        @apply transition-all duration-300 ease-in-out bg-[#fff]  fixed top-0 left-0 w-full shadow-xl
     }
     #header-navbar{
-        @apply bg-secondary-light-5 before:bg-[url("/wave.webp")] before:h-[18px] before:absolute relative before:bg-repeat-x before:w-full  before:animate-navbar before:block before:bottom-[-18px]   before:right-0 before:left-0
+        @apply bg-secondary-light-5 before:bg-[url("/wave.webp")] before:h-[18px] before:absolute relative before:bg-repeat-x before:w-full  before:animate-navbar before:block before:bottom-[-18px]   before:right-0 before:left-0  before:z-[999]
     }
     #header-navbar .logo{
         @apply absolute top-0 left-0 z-[99999];

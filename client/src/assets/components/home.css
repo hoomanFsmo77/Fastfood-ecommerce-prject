@@ -1,0 +1,22 @@
+@tailwind components;
+
+@layer components {
+    #recommendation{
+        @apply my-5
+    }
+    .content-img{
+        @apply absolute inset-0  h-full w-full z-[2] py-1.5
+    }
+    #products{
+        @apply my-2 mb-5
+    }
+    .products-tab{
+        @apply flex justify-between items-center w-full pb-1.1 border-b-[1px] border-b-gray-300
+    }
+    .products-tab-item{
+        @apply  text-center w-full cursor-pointer h-full
+    }
+    .products-tab-inside{
+        @apply text-1.2 font-600 h-full pb-1.3
+    }
+}

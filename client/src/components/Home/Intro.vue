@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import {IResponse,Banner} from "~/utils/types";
+import {Banner} from "~/utils/types";
 import {useCarousel} from "~/composables/useCarousel";
-const {data:banner_data,pending}=await useFetch<IResponse<Banner[]>>('/api/intro')
+const {data:banner_data,pending}=await useFetch<Banner[]>('/api/intro')
 const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,currentSlide,changeSlideHandler,textClasses,rowClass}= useCarousel(banner_data);
 </script>
 
 <template>
 
   <v-container v-if="!pending" class="relative h-full !m-0 !ml-auto ">
-    <v-row  v-for="(slide,index) in banner_data.data" :key="slide.id" v-bind="rowClass(index)">
+    <v-row  v-for="(slide,index) in banner_data" :key="slide.id" v-bind="rowClass(index)">
       <v-column col="7" class="flex-col items-start">
         <div class="relative">
           <p  v-bind="textClasses(index)"
@@ -28,9 +28,9 @@ const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,currentSlide,
           <h5 v-bind="textClasses(index)" class="text-primary-light-1 mb-2.5 italic">{{slide.last_text}}</h5>
           <div v-carousel="changeSlideHandler" class="carousel-cover"></div>
         </div>
-        <button v-bind="textClasses(index)"  class="btn btn-primary !font-poppins">
+        <NuxtLink :to="{name:'PRODUCT_DETAIL',params:{link:slide.link}}" v-bind="textClasses(index)"  class="btn btn-primary !font-poppins">
           order now
-        </button>
+        </NuxtLink>
 
       </v-column>
 

@@ -45,4 +45,23 @@ export interface Banner{
     first_text:string
     middle_text:string
     last_text:string
+    link:string
+}
+
+export interface Product_menu {
+    id:number
+    categoryID:number
+    title:string
+    caption:string
+    price:number
+    primary_image:string
+    description:string
+    brief:string
+    specification:ScrollIntoViewOptions
+    link:string
+    status:boolean
+    off:boolean
+    off_percent:number
+    quantity:number
+    category:string
 }
