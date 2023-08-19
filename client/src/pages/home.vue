@@ -1,6 +1,7 @@
 <template>
   <LazyHomeRecommendation/>
   <LazyHomeProducts />
+  <LazyHomeOffer />
 
 </template>
 
