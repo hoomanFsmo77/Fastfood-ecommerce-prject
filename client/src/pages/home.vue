@@ -2,7 +2,7 @@
   <LazyHomeRecommendation/>
   <LazyHomeProducts />
   <LazyHomeOffer />
-
+  <LazyHomeNews/>
 </template>
 
 <script setup lang="ts">

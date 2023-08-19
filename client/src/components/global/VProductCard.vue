@@ -16,7 +16,7 @@ defineProps<{
 <template>
   <div class="product-card ">
     <div class="product-card-image">
-      <VImage loader-class="h-11 w-11 rounded-full"  class="object-cover w-full" :src="primary_image"/>
+      <VImage loader-class="h-11 w-11 rounded-full"  image-class="object-cover w-full"  :src="primary_image"/>
 
     </div>
     <div class="product-card-content">

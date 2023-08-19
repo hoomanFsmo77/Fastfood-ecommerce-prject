@@ -20,7 +20,7 @@
                 <p class="text-6 leading-1 text-primary-light-1 font-600"> <sup class="text-2 text-primary-light-1">$</sup>21</p>
                 <p class="text-primary-light-1 text-1.5 uppercase text-center font-300">Each</p>
               </div>
-            <ul class="ml-1.5">
+            <ul class="ml-5">
               <li class="text-secondary-light-4 text-1.2 font-600">- Chicken Hallon</li>
               <li class="text-secondary-light-4 text-1.2 font-600 my-0.5">- Summer Pizza</li>
               <li class="text-secondary-light-4 text-1.2 font-600">- Vegge Lover</li>

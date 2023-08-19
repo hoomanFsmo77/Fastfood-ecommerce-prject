@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   src:string,
-  loaderClass?:string
+  loaderClass?:string,
+  imageClass?:string
 }>();
 const flag=shallowRef<boolean>(false)
 const loadImage = () => {
@@ -13,13 +14,13 @@ const loadMetaData = () => {
 </script>
 
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center h-full w-full">
     <nuxt-img  :alt="src"
                @load="loadImage"
                @loadedmetadata="loadMetaData"
                :srcset="src"
-               class="transition-all"
-               :class="[$attrs,{'opacity-100 visible !z-auto':flag,'hidden opacity-0 z-[-1]':!flag}]"
+               class="transition-all w-full"
+               :class="[imageClass,{'opacity-100 visible !z-auto':flag,'hidden opacity-0 z-[-1]':!flag}]"
                :src="src"
 
     />

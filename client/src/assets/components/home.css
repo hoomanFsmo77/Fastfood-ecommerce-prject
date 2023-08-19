@@ -22,4 +22,8 @@
     #offer{
         @apply bg-[url("/home/offer.webp")] bg-cover bg-[left_center] py-6
     }
+
+    #latest-news{
+        @apply py-3 bg-[url("/home/blog.webp")] bg-cover bg-center
+    }
 }

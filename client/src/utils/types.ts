@@ -65,3 +65,18 @@ export interface Product_menu {
     quantity:number
     category:string
 }
+
+export interface Blog {
+    id:number
+    title:string
+    date:string
+    brief:string
+    link:string
+    image_sm:string
+    image_xs:string
+    image_lg:string
+    categoryID:number
+    adminID:number
+    isLatest:boolean
+    category:string
+}

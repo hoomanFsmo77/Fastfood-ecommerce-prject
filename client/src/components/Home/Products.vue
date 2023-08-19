@@ -28,7 +28,7 @@ const currentTabIndex=ref<number>(0)
         </v-column>
       </v-row>
       <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
-        <ProductCard
+        <VProductCard
             v-for="tab_item in data[currentTabIndex].list"
             :primary_image="tab_item.primary_image"
             :title="tab_item.title"

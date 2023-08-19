@@ -30,5 +30,10 @@
     .underline-active{
         @apply before:absolute relative before:bottom-0 before:w-5 before:h-[4px] before:bg-secondary-light-3 before:left-[calc(50%-2.5rem)]
     }
-
+    .underline-active-left{
+        @apply before:absolute relative before:left-0 before:bottom-0 before:w-5 before:h-[4px] before:bg-secondary-light-3
+    }
+    .text-hidden{
+        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+    }
 }

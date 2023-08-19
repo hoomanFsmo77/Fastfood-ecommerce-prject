@@ -24,4 +24,24 @@
     .product-card-link{
         @apply absolute inset-0 w-full h-full
     }
+
+
+    .blog-card{
+        @apply overflow-hidden  hover:[&_img]:scale-[1.05] hover:[&_.blog-card-image-content]:bg-[rgba(0,0,0,0.4)] relative
+    }
+    .blog-card-image-wrapper{
+        @apply w-full overflow-hidden  relative cursor-pointer
+    }
+    .blog-card-image{
+        @apply  w-full object-cover transition-all duration-700 ease-in-out rounded-2
+    }
+    .blog-card-image-content{
+        @apply absolute inset-0 w-full h-full bg-[rgba(0,0,0,0.2)] z-10 transition-all duration-700 ease-in-out flex justify-start items-end
+    }
+    .blog-card-date{
+        @apply bg-secondary-light-2 py-0.5 px-0.7
+    }
+    .blog-content{
+        @apply mt-1.3
+    }
 }
