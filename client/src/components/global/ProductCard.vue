@@ -16,7 +16,8 @@ defineProps<{
 <template>
   <div class="product-card ">
     <div class="product-card-image">
-      <nuxt-img class="object-cover w-full"   :src="primary_image"/>
+      <VImage loader-class="h-11 w-11 rounded-full"  class="object-cover w-full" :src="primary_image"/>
+
     </div>
     <div class="product-card-content">
         <h5 class="product-card-title  ">{{title}}</h5>
@@ -25,7 +26,7 @@ defineProps<{
       </p>
       <div v-if="off" class="flex justify-center items-center">
         <h3  class=" text-secondary-light-3 mr-1 text-center tracking-wider  font-800">
-          ${{$calculate_off_price(price.toFixed(2),off_percent)}}
+          ${{$calculate_off_price(price.toFixed(2),off_percent).toFixed(2)}}
         </h3>
         <div>
           <h4  class=" text-primary-dark-2 line-through text-center tracking-wider  font-800">

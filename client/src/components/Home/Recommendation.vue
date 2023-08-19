@@ -14,7 +14,7 @@
               Hot & Spicy
             </NuxtLink>
           </div>
-          <nuxt-img class="w-full" src="/home/pizza.webp" />
+          <VImage loader-class="w-full"  class="w-full" src="/home/pizza.webp"/>
         </v-column>
         <v-column col="3" >
           <div class="px-1 relative w-full h-full">
@@ -25,7 +25,7 @@
                 Read More
               </NuxtLink>
             </div>
-            <nuxt-img class="w-full  h-full" src="/home/drink.webp" />
+            <VImage loader-class="w-full"  class="w-full  h-full" src="/home/drink.webp"/>
           </div>
         </v-column>
         <v-column col="3" class="relative">
@@ -37,7 +37,8 @@
               Read More
             </NuxtLink>
           </div>
-          <nuxt-img class="w-full" src="/home/chips.webp" />
+          <VImage loader-class="w-full h-15"  class="w-full  h-full" src="/home/chips.webp"/>
+
         </v-column>
       </v-row>
     </v-container>

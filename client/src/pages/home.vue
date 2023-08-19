@@ -1,6 +1,6 @@
 <template>
-  <HomeRecommendation/>
-  <HomeProducts />
+  <LazyHomeRecommendation/>
+  <LazyHomeProducts />
 
 </template>
 
