@@ -36,7 +36,7 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt'
     ],
     runtimeConfig:{
         api_base:process.env.API_BASE,

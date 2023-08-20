@@ -5,6 +5,7 @@
   <LazyHomeNews/>
   <LazyHomeDelivery />
   <LazyHomeServices />
+  <LazyHomeGallery />
 </template>
 
 <script setup lang="ts">
