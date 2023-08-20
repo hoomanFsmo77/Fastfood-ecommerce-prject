@@ -31,7 +31,7 @@ const {data,pending,error}=await useFetch<Blog[]>('/api/news')
             <div class="bg-[#fff] rounded-2 px-1 py-2 mt-2 w-full shadow-md">
               <div class="mb-1 last:mb-0 border-b-[1px] last:border-0 pb-1 border-b-gray-200" v-for="blog in data.slice(3,6)">
                 <NuxtLink class="h4 font-600 leading-1.1  transition-all hover:text-secondary-light-2" :to="{name:'BLOG_DETAIL',params:{link:blog.link}}">{{blog.title}}</NuxtLink>
-                <p class="text-secondary-light-2 text-0.8 mt-1">{{blog.date}}</p>
+                <p class="text-secondary-light-2 text-0.9 mt-1">{{blog.date}}</p>
 
               </div>
             </div>

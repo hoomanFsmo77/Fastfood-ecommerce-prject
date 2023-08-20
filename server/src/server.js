@@ -29,9 +29,11 @@ const profileRoute=require('./routes/app/profile')
 const locationRoute=require('./routes/app/location')
 const ordersRoute=require('./routes/app/orders')
 const basketRoute=require('./routes/app/basket')
+const offerRoute=require('./routes/app/offer')
 const paymentRoute=require('./routes/app/payment')
 const transactionRoute=require('./routes/app/transaction')
 const favoriteRoute=require('./routes/app/favorite')
+const newsletterRoute=require('./routes/app/newsletter')
 
 
 //// panel routes
@@ -47,6 +49,7 @@ const blogCommentRoute=require('./routes/panel/blog_comments')
 const productCommentRoute=require('./routes/panel/product_comments')
 const chartsRoute=require('./routes/panel/charts')
 const statisticRoute=require('./routes/panel/statistic')
+const offersRoute=require('./routes/panel/offer')
 
 //// app routes
 app.use('/storage/image',storageRoute)
@@ -69,6 +72,8 @@ app.use('/app/basket',basketRoute)
 app.use('/app/payment',paymentRoute)
 app.use('/app/transaction',transactionRoute)
 app.use('/app/favorite',favoriteRoute)
+app.use('/app/offer',offerRoute)
+app.use('/app/newsletter',newsletterRoute)
 
 //// panel routes
 app.use('/panel/auth',panelAuthRoute)
@@ -83,6 +88,7 @@ app.use('/panel/blog-comments',blogCommentRoute)
 app.use('/panel/product-comments',productCommentRoute)
 app.use('/panel/charts',chartsRoute)
 app.use('/panel/statistic',statisticRoute)
+app.use('/panel/offer',offersRoute)
 
 
 

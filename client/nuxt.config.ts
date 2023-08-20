@@ -41,5 +41,8 @@ export default defineNuxtConfig({
     runtimeConfig:{
         api_base:process.env.API_BASE,
         access_key:process.env.ACCESS_KEY,
+        public:{
+            imageUrlBase:process.env.IMAGE_URL_BASE
+        }
     }
 })

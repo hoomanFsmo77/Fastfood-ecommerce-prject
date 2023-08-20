@@ -18,7 +18,6 @@ const loadMetaData = () => {
     <nuxt-img  :alt="src"
                @load="loadImage"
                @loadedmetadata="loadMetaData"
-               :srcset="src"
                class="transition-all w-full"
                :class="[imageClass,{'opacity-100 visible !z-auto':flag,'hidden opacity-0 z-[-1]':!flag}]"
                :src="src"
