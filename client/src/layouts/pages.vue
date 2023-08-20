@@ -3,6 +3,7 @@
     <LayoutDetail />
   </LayoutHeader>
   <div><slot/></div>
+  <LayoutFooter />
 </template>
 
 <script>
