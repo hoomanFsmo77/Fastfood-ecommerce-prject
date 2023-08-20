@@ -14,13 +14,13 @@ router.get('/',async (req,res)=>{
     const id=req.query.id;
     if(id){
         database('offer').where({id}).select('*').then(response=>{
-            res.status(200).send(responseHandler(false,null,response))
+            res.status(200).send(responseHandler(false,null,addImageBase([...response],'image')[0]))
         }).catch(err=>{
             res.status(503).send('error in db!')
         })
     }else{
         database('offer').select('*').then(response=>{
-            res.status(200).send(responseHandler(false,null,response))
+            res.status(200).send(responseHandler(false,null,addImageBase(response,'image')))
         }).catch(err=>{
             res.status(503).send('error in db!')
         })

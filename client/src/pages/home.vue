@@ -3,6 +3,7 @@
   <LazyHomeProducts />
   <LazyHomeOffer />
   <LazyHomeNews/>
+  <LazyHomeDelivery />
 </template>
 
 <script setup lang="ts">

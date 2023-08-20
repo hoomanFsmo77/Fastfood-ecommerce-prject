@@ -188,6 +188,7 @@ module.exports = {
       poppins:['Poppins','sans-serif'],
       openSans:['Open Sans','sans-serif'],
       playFair:['Playfair Display','serif'],
+      dance:['Moon Dance', 'cursive']
     },
     container:{
       center:true,
