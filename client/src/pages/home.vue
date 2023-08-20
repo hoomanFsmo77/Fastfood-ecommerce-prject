@@ -4,6 +4,7 @@
   <LazyHomeOffer />
   <LazyHomeNews/>
   <LazyHomeDelivery />
+  <LazyHomeServices />
 </template>
 
 <script setup lang="ts">

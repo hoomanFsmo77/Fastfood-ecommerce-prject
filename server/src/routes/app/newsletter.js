@@ -17,7 +17,7 @@ router.post('/',body('email').isEmail(),async (req,res)=>{
             res.status(200).send(responseHandler(true,'email address already exist!',null))
         }else{
             await database('newsletter').insert({email:body.email});
-            res.status(200).send(responseHandler(false,'email added',null))
+            res.status(200).send(responseHandler(false,'Thanks for subscribing!',null))
         }
     }else{
         res.status(200).send(responseHandler(true,result.array(),null))

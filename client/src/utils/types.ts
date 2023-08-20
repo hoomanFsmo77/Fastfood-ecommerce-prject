@@ -2,7 +2,7 @@
 export interface IResponse<T> {
     data:T,
     error:boolean,
-    errors:null|string[]
+    errors:null|{location:string,msg:string,path:string}[]|string
 }
 
 

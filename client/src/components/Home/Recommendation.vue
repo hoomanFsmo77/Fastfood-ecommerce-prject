@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const {public:{imageUrlBase}}=useRuntimeConfig()
+
 
 </script>
 
@@ -15,10 +15,8 @@ const {public:{imageUrlBase}}=useRuntimeConfig()
               Hot & Spicy
             </NuxtLink>
           </div>
-          <client-only>
-            <VImage loader-class="w-full"  image-class="w-full  h-full" :src="imageUrlBase+'pizza.webp'"/>
+          <VImage loader-class="w-full"  image-class="w-full  h-full" src="/home/pizza.webp"/>
 
-          </client-only>
         </v-column>
         <v-column col="3" >
           <div class="px-1 relative w-full h-full">
@@ -29,9 +27,7 @@ const {public:{imageUrlBase}}=useRuntimeConfig()
                 Read More
               </NuxtLink>
             </div>
-            <client-only>
-              <VImage loader-class="w-full"  image-class="w-full  h-full" :src="imageUrlBase+'drink.webp'"/>
-            </client-only>
+            <VImage loader-class="w-full"  image-class="w-full  h-full" src="/home/drink.webp"/>
           </div>
         </v-column>
         <v-column col="3" class="relative">
@@ -43,9 +39,7 @@ const {public:{imageUrlBase}}=useRuntimeConfig()
               Read More
             </NuxtLink>
           </div>
-          <client-only>
-            <VImage loader-class="w-full h-15" image-class="w-full  h-full"   :src="imageUrlBase+'chips.webp'"/>
-          </client-only>
+          <VImage loader-class="w-full h-15" image-class="w-full  h-full"   src="/home/chips.webp"/>
         </v-column>
       </v-row>
     </v-container>

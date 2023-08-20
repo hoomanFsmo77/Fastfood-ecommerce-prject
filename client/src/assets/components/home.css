@@ -20,7 +20,7 @@
         @apply text-1.2 font-600 h-full pb-1.3
     }
     #offer{
-        @apply  !bg-cover !bg-[left_center] py-6 my-4
+        @apply  !bg-cover !bg-[left_center] py-6
     }
 
     #latest-news{
@@ -29,5 +29,8 @@
 
     #delivery{
         @apply bg-secondary-light-2 py-3 relative
+    }
+    #services{
+        @apply py-3 bg-[#fff] bg-[url(/home/service.webp)] bg-no-repeat bg-left-bottom
     }
 }

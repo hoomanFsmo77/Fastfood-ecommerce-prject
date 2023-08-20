@@ -131,3 +131,27 @@ export const navbar:Navbar[]=[
         link:{name:'CONTACT_US'}
     }
 ]
+
+
+export const services=[
+    {
+       title:'Free shipping on first order',
+        desc:'Sign up for updates and get free shipping',
+        image:'/home/service-1.webp'
+    },
+    {
+        title:'Best Taste Guaranttee',
+        desc: 'We use best ingredients to cook the taste food.',
+        image:'/home/service-2.webp'
+    },
+    {
+        title: 'Variety of Dishes',
+        desc: 'We give variety of dishes, deserts, and drinks',
+        image:'/home/service-3.webp'
+    },
+    {
+        title:'25 Minutes Delivery',
+        desc: 'We deliver your food at your dooe that you order',
+        image:'/home/service-4.webp'
+    }
+]
