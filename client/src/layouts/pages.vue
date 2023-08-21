@@ -1,6 +1,8 @@
 <template>
   <LayoutHeader>
-    <LayoutDetail />
+    <section id="header-detail-content">
+      <LayoutDetail />
+    </section>
   </LayoutHeader>
   <div><slot/></div>
   <LayoutFooter />

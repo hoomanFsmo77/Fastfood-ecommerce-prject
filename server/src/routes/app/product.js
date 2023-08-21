@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const bodyParser=require('body-parser')
 const database=require('../../database/database');
-const {responseHandler,getAllProductFilter,getProductByLinkFilter}=require('../../utils');
+const {responseHandler,getAllProductFilter,getProductByLinkFilter, addImageBase, changeToBoolean,removeDuplicate}=require('../../utils');
 const _ = require('lodash');
 const {body, validationResult, matchedData,param,query} = require("express-validator");
 const upload=require('../../database/upload')
@@ -35,15 +35,35 @@ router.post('/image',upload.single('image'),(req,res)=>{
     }
 })
 ////////////////// end add product image  ///////////////////////
+/// get all
 
+
+
+router.get('/all',async (req,res)=>{
+    
+        const allProducts=await database('product').select('*');
+        const changeImage=addImageBase(allProducts,'primary_image');
+        const changeToBool=changeToBoolean(changeImage,['status','off'])
+        res.status(200).send(responseHandler(false,null,removeDuplicate(changeToBool,'title')))
+    
+
+})
 
 ///////////////// start get product by link //////////////////
 router.get('/:link',param('link').notEmpty(),async (req,res)=>{
+	
     const result = validationResult(req);
     if(result.isEmpty()) {
-        const param = matchedData(req);
-        const target=await getProductByLinkFilter(param.link)
-        res.status(200).send(responseHandler(false,null,target))
+	try{
+	    const param = matchedData(req);
+            const target=await getProductByLinkFilter(param.link)
+	    res.status(200).send(responseHandler(false,null,target))
+
+	}catch(err){
+            res.status(200).send(responseHandler(true,result.array(),null))
+         }
+        
+        
     }else{
         res.status(200).send(responseHandler(true,result.array(),null))
     }

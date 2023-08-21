@@ -29,3 +29,8 @@ body .scroller{
         background-position-x: -200%;
     }
 }
+
+#nprogress .bar{
+    background: #a41a13 !important;
+    height: 3px !important;
+}

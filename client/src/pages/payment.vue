@@ -7,7 +7,18 @@
 definePageMeta({
   name:'PAYMENT_VERIFY',
   path:'/payment/verify',
-  layout:'pages'
+  layout:'pages',
+  breadcrumb:[
+    {
+      name:'Home',
+      link:{name:'HOME'},
+      on:false
+    },{
+      name:'Payment',
+      link:{name:'PAYMENT_VERIFY'},
+      on:true
+    }
+  ]
 });
 </script>
 

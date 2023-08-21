@@ -8,6 +8,21 @@ const querySerialize = (obj) => {
   return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&');
 }
 
+const  removeDuplicate = (arr,key) => {
+    const uniqueItems = [];
+    return arr.filter(element => {
+        const isDuplicate = uniqueItems.includes(element[key]);
+
+        if (!isDuplicate) {
+            uniqueItems.push(element[key]);
+
+            return true;
+        }
+
+        return false;
+    });
+}
+
 const responseHandler = (error,msg,data) => {
     return {
         error:error,
@@ -282,5 +297,5 @@ const transferPaymentStatus = (source) => {
 }
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate
 }

@@ -1,8 +1,9 @@
-import {Banner, IResponse} from "~/utils/types";
+import {Banner} from "~/utils/types";
 
 
 
 export const useCarousel=(banner_data:Ref<Banner[]|null>)=>{
+    let isFirst=true
     const currentSlide=ref(0)
     let interval:any;
 
@@ -62,12 +63,20 @@ export const useCarousel=(banner_data:Ref<Banner[]|null>)=>{
 
 
     const rowClass=(index:number|string)=>{
-        return {
+        const classes={
             class:[
-                {'animate__fadeOut ':currentSlide.value!==index,'animate__fadeIn !z-[9]':currentSlide.value===index},
+                {
+                    'animate__fadeOut':currentSlide.value!==index,
+                    'animate__fadeIn !z-[9]':currentSlide.value===index,
+                    '!z-[-1]':isFirst
+                },
                 'absolute items-center inset-0 w-full animate__animated  animate__delay-1s animate__slow'
             ]
         }
+        if(index===2){
+            isFirst=false;
+        }
+        return classes;
     }
     const textClasses = (index:number|string) => {
         return {

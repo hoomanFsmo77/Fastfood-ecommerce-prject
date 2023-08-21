@@ -29,4 +29,8 @@ const {data,pending}=await useFetch('/api/gallery')
 .PhotoSlider__Wrapper{
   z-index: 99999999999999;
 }
+.PhotoSlider__Wrapper .PhotoSlider__ArrowLeft svg, .PhotoSlider__Wrapper .PhotoSlider__ArrowRight svg{
+  width:3rem !important;
+  height: 3rem !important;
+}
 </style>

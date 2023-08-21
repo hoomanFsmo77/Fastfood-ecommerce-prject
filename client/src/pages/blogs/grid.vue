@@ -6,7 +6,19 @@
 definePageMeta({
   name:'BLOG_GRID',
   path:'/blogs/grid',
-  layout:'pages'
+  layout:'pages',
+  page_title:'Blogs grid',
+  breadcrumb:[
+    {
+      name:'Home',
+      link:{name:'HOME'},
+      on:false
+    },{
+      name:'Blogs',
+      link:{name:'BLOG_GRID'},
+      on:true
+    }
+  ]
 });
 </script>
 

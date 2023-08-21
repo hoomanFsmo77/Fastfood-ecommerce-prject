@@ -1,6 +1,8 @@
 <template>
   <LayoutHeader>
-    <HomeIntro />
+    <section id="main-header-content">
+      <HomeIntro />
+    </section>
   </LayoutHeader>
   <div><slot/></div>
   <LayoutFooter />

@@ -6,7 +6,7 @@
   <header>
     <HeaderTopbar/>
     <HeaderNavbar/>
-    <section id="main-header-content"><slot/></section>
+    <slot/>
   </header>
 
 </template>

@@ -1,0 +1,7 @@
+
+@tailwind components;
+@layer components {
+    #products-list{
+        @apply my-5
+    }
+}

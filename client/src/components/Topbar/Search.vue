@@ -77,7 +77,7 @@
                 </p>
                 <ul class="flex flex-row mt-2 justify-center">
                   <li v-for="item in recentKeyWord" class="">
-                    <NuxtLink :to="{name:'PRODUCT_LIST',query:{category:item.toLowerCase()}}" class="text-white block mr-1 p-1  border-[1px] border-white cursor-pointer transition-all hover:text-secondary-light-2 hover:border-secondary-light-2">
+                    <NuxtLink :to="{name:'FEATURE_MENU',query:{category:item.toLowerCase()}}" class="text-white block mr-1 p-1  border-[1px] border-white cursor-pointer transition-all hover:text-secondary-light-2 hover:border-secondary-light-2">
                       {{item}}
                     </NuxtLink>
                   </li>

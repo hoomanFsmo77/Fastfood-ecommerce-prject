@@ -21,4 +21,11 @@
     .input{
         @apply py-0.8 px-2 w-full bg-[#fff] outline-none focus:outline-none placeholder:text-gray-400 placeholder:capitalize placeholder:text-1 text-gray-500
     }
+
+    .pagination-btn{
+        @apply w-3 h-3 rounded-full border-[2px] border-secondary-light-2 flex justify-center items-center font-600 text-secondary-light-2 hover:bg-secondary-light-2 transition-all duration-500 ease-in-out hover:text-[#fff]
+    }
+    .pagination-btn.active{
+        @apply !text-[#fff] !bg-secondary-light-2
+    }
 }

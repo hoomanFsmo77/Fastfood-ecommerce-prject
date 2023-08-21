@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {Banner} from "~/utils/types";
 import {useCarousel} from "~/composables/useCarousel";
-const {data:banner_data,pending}=await useFetch<Banner[]>('/api/intro')
-const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,currentSlide,changeSlideHandler,textClasses,rowClass}= useCarousel(banner_data);
+const {data:banner_data,pending}=await useFetch<Banner[]>('/api/intro');
+const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,changeSlideHandler,textClasses,rowClass}= useCarousel(banner_data);
 </script>
 
 <template>
