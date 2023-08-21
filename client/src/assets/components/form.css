@@ -13,11 +13,16 @@
     .btn-sm{
         @apply  tracking-[2px] leading-[40px] px-1 text-0.8
     }
+    .btn-light{
+       @apply !bg-secondary-light-2 !text-primary-light-1
+    }
 
     .btn-secondary{
         @apply bg-secondary-light-2 text-primary-light-1 before:block before:absolute  before:top-0 before:h-full  before:mx-auto before:bg-primary-dark-2 before:w-full before:left-0  before:opacity-0 before:scale-x-[1] before:scale-y-[0.5] before:invisible hover:before:opacity-100 hover:before:visible hover:before:w-full before:transition-all before:duration-500 before:ease-in-out hover:before:scale-x-[1] hover:before:scale-y-[1] before:z-[-1] before:rounded-4
     }
-
+    .input-reset{
+        @apply outline-none focus:outline-none
+    }
     .input{
         @apply py-0.8 px-2 w-full bg-[#fff] outline-none focus:outline-none placeholder:text-gray-400 placeholder:capitalize placeholder:text-1 text-gray-500
     }
@@ -27,5 +32,8 @@
     }
     .pagination-btn.active{
         @apply !text-[#fff] !bg-secondary-light-2
+    }
+    .number-input{
+        @apply w-4 h-3 border-[1px] transition-all duration-500 focus:border-[#80bdff] text-1 text-gray-700 border-[#ced4da] p-1
     }
 }

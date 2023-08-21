@@ -4,7 +4,7 @@ interface IMenuResponse {
   tab:string,
   list:Product_menu[]
 }
-const {data,pending,error}=await useFetch<IMenuResponse[]>('/api/tab-products')
+const {data,pending,error}=await useFetch<IMenuResponse[]>('/api/products/tab')
 const currentTabIndex=ref<number>(0)
 </script>
 

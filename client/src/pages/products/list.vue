@@ -62,7 +62,7 @@ definePageMeta({
   ]
 });
 
-const {data,pending,execute,refresh}=await useFetch<IProduct[]>(`/api/all-products`)
+const {data,pending,execute,refresh}=await useFetch<IProduct[]>(`/api/products/all`)
 const {paginationData,prevPage,nextPage,goToPage}=usePagination<IProduct>(data,8);
 
 </script>
