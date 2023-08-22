@@ -11,6 +11,9 @@
 @tailwind components;
 
 @layer components {
+    .text{
+        @apply text-1 text-[#848484] font-400 leading-1.8
+    }
     .horizontal-line{
         @apply w-[1px] h-full bg-gray-200/40
     }

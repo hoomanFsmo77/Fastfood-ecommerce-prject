@@ -7,6 +7,9 @@
     #product-detail{
         @apply py-6  bg-[#fff]
     }
+    #similar-products{
+        @apply py-5
+    }
     .product-tab{
         @apply w-full
     }
@@ -18,5 +21,20 @@
     }
     .product-tab-content{
         @apply border-[1px] p-2
+    }
+    .product-comment{
+        @apply flex items-start my-1.5
+    }
+    .product-comment-image{
+        @apply w-[60px] object-cover
+    }
+    .product-comment-content{
+        @apply w-full border-[1px] p-1 ml-1
+    }
+    .rate-hover:hover{
+        @apply [&_*]:!text-secondary-light-2 transition-all
+    }
+    .rate-hover.active{
+        @apply [&_*]:!text-secondary-light-2
     }
 }
