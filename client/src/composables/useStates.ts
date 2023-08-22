@@ -1,7 +1,7 @@
 
 
 export const useStates=()=>{
-    const isLogin=useState<boolean>('isLogin',()=>true)
+    const isLogin=useState<boolean>('isLogin',()=>false)
     const userInformation=useState('userInformation',()=>{
         return{
             firstname:'hooman',

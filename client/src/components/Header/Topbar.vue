@@ -22,7 +22,7 @@
     <div id="header-topbar">
         <v-container >
             <v-row>
-                <v-column col="12" lg="6" md="8" class="sm:flex-row sm:justify-start flex-col justify-center items-center">
+                <v-column col="12" lg="7" md="8" class="sm:flex-row sm:justify-start flex-col justify-center items-center">
                     <NuxtLink :to="{name:'HOME'}">
                       <h6
                           class="text-primary-light-3 font-500 text-left">
@@ -35,8 +35,25 @@
                     <Icon name="bi:envelope" class="mr-0.6"/>
                     info@wengdo.com
                    </a>
+                  <template v-if="isLogin">
+                    <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:logout-circle-line"/>
+                    <button class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5">
+                      logout
+                    </button>
+                  </template>
+                  <template v-else >
+                    <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:login-circle-line"/>
+                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-0.5 text-0.9" :to="{name:'AUTH',params:{slug:['login']}}">
+                      login
+                    </NuxtLink>
+                    <span class="text-0.9 text-primary-light-3 font-500 text-left mx-0.5">or</span>
+                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left text-0.9" :to="{name:'AUTH',params:{slug:['sign-in']}}">
+                      sign in
+                    </NuxtLink>
+                  </template>
+
                 </v-column>
-                <v-column col="0" lg="6" md="4"  class=" justify-end">
+                <v-column col="0" lg="5" md="4"  class=" justify-end">
                     <a class="topbar-icon" href="#">
                         <Icon name="bi:facebook"/>
                     </a>
@@ -58,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-
+const {isLogin}=useStates()
 
 </script>
 

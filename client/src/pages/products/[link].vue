@@ -91,25 +91,37 @@
               </p>
 
               <div v-if="tabIndex===2" id="comments-tab">
-                <h4 class="font-600">{{product_data.comments.length}} Reviews For win Your Friends</h4>
-                <ProductComment
-                  v-for="comment in product_data.comments"
-                  :image="comment.author_image"
-                  :content="comment.body"
-                  :star="comment.rating"
-                  :date="comment.date"
-                  :name="`${comment.author_firstname} ${comment.author_lastname}`"
-                  :reply="comment.reply"
-                  :comment-id="comment.id"
-                  :productId="comment.productID"
-                />
+<!--                ///// comments-->
+                <template v-if="product_data.comments.length>0">
+                  <h4 class="font-600">{{product_data.comments.length}} Reviews For win Your Friends</h4>
+                  <ProductComment
+                      v-for="comment in product_data.comments"
+                      :image="comment.author_image"
+                      :content="comment.body"
+                      :star="comment.rating"
+                      :date="comment.date"
+                      :name="`${comment.author_firstname} ${comment.author_lastname}`"
+                      :reply="comment.reply"
+                      :comment-id="comment.id"
+                      :productId="comment.productID"
+                  />
+                </template>
+                <template v-else>
+                  <h5 class="font-600">No Review.</h5>
+                </template>
+<!--               ////-->
                 <h4 class="font-playFair font-700 uppercase mt-2 pb-1 underline-active-left border-b-[1px]">add your Review</h4>
-                <ProductReply
-                    class="!border-0 !p-0"
-                    :commentId="0"
-                    :productId="product_data.id"
-                    :is-reply="false"
-                />
+                <template v-if="isLogin">
+                  <ProductReply
+                      class="!border-0 !p-0"
+                      :commentId="0"
+                      :productId="product_data.id"
+                      :is-reply="false"
+                  />
+                </template>
+                <template v-else>
+                  <h6 class="font-400 mt-2">You are not authorized yet. <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH',params:{slug:['login']}}">login</NuxtLink> or <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH',params:{slug:['sing-in']}}">sign in</NuxtLink> to add review or comments.</h6>
+                </template>
               </div>
             </div>
 
@@ -169,8 +181,9 @@ definePageMeta({
 const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/api/products/${route.params.link}`);
 const {data:similar_products,pending:similar_product_flag}=await useFetch<IProduct[]>(`/api/products/all?category=${product_data.value && product_data.value.category}`);
 
+const {isLogin}=useStates();
 const quantity=ref(1);
-const tabIndex=ref(0)
+const tabIndex=ref(0);
 const plusQuantity = () => {
   if(product_data.value && quantity.value!==product_data.value.quantity){
     quantity.value++

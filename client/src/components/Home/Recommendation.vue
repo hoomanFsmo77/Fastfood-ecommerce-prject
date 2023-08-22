@@ -11,7 +11,7 @@
           <div class="content-img w-[60%] ml-auto">
               <h1 class="text-primary-light-1 font-600 text-left mt-2">Pizza Calabriz </h1>
               <h5 class="text-primary-light-1 italic mb-0.5 text-left"> Mascarpone · Nduja Spicy</h5>
-            <NuxtLink class="btn btn-primary btn-sm" :to="{name:'PRODUCT_DETAIL',params:{link:'spicy-pepperony'}}">
+            <NuxtLink class="btn btn-primary btn-sm" :to="{name:'PRODUCT_DETAIL',params:{link:'spicy-pepperoni'}}">
               Hot & Spicy
             </NuxtLink>
           </div>
