@@ -39,4 +39,20 @@
     .number-input{
         @apply w-4 h-3 border-[1px] transition-all duration-500 focus:border-[#80bdff] text-1 text-gray-700 border-[#ced4da] p-1
     }
+    .label{
+        @apply text-0.9 text-[#848484] capitalize block mb-0.2
+    }
+    .input-wrapper{
+        @apply w-full relative
+    }
+    .input-wrapper .password-icon{
+        @apply absolute w-1.3 h-1.3 [&_svg]:w-1.3 [&_svg]:h-1.3 right-[16px] top-[39px] cursor-pointer z-[4] text-gray-500
+    }
+    .input-file-wrapper{
+        @apply relative w-full h-5 border-[1px] border-gray-500 rounded-4 m-3 cursor-pointer flex justify-center items-center
+    }
+    .input-file{
+        @apply absolute inset-0 w-full h-full appearance-none opacity-0 cursor-pointer
+    }
+
 }

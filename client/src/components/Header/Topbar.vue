@@ -43,11 +43,11 @@
                   </template>
                   <template v-else >
                     <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:login-circle-line"/>
-                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-0.5 text-0.9" :to="{name:'AUTH',params:{slug:['login']}}">
+                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-0.5 text-0.9" :to="{name:'AUTH'}">
                       login
                     </NuxtLink>
                     <span class="text-0.9 text-primary-light-3 font-500 text-left mx-0.5">or</span>
-                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left text-0.9" :to="{name:'AUTH',params:{slug:['sign-in']}}">
+                    <NuxtLink class="text-primary-light-3 transition-all hover:text-white font-500 text-left text-0.9" :to="{name:'AUTH'}">
                       sign in
                     </NuxtLink>
                   </template>

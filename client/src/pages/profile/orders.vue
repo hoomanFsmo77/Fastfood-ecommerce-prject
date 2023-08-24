@@ -6,7 +6,8 @@
 definePageMeta({
   name:'PROFILE_ORDERS',
   path:'/profile/orders',
-  layout:'pages'
+  layout:'pages',
+  middleware:'auth'
 });
 </script>
 

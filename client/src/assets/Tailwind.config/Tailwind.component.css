@@ -8,6 +8,7 @@
 @import "../components/card.css";
 @import "../components/footer.css";
 @import "../components/products.css";
+@import "../components/auth.css";
 @tailwind components;
 
 @layer components {

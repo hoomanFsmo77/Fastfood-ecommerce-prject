@@ -1,3 +1,4 @@
+import {IResponse} from "~/utils/types";
 
 
 export const urlEncodeBody=(obj:object)=>{
@@ -17,8 +18,19 @@ export const formDataBody=(obj:object)=>{
     })
     return form
 }
+export const handleIconClick = (node:any) => {
+    node.props.suffixIcon = node.props.suffixIcon === 'eye' ? 'eyeClosed' : 'eye'
+    node.props.type = node.props.type === 'password' ? 'text' : 'password'
+}
 
+export const serializeError=(errors:IResponse<any>['errors'])=>{
+    if(errors){
+        return typeof errors==='string' ? [errors] :errors.map(error=>{
+            return `${error.type} ${error.path}: ${error.msg}`
+        })
+    }
 
+}
 export const calculate_off_price=(price:number,off_percent:number)=>{
     const off=Number(((price*off_percent)/100).toFixed(0))
     return price-off

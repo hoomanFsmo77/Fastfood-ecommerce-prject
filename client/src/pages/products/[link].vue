@@ -120,7 +120,7 @@
                   />
                 </template>
                 <template v-else>
-                  <h6 class="font-400 mt-2">You are not authorized yet. <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH',params:{slug:['login']}}">login</NuxtLink> or <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH',params:{slug:['sing-in']}}">sign in</NuxtLink> to add review or comments.</h6>
+                  <h6 class="font-400 mt-2">You are not authorized yet. <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH'}">login</NuxtLink> or <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH'}">sign in</NuxtLink> to add review or comments.</h6>
                 </template>
               </div>
             </div>

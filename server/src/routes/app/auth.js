@@ -21,13 +21,13 @@ router.post('/login',body('email').isEmail(),body('password').notEmpty(),async (
             if(response.length>0){
                 bcrypt.compare(body.password, response[0].password, function(err, result) {
                     if(result){
-                        res.status(200).send(responseHandler(false,null,response[0]))
+                        res.status(200).send(responseHandler(false,null,addImageBase(response,'profile_image')[0]))
                     }else{
                         res.status(200).send(responseHandler(true,'password is incorrect.',null))
                     }
                 });
             }else{
-                res.status(200).send(responseHandler(true,'email is not found!',null))
+                res.status(200).send(responseHandler(true,'email address is invalid!',null))
             }
         })
     }else{
@@ -46,7 +46,7 @@ router.get('/me',header('token').notEmpty(),(req,res)=>{
         where({token:header.token}).
         then(response=>{
             if(response.length>0){
-                res.status(200).send(responseHandler(false,null,changeToBoolean(addImageBase(response,'profile_image'),'isAdmin')))
+                res.status(200).send(responseHandler(false,null,changeToBoolean(addImageBase(response,'profile_image'),'isAdmin')[0]))
             }else{
                 res.status(200).send(responseHandler(true,'user not found!',null))
             }

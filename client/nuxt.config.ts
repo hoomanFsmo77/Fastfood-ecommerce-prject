@@ -36,10 +36,14 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt','@formkit/nuxt'
     ],
     runtimeConfig:{
         api_base:process.env.API_BASE,
-        access_key:process.env.ACCESS_KEY
+        access_key:process.env.ACCESS_KEY,
+        public:{
+            api_base:process.env.API_BASE,
+            access_key:process.env.ACCESS_KEY
+        }
     }
 })

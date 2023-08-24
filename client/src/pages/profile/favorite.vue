@@ -6,7 +6,8 @@
 definePageMeta({
   name:'PROFILE_FAVORITE',
   path:'/profile/favorite',
-  layout:'pages'
+  layout:'pages',
+  middleware:'auth'
 });
 </script>
 

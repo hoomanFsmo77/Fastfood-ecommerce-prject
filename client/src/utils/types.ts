@@ -2,7 +2,7 @@
 export interface IResponse<T> {
     data:T,
     error:boolean,
-    errors:null|{location:string,msg:string,path:string}[]|string
+    errors:null|{location:string,msg:string,path:string,type:string}[]|string
 }
 
 
@@ -79,4 +79,13 @@ export interface Blog {
     adminID:number
     isLatest:boolean
     category:string
+}
+
+export interface User_Information {
+    firstname:string,
+    lastname:string,
+    username:string,
+    profile_image:string,
+    email:string,
+    phone:string
 }

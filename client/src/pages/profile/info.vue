@@ -6,7 +6,8 @@
 definePageMeta({
   name:'PROFILE_INFO',
   path:'/profile/info',
-  layout:'pages'
+  layout:'pages',
+  middleware:'auth'
 });
 </script>
 
