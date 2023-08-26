@@ -1,4 +1,5 @@
 import {IResponse} from "~/utils/types";
+import Form from "form-data";
 
 
 export const urlEncodeBody=(obj:object)=>{
@@ -13,6 +14,14 @@ export const urlEncodeBody=(obj:object)=>{
 export const formDataBody=(obj:object)=>{
     const changeToArray=Object.entries(obj)
     const form=new FormData()
+    changeToArray.forEach(item=>{
+        form.append(item[0],item[1])
+    })
+    return form
+}
+export const nodeFormDataBody=(obj:object)=>{
+    const changeToArray=Object.entries(obj)
+    const form=new Form()
     changeToArray.forEach(item=>{
         form.append(item[0],item[1])
     })

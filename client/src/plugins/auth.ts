@@ -9,5 +9,6 @@ export default defineNuxtPlugin(async ()=>{
         userInformation.value=req
     }catch (err) {
         isLogin.value=false
+        userInformation.value=null
     }
 })

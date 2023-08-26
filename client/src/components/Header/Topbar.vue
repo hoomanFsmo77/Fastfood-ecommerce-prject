@@ -36,8 +36,13 @@
                     info@wengdo.com
                    </a>
                   <template v-if="isLogin">
+                    <Icon name="ri:account-circle-fill" size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5"/>
+                    <NuxtLink class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5" :to="{name:'PROFILE_INFO'}">
+                      profile
+                    </NuxtLink>
+
                     <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:logout-circle-line"/>
-                    <button class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5">
+                    <button @click="logoutHandler" class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5">
                       logout
                     </button>
                   </template>
@@ -75,8 +80,18 @@
 </template>
 
 <script setup lang="ts">
-const {isLogin}=useStates()
+const {isLogin,userInformation}=useStates()
 
+const logoutHandler = async () => {
+  try {
+    await $fetch('/api/auth/logout')
+    isLogin.value=false
+    userInformation.value=null
+    return navigateTo({name:'HOME'})
+  }catch (err) {
+    console.log(err)
+  }
+}
 </script>
 
 <style scoped>

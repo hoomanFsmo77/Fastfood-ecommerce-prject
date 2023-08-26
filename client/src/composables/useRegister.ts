@@ -1,9 +1,9 @@
-import {reset} from "@formkit/core";
-import {IResponse} from "~/utils/types";
 
-export const useSignIn=()=>{
-    const {public:{api_base,access_key}}=useRuntimeConfig();
-    const {$formDataBody,$serializeError}=useNuxtApp();
+
+
+export const useRegister=()=>{
+    const {$formDataBody}=useNuxtApp();
+    const profileImageSrc=ref<string|null>(null)
     const signInData=reactive({
         loaderButtonFlag:false as boolean,
         errors:null as string[]|null,
@@ -12,17 +12,22 @@ export const useSignIn=()=>{
             this.errors=null
         }
     })
+    const profileImageChange = (ev:any) => {
+        const fileReader=new FileReader()
+        fileReader.readAsDataURL(ev[0].file)
+        fileReader.onload=(data)=>{
+            profileImageSrc.value=data.explicitOriginalTarget.result as string
+        }
+
+    }
 
 
     const signInSubmit = async (formData:any) => {
         const {personalInfo,profile,security}=formData["multi-signIn"];
         signInData.init()
         try {
-            const req=await $fetch<IResponse<any>>(api_base+'/auth/register',{
+            const req=await $fetch<{code:number,errors:string[]}>('/api/auth/register',{
                 method:'POST',
-                headers:{
-                    access_key,
-                },
                 body:$formDataBody({
                     username:personalInfo.signup_username,
                     firstname:personalInfo.signup_firstname,
@@ -32,12 +37,12 @@ export const useSignIn=()=>{
                     profile_image:profile.signup_profile[0].file,
                     password:security.password
                 })
-            })
-            if(req.error){
-                signInData.errors=$serializeError(req.errors)
+            });
+
+            if(req.code===200){
+                await reloadNuxtApp();
             }else{
-                reset('signInForm')
-                await reloadNuxtApp()
+                signInData.errors=req.errors
             }
             signInData.loaderButtonFlag=false
         }catch (err){
@@ -46,6 +51,6 @@ export const useSignIn=()=>{
     }
 
     return{
-        signInSubmit,signInData
+        signInSubmit,signInData,profileImageChange,profileImageSrc
     }
 }

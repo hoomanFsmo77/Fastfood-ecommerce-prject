@@ -4,7 +4,7 @@
       <v-row class="items-start">
 <!--        //// login-->
         <v-column col="6" class="pr-1">
-          <div class="w-full  bg-[#fff] rounded-4 py-2  transition-all hover:shadow-lg">
+          <div class="w-full relative bg-[#fff] rounded-4 py-2  transition-all shadow-md hover:shadow-lg">
               <div class="flex items-center justify-center">
                 <nuxt-img width="80" src="/logo-small.webp"/>
                 <h2 class="uppercase tracking-wider text-secondary-light-2 font-700">login</h2>
@@ -21,11 +21,11 @@
                   <v-column class="justify-center" col="12">
                     <FormKit
                         type="custom_text"
-                        label="email*"
-                        id="login_email"
-                        name="login_email"
+                        label="email, phone or username*"
+                        id="login_identity"
+                        name="login_identity"
                         validation="required"
-                        validation-label="email"
+                        validation-label="email, phone or username"
                     />
                   </v-column>
                 </v-row>
@@ -51,13 +51,14 @@
                   </VBtnLoader>
                 </v-column>
               </v-row>
+
           </div>
 
         </v-column>
 <!--        //// sign up-->
         <v-column col="6" class="pl-1">
 
-          <div class="w-full   bg-[#fff] rounded-4 py-2  transition-all hover:shadow-lg">
+          <div class="w-full   bg-[#fff] rounded-4 py-2  transition-all shadow-md hover:shadow-lg">
             <div class="flex items-center justify-center">
               <nuxt-img width="80" src="/logo-small.webp"/>
               <h2 class="uppercase tracking-wider text-secondary-light-2 font-700">sign in</h2>
@@ -72,7 +73,6 @@
             <FormKit @submit="signInSubmit" name="signInForm" id="signInForm" type="form" :actions="false">
               <FormKit :allow-incomplete="false" name="multi-signIn" id="multi-signIn" type="multi-step" tab-style="progress">
                 <FormKit  stepNext-class="[&_.formkit-input]:btn [&_.formkit-input]:btn-sm [&_.formkit-input]:btn-secondary [&_.formkit-input]:btn-light [&_.formkit-input]:!font-poppins"  type="step" name="personalInfo">
-                  <!-- component for example brevity. -->
                   <!--                /// step 1-->
                   <v-row class="my-1">
                     <v-column col="12" class="justify-center">
@@ -144,15 +144,18 @@
                   <!-- component for example brevity. -->
                   <!--                /// step 2-->
                   <v-row class="my-1">
-                    <v-column col="12">
+                    <v-column col="12" class="flex-col">
+                      <nuxt-img v-if="profileImageSrc" class="mb-1 mx-auto" width="200" height="300"  :src="profileImageSrc"/>
                       <FormKit
+                          @input="profileImageChange($event)"
                           outer-class="w-full"
                           type="file"
                           id="signup_profile"
                           name="signup_profile"
+                          input-class="focus-visible:!border-[1px] focus-visible:!border-red-600"
                           label="Please choose a profile picture..."
                           accept=".jpg,.png,.jpeg,.webp"
-                          label-class="label"
+                          label-class="label !font-600 font-poppins"
                       />
                     </v-column>
                   </v-row>
@@ -196,7 +199,7 @@
                     <VBtnLoader
                         :flag="signInData.loaderButtonFlag"  class="btn btn-secondary btn-sm btn-light mt-1"
                          type="submit">
-                      sign in
+                      confirm
                     </VBtnLoader>
                   </template>
                 </FormKit>
@@ -237,7 +240,6 @@ definePageMeta({
 });
 
 const loginForm=ref(null);
-const signInForm=ref(null);
 const submitLoginForm = () => {
   if(loginForm.value){
     const node = (loginForm.value as any).node
@@ -248,7 +250,7 @@ const submitLoginForm = () => {
 
 const {loginProcessData,loginSubmit}=useLogin()
 
-const {signInSubmit,signInData}=useSignIn()
+const {signInSubmit,signInData,profileImageChange,profileImageSrc}=useRegister()
 
 </script>
 
@@ -259,8 +261,8 @@ const {signInSubmit,signInData}=useSignIn()
 }
 .formkit-step-actions{
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
+
 }
 .formkit-steps{
   width: 100% !important;
@@ -270,5 +272,29 @@ const {signInSubmit,signInData}=useSignIn()
 .formkit-outer{
   display: flex;
   justify-content: center;
+}
+.formkit-outer[data-type="multi-step"] > [data-tab-style="progress"] .formkit-tab[data-active="true"]::before{
+  border-color: #a41a13 !important;
+}
+
+.formkit-outer[data-type="multi-step"] > [data-tab-style="progress"] > .formkit-tabs .formkit-tab[data-valid="true"][data-visited="true"]::after{
+ background-color: #a41a13 !important;
+}
+
+.formkit-outer[data-type="multi-step"] .formkit-tab[data-valid="true"] .formkit-badge{
+  background-color: #a41a13 !important;
+}
+.formkit-outer[data-type="multi-step"] .formkit-badge *{
+  color:#fff !important;
+}
+.formkit-outer[data-type="multi-step"] .formkit-badge{
+  background-color: #a41a13 !important;
+
+}
+.formkit-wrapper{
+  width: 100% !important;
+}
+#signInForm .password-icon{
+  top: 35px !important;
 }
 </style>

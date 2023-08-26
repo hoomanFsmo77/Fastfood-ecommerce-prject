@@ -9,31 +9,31 @@ const upload = require("../../database/upload");
 const {nanoid} = require("nanoid");
 router.use(bodyParser.urlencoded({extended:true}))
 
+const emailRegex=/^([^\.\_])([\w\d\.\_]+)(\@)(\w{1,6})(\.)(\w{1,4})$/g
+const phoneRegex=/^09\d{9}$/
+const usernameRegex=/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/g
 
-router.post('/login',body('email').isEmail(),body('password').notEmpty(),async (req,res)=>{
-    const result = await validationResult(req);
-    if(result.isEmpty()) {
-        const body = matchedData(req);
-        database('users').
-        select('*').
-        where({email:body.email}).
-        then(response=>{
-            if(response.length>0){
-                bcrypt.compare(body.password, response[0].password, function(err, result) {
-                    if(result){
-                        res.status(200).send(responseHandler(false,null,addImageBase(response,'profile_image')[0]))
-                    }else{
-                        res.status(200).send(responseHandler(true,'password is incorrect.',null))
-                    }
-                });
-            }else{
-                res.status(200).send(responseHandler(true,'email address is invalid!',null))
-            }
-        })
+router.post('/login',async (req,res)=>{
+    const identity=req.body.identity.trim();
+    const password=req.body.password.trim();
+    if(identity && password){
+        const getUser=await database('users').where({email:identity}).orWhere({phone:identity}).orWhere({username:identity})
+
+        if(getUser.length>0){
+            await bcrypt.compare(password, getUser[0].password, function(err, result) {
+                if(result){
+                    res.status(200).send(responseHandler(false,null,addImageBase(getUser,'profile_image')[0]))
+                }else{
+                    res.status(200).send(responseHandler(true,'password is incorrect.',null))
+                }
+            });
+        }else{
+            res.status(200).send(responseHandler(true,'username, email or phone number is invalid!',null))
+        }
+
     }else{
-        res.status(200).send(responseHandler(true,result.array(),null))
+        res.status(200).send(responseHandler(true,'identity and password are required!',null))
     }
-
 
 })
 

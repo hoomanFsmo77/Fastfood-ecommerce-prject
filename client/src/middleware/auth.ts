@@ -5,11 +5,11 @@ export default defineNuxtRouteMiddleware((to,from)=>{
     if(process.client){
         const {isLogin}=useStates()
         if(!isLogin.value){
-            return showError({
-                name:'unauthorized!',
-                fatal:false,
-                message:'unauthorized!',
-                statusCode:404,
+            return createError({
+                name:'unauthorized! you are not allowed to this page.',
+                fatal:true,
+                message:'unauthorized! you are not allowed to this page.',
+                statusCode:400,
             })
         }
     }
