@@ -10,7 +10,7 @@ const subscribeHandler =async () => {
   if(subscribeData.email.length>0){
     subscribeData.message=''
     try {
-        const req=await $fetch<IResponse<any>>(`/api/subscribe?email=${subscribeData.email}`);
+        const req=await $fetch<IResponse<any>>(`/api/home/subscribe?email=${subscribeData.email}`);
         if(req.error){
           if(typeof req.errors==='object' && req.errors){
             subscribeData.message=req.errors[0].msg

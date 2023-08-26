@@ -89,3 +89,28 @@ export interface User_Information {
     email:string,
     phone:string
 }
+
+export interface Response_Meta {
+    current_page: number,
+    total: number,
+    nextPage: number,
+    prevPage: number
+}
+
+export interface IBlogs {
+    id: number,
+    title: string,
+    date: string,
+    brief: string,
+    link: string,
+    image_sm: string,
+    image_xs: string,
+    image_lg: string,
+    categoryID: number,
+    adminID: number,
+    isLatest: number,
+    category: string,
+    author_lastname: string,
+    author_username: string,
+    author_firstname: string
+}

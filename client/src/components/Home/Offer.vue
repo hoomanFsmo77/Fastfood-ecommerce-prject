@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const {data,pending}=await useFetch('/api/offer')
+const {data,pending}=await useFetch('/api/home/offer')
 
 </script>
 

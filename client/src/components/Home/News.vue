@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Blog} from "~/utils/types";
 
-const {data,pending,error}=await useFetch<Blog[]>('/api/news')
+const {data,pending,error}=await useFetch<Blog[]>('/api/home/news')
 
 
 </script>

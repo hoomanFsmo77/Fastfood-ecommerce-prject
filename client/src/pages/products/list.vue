@@ -6,7 +6,7 @@
             <h1 class="text-center font-700 underline-active pb-1 mx-auto">Our Products</h1>
           <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
             <VProductCard
-                v-for="tab_item in paginationData.current_page_data"
+                v-for="tab_item in data.products"
                 :primary_image="tab_item.primary_image"
                 :title="tab_item.title"
                 :caption="tab_item.caption"
@@ -25,8 +25,8 @@
           <button class="pagination-btn mx-0.5" @click="prevPage">
             <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
           </button>
-          <template v-for="(item,index) in paginationData.pages">
-            <button class="pagination-btn mx-0.5" :class="{'active':paginationData.current_page===index+1}" @click="goToPage(index+1)">
+          <template v-for="(item,index) in data.meta.total">
+            <button class="pagination-btn mx-0.5" :class="{'active':data.meta.current_page===index+1}" @click="goToPage(index+1)">
               {{index+1}}
             </button>
           </template>
@@ -38,11 +38,21 @@
       </v-row>
     </v-container>
   </section>
+  <section v-else class="loader-section">
+    <client-only>
+      <half-circle-spinner
+          :animation-duration="1000"
+          :size="150"
+          color="#a41a13"
+      />
+    </client-only>
+  </section>
 </template>
 
 <script setup lang="ts">
-import {IProduct} from "~/utils/types";
-import {usePagination} from "~/composables/usePagination";
+import {IProduct, Response_Meta} from "~/utils/types";
+import { HalfCircleSpinner } from 'epic-spinners';
+
 definePageMeta({
   name:'PRODUCT_LIST',
   path:'/products/list',
@@ -61,9 +71,55 @@ definePageMeta({
 
   ]
 });
+const route=useRoute();
+const paginationQuery=reactive({
+  per:8,
+  page:1
+})
+watchEffect(()=>{
+  paginationQuery.per=route.query.per ? Number(route.query.per) : 8;
+  paginationQuery.page=route.query.page ? Number(route.query.page) :1;
+  process.client && window.scrollTo(0,0)
+})
 
-const {data,pending,execute,refresh}=await useFetch<IProduct[]>(`/api/products/all`)
-const {paginationData,prevPage,nextPage,goToPage}=usePagination<IProduct>(data,8);
+const {data,pending,refresh}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list`,{query:paginationQuery}
+);
+const goToPage = (page:number) => {
+   navigateTo({
+    name:'PRODUCT_LIST',
+    query:{
+      page:page,
+      per:8
+    },
+  })
+  refresh()
+}
+
+const nextPage = () => {
+  if(data.value){
+     navigateTo({
+       name:'PRODUCT_LIST',
+      query:{
+        page:data.value.meta.nextPage,
+        per:8
+      }
+    })
+    refresh()
+  }
+}
+
+const prevPage = () => {
+  if(data.value){
+     navigateTo({
+       name:'PRODUCT_LIST',
+      query:{
+        page:data.value.meta.prevPage,
+        per:8
+      }
+    })
+    refresh()
+  }
+}
 
 </script>
 

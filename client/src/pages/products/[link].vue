@@ -138,7 +138,7 @@
           <h1 class="text-center w-full  font-700 underline-active pb-1 mx-auto">Similar Products</h1>
           <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
             <VProductCard
-                v-for="product in similar_products"
+                v-for="product in similar_products.products"
                 :primary_image="product.primary_image"
                 :title="product.title"
                 :caption="product.caption"
@@ -179,7 +179,13 @@ definePageMeta({
 });
 
 const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/api/products/${route.params.link}`);
-const {data:similar_products,pending:similar_product_flag}=await useFetch<IProduct[]>(`/api/products/all?category=${product_data.value && product_data.value.category}`);
+const {data:similar_products,pending:similar_product_flag}=await useFetch<{products:IProduct[]}>(`/api/products/list`,{
+  query:{
+    category:product_data.value && product_data.value.category,
+    page:1,
+    per:4
+  }
+});
 
 const {isLogin}=useStates();
 const quantity=ref(1);

@@ -9,6 +9,7 @@
 @import "../components/footer.css";
 @import "../components/products.css";
 @import "../components/auth.css";
+@import "../components/blog.css";
 @tailwind components;
 
 @layer components {
@@ -41,5 +42,8 @@
     }
     .text-hidden{
         @apply overflow-hidden text-ellipsis whitespace-nowrap;
+    }
+    .loader-section{
+        @apply h-[300px] w-full flex justify-center items-center
     }
 }

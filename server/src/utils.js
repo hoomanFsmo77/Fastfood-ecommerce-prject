@@ -152,7 +152,16 @@ const getBlogByLinkFilter = async (link) => {
 }
 
 const getAllBlogs =async () => {
-    return database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname');
+    const allBlogs=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname');
+    const blogIds=_.map(allBlogs, (el) => el.id);
+    const comments = await database('blog_comments').select().whereIn('blogID', blogIds);
+    const groupComments=_.groupBy(comments,'blogID')
+    return  _.map(allBlogs, (record) => {
+        return {
+            ...record,
+            comments:groupComments[record.id] ?  groupComments[record.id].length : 0,
+        };
+    });
 }
 
 const getBlogByCategory =async (id) => {
@@ -250,7 +259,9 @@ const pagination = (source,page,per_page,originalUrl,key) => {
         [key]:source.slice(startIdx,endIdx),
         meta:{
             current_page:validPage,
-            total:totalPage
+            total:totalPage,
+            nextPage:validPage>=totalPage ? 1 : validPage+1,
+            prevPage:validPage>1 ? validPage-1 : totalPage
         },
         links:{
             "first":apiBase+ url.replace(pageRegx,'page='+'1') ,
