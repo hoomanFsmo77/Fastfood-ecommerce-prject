@@ -67,7 +67,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api_base}}/menu",
+									"raw": "{{api_base}}/menu?page=3&per=8",
 									"host": [
 										"{{api_base}}"
 									],
@@ -87,25 +87,22 @@
 											"disabled": true
 										},
 										{
-											"key": "category",
-											"value": "salad",
-											"description": "category name",
-											"disabled": true
-										},
-										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "3"
 										},
 										{
 											"key": "per",
-											"value": "2",
-											"description": "default : 6",
-											"disabled": true
+											"value": "8",
+											"description": "default : 6"
 										},
 										{
 											"key": "count",
-											"value": "1",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "pizza",
 											"disabled": true
 										}
 									]
@@ -141,6 +138,31 @@
 									"path": [
 										"products",
 										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/products/all",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products",
+										"all"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -316,7 +338,7 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "email",
+											"key": "identity",
 											"value": "hoomanmousavi77@gmail.com",
 											"type": "text"
 										},
@@ -377,6 +399,70 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "profile_image",
+											"type": "file",
+											"src": "/D:/مدارک/22.jpg"
+										},
+										{
+											"key": "username",
+											"value": "hooman_77",
+											"type": "text"
+										},
+										{
+											"key": "firstname",
+											"value": "hooman",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "mousavi",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "09129154038",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "13777731Ho@",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "hooman5@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/auth/register",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -407,7 +493,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api_base}}/blog",
+									"raw": "{{api_base}}/blog?link=family-gather",
 									"host": [
 										"{{api_base}}"
 									],
@@ -417,13 +503,12 @@
 									"query": [
 										{
 											"key": "link",
-											"value": "5-way-to-increase-neutrients-in-fast-food",
-											"description": "optional",
-											"disabled": true
+											"value": "family-gather",
+											"description": "optional"
 										},
 										{
 											"key": "categoryID",
-											"value": "3",
+											"value": "0",
 											"description": "optional",
 											"disabled": true
 										},
@@ -435,7 +520,7 @@
 										},
 										{
 											"key": "per",
-											"value": "2",
+											"value": "4",
 											"description": "optional",
 											"disabled": true
 										}
@@ -461,142 +546,6 @@
 									],
 									"path": [
 										"blog-category"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "blog comments",
-					"item": [
-						{
-							"name": "get comment by user",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{api_base}}/blog-comments/user/:id",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"blog-comments",
-										"user",
-										":id"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "per",
-											"value": "6",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "add comment",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"userID\":10,\r\n    \"date\":\"Aug. 20 2020\",\r\n    \"blogID\":9,\r\n    \"body\":\"goood\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api_base}}/blog-comments",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"blog-comments"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "product comments",
-					"item": [
-						{
-							"name": "add comments",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"userID\":2,\r\n    \"date\":\"dede\",\r\n    \"productID\":8,\r\n    \"rating\":5,\r\n    \"body\":\"dede\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api_base}}/product-comments",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"product-comments"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get comment by user",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{api_base}}/product-comments/user/:id",
-									"host": [
-										"{{api_base}}"
-									],
-									"path": [
-										"product-comments",
-										"user",
-										":id"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "per",
-											"value": "6",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
 									]
 								}
 							},
@@ -1419,6 +1368,152 @@
 							]
 						},
 						{
+							"name": "product comments",
+							"item": [
+								{
+									"name": "add comments",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"date\":\"dede\",\r\n    \"productID\":8,\r\n    \"rating\":5,\r\n    \"body\":\"dede\",\r\n    \"isReply\":0,\r\n    \"replyID\":0    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api_base}}/product-comments",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"product-comments"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get comment by user",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/product-comments/user",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"product-comments",
+												"user"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "per",
+													"value": "6",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "blog comments",
+							"item": [
+								{
+									"name": "get comment by user",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/blog-comments/user",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"blog-comments",
+												"user"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "per",
+													"value": "6",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "add comment",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\r\n    \"date\":\"Aug. 20 2020\",\r\n    \"blogID\":7,\r\n    \"body\":\"Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.\",\r\n    \"isReply\":1,\r\n    \"replyID\":9   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api_base}}/blog-comments",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"blog-comments"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "submit payment",
 							"request": {
 								"method": "POST",
@@ -1493,6 +1588,112 @@
 										{
 											"key": "provinceID",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "offer",
+					"item": [
+						{
+							"name": "offer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/offer",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"offer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "newsletter",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "hoomanmousavi77@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_base}}/newsletter",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"newsletter"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/search/:cat/:search",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"search",
+										":cat",
+										":search"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "4",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "3",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "cat",
+											"value": "blog",
+											"description": "product or blog"
+										},
+										{
+											"key": "search",
+											"value": "piz"
 										}
 									]
 								}
@@ -3216,6 +3417,214 @@
 									"path": [
 										"statistic",
 										"popular"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "offer",
+					"item": [
+						{
+							"name": "get offer or by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/offer",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"offer"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per",
+											"value": "6",
+											"disabled": true
+										},
+										{
+											"key": "productID",
+											"value": "20",
+											"description": "optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add offer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/offer.webp"
+										},
+										{
+											"key": "title",
+											"value": "Veggi Fun Pizza",
+											"type": "text"
+										},
+										{
+											"key": "specification_1",
+											"value": "Chicken Hallon",
+											"type": "text"
+										},
+										{
+											"key": "specification_2",
+											"value": "Summer Pizza",
+											"type": "text"
+										},
+										{
+											"key": "specification_3",
+											"value": "Vegge Lover",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "ceasar-salad",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "21",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/offer",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"offer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete offer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/offer?id=37",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"offer"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "37"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add offer",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/offer.webp"
+										},
+										{
+											"key": "title",
+											"value": "Veggi Fun Pizza",
+											"type": "text"
+										},
+										{
+											"key": "specification_1",
+											"value": "Chicken Hallon",
+											"type": "text"
+										},
+										{
+											"key": "specification_2",
+											"value": "Summer Pizza",
+											"type": "text"
+										},
+										{
+											"key": "specification_3",
+											"value": "Vegge Lover",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "ceasar-salad",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "21",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/offer/:id",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"offer",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
 									]
 								}
 							},
