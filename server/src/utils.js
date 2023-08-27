@@ -93,18 +93,23 @@ const getAllProductFilter = async () => {
 }
 
 const getProductByLinkFilter = async (link) => {
+    let target={};
     const product=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category').where({link:link});
     const images = await database('product_image').select().where({productID:product[0].id} );
     const comments = await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:0} );
     const replies=await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:1} );
-    addImageBase(replies,'author_image').forEach(reply=>{
-        comments.forEach(comment=>{
-            if(reply.replyID===comment.id){
-                comment.reply=comment.reply ? comment.reply.push(reply) : [reply]
-            }
-        })
-    });
-    const target={...product[0],images,comments};
+
+    if(comments.length>0){
+        if(replies.length>0){
+            const embedComments=groupReplies([...replies,...comments])
+            target={...product[0],images,comments:embedComments}
+        }else{
+            const embedComments=groupReplies(comments)
+            target={...product[0],images,comments:embedComments}
+        }
+    }else{
+        target={...product[0],images,comments:[]}
+    }
     const changeNumberToBoolean=changeToBoolean([target],['status','off']);
     const result=addImageBase(changeNumberToBoolean,'primary_image').map(item=>{
         if(item.images){
@@ -112,36 +117,6 @@ const getProductByLinkFilter = async (link) => {
                 ...item,
                 images:item.images.map(sub_item=>{
                     return {...sub_item,image:imageBase+sub_item.image}
-                }),
-                comments:item.comments.map(sub_item=>{
-                    return {...sub_item,author_image:imageBase+sub_item.author_image}
-                }),
-            }
-        }else{
-            return item
-        }
-    })
-    return result[0]
-}
-const getBlogByLinkFilter = async (link) => {
-    const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('admins','blog.adminID','=','admins.id').select('blog.*','blog_category.name as category','admins.lastname as author_lastname','admins.username as author_username','admins.firstname as author_firstname').where({link:link});
-    const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:0} );
-    const content = await database('blog').join('blog_content','blog_content.blogID','=','blog.id').select('blog_content.*').where({blogID:blog[0].id} );
-    const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:1} );
-   addImageBase(replies,['author_image']).forEach(reply=>{
-        comments.forEach(comment=>{
-            if(reply.replyID===comment.id){
-                comment.reply=comment.reply ? comment.reply.push(reply) : [reply]
-            }
-        })
-    });
-    const target={...blog[0],comments:addImageBase(comments,'author_image'),content}
-    const result=addImageBase([target],['image_sm','image_xs','image_lg']).map(item=>{
-        if(item.images){
-            return {
-                ...item,
-                comments:item.comments.map(sub_item=>{
-                    return {...sub_item,author_image:imageBase+sub_item.author_image}
                 }),
             }
         }else{
@@ -151,10 +126,57 @@ const getBlogByLinkFilter = async (link) => {
     return result[0]
 }
 
+const groupReplies = (data) => {
+    const roots = [];
+    const byId = new Map();
+    const replies=addImageBase(data,'author_image')
+
+    for(const reply of replies){
+        byId.set(reply.id, reply);
+    }
+
+    for(const reply of replies) {
+        const {replyID} = reply;
+        if(replyID) {
+            const parent = byId.get(replyID);
+            if(parent){
+                (parent.reply || (parent.reply = [])).push(reply);
+            }else{
+                roots.push(reply);
+            }
+        } else {
+            roots.push(reply);
+        }
+    }
+    return roots
+}
+
+
+const getBlogByLinkFilter = async (link) => {
+    let target={};
+    const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('admins','blog.adminID','=','admins.id').select('blog.*','blog_category.name as category','admins.lastname as author_lastname','admins.username as author_username','admins.firstname as author_firstname').where({link:link});
+    const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:0} );
+    const content = await database('blog').join('blog_content','blog_content.blogID','=','blog.id').select('blog_content.*').where({blogID:blog[0].id} );
+    const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:1} );
+    if(comments.length>0){
+        if(replies.length>0){
+            const embedComments=groupReplies([...replies,...comments])
+            target={...blog[0],comments:embedComments,content}
+        }else{
+            const embedComments=groupReplies(comments)
+            target={...blog[0],comments:embedComments,content}
+        }
+    }else{
+        target={...blog[0],comments:[],content}
+    }
+    const result=addImageBase([target],['image_sm','image_xs','image_lg']);
+    return result[0]
+}
+
 const getAllBlogs =async () => {
     const allBlogs=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname');
     const blogIds=_.map(allBlogs, (el) => el.id);
-    const comments = await database('blog_comments').select().whereIn('blogID', blogIds);
+    const comments = await database('blog_comments').select().whereIn('blogID', blogIds).where({isReply:0});
     const groupComments=_.groupBy(comments,'blogID')
     return  _.map(allBlogs, (record) => {
         return {

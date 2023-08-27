@@ -29,7 +29,7 @@
         @apply w-[60px] object-cover
     }
     .product-comment-content{
-        @apply w-full border-[1px] p-1 ml-1
+        @apply w-full border-[1px] p-1 ml-1 transition-all hover:shadow-lg
     }
     .rate-hover:hover{
         @apply [&_*]:!text-secondary-light-2 transition-all

@@ -1,9 +1,8 @@
 
-import {getQuery} from "h3";
 import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=>{
-    const query=await getQuery(ev)
+    const link=ev.context.params.link
     const {api_base,access_key}=useRuntimeConfig();
     try {
         const req=await $fetch<IResponse<any>>(api_base+`/blog`,{
@@ -11,10 +10,7 @@ export default defineEventHandler(async ev=>{
                 access_key
             },
             query:{
-                per:query.per,
-                page:query.page,
-                categoryID:query?.category || 'all',
-
+                link
             }
         })
         if(req.error){

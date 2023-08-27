@@ -44,22 +44,21 @@ const replySubmit = () => {
           :is-reply="true"
       />
       <template v-if="reply && reply.length>0">
-        <div v-for="item in reply" class="product-comment">
-          <VImage image-class="product-comment-image" loader-class="w-3 h-3" class="!w-[60px] !h-auto" :src="item.author_image"/>
-          <div class="product-comment-content">
-            <div class="flex justify-between items-center mb-1">
-              <h6 class="font-600">{{item.author_firstname}} {{item.author_lastname}} - {{item.date}}
-              </h6>
-              <div>
-                <Icon name="ri:star-fill" size="1.1rem" class="text-secondary-light-2 mx-0.1" v-for="i in item.rating" />
-              </div>
-            </div>
-            <p class="text">
-              {{item.body}}
-            </p>
-          </div>
-        </div>
+        <ProductComment
+            v-for="item in reply"
+            :image="item.author_image"
+            :content="item.body"
+            :star="item.rating"
+            :date="item.date"
+            :name="`${item.author_firstname} ${item.author_lastname}`"
+            :reply="item.reply"
+            :comment-id="item.id"
+            :productId="productId"
+        />
       </template>
+
+
+
 
     </div>
 

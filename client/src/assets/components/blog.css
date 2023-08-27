@@ -6,6 +6,7 @@
     #blog-grid{
         @apply py-5 bg-[#fff]
     }
+
     .blog-list-card{
         @apply w-full relative  overflow-hidden ;
     }
@@ -17,5 +18,20 @@
     }
     .blog-list-card-desc{
         @apply py-1.3 flex justify-between items-center
+    }
+    .blog-detail-image{
+        @apply w-full overflow-hidden relative
+    }
+    .blog-detail-image-cover{
+        @apply absolute inset-0 w-full h-full bg-[#a41a13]/50 opacity-0 transition-all duration-500
+    }
+    .blog-detail{
+        @apply flex justify-between items-center py-1 border-b-[1px]
+    }
+    .blog-detail-content{
+        @apply my-2
+    }
+    .blog-comment{
+        @apply p-1.3 border-[1px] flex items-start mb-1 transition-all hover:shadow-lg
     }
 }
