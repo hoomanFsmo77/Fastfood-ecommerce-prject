@@ -2,6 +2,7 @@
 
   search
 
+  {{$route.params.slug}}
 </template>
 <script setup lang="ts">
 definePageMeta({
@@ -13,11 +14,13 @@ definePageMeta({
       name:'Home',
       link:{name:'HOME'},
       on:false
-    },{
+    },
+    {
       name:'Search',
-      link:{name:'SEARCH'},
+      link:{name:'SEARCH',params:{slug:['product']}},
       on:true
-    }
+    },
+
   ]
 })
 

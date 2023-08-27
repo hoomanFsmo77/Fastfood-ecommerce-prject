@@ -31,8 +31,15 @@ router.get('/',async (req,res)=>{
         const target=await getBlogByLinkFilter(link)
         res.status(200).send(responseHandler(false,null,target))
     }else if(categoryID){
-        const target=await getBlogByCategory(categoryID)
-        res.status(200).send(responseHandler(false,null,target))
+        if(categoryID==='all'){
+            const allBlogs=await getAllBlogs();
+            const target=addImageBase(allBlogs,['image_sm','image_xs','image_lg']);
+            res.status(200).send(responseHandler(false,null,pagination(target,page,per_page,req.originalUrl,'blogs')))
+        }else{
+            const target=await getBlogByCategory(categoryID)
+            res.status(200).send(responseHandler(false,null,pagination(target,page,per_page,req.originalUrl,'blogs')))
+        }
+
     }else{
         const allBlogs=await getAllBlogs();
         const target=addImageBase(allBlogs,['image_sm','image_xs','image_lg']);

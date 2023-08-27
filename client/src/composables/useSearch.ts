@@ -51,14 +51,14 @@ export const useSearch=()=>{
         if(searchData.searchContext.length>0){
             searchData.initSearch()
             try {
-                const request:IResponse<{products:IProduct[]}>=await $fetch('/api/home/search',{
-                    query:{context:searchData.searchContext}
+                const request:IProduct[]=await $fetch('/api/search',{
+                    query:{
+                        limit:4,
+                        cat:'product',
+                        search:searchData.searchContext
+                    }
                 })
-                if(request.error){
-                    console.log(request.errors)
-                }else{
-                    searchData.setData(request.data.products)
-                }
+                searchData.setData(request)
             }catch (err) {
                 console.log(err)
             }

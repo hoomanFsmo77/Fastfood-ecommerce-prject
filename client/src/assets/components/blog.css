@@ -3,6 +3,9 @@
     #blogs-list{
         @apply py-5 bg-[#fff]
     }
+    #blog-grid{
+        @apply py-5 bg-[#fff]
+    }
     .blog-list-card{
         @apply w-full relative  overflow-hidden ;
     }

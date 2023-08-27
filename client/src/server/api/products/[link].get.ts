@@ -10,12 +10,7 @@ export default defineEventHandler(async ev=>{
                 headers:{access_key}
             });
             if(request.error){
-                showError({
-                    statusCode:400,
-                    message:'Server bad request!',
-                    fatal:true,
-                    statusMessage:'Server bad request!'
-                })
+                sendNoContent(ev,400)
             }else{
                 return request.data
             }

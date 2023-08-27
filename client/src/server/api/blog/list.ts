@@ -13,15 +13,11 @@ export default defineEventHandler(async ev=>{
             query:{
                 per:query.per,
                 page:query.page,
+                categoryID:query?.category || 'all'
             }
         })
         if(req.error){
-            showError({
-                statusCode:400,
-                message:'Server bad request!',
-                fatal:true,
-                statusMessage:'Server bad request!'
-            })
+            sendNoContent(ev,400)
         }else{
             return req.data
         }

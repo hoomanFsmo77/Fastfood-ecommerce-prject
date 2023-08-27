@@ -14,7 +14,7 @@ definePageMeta({
       link:{name:'HOME'},
       on:false
     },{
-      name:'Products',
+      name:'Blogs',
       link:{name:'BLOG_LIST'},
       on:false
     }

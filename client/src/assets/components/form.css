@@ -24,7 +24,7 @@
         @apply outline-none focus:outline-none
     }
     .input{
-        @apply py-0.8 px-2 w-full bg-[#fff] outline-none focus:outline-none placeholder:text-gray-400 placeholder:capitalize placeholder:text-1 text-gray-500
+        @apply py-0.8 pl-1.5 pr-2 w-full bg-[#fff] outline-none focus:outline-none placeholder:text-gray-400 placeholder:capitalize placeholder:text-1 text-gray-500
     }
     .input-primary{
         @apply border-[1px] transition-all focus:border-secondary-light-2

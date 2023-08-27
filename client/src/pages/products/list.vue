@@ -22,17 +22,17 @@
       <v-row class="mt-2">
         <v-column col="12" class="justify-center">
 
-          <button class="pagination-btn mx-0.5" @click="prevPage">
+          <NuxtLink :to="{name:'PRODUCT_LIST',query:{page:data.meta.prevPage,per:8}}" class="pagination-btn mx-0.5">
             <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
-          </button>
+          </NuxtLink>
           <template v-for="(item,index) in data.meta.total">
-            <button class="pagination-btn mx-0.5" :class="{'active':data.meta.current_page===index+1}" @click="goToPage(index+1)">
+            <NuxtLink :to="{name:'PRODUCT_LIST',query:{page:index+1,per:8}}" class="pagination-btn mx-0.5" :class="{'active':data.meta.current_page===index+1}" >
               {{index+1}}
-            </button>
+            </NuxtLink>
           </template>
-          <button class="pagination-btn mx-0.5" @click="nextPage">
+          <NuxtLink :to="{name:'PRODUCT_LIST',query:{page:data.meta.nextPage,per:8}}" class="pagination-btn mx-0.5" >
             <Icon size="1.5rem" name="ri:arrow-right-s-line"/>
-          </button>
+          </NuxtLink>
 
         </v-column>
       </v-row>
@@ -84,42 +84,6 @@ watchEffect(()=>{
 
 const {data,pending,refresh}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list`,{query:paginationQuery}
 );
-const goToPage = (page:number) => {
-   navigateTo({
-    name:'PRODUCT_LIST',
-    query:{
-      page:page,
-      per:8
-    },
-  })
-  refresh()
-}
-
-const nextPage = () => {
-  if(data.value){
-     navigateTo({
-       name:'PRODUCT_LIST',
-      query:{
-        page:data.value.meta.nextPage,
-        per:8
-      }
-    })
-    refresh()
-  }
-}
-
-const prevPage = () => {
-  if(data.value){
-     navigateTo({
-       name:'PRODUCT_LIST',
-      query:{
-        page:data.value.meta.prevPage,
-        per:8
-      }
-    })
-    refresh()
-  }
-}
 
 </script>
 

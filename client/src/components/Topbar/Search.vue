@@ -61,9 +61,12 @@
                            :off_percent="item.off_percent"
                            :price="item.price"
                            :brief="item.brief"
-
-
                         />
+                    </div>
+                    <div>
+                      <NuxtLink class="block btn btn-primary !rounded-[0px] before:!rounded-[0px] text-center" :to="{name:'SEARCH',params:{slug:['product',searchData.searchContext]}}">
+                        see more
+                      </NuxtLink>
                     </div>
                   </template>
                 </div>

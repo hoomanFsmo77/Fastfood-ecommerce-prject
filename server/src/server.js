@@ -34,6 +34,7 @@ const paymentRoute=require('./routes/app/payment')
 const transactionRoute=require('./routes/app/transaction')
 const favoriteRoute=require('./routes/app/favorite')
 const newsletterRoute=require('./routes/app/newsletter')
+const searchRoute=require('./routes/app/search')
 
 
 //// panel routes
@@ -74,6 +75,7 @@ app.use('/app/transaction',transactionRoute)
 app.use('/app/favorite',favoriteRoute)
 app.use('/app/offer',offerRoute)
 app.use('/app/newsletter',newsletterRoute)
+app.use('/app/search',searchRoute)
 
 //// panel routes
 app.use('/panel/auth',panelAuthRoute)

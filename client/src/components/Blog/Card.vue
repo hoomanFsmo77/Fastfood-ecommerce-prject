@@ -8,7 +8,8 @@ defineProps<{
   title:string,
   brief:string,
   link:string,
-  total_comments:number
+  total_comments:number,
+  type:'grid'|'list'
 }>()
 
 
@@ -24,7 +25,7 @@ defineProps<{
       <p class="text-secondary-light-2 capitalize text-1 font-600">
         {{date}}
       </p>
-      <div class="flex items-center">
+      <div class="flex items-center" v-if="type==='list'">
         <p class="font-600 capitalize text-primary-light-3 text-1">
           By: {{author_firstname}} {{author_lastname}}
         </p>
