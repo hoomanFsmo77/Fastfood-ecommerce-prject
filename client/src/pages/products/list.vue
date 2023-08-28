@@ -19,7 +19,7 @@
           </div>
         </v-column>
       </v-row>
-      <VPagination :per="8"
+      <VPagination
                    :current_page="data.meta.current_page"
                    :prev-page="data.meta.prevPage"
                    :next-page="data.meta.nextPage"
@@ -61,16 +61,14 @@ definePageMeta({
   ]
 });
 const route=useRoute();
-const paginationQuery=reactive({
-  per:8,
-  page:1
-})
+const pageQuery=ref<number>(1)
+
+
 watchEffect(()=>{
-  paginationQuery.per=route.query.per ? Number(route.query.per) : 8;
-  paginationQuery.page=route.query.page ? Number(route.query.page) :1;
+  pageQuery.value=route.query.page ? Number(route.query.page) :1;
 })
 
-const {data,pending,refresh}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list`,{query:paginationQuery}
+const {data,pending,refresh}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list?per=8`,{query:{page:pageQuery}}
 );
 
 </script>

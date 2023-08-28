@@ -79,7 +79,7 @@
                 Specification
               </li>
               <li @click="tabIndex=2" :class="{'active':tabIndex===2}" class="product-tab-item">
-                Review ({{product_data.comments.length}})
+                Review ({{product_data.total_comments}})
               </li>
             </ul>
             <div class="product-tab-content">
@@ -91,11 +91,11 @@
               </p>
 
               <div v-if="tabIndex===2" id="comments-tab">
-<!--                ///// comments-->
-                <template v-if="product_data.comments.length>0">
-                  <h4 class="font-600">{{product_data.comments.length}} Reviews For win Your Friends</h4>
+<!--      ////// start comments render here-->
+                <template v-if="product_data.total_comments>0 && !product_comments_flag">
+                  <h4 class="font-600">{{product_data.total_comments}} Reviews For win Your Friends</h4>
                   <ProductComment
-                      v-for="comment in product_data.comments"
+                      v-for="comment in product_comments.comments"
                       :image="comment.author_image"
                       :content="comment.body"
                       :star="comment.rating"
@@ -105,19 +105,42 @@
                       :comment-id="comment.id"
                       :productId="comment.productID"
                   />
+                  <VPagination
+                      :total="product_comments.meta.total"
+                      :next-page="product_comments.meta.nextPage"
+                      :prev-page="product_comments.meta.prevPage"
+                      :current_page="product_comments.meta.current_page"
+                  />
                 </template>
-                <template v-else>
+<!--      ////// end  comments render here-->
+
+<!--      //// start loader for comment-->
+                <template v-else-if="product_comments_flag && product_data.total_comments>0">
+                  <div class="flex justify-center">
+                    <client-only>
+                      <half-circle-spinner
+                          :animation-duration="2000"
+                          :size="150"
+                          color="#a41a13"
+                      />
+                    </client-only>
+                  </div>
+                </template>
+ <!--      //// end loader for comment-->
+                <template v-else-if="product_data.total_comments===0">
                   <h5 class="font-600">No Review.</h5>
                 </template>
 <!--               ////-->
                 <h4 class="font-playFair font-700 uppercase mt-2 pb-1 underline-active-left border-b-[1px]">add your Review</h4>
                 <template v-if="isLogin">
                   <ProductReply
+                      @reply-submit="replySubmit"
                       class="!border-0 !p-0"
                       :commentId="0"
                       :productId="product_data.id"
                       :is-reply="false"
                   />
+                  <h6 v-if="replyMessage" class="text-green-500 mt-1">{{replyMessage}}</h6>
                 </template>
                 <template v-else>
                   <h6 class="font-400 mt-2">You are not authorized yet. <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH'}">login</NuxtLink> or <NuxtLink class="text-blue-600 h6" :to="{name:'AUTH'}">sign in</NuxtLink> to add review or comments.</h6>
@@ -158,6 +181,7 @@
 
 <script setup lang="ts">
 import {IProduct} from "~/utils/types";
+import {HalfCircleSpinner} from "epic-spinners";
 
 const route=useRoute();
 definePageMeta({
@@ -178,18 +202,18 @@ definePageMeta({
   ]
 });
 
-const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/api/products/${route.params.link}`);
-const {data:similar_products,pending:similar_product_flag}=await useFetch<{products:IProduct[]}>(`/api/products/list`,{
-  query:{
-    category:product_data.value && product_data.value.category,
-    page:1,
-    per:4
-  }
-});
+
 
 const {isLogin}=useStates();
 const quantity=ref(1);
 const tabIndex=ref(0);
+const replyMessage=ref<string|null>(null);
+const pageQuery=ref<number>(1)
+
+
+watchEffect(()=>{
+  pageQuery.value=route.query.page ? Number(route.query.page) :1;
+})
 const plusQuantity = () => {
   if(product_data.value && quantity.value!==product_data.value.quantity){
     quantity.value++
@@ -205,9 +229,33 @@ const changeQuantity = (ev:Event) => {
   const el=ev.target as HTMLInputElement;
   const value=Number(el.value)
   if(product_data.value && value>product_data.value.quantity){
-    quantity.value=data.value.quantity
+    quantity.value=product_data.value.quantity
   }
 }
+
+
+
+const replySubmit = (msg:string) => {
+  replyMessage.value=msg
+}
+
+//// product list
+const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/api/products/${route.params.link}`);
+//// comments
+const {data:product_comments,pending:product_comments_flag}=await useFetch<IProduct>(`/api/products/comments?productID=${product_data.value && product_data.value.id}&per=3`,{
+  query:{
+    page:pageQuery
+  }
+});
+
+//// similar products
+const {data:similar_products,pending:similar_product_flag}=await useFetch<{products:IProduct[]}>(`/api/products/list`,{
+  query:{
+    category:product_data.value && product_data.value.category,
+    page:1,
+    per:4
+  }
+});
 </script>
 
 <style scoped>

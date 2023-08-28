@@ -28,7 +28,7 @@
         />
       </div>
 
-      <VPagination :per="4"
+      <VPagination
                    :current_page="data.meta.current_page"
                    :prev-page="data.meta.prevPage"
                    :next-page="data.meta.nextPage"
@@ -69,20 +69,18 @@ definePageMeta({
 })
 const route=useRoute();
 const paginationQuery=reactive({
-  per:4,
   page:1,
   cat:'',
   search:''
 })
 
 watchEffect(()=>{
-  paginationQuery.per=route.query.per ? Number(route.query.per) : 4;
   paginationQuery.page=route.query.page ? Number(route.query.page) :1;
   paginationQuery.cat=route.params.slug[0] ? route.params.slug[0] :'product';
   paginationQuery.search=route.params.slug[1] ? route.params.slug[1] :'pizza';
 })
 
-const {data,pending}=await useFetch('/api/search',{
+const {data,pending}=await useFetch('/api/search?per=4',{
   query:paginationQuery
 })
 

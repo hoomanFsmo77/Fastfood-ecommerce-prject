@@ -44,3 +44,7 @@ export const calculate_off_price=(price:number,off_percent:number)=>{
     const off=Number(((price*off_percent)/100).toFixed(0))
     return price-off
 }
+
+export const querySerialize = (obj:any) => {
+    return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&');
+}

@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router();
 const database=require('../../database/database')
 const bodyParser = require("body-parser");
-const {responseHandler, addImageBase, getBlogByLinkFilter,getAllBlogs, pagination,getBlogByCategory}=require('../../utils')
+const {responseHandler, addImageBase, getBlogByLinkFilter,getAllBlogs, pagination,getBlogByCategory, getCommentsByLink,getBlogCommentsByBlogId}=require('../../utils')
 router.use(bodyParser.urlencoded({extended:true}));
 
 
@@ -49,6 +49,15 @@ router.get('/',async (req,res)=>{
 })
 ////////////////// start get blogs ////////////////////////
 
+//// get comments
+
+router.get('/comments/:blogID',async (req,res)=>{
+    const blogID=req.params.blogID
+    const page=Number(req.query.page) || 1;
+    const per_page=Number(req.query.per) || 3;
+    const comments=await getBlogCommentsByBlogId(blogID);
+    res.status(200).send(responseHandler(false,null,pagination(comments,page,per_page,req.originalUrl,'comments')))
+})
 
 
 module.exports=router

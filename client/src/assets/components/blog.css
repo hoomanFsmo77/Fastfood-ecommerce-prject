@@ -32,6 +32,6 @@
         @apply my-2
     }
     .blog-comment{
-        @apply p-1.3 border-[1px] flex items-start mb-1 transition-all hover:shadow-lg
+        @apply p-1.3 border-[1px] w-full flex items-start mb-1 transition-all hover:shadow-lg
     }
 }

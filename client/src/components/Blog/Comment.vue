@@ -1,36 +1,50 @@
 <script setup lang="ts">
+const {isLogin}=useStates()
 defineProps<{
   image:string,
   name:string,
   date:string,
   content:string,
-  reply:any[],
+  reply?:any[],
   commentId:number,
   blogId:number
 }>()
+const replyData=reactive({
+  addFlag:false as boolean,
+  message:null as string|null
+})
 
-const addReplyFlag=ref<boolean>(false)
 
 const addReply = () => {
-  addReplyFlag.value=!addReplyFlag.value
+  replyData.message=null
+  replyData.addFlag=!replyData.addFlag
 }
-const replySubmit = () => {
-  addReplyFlag.value=false
+const replySubmit = (msg:string) => {
+  if(msg.length>0){
+    replyData.addFlag=false
+    replyData.message=msg
+  }else{
+    replyData.message=null
+  }
+
 }
+
 </script>
 
 <template>
   <div class="blog-comment">
     <VImage image-class="product-comment-image" loader-class="w-3 h-3" class="!w-[60px] !h-auto" :src="image"/>
-    <div class="pl-1">
+    <div class="pl-1 w-full">
       <h6 class="font-600 mb-0.7">{{name}}</h6>
       <p class="text-gray-500 leading-1.8 h6 mb-0.7 font-400">{{content}}</p>
-      <p class="text-gray-500 mb-1 font-400">{{date}} <span class="mx-1">|</span>
-        <button @click="addReply" class="text-secondary-light-2">reply</button>
+      <p class="text-gray-500 mb-1 font-400">{{date}} <span v-if="isLogin" class="mx-1">|</span>
+        <button @click="addReply" v-if="isLogin" class="text-secondary-light-2">reply</button>
       </p>
+      <h6 v-if="replyData.message" class="text-green-500 my-1">{{replyData.message}}</h6>
+
       <BlogReply
           @reply-submit="replySubmit"
-          v-if="addReplyFlag"
+          v-if="replyData.addFlag"
           :commentId="commentId"
           :blog-id="blogId"
           :is-reply="true"

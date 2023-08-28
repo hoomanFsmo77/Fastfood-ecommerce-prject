@@ -19,12 +19,7 @@ export default defineEventHandler(async ev=>{
         }
 
     }else{
-        showError({
-            statusCode:400,
-            message:'Server bad request!',
-            fatal:true,
-            statusMessage:'Server bad request!'
-        })
+        sendNoContent(ev,400)
     }
 
 })

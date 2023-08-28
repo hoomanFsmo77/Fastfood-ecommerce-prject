@@ -93,24 +93,11 @@ const getAllProductFilter = async () => {
 }
 
 const getProductByLinkFilter = async (link) => {
-    let target={};
     const product=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category').where({link:link});
-    const images = await database('product_image').select().where({productID:product[0].id} );
-    const comments = await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:0} );
-    const replies=await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:product[0].id,isAccept:1,isReply:1} );
+    const comments = await database('product_comments').where({productID:product[0].id,isAccept:1,isReply:0} );
 
-    if(comments.length>0){
-        if(replies.length>0){
-            const embedComments=groupReplies([...replies,...comments])
-            target={...product[0],images,comments:embedComments}
-        }else{
-            const embedComments=groupReplies(comments)
-            target={...product[0],images,comments:embedComments}
-        }
-    }else{
-        target={...product[0],images,comments:[]}
-    }
-    const changeNumberToBoolean=changeToBoolean([target],['status','off']);
+    const images = await database('product_image').select().where({productID:product[0].id} );
+    const changeNumberToBoolean=changeToBoolean([{...product[0],images,total_comments:comments.length}],['status','off']);
     const result=addImageBase(changeNumberToBoolean,'primary_image').map(item=>{
         if(item.images){
             return {
@@ -124,6 +111,22 @@ const getProductByLinkFilter = async (link) => {
         }
     })
     return result[0]
+}
+
+const getCommentsByLink = async (productID) => {
+    let target=[]
+    const comments = await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:productID,isAccept:1,isReply:0} );
+    const replies=await database('product_comments').join('users','product_comments.userID','=','users.id').select('product_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.profile_image as author_image').where({productID:productID,isAccept:1,isReply:1} );
+    if(comments.length>0){
+        if(replies.length>0){
+            target=groupReplies([...replies,...comments])
+        }else{
+            target=groupReplies(comments)
+        }
+    }else{
+        target=[]
+    }
+    return target
 }
 
 const groupReplies = (data) => {
@@ -153,24 +156,29 @@ const groupReplies = (data) => {
 
 
 const getBlogByLinkFilter = async (link) => {
-    let target={};
     const blog=await database('blog').join('blog_category','blog_category.id','=','blog.categoryID').join('admins','blog.adminID','=','admins.id').select('blog.*','blog_category.name as category','admins.lastname as author_lastname','admins.username as author_username','admins.firstname as author_firstname').where({link:link});
-    const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:0} );
+    const comments = await database('blog_comments').where({blogID:blog[0].id,isAccept:1,isReply:0} );
     const content = await database('blog').join('blog_content','blog_content.blogID','=','blog.id').select('blog_content.*').where({blogID:blog[0].id} );
-    const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blog[0].id,isAccept:1,isReply:1} );
+
+    const result=addImageBase([{...blog[0],content,total_comments:comments.length}],['image_sm','image_xs','image_lg']);
+    return result[0]
+}
+
+const getBlogCommentsByBlogId =async (blogId) => {
+    let target=[];
+    const comments = await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blogId,isAccept:1,isReply:0} );
+    const replies=await database('blog_comments').join('users','blog_comments.userID','=','users.id').select('blog_comments.*','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image').where({blogID:blogId,isAccept:1,isReply:1} );
     if(comments.length>0){
         if(replies.length>0){
-            const embedComments=groupReplies([...replies,...comments])
-            target={...blog[0],comments:embedComments,content}
+            target=groupReplies([...replies,...comments])
         }else{
-            const embedComments=groupReplies(comments)
-            target={...blog[0],comments:embedComments,content}
+            target=groupReplies(comments)
         }
     }else{
-        target={...blog[0],comments:[],content}
+        target=[]
     }
-    const result=addImageBase([target],['image_sm','image_xs','image_lg']);
-    return result[0]
+    return target
+
 }
 
 const getAllBlogs =async () => {
@@ -188,8 +196,17 @@ const getAllBlogs =async () => {
 
 const getBlogByCategory =async (id) => {
     const target=await database('blog').join('blog_category', 'blog_category.id', '=', 'blog.categoryID').join('admins', 'blog.adminID', '=', 'admins.id').select('blog.*', 'blog_category.name as category', 'admins.lastname as author_lastname', 'admins.username as author_username', 'admins.firstname as author_firstname').where({'blog.categoryID':id});
+    const addImage=addImageBase(target,['image_sm','image_xs','image_lg'])
+    const blogIds=_.map(addImage, (el) => el.id);
+    const comments = await database('blog_comments').select().whereIn('blogID', blogIds).where({isReply:0});
+    const groupComments=_.groupBy(comments,'blogID')
 
-    return addImageBase(target,['image_sm','image_xs','image_lg']);
+    return  _.map(addImage, (record) => {
+        return {
+            ...record,
+            comments:groupComments[record.id] ?  groupComments[record.id].length : 0,
+        };
+    });
 }
 
 const transferProductToReadable = async (products) => {
@@ -330,5 +347,5 @@ const transferPaymentStatus = (source) => {
 }
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId
 }

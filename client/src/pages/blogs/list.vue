@@ -17,7 +17,7 @@
       </v-column>
     </v-row>
 
-    <VPagination :per="4"
+    <VPagination
                  :current_page="blog_list.meta.current_page"
                  :prev-page="blog_list.meta.prevPage"
                  :next-page="blog_list.meta.nextPage"
@@ -62,17 +62,15 @@ definePageMeta({
 
 const route=useRoute();
 const paginationQuery=reactive({
-  per:4 as number,
   page:1 as number,
   category:'all' as string
 })
 watchEffect(()=>{
-  paginationQuery.per=route.query.per ? Number(route.query.per) : 4;
   paginationQuery.page=route.query.page ? Number(route.query.page) :1;
   paginationQuery.category=route.query.category ? String(route.query.category):'all';
 })
 
-const {data:blog_list,pending:blog_list_pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list`,{query:paginationQuery}
+const {data:blog_list,pending:blog_list_pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list?per=4`,{query:paginationQuery}
 );
 
 

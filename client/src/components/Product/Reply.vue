@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {months} from "~/utils/data";
 const date=new Date();
+const replyDate=`${months[date.getMonth()+1]} ${date.getDate()}, ${date.getFullYear()}`
 const props=defineProps<{
   commentId:number,
   productId:number,
@@ -8,25 +9,56 @@ const props=defineProps<{
 }>();
 
 const emit=defineEmits<{
-  (e:'reply-submit'):void
+  (e:'reply-submit',value:string):void
 }>();
 
 const {userInformation,isLogin}=useStates();
 
 const replyData=reactive({
-  body:'',
-  rate:0,
-  date:`${months[date.getMonth()+1]} ${date.getDate()}, ${date.getFullYear()}`
+  body:'' as string,
+  rate:0 as number,
+  btnFlag:false as boolean,
+  error:null as null|string,
+  init(){
+    this.error=null
+    this.btnFlag=true
+  },
+  reset(){
+    this.btnFlag=false
+    this.rate=0
+    this.body=''
+  }
 })
-const submitReply = () => {
+const submitReply = async () => {
+  emit('reply-submit','')
   if(isLogin.value){
     if(replyData.body.length>0 && replyData.rate>0 && replyData.rate<6){
-      //// send request here
-      console.log(replyData)
-      console.log(props.productId)
-      /// reply id
-      console.log(props.commentId)
-      emit('reply-submit')
+      replyData.init()
+      try {
+        const req=await $fetch('/api/profile/product/comment',{
+          method:'POST',
+          body:{
+            date:replyDate,
+            productID:props.productId,
+            rating:replyData.rate,
+            body:replyData.body,
+            isReply:props.isReply ? 1 : 0,
+            replyID:props.isReply ? props.commentId : 0
+          }
+        })
+        emit('reply-submit','Thanks for sharing your comment! after review you can see here.')
+        if(process.client){
+          setTimeout(()=>{
+            reloadNuxtApp()
+          },2000)
+        }
+      }catch (err) {
+        emit('reply-submit','Error in connecting to server! please try later.')
+      }finally {
+        replyData.reset()
+      }
+    }else{
+      replyData.error='rate and comment body are required!'
     }
 
   }
@@ -71,10 +103,13 @@ const submitReply = () => {
           <VInput type="area" v-model="replyData.body" label="Your Comments" :require="true" id="comments"/>
         </v-column>
       </v-row>
-      <v-row class="mb-1">
-        <button type="submit" class="btn btn-primary btn-sm btn-light">
+      <v-row class="mb-1 items-center">
+        <VBtnLoader type="submit" class="btn btn-primary btn-sm btn-light" :flag="replyData.btnFlag">
           submit now
-        </button>
+        </VBtnLoader>
+        <h6 class="text-red-600 ml-1" v-if="replyData.error">
+          {{replyData.error}}
+        </h6>
       </v-row>
     </form>
   </div>

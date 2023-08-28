@@ -22,7 +22,7 @@ router.post('/',addCommentBodyValidation(),body(['isReply','replyID']).optional(
             userID:userData[0].id
         }).
         then(response=>{
-            res.status(200).send(responseHandler(true,'comment added',null))
+            res.status(200).send(responseHandler(false,'comment added',null))
         }).catch(err=>{
             res.status(503).send('error in db')
         })

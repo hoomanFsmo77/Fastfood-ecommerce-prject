@@ -16,7 +16,7 @@
             type="grid"
         />
       </div>
-      <VPagination :per="4"
+      <VPagination
                    :current_page="data.meta.current_page"
                    :prev-page="data.meta.prevPage"
                    :next-page="data.meta.nextPage"
@@ -57,16 +57,14 @@ definePageMeta({
   ]
 });
 const route=useRoute();
-const paginationQuery=reactive({
-  per:6,
-  page:1
-})
+const pageQuery=ref<number>(1)
+
+
 watchEffect(()=>{
-  paginationQuery.per=route.query.per ? Number(route.query.per) : 6;
-  paginationQuery.page=route.query.page ? Number(route.query.page) :1;
+  pageQuery.value=route.query.page ? Number(route.query.page) :1;
 })
 
-const {data,pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list`,{query:paginationQuery}
+const {data,pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list?per=6`,{query:{page:pageQuery}}
 );
 </script>
 
