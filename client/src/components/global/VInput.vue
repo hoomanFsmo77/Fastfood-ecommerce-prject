@@ -37,7 +37,7 @@ const emit=defineEmits<{
     <div class="input-wrapper relative">
       <label class="label" :for="id">{{label}}
         <template v-if="require">*</template></label>
-      <input v-model="iconInput" type="text" :placeholder="placeholder"  :id="id" class="input input-primary" />
+      <input @keydown.enter="emit('icon-fire',iconInput)"  v-model="iconInput" type="text" :placeholder="placeholder"  :id="id" class="input input-primary" />
       <Icon @click="emit('icon-fire',iconInput)" :name="icon" size="1.3rem" class="absolute right-[10px] top-[30%] cursor-pointer text-gray-500"/>
     </div>
   </template>

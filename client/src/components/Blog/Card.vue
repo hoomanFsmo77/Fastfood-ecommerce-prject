@@ -8,7 +8,7 @@ defineProps<{
   title:string,
   brief:string,
   link:string,
-  total_comments:number,
+  total_comments?:number,
   type:'grid'|'list'
 }>()
 

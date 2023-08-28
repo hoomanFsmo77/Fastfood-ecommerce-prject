@@ -46,4 +46,7 @@
     .loader-section{
         @apply h-[300px] w-full flex justify-center items-center
     }
+    #search-section{
+        @apply py-4
+    }
 }

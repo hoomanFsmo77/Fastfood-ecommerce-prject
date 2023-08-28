@@ -36,7 +36,7 @@ const initSearch = (value:string) => {
             </v-row>
             <slot/>
           </v-column>
-          <v-column col="3" class="sticky top-[150px]">
+          <v-column col="3" class="sticky top-[120px]">
             <aside class="pl-2">
               <VInput
                   @icon-fire="initSearch($event)"

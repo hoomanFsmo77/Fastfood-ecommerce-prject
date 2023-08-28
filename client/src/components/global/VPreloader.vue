@@ -14,7 +14,6 @@ nuxtApp.hook('page:finish',()=>{
   el!.style.opacity='0'
   el!.style.visibility='hidden'
   el!.style.zIndex='-1'
-
 })
 
 </script>

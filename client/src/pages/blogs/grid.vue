@@ -16,23 +16,12 @@
             type="grid"
         />
       </div>
-      <v-row class="mt-2">
-        <v-column col="12" class="justify-center">
-
-          <NuxtLink :to="{name:'BLOG_GRID',query:{page:data.meta.prevPage,per:4}}" class="pagination-btn mx-0.5">
-            <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
-          </NuxtLink>
-          <template v-for="(item,index) in data.meta.total">
-            <NuxtLink :to="{name:'BLOG_GRID',query:{page:index+1,per:4}}" class="pagination-btn mx-0.5" :class="{'active':data.meta.current_page===index+1}" >
-              {{index+1}}
-            </NuxtLink>
-          </template>
-          <NuxtLink :to="{name:'BLOG_GRID',query:{page:data.meta.nextPage,per:4}}" class="pagination-btn mx-0.5" >
-            <Icon size="1.5rem" name="ri:arrow-right-s-line"/>
-          </NuxtLink>
-
-        </v-column>
-      </v-row>
+      <VPagination :per="4"
+                   :current_page="data.meta.current_page"
+                   :prev-page="data.meta.prevPage"
+                   :next-page="data.meta.nextPage"
+                   :total="data.meta.total"
+      />
     </v-container>
   </section>
   <section v-else class="loader-section">
@@ -75,7 +64,6 @@ const paginationQuery=reactive({
 watchEffect(()=>{
   paginationQuery.per=route.query.per ? Number(route.query.per) : 6;
   paginationQuery.page=route.query.page ? Number(route.query.page) :1;
-  process.client && window.scrollTo(0,0)
 })
 
 const {data,pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list`,{query:paginationQuery}

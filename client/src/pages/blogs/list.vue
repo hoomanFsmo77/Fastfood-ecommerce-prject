@@ -16,23 +16,13 @@
         />
       </v-column>
     </v-row>
-    <v-row class="mt-2">
-      <v-column col="12" class="justify-center ">
 
-        <NuxtLink :to="{name:'BLOG_LIST',query:{page:blog_list.meta.prevPage,per:4}}" class="pagination-btn mx-0.5">
-          <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
-        </NuxtLink>
-        <template v-for="(item,index) in blog_list.meta.total">
-          <NuxtLink :to="{name:'BLOG_LIST',query:{page:index+1,per:4}}" class="pagination-btn mx-0.5" :class="{'active':blog_list.meta.current_page===index+1}" >
-            {{index+1}}
-          </NuxtLink>
-        </template>
-        <NuxtLink :to="{name:'BLOG_LIST',query:{page:blog_list.meta.nextPage,per:4}}" class="pagination-btn mx-0.5" >
-          <Icon size="1.5rem" name="ri:arrow-right-s-line"/>
-        </NuxtLink>
-
-      </v-column>
-    </v-row>
+    <VPagination :per="4"
+                 :current_page="blog_list.meta.current_page"
+                 :prev-page="blog_list.meta.prevPage"
+                 :next-page="blog_list.meta.nextPage"
+                 :total="blog_list.meta.total"
+    />
   </template>
 
   <v-row v-else>
@@ -80,7 +70,6 @@ watchEffect(()=>{
   paginationQuery.per=route.query.per ? Number(route.query.per) : 4;
   paginationQuery.page=route.query.page ? Number(route.query.page) :1;
   paginationQuery.category=route.query.category ? String(route.query.category):'all';
-  process.client && window.scrollTo(0,0)
 })
 
 const {data:blog_list,pending:blog_list_pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list`,{query:paginationQuery}
