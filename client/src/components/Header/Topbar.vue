@@ -36,15 +36,17 @@
                     info@wengdo.com
                    </a>
                   <template v-if="isLogin">
-                    <Icon name="ri:account-circle-fill" size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5"/>
-                    <NuxtLink class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5" :to="{name:'PROFILE_INFO'}">
-                      profile
-                    </NuxtLink>
+                    <client-only>
+                      <Icon name="ri:account-circle-fill" size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5"/>
+                      <NuxtLink class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5" :to="{name:'PROFILE_INFO'}">
+                        profile
+                      </NuxtLink>
 
-                    <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:logout-circle-line"/>
-                    <button @click="logoutHandler" class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5">
-                      logout
-                    </button>
+                      <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:logout-circle-line"/>
+                      <button @click="logoutHandler" class="text-primary-light-3 text-0.9 transition-all hover:text-white font-500 text-left ml-0.5">
+                        logout
+                      </button>
+                    </client-only>
                   </template>
                   <template v-else >
                     <Icon size="1.2rem" class="text-primary-light-3 font-500 text-left ml-1.5" name="ri:login-circle-line"/>

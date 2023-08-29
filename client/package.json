@@ -31,6 +31,7 @@
     "animate.css": "^4.1.1",
     "form-data": "^4.0.0",
     "h3-formidable": "^0.3.8",
+    "vue-sweetalert2": "^5.0.5",
     "vue3-carousel-nuxt": "^1.1.0",
     "vue3-photo-preview": "^0.3.0"
   }

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         },
     },
     build:{
-        transpile:[]
+        transpile:['vue-sweetalert2']
     },
     css:[
         '~/assets/App.css',

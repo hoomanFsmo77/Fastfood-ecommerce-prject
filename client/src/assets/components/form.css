@@ -1,7 +1,7 @@
 @tailwind components;
 @layer components {
     .btn{
-        @apply bg-[#fff] uppercase tracking-[4px] leading-[60px] px-4 font-500 rounded-4 cursor-pointer  relative z-[1] inline-block
+        @apply bg-[#fff] uppercase tracking-[4px] leading-[60px] px-4 font-500 rounded-4 cursor-pointer  relative z-[1] inline-block disabled:!bg-gray-400 disabled:before:!hidden
     }
     .btn-primary{
         @apply before:block before:absolute  before:top-0 before:h-full  before:mx-auto before:bg-secondary-light-1 before:w-full before:left-0  before:opacity-0 before:scale-x-[0.5] before:scale-y-[1] before:invisible hover:before:opacity-100 hover:before:visible hover:before:w-full before:transition-all before:duration-500 before:ease-in-out hover:before:scale-x-[1] hover:before:scale-y-[1] before:z-[-1] before:rounded-4
@@ -12,6 +12,9 @@
 
     .btn-sm{
         @apply  tracking-[2px] leading-[40px] px-1 text-0.8
+    }
+    .btn-xsm{
+        @apply tracking-[1px] leading-[25px] px-1 text-0.6
     }
     .btn-light{
        @apply !bg-secondary-light-2 !text-primary-light-1
