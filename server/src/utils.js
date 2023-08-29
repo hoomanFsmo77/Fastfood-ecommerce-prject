@@ -244,39 +244,39 @@ const getProductByCondition = async (search,categoryName,sortBy) => {
          products=await database('product').
          join('product_category','product_category.id','=','product.categoryID').
          select('product.*','product_category.name as category').
-         whereILike(`title`,`${search.toLowerCase()}%`).
+         whereILike(`title`,`%${search.toLowerCase()}%`).
          orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
     }else if(sortBy===4 && !categoryName){
         products=await database('product').
         join('product_category','product_category.id','=','product.categoryID').
         select('product.*','product_category.name as category').
-        whereILike(`title`,`${search.toLowerCase()}%`).
+        whereILike(`title`,`%${search.toLowerCase()}%`).
         where({off:1})
     }else if(categoryName && sortBy!==4 && typeof sortBy==='number'){
         products=await database('product').
         join('product_category','product_category.id','=','product.categoryID').
         select('product.*','product_category.name as category').
-        whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('product_category.name',`${categoryName.toLowerCase()}%`).
+        whereILike(`title`,`%${search.toLowerCase()}%`).
+        whereILike('product_category.name',`%${categoryName.toLowerCase()}%`).
         orderByRaw(sortBy===1 ? 'price DESC' : sortBy===2 ? 'price ASC' : sortBy===3 ? ''  : null);
     }else if(categoryName && sortBy===4){
         products=await database('product').
         join('product_category','product_category.id','=','product.categoryID').
         select('product.*','product_category.name as category').
-        whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('product_category.name',`${categoryName.toLowerCase()}%`).
+        whereILike(`title`,`%${search.toLowerCase()}%`).
+        whereILike('product_category.name',`%${categoryName.toLowerCase()}%`).
         where({off:1})
     }else if (!sortBy && categoryName){
         products=await database('product').
         join('product_category','product_category.id','=','product.categoryID').
         select('product.*','product_category.name as category').
-        whereILike(`title`,`${search.toLowerCase()}%`).
-        whereILike('product_category.name',`${categoryName.toLowerCase()}%`)
+        whereILike(`title`,`%${search.toLowerCase()}%`).
+        whereILike('product_category.name',`%${categoryName.toLowerCase()}%`)
     }else if(!sortBy && !categoryName){
         products=await database('product').
         join('product_category','product_category.id','=','product.categoryID').
         select('product.*','product_category.name as category').
-        whereILike(`title`,`${search.toLowerCase()}%`)
+        whereILike(`title`,`%${search.toLowerCase()}%`)
     }
 
     return await transferProductToReadable(products)

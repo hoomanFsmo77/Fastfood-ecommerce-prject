@@ -10,6 +10,7 @@
 @import "../components/products.css";
 @import "../components/auth.css";
 @import "../components/blog.css";
+@import "../components/menu.css";
 @tailwind components;
 
 @layer components {

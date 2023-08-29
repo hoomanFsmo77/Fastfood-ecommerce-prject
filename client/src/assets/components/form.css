@@ -57,5 +57,16 @@
     .input-file{
         @apply absolute inset-0 w-full h-full appearance-none opacity-0 cursor-pointer
     }
+    .input-radio{
+        @apply appearance-none w-[16px] h-[16px] p-[8px] rounded-full border-[1px] border-gray-400  focus:ring-4 focus:ring-secondary-light-2/50 checked:bg-secondary-light-2 checked:text-white
+        checked:bg-[url("/check.svg")] checked:bg-center  checked:rounded-full checked:w-[18px] checked:h-[18px] outline-0 checked:border-[0px]
+        ;
+    }
+    .radio-options{
+        @apply flex gap-1 flex-col
+    }
+    .radio-option{
+        @apply flex items-center [&_input]:mr-0.5 dark:[&_label]:text-primary-dark-3
+    }
 
 }

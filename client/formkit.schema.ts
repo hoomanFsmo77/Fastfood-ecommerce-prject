@@ -305,7 +305,7 @@ export const custom_radio_schema:FormKitTypeDefinition={
                     (
                         $attrs(
                             {
-                                class:'v-checkbox cursor-pointer',
+                                class:'input-radio cursor-pointer',
                                 type:'radio',
                                 name:'$label',
                                 id:'$option',

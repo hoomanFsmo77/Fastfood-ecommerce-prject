@@ -15,6 +15,7 @@ module.exports = {
     "./nuxt.config.{js,ts}",
     "./src/App.vue",
     "./src/error.vue",
+      "./formkit.schema.ts"
   ],
   theme: {
     screens: {
@@ -188,7 +189,8 @@ module.exports = {
       poppins:['Poppins','sans-serif'],
       openSans:['Open Sans','sans-serif'],
       playFair:['Playfair Display','serif'],
-      dance:['Moon Dance', 'cursive']
+      dance:['Moon Dance', 'cursive'],
+      robot:['Roboto', 'sans-serif']
     },
     container:{
       center:true,

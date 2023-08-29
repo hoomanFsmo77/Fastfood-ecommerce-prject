@@ -10,22 +10,22 @@ const {query} = require("express-validator");
 const queryValidation=()=>query(['search','sortBy','category','page','per','count']).optional();
 router.get('/',queryValidation(),async (req,res)=>{
     const query=req.query
+    const page=Number(query?.page) || null;
+    const per_page=Number(query?.per) || 6;
     if(query.search || query.sortBy || query.category || query.page){
         const search=query?.search || '';
         const categoryName=query?.category || null;
         const sortBy=Number(query?.sortBy) || null;
-        const page=Number(query?.page) || null;
-        const per_page=Number(query?.per) || 6;
         if(sortBy===3){
             const randomProduct=await getRandomProduct(6)
-            res.status(200).send(responseHandler(false,null,randomProduct))
+            res.status(200).send(responseHandler(false,null,pagination(randomProduct,page,per_page,req.originalUrl,'products')))
         }else{
             const target=await getProductByCondition(search,categoryName,sortBy);
             res.status(200).send(responseHandler(false,null,pagination(target,page,per_page,req.originalUrl,'products')))
         }
     }else{
         const randomProduct=await getRandomProduct(req.query.count || 6)
-        res.status(200).send(responseHandler(false,null,randomProduct))
+        res.status(200).send(responseHandler(false,null,pagination(randomProduct,page,per_page,req.originalUrl,'products')))
     }
 
 })

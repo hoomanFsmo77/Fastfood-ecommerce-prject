@@ -65,10 +65,10 @@ const submitReply = async () => {
 
 <template>
   <div class="my-1 border-[1px] p-1 bg-gray-100 ">
-    <form class="w-full " @submit.prevent="submitReply">
+    <form class="w-full [&_*]:font-robot" @submit.prevent="submitReply">
       <v-row class="mb-1">
         <v-column col="6">
-          <VInput type="text" v-model="userInformation.firstname" :disable="true" label="first name" :require="true" id="firstname"/>
+          <VInput  type="text" v-model="userInformation.firstname" :disable="true" label="first name" :require="true" id="firstname"/>
         </v-column>
         <v-column col="6" class="pl-1">
           <VInput type="text" v-model="userInformation.lastname" :disable="true" label="last name" :require="true" id="lastname"/>

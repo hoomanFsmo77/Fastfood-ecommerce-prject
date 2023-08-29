@@ -25,13 +25,13 @@ const initSearch = (value:string) => {
     </section>
   </LayoutHeader>
   <div>
-    <section id="blogs-list" >
+    <section id="blogs-list" class="[&_*]:font-robot">
       <v-container>
         <v-row class="items-start">
           <v-column  col="9" class="!block">
             <v-row class="mb-2" v-if="$route.query.category && $route.query.category!=='all' && blog_categories">
               <v-column col="12">
-                <h3 class="font-600 capitalize">category: {{blog_categories.filter(item=>item.id==$route.query.category)[0].name}}</h3>
+                <h3 class="font-600 capitalize ">category: {{blog_categories.filter(item=>item.id==$route.query.category)[0].name}}</h3>
               </v-column>
             </v-row>
             <slot/>

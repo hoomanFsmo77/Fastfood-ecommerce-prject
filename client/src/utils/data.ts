@@ -155,3 +155,23 @@ export const services=[
         image:'/home/service-4.webp'
     }
 ]
+
+export const sortByOption=[
+
+    {
+        name:'Most expensive',
+        id:1
+    },
+    {
+        name:'Cheapest price',
+        id:2
+    },
+    {
+        name:'Best sellers',
+        id:3
+    },
+    {
+        id:4,
+        name:'Off'
+    }
+]
