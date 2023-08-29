@@ -11,16 +11,16 @@ export const useMenu=()=>{
 
     const initialSearch = (value:string) => {
         menuData.search=value
-        navigateTo({name:"FEATURE_MENU",query:{page:1}})
+        navigateTo({name:"MENU",query:{page:1}})
     }
     
     const selectCategory = (cat:string) => {
       menuData.category=cat
-        navigateTo({name:"FEATURE_MENU",query:{page:1}})
+        navigateTo({name:"MENU",query:{page:1}})
     }
 
     const selectSortBy = () => {
-        navigateTo({name:"FEATURE_MENU",query:{page:1}})
+        navigateTo({name:"MENU",query:{page:1}})
     }
     return{
         menuData,initialSearch,selectCategory,selectSortBy

@@ -84,8 +84,8 @@ import {sortByOption} from "~/utils/data";
 import {HalfCircleSpinner} from "epic-spinners";
 
 definePageMeta({
-  name:'FEATURE_MENU',
-  path:'/menu/features',
+  name:'MENU',
+  path:'/menu',
   layout:'pages',
   page_title:'Feature menu',
   breadcrumb:[
@@ -95,7 +95,7 @@ definePageMeta({
       on:false
     },{
       name:'Menu',
-      link:{name:'FEATURE_MENU'},
+      link:{name:'MENU'},
       on:true
     }
   ]

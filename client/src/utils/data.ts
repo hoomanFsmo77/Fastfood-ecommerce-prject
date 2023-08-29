@@ -72,21 +72,9 @@ export const navbar:Navbar[]=[
     },
 
     {
-        title:'Our Offers',
-        link:{name: 'CLASSIC_MENU'},
-        hasSub:true,
-        sub:[
-            {
-                title: 'Classic menu',
-                link: {name:'CLASSIC_MENU'},
-                hasSub: false,
-            },
-            {
-                title: 'Feature menu',
-                link: {name:'FEATURE_MENU'},
-                hasSub: false,
-            },
-        ]
+        title:'Menu',
+        link:{name: 'MENU'},
+        hasSub:false
     },{
         title:'Gallery',
         hasSub:false,

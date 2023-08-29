@@ -11,6 +11,7 @@
 @import "../components/auth.css";
 @import "../components/blog.css";
 @import "../components/menu.css";
+@import "../components/contact.css";
 @tailwind components;
 
 @layer components {
