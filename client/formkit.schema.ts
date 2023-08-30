@@ -240,36 +240,25 @@ export const custom_date_schema:FormKitTypeDefinition={
     type:'input',
 };
 export const custom_area_schema:FormKitTypeDefinition={
-
+    forceTypeProp:'text',
     schema: wrapper(
         $attrs(
             {
-                class:'input-effect-wrapper w-full'
+                class:"input-wrapper"
             },
             inner(
                 $attrs(
                     {
-                        class:'input-effect',
-                        required:true,
-                        placeholder:'$label'
+                        class:'label'
+                    },
+                    label('$label')
+                ),
+                $attrs(
+                    {
+                        class:'input input-primary',
                     },
                     textareaInput()
                 ),
-                $attrs(
-                    {
-                        class: 'focus-border',
-                    },
-                    label(
-                        label()
-                    )
-                ),
-                suffix(),
-                $attrs(
-                    {
-                        class:'password-icon'
-                    },
-                    icon('suffix')
-                )
 
             ),
         ),

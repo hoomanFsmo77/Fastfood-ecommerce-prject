@@ -1,5 +1,6 @@
 import {IResponse} from "~/utils/types";
 import Form from "form-data";
+import {Ref} from "vue";
 
 
 export const urlEncodeBody=(obj:object)=>{
@@ -48,3 +49,10 @@ export const calculate_off_price=(price:number,off_percent:number)=>{
 export const querySerialize = (obj:any) => {
     return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&');
 }
+
+export const submitForm = (form:Ref<null|HTMLElement>) => {
+    if(form.value){
+        const node = (form.value as any).node
+        node.submit()
+    }
+};
