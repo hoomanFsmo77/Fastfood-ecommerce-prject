@@ -35,6 +35,7 @@ const transactionRoute=require('./routes/app/transaction')
 const favoriteRoute=require('./routes/app/favorite')
 const newsletterRoute=require('./routes/app/newsletter')
 const searchRoute=require('./routes/app/search')
+const customProductsRoute=require('./routes/app/custom_product')
 
 
 //// panel routes
@@ -51,6 +52,7 @@ const productCommentRoute=require('./routes/panel/product_comments')
 const chartsRoute=require('./routes/panel/charts')
 const statisticRoute=require('./routes/panel/statistic')
 const offersRoute=require('./routes/panel/offer')
+const customProductRoute=require('./routes/panel/product_custom')
 
 //// app routes
 app.use('/storage/image',storageRoute)
@@ -76,6 +78,7 @@ app.use('/app/favorite',favoriteRoute)
 app.use('/app/offer',offerRoute)
 app.use('/app/newsletter',newsletterRoute)
 app.use('/app/search',searchRoute)
+app.use('/app/custom-product',customProductsRoute)
 
 //// panel routes
 app.use('/panel/auth',panelAuthRoute)
@@ -91,6 +94,7 @@ app.use('/panel/product-comments',productCommentRoute)
 app.use('/panel/charts',chartsRoute)
 app.use('/panel/statistic',statisticRoute)
 app.use('/panel/offer',offersRoute)
+app.use('/panel/custom-product',customProductRoute)
 
 
 
