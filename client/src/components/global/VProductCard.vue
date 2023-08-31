@@ -7,9 +7,11 @@ defineProps<{
   link:string,
   status:boolean,
   off:boolean
-  off_percent:number
+  off_percent:number,
+  productId:number
 }>()
 
+const {addToCart,productPageData}=useProduct()
 
 </script>
 
@@ -42,13 +44,20 @@ defineProps<{
       </h4>
     </div>
     <div class="product-card-lower">
-        <NuxtLink class="btn btn-secondary !rounded-b-[0px]  z-[9999] btn-sm" :to="{name:'PRODUCT_DETAIL',params:{link}}">
-          order now
+        <NuxtLink class="btn btn-secondary !rounded-b-[0px]  z-[9999] btn-sm px-0.8 text-0.7" :to="{name:'PRODUCT_DETAIL',params:{link}}">
+          see details
         </NuxtLink>
+      <VBtnLoader :flag="productPageData.btnLoaderFlag" @click="addToCart(productId)" class="btn btn-secondary ml-0.5 !rounded-b-[0px]  z-[9999] btn-sm px-0.8 text-0.7" :class="{'!text-0.6 !px-0.5':productPageData.btnLoaderFlag}">
+        order now
+      </VBtnLoader>
     </div>
     <div v-if="!status" class="badge-container">
       <span  class="triangle text-0.7"></span>
       <span class="badge-content">not <br/> available</span>
+    </div>
+    <div v-if="off" class="badge-container">
+      <span  class="triangle text-0.7"></span>
+      <span class="badge-content !text-1 !translate-x-[-5px] !translate-y-[9px]">Sale</span>
     </div>
     <NuxtLink class="product-card-link" :to="{name:'PRODUCT_DETAIL',params:{link}}">
     </NuxtLink>

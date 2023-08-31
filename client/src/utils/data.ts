@@ -44,41 +44,15 @@ export const navbar:Navbar[]=[
         ]
     },
     {
-        title:'About Us',
+        title:'About',
         link:{name: 'ABOUT_US'},
-        hasSub:true,
-        sub:[
-            {
-                title: 'About Us',
-                link: {name:'ABOUT_US'},
-                hasSub: false,
-            },
-            {
-                title: 'Services',
-                link: {name:'SERVICES'},
-                hasSub: false,
-            },
-            {
-                title: 'Testimonials',
-                link: {name:'TESTIMONIAL'},
-                hasSub: false,
-            },
-            {
-                title: "Faq's",
-                link: {name:'FAQ'},
-                hasSub: false,
-            }
-        ]
+        hasSub:false,
     },
 
     {
         title:'Menu',
         link:{name: 'MENU'},
         hasSub:false
-    },{
-        title:'Gallery',
-        hasSub:false,
-        link:{name:'GALLERY'}
     },{
         title:'Blog',
         link:{name:'BLOG_GRID'},

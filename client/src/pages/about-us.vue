@@ -1,26 +1,25 @@
 <template>
-  faq
+ about us
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  name:'FAQ',
-  path:'/about-us/faq',
+  name:'ABOUT_US',
+  path:'/about-us',
   layout:'pages',
-  page_title:'FAQ',
+  page_title:'About us',
   breadcrumb:[
     {
       name:'Home',
       link:{name:'HOME'},
       on:false
     },{
-      name:'FAQ',
-      link:{name:'FAQ'},
+      name:'About us',
+      link:{name:'ABOUT_US'},
       on:true
     }
   ]
-});
-
+})
 
 </script>
 

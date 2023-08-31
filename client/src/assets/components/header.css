@@ -5,7 +5,7 @@
         @apply bg-[url("/slider-bg.webp")] bg-no-repeat relative bg-scroll bg-center bg-cover h-[600px] py-4
     }
     #header-detail-content{
-        @apply bg-[url("/slider-bg.webp")] py-8
+        @apply bg-[url("/slider-bg.webp")] py-5
     }
 
 

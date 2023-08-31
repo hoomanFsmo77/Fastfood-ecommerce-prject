@@ -19,8 +19,10 @@ router.get('/:cat/:search',async (req,res)=>{
        orWhereILike('product_category.name',`${search.toLowerCase()}%`).
        orWhereILike('link',`${search.toLowerCase()}%`).limit(limit || 100);
         const addImage=addImageBase(searchProducts,'primary_image');
+        const addPagination=pagination(addImage,page,per_page,req.originalUrl,'products');
+        const result={...addPagination,meta:{...addPagination.meta,total_items:addImage.length}}
         if(page && per_page){
-            res.status(200).send(responseHandler(false,null,pagination(addImage,page,per_page,req.originalUrl,'products')));
+            res.status(200).send(responseHandler(false,null,result));
         }else{
             res.status(200).send(responseHandler(false,null,addImage));
         }
@@ -33,8 +35,10 @@ router.get('/:cat/:search',async (req,res)=>{
        orWhereILike('blog_category.name',`%${search.toLowerCase()}%`).
        orWhereILike('link',`%${search.toLowerCase()}%`).limit(limit || 100);
        const addImage=addImageBase(searchBlogs,['image_xs','image_lg','image_sm']);
+       const addPagination=pagination(addImage,page,per_page,req.originalUrl,'blogs');
+       const result={...addPagination,meta:{...addPagination.meta,total_items:addImage.length}}
        if(page && per_page){
-           res.status(200).send(responseHandler(false,null,pagination(addImage,page,per_page,req.originalUrl,'blogs')));
+           res.status(200).send(responseHandler(false,null,result));
        }else{
            res.status(200).send(responseHandler(false,null,addImage));
        }

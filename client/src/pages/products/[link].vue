@@ -61,10 +61,15 @@
              </div>
            </div>
            <!--           /// add to card-->
-           <div class="flex items-center mt-2">
-             <VBtnLoader :flag="productPageData.btnLoaderFlag" :disabled="!product_data.status" @click="addToCart" class="btn btn-secondary  btn-light">
+           <div class="flex items-center flex-wrap gap-1 mt-2">
+             <VBtnLoader :flag="productPageData.btnLoaderFlag" :disabled="!product_data.status" @click="addToCart" class="btn btn-secondary btn-md btn-light">
                add to card
              </VBtnLoader>
+
+             <VBtnLoader  v-if="isLogin" :flag="productPageData.FAVBtnLoaderFlag"  @click="addToFav" class="btn btn-fav btn-md">
+               add to favorite
+             </VBtnLoader>
+
              <p class="h5 text-red-500 ml-1" v-if="!product_data.status">
                Not Available Now!
              </p>
@@ -176,6 +181,7 @@
                 :status="product.status"
                 :off="product.off"
                 :off_percent="product.off_percent"
+                :product-id="product.id"
             />
           </div>
         </v-column>
@@ -218,7 +224,7 @@ const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/a
 /////////////////////////
 const {isLogin}=useStates();
 const pageQuery=ref(1)
-const {replySubmit,changeQuantity,minusQuantity,plusQuantity,addToCart,productPageData}=useProduct(product_data)
+const {replySubmit,changeQuantity,minusQuantity,plusQuantity,addToCart,productPageData,addToFav}=useProduct(product_data)
 
 watchEffect(()=>{
   pageQuery.value=route.query.page ? Number(route.query.page) :1;

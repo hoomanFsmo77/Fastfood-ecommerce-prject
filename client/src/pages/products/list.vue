@@ -15,6 +15,7 @@
                 :status="tab_item.status"
                 :off="tab_item.off"
                 :off_percent="tab_item.off_percent"
+                :product-id="tab_item.id"
             />
           </div>
         </v-column>

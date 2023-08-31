@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2023 at 03:59 PM
+-- Generation Time: Aug 31, 2023 at 11:51 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -61,17 +61,18 @@ CREATE TABLE `banner` (
   `caption` varchar(100) NOT NULL,
   `first_text` varchar(100) NOT NULL,
   `middle_text` varchar(100) NOT NULL,
-  `last_text` varchar(100) NOT NULL
+  `last_text` varchar(100) NOT NULL,
+  `link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `banner`
 --
 
-INSERT INTO `banner` (`id`, `image`, `caption`, `first_text`, `middle_text`, `last_text`) VALUES
-(3, '1687610719917.png', 'Hot Stuff', 'Maxican Burger ...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur'),
-(4, '1687610834305.png', 'Happy hour', 'Pizza with cheese ...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur'),
-(5, '1687610875174.png', 'Happy hour', 'Non Veg Burger...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur');
+INSERT INTO `banner` (`id`, `image`, `caption`, `first_text`, `middle_text`, `last_text`, `link`) VALUES
+(3, '1687610719917.png', 'Hot Stuff', 'Maxican Burger ...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur', 'roast-beef'),
+(4, '1687610834305.png', 'Happy hour', 'Pizza with cheese ...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur', 'special-pizza'),
+(5, '1687610875174.png', 'Happy hour', 'Non Veg Burger...', 'with bacon, tasty ham, pineapple and onion', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur', 'spicy-pepperoni');
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,8 @@ INSERT INTO `basket` (`id`, `userID`, `productID`, `price`, `quantity`, `subtota
 (105, 10, 13, 19, 1, 8, 44),
 (108, 10, 11, 35, 1, 35, 46),
 (109, 10, 12, 25, 3, 75, 46),
-(110, 10, 13, 19, 1, 8, 44);
+(110, 10, 13, 19, 1, 8, 44),
+(111, 10, 10, 24, 1, 24, 47);
 
 -- --------------------------------------------------------
 
@@ -128,13 +130,13 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `title`, `date`, `brief`, `link`, `image_sm`, `image_xs`, `image_lg`, `categoryID`, `adminID`, `isLatest`) VALUES
-(4, '5 way to increase neutrients in fast food', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', '5-way-to-increase-neutrients-in-fast-food', '', '1687805724284.jpeg', '1687805724285.jpeg', 2, 4, 0),
-(5, 'New formular of pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-pizza', '', '1687805842051.jpeg', '1687805842052.jpeg', 3, 2, 1),
-(6, 'New formular of burger', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-formular-of-burger', '', '1687805923222.jpeg', '1687805923223.jpeg', 4, 1, 1),
-(7, 'Family gather', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'family-gather', '', '1687805986695.jpeg', '1687805986696.jpeg', 1, 2, 1),
-(8, 'Sceintific facts about pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'Sceintific -facts-about -pizza', '1687806056356.jpeg', '1687806056356.jpeg', '1687806056357.jpeg', 5, 3, 1),
-(9, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 5, 1),
-(10, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 6, 1);
+(4, '5 way to increase neutrients in fast food', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', '5-way-to-increase-neutrients-in-fast-food', '', '1687805724284.jpeg', '1687805724285.jpeg', 2, 4, 0),
+(5, 'New formular of pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'new-formular-of-pizza', '', '1687805842051.jpeg', '1687805842052.jpeg', 3, 2, 1),
+(6, 'New formular of burger', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'new-formular-of-burger', '', '1687805923222.jpeg', '1687805923223.jpeg', 4, 1, 1),
+(7, 'Family gather', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'family-gather', '', '1687805986695.jpeg', '1687805986696.jpeg', 1, 2, 1),
+(8, 'Sceintific facts about pizza', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'Sceintific-facts-about-pizza', '1687806056356.jpeg', '1687806056356.jpeg', '1687806056357.jpeg', 5, 3, 1),
+(9, 'Sleep is one of the most important parts of living', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 5, 1),
+(10, 'New buffay', '02 March. 2022', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ', 'new-buffay', '1687806235519.jpeg', '1687806235520.jpeg', '1687806235520.jpeg', 6, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +191,16 @@ INSERT INTO `blog_comments` (`id`, `userID`, `date`, `blogID`, `body`, `isAccept
 (7, 3, 'Aug. 26 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0),
 (9, 6, 'Aug. 26 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 1, 7),
 (10, 6, 'Aug. 26 2020', 9, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0),
-(11, 7, 'Aug. 26 2020', 9, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0);
+(11, 7, 'Aug. 26 2020', 9, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0),
+(14, 10, 'Aug. 20 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 1, 9),
+(15, 6, 'Aug. 26 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 1, 7),
+(16, 6, 'Aug. 26 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 1, 15),
+(17, 10, 'Aug. 20 2020', 7, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 1, 14),
+(18, 5, 'Aug. 21 2020', 4, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0),
+(19, 5, 'Aug. 21 2020', 4, 'Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.', 1, 0, 0),
+(23, 10, 'September 28, 2023', 4, 'that was interesting!', 1, 0, 0),
+(24, 10, 'September 28, 2023', 4, 'your welcome!', 1, 1, 23),
+(29, 10, 'September 28, 2023', 4, 'goooood', 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -292,6 +303,13 @@ CREATE TABLE `contact_us` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contact_us`
+--
+
+INSERT INTO `contact_us` (`id`, `email`, `name`, `subject`, `message`, `created_at`) VALUES
+(2, 'hoomanmousavi77@gmail.com', 'dede', 'dede', 'dede', '2023-08-30 15:07:18');
+
 -- --------------------------------------------------------
 
 --
@@ -366,6 +384,50 @@ INSERT INTO `gallery` (`id`, `title`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `newsletter`
+--
+
+CREATE TABLE `newsletter` (
+  `id` int(11) NOT NULL,
+  `email` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `newsletter`
+--
+
+INSERT INTO `newsletter` (`id`, `email`) VALUES
+(2, 'hoomanmousavi77@gmail.com'),
+(3, 'hoomanmousavi15@gmail.com'),
+(4, 'hoomanmousavi10@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offer`
+--
+
+CREATE TABLE `offer` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `price` int(100) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `specification_1` varchar(200) NOT NULL,
+  `specification_2` varchar(200) NOT NULL,
+  `specification_3` varchar(200) NOT NULL,
+  `link` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `offer`
+--
+
+INSERT INTO `offer` (`id`, `title`, `price`, `image`, `specification_1`, `specification_2`, `specification_3`, `link`) VALUES
+(1, 'Veggi Fun Pizza', 21, '1692531952263.webp', 'Chicken Hallon', 'Summer Pizza', 'Vegge Lover', 'ceasar-salad');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -389,7 +451,8 @@ INSERT INTO `orders` (`id`, `addressID`, `statusID`, `paymentStatusID`, `total_a
 (37, 2, 1, 1, '94', 10, 7, '2023-7-6', 94),
 (43, 3, 1, 1, '40', 10, 3, '2023-7-6', 20),
 (44, 3, 1, 1, '8', 10, 7, '2023-7-6', 8),
-(46, 2, 1, 2, '110', 10, 3, '2023-7-6', 55);
+(46, 2, 1, 2, '110', 10, 3, '2023-7-6', 55),
+(47, NULL, 2, 3, '24', 10, 7, '2023-8-29', 24);
 
 -- --------------------------------------------------------
 
@@ -532,7 +595,7 @@ CREATE TABLE `product_comments` (
 --
 
 INSERT INTO `product_comments` (`id`, `userID`, `date`, `productID`, `rating`, `body`, `isAccept`, `isReply`, `replyID`) VALUES
-(2, 2, 'Sep 17, 2023', 8, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
+(2, 2, 'Sep 17, 2023', 8, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 0, 0, 0),
 (3, 2, 'Sep 17, 2023', 9, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
 (4, 2, 'Sep 17, 2023', 10, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
 (5, 2, 'Sep 17, 2023', 11, 5, 'How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.', 1, 0, 0),
@@ -565,7 +628,15 @@ INSERT INTO `product_comments` (`id`, `userID`, `date`, `productID`, `rating`, `
 (32, 3, 'Sep 18, 2023', 18, 4, 'There anyone who loves or pursues or desires to obtain pain itself, because it is pain sed, because occasionally circumstances occur some great pleasure.', 1, 0, 0),
 (33, 3, 'Sep 18, 2023', 19, 4, 'There anyone who loves or pursues or desires to obtain pain itself, because it is pain sed, because occasionally circumstances occur some great pleasure.', 1, 0, 0),
 (34, 2, 'Sep 18, 2023', 10, 5, 'Thank you.', 1, 1, 24),
-(35, 3, 'Sep 17, 2023', 10, 2, 'thanks.', 1, 1, 4);
+(35, 3, 'Sep 17, 2023', 10, 2, 'thanks.', 1, 1, 4),
+(38, 10, 'Sep 18, 2023', 10, 4, 'There anyone who loves or pursues or desires to obtain pain itself, because it is pain sed, because occasionally circumstances occur some great pleasure.', 1, 1, 35),
+(43, 10, 'September 28, 2023', 10, 4, 'your welcome!', 1, 1, 34),
+(44, 10, 'September 28, 2023', 10, 3, 'realy good!', 1, 0, 0),
+(45, 10, 'September 28, 2023', 10, 5, 'ok', 1, 1, 44),
+(46, 10, 'September 28, 2023', 10, 5, 'gooooood', 1, 0, 0),
+(47, 10, 'September 28, 2023', 10, 4, 'thank you', 1, 1, 46),
+(48, 10, 'September 28, 2023', 8, 5, 'delicious!', 1, 0, 0),
+(49, 10, 'September 28, 2023', 8, 4, 'thank you very much hooman', 1, 1, 48);
 
 -- --------------------------------------------------------
 
@@ -759,7 +830,9 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `profile_image`,
 (6, 'Adam', 'Smith', 'adam_smith', '1688207214478.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09012564789', 'smith@gmail.com', 'fmJ0sNTgXjtxAdvjrsS9vleLtCP2GVAtyMY6eVfE67mDcF4O', 0, '15 March. 2022'),
 (7, 'Nasir', 'Jalali', 'nasir_jalali', '1688207258297.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09012564789', 'nasir@gmail.com', 'lmQH83jCLvDRw0wfZGfVAdZHXrhYXJ1GYgfWAT6BnYzcUNra', 0, '12 March. 2022'),
 (10, 'hooman', 'mousavi', 'hooman_77', '1688207258297.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09921929653', 'hoomanmousavi77@gmail.com', '81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d', 1, '18 March. 2022'),
-(12, 'test', 'test', 'test', '1688207258297.jpeg', '$2b$10$myVkFnxtQvJNiSaQDxb37OH8oOp2KbhkQgMzlBbXjE7uYIOmeeUIa', '09921929853', 'test33@gmail.com', 'b_J8r8GTFwxaTMsQqv-oKC7TIuTBWQSw7iWYBfg4jf6tnJJT', 0, '18 March. 2022');
+(12, 'test', 'test', 'test', '1688207258297.jpeg', '$2b$10$myVkFnxtQvJNiSaQDxb37OH8oOp2KbhkQgMzlBbXjE7uYIOmeeUIa', '09921929853', 'test33@gmail.com', 'b_J8r8GTFwxaTMsQqv-oKC7TIuTBWQSw7iWYBfg4jf6tnJJT', 0, '18 March. 2022'),
+(18, 'hooman', 'mousavi', 'hooman_23', '1693046208066.jpeg', '$2b$10$13BrqrsIdpu8mrixqnmdo.8YFjqJ3zv/9/o6Xq4C.Hvmgh.y7xSpW', '09921829653', 'hoomanmousavi66@gmail.com', 'HqMj8yTCpsGcbHrEuIgr6MLyVf5cY3LUZVNL0zQrHgxRldaD', 0, '2023-8-26'),
+(19, 'alireza', 'alikhani', 'alireza_98', '1693051209474.jpeg', '$2b$10$R4am8/6X6prYvG/JxOuSTe62g3Gtw5cvbh6GXKzZ5hX0f8e0MbXvy', '09129154038', 'ali77@gmail.com', 'D5FX-tlNXHY16clLdLXj6InCPD2jvtPTfEqrmxI7INF60rgC', 0, '2023-8-26');
 
 -- --------------------------------------------------------
 
@@ -904,6 +977,18 @@ ALTER TABLE `gallery`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `newsletter`
+--
+ALTER TABLE `newsletter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `offer`
+--
+ALTER TABLE `offer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -1020,7 +1105,7 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -1038,7 +1123,7 @@ ALTER TABLE `blog_category`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `blog_content`
@@ -1056,7 +1141,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -1077,10 +1162,22 @@ ALTER TABLE `gallery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `newsletter`
+--
+ALTER TABLE `newsletter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `offer`
+--
+ALTER TABLE `offer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -1110,7 +1207,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `product_image`
@@ -1146,7 +1243,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_address`
@@ -1247,14 +1344,6 @@ ALTER TABLE `user_address`
   ADD CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `user_address_ibfk_2` FOREIGN KEY (`cityID`) REFERENCES `cities` (`id`),
   ADD CONSTRAINT `user_address_ibfk_3` FOREIGN KEY (`provinceID`) REFERENCES `provinces` (`id`);
-
-DELIMITER $$
---
--- Events
---
-CREATE DEFINER=`root`@`localhost` EVENT `recycling` ON SCHEDULE EVERY 1 HOUR STARTS '2023-06-24 14:11:57' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM `registered` WHERE `expiresAt` < CURRENT_TIMESTAMP - INTERVAL 720 HOUR$$
-
-DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

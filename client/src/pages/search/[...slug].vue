@@ -2,8 +2,7 @@
   <section v-if="!pending" id="search-section">
     <v-container>
       <h3 class="mb-1">Search result for "{{$route.params.slug[1]}}" in {{$route.params.slug[0]}}</h3>
-      <h3 v-if="$route.params.slug[0]==='product'">found {{data.products.length}} items</h3>
-      <h3 v-else-if="$route.params.slug[0]==='blog'">found {{data.blogs.length}} items</h3>
+      <h3 >found {{data.meta.total_items}} items</h3>
       <div v-if="$route.params.slug[0]==='product' && data.products && data.products.length>0" class="grid my-3 grid-cols-[repeat(4,1fr)] gap-2">
         <VProductCard
             v-for="tab_item in data.products"
@@ -15,6 +14,7 @@
             :status="tab_item.status"
             :off="tab_item.off"
             :off_percent="tab_item.off_percent"
+            :product-id="tab_item.id"
         />
       </div>
       <div v-else-if="$route.params.slug[0]==='blog' && data.blogs && data.blogs.length>0" class="grid mt-2  grid-cols-[repeat(2,1fr)] gap-2 w-full">

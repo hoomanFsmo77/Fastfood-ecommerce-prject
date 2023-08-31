@@ -9,6 +9,13 @@
     .btn-simple{
         @apply  bg-secondary-light-2 text-primary-light-1
     }
+    .btn-md{
+        @apply  tracking-[3px] leading-[50px] px-2 text-1
+    }
+
+    .btn-fav{
+        @apply before:block before:absolute  before:top-0 before:h-full  before:mx-auto before:bg-primary-dark-2 before:w-full before:left-0  before:opacity-0 before:scale-x-[0.5] before:scale-y-[1] before:invisible hover:before:opacity-100 hover:before:visible hover:before:w-full before:transition-all before:duration-500 before:ease-in-out hover:before:scale-x-[1] hover:before:scale-y-[1] before:z-[-1] before:rounded-4 bg-secondary-light-1 text-primary-light-1
+    }
 
     .btn-sm{
         @apply  tracking-[2px] leading-[40px] px-1 text-0.8
