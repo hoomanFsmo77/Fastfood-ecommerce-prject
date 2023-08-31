@@ -93,7 +93,7 @@ const getAllProductFilter = async () => {
 }
 
 const getProductByLinkFilter = async (link) => {
-    const product=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category').where({link:link});
+    const product=await database('product').join('product_category','product_category.id','=','product.categoryID').select('product.*','product_category.name as category','product_specification.color as color','product_specification.size as size').join('product_specification','product.specification','=','product_specification.id').where({link:link});
     const comments = await database('product_comments').where({productID:product[0].id,isAccept:1,isReply:0} );
 
     const images = await database('product_image').select().where({productID:product[0].id} );

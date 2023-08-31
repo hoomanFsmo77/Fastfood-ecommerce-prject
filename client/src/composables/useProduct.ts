@@ -3,16 +3,19 @@ import {IProduct} from "~/utils/types";
 
 
 export const useProduct=(product_data?:Ref<IProduct|null>)=>{
+    const {favoriteStore}=useFavoriteStore()
     const productPageData=shallowReactive({
         quantity:1 as number,
         tabIndex:0 as number,
         replyMessage:null as string|null,
         btnLoaderFlag:false as boolean,
         FAVBtnLoaderFlag:false as boolean,
+        removeFAVBtnLoaderFlag:false as boolean,
         reset(){
             this.btnLoaderFlag=false
             this.quantity=1
             this.FAVBtnLoaderFlag=false
+            this.removeFAVBtnLoaderFlag=false
         }
     })
     const {$toast}=useNuxtApp()
@@ -83,26 +86,70 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
         productPageData.FAVBtnLoaderFlag=true
         try {
             const req=await $fetch('/api/profile/product/fav',{
+                method:'POST',
                 query:{
                     productID:product_data ? product_data.value?.id : 0,
                 }
             })
-            $toast('success').fire({
-                text: 'product added to you favorite list!',
-                icon: 'success',
-            })
-            return navigateTo({name:'PROFILE_FAVORITE'})
+
+            if(req.code===200){
+                $toast('success').fire({
+                    text: req.message,
+                    icon: 'success',
+                })
+                return navigateTo({name:'PROFILE_FAVORITE'})
+            }else{
+                $toast('error').fire({
+                    text: req.errors,
+                    icon: 'error',
+                })
+            }
         }catch (e) {
             $toast('error').fire({
                 text: 'error in connecting to server!',
                 icon: 'error',
             })
         }finally {
+            await favoriteStore.fetchUserFavoriteList()
             productPageData.reset()
         }
     }
 
+    const removeFav = async () => {
+        const favID=favoriteStore.getFavID(product_data?.value?.id)
+        productPageData.removeFAVBtnLoaderFlag=true
+        try {
+            const req=await $fetch('/api/profile/product/fav',{
+                method:'DELETE',
+                query:{
+                    favID
+                }
+            })
+
+            if(req.code===200){
+                $toast('success').fire({
+                    text: req.message,
+                    icon: 'success',
+                })
+            }else{
+                $toast('error').fire({
+                    text: req.errors,
+                    icon: 'error',
+                })
+            }
+        }catch (e) {
+            $toast('error').fire({
+                text: 'error in connecting to server!',
+                icon: 'error',
+            })
+        }finally {
+            await favoriteStore.fetchUserFavoriteList()
+            productPageData.reset()
+        }
+
+    }
+
     return{
-        addToCart,changeQuantity,minusQuantity,plusQuantity,replySubmit,productPageData,addToFav
+        addToCart,changeQuantity,minusQuantity,plusQuantity,replySubmit,productPageData,addToFav,removeFav
     }
 }

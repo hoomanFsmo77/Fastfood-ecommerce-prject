@@ -79,6 +79,10 @@ export const navbar:Navbar[]=[
                 title:'Our Products',
                 hasSub:false,
                 link:{name:'PRODUCT_LIST'}
+            },{
+                title:'Build you product',
+                hasSub:false,
+                link:{name:'PRODUCT_BUILD'}
             },
             {
                 title:'Shopping Cart',

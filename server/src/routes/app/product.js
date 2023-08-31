@@ -42,7 +42,7 @@ router.post('/image',upload.single('image'),(req,res)=>{
 
 
 router.get('/all',async (req,res)=>{
-        const allProducts=await database('product').select('*');
+        const allProducts=await database('product').select('*').join('product_specification','product.specification','=','product_specification.id');
         const changeImage=addImageBase(allProducts,'primary_image');
         const changeToBool=changeToBoolean(changeImage,['status','off'])
         res.status(200).send(responseHandler(false,null,removeDuplicate(changeToBool,'title')))

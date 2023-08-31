@@ -22,7 +22,8 @@ router.get('/',async (req,res)=>{
         const userActiveBasket=await database('basket').
         join('users','basket.userID','=','users.id').
         join('product','basket.productID','=','product.id').
-        select('basket.*','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link').where({orderID:activeOrderId});
+        join('product_specification','product.specification','=','product_specification.id').
+        select('basket.*','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link','product_specification.color as color','product_specification.size as size').where({orderID:activeOrderId});
         res.status(200).send(responseHandler(false,null,{
             items:changeToBoolean(addImageBase(userActiveBasket,'primary_image'),'off'),
             order:userActiveOrder[0]

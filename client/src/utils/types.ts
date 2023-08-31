@@ -23,7 +23,8 @@ export interface IProduct {
     quantity:number
     date_on_sale_from:null|string
     date_on_sale_to:null|string
-    category:string
+    category:string,
+    favoriteID:number
     images:{
         id:number
         productID:number

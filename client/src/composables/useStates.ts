@@ -1,5 +1,6 @@
 import {User_Information} from "~/utils/types";
-
+import {Favorite} from "~/store/Favorite";
+import {storeToRefs} from "pinia";
 
 export const useStates=()=>{
     const isLogin=useState<boolean>('isLogin',()=>false)
@@ -20,3 +21,13 @@ export const useStates=()=>{
     }
 }
 
+
+export const useFavoriteStore=()=>{
+    const favoriteStore=Favorite()
+    const {userFavoriteListFetchFlag,isProductExistInFAV}=storeToRefs(favoriteStore)
+
+
+    return{
+        favoriteStore,isProductExistInFAV,userFavoriteListFetchFlag
+    }
+}

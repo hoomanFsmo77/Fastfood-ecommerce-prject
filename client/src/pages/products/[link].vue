@@ -66,14 +66,21 @@
                add to card
              </VBtnLoader>
 
-             <VBtnLoader  v-if="isLogin" :flag="productPageData.FAVBtnLoaderFlag"  @click="addToFav" class="btn btn-fav btn-md">
-               add to favorite
-             </VBtnLoader>
+             <template v-if="userFavoriteListFetchFlag && isLogin">
+               <VBtnLoader  v-if="!isProductExistInFAV(product_data.id)" :flag="productPageData.FAVBtnLoaderFlag"  @click="addToFav" class="btn btn-fav btn-md">
+                 add to favorite
+               </VBtnLoader>
+               <VBtnLoader  v-else :flag="productPageData.removeFAVBtnLoaderFlag"  @click="removeFav" class="btn btn-remove btn-md">
+                 remove from favorites
+               </VBtnLoader>
+             </template>
 
              <p class="h5 text-red-500 ml-1" v-if="!product_data.status">
                Not Available Now!
              </p>
            </div>
+
+
 
 
          </div>
@@ -94,17 +101,38 @@
               </li>
             </ul>
             <div class="product-tab-content">
-                <p id="description-tab" class="text-1 text-[#555555] font-400 leading-2" v-if="productPageData.tabIndex===0">
-                  {{product_data.description}}
-                </p>
-              <p id="specification-tab" class="text-1 text-[#555555] font-400 leading-2" v-if="productPageData.tabIndex===1">
-                {{product_data.specification}}
+
+              <p id="specification-tab" class="text-1 text-[#555555] font-400 leading-2" v-if="productPageData.tabIndex===0">
+                {{product_data.description}}
               </p>
+
+
+              <div v-if="productPageData.tabIndex===1">
+                <h4 class="font-600">
+                  Food Specification
+                </h4>
+                <div class="border-[2px] w-full mt-1  flex">
+                  <div class=" w-[30%] py-0.5 px-1" >
+                    <p class="text-[#555555] font-600 text-1">color</p>
+                  </div>
+                  <div class="w-full border-l-[2px] py-0.5 px-1" >
+                    <p class="text-gray-600 font-400 text-1">{{product_data.color}}</p>
+                  </div>
+                </div>
+                <div class="border-[2px] border-t-[0px] w-full  flex bg-gray-100">
+                  <div class=" w-[30%] py-0.5 px-1" >
+                    <p class="text-[#555555] font-600 text-1">size</p>
+                  </div>
+                  <div class="w-full border-l-[2px] py-0.5 px-1" >
+                    <p class="text-gray-600 font-400 text-1">{{product_data.size}}</p>
+                  </div>
+                </div>
+              </div>
 
               <div v-if="productPageData.tabIndex===2" id="comments-tab">
 <!--      ////// start comments render here-->
                 <template v-if="product_data.total_comments>0 && !product_comments_flag">
-                  <h4 class="font-600">{{product_data.total_comments}} Reviews For win Your Friends</h4>
+                  <h4 class="font-600">{{product_data.total_comments}} Reviews For {{product_data.title}}</h4>
                   <ProductComment
                       v-for="comment in product_comments.comments"
                       :image="comment.author_image"
@@ -194,6 +222,7 @@
 <script setup lang="ts">
 import {IProduct} from "~/utils/types";
 import {HalfCircleSpinner} from "epic-spinners";
+import {useFavoriteStore} from "~/composables/useStates";
 const route=useRoute();
 definePageMeta({
   name:'PRODUCT_DETAIL',
@@ -213,7 +242,7 @@ definePageMeta({
   ]
 });
 
-
+const {isProductExistInFAV,userFavoriteListFetchFlag}=useFavoriteStore()
 
 
 
@@ -224,7 +253,7 @@ const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/a
 /////////////////////////
 const {isLogin}=useStates();
 const pageQuery=ref(1)
-const {replySubmit,changeQuantity,minusQuantity,plusQuantity,addToCart,productPageData,addToFav}=useProduct(product_data)
+const {replySubmit,changeQuantity,minusQuantity,plusQuantity,addToCart,productPageData,addToFav,removeFav}=useProduct(product_data)
 
 watchEffect(()=>{
   pageQuery.value=route.query.page ? Number(route.query.page) :1;

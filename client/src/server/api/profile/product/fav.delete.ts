@@ -8,9 +8,9 @@ export default defineEventHandler(async ev=>{
     try {
         const req=await $fetch<IResponse<any>>('/favorite',{
             baseURL:api_base,
-            method:'POST',
+            method:'DELETE',
             query:{
-                productID:query.productID
+                favID:query.favID
             },
             headers:{
                 access_key,
@@ -19,13 +19,20 @@ export default defineEventHandler(async ev=>{
             }
         })
         if(req.error){
-            sendNoContent(ev,400)
+            return {
+                code:400,
+                errors:req.errors,
+                message:null
+            }
         }else{
-            return req
+            return   {
+                code:200,
+                errors:null,
+                message:'product removed from your favorite list!'
+            }
         }
-
     }catch (err) {
-        return err
+        sendNoContent(ev,400)
     }
 
 

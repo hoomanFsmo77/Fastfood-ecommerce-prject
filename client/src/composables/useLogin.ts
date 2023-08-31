@@ -2,6 +2,7 @@
 import {reset} from "@formkit/core";
 
 export const useLogin=()=>{
+    const {favoriteStore}=useFavoriteStore()
     const {isLogin,userInformation}=useStates()
     const loginProcessData=reactive({
         buttonLoaderFlag:false as boolean,
@@ -21,7 +22,8 @@ export const useLogin=()=>{
                 loginProcessData.errors=null
                 isLogin.value=true
                 userInformation.value=req.data;
-                reset('loginForm')
+                await favoriteStore.fetchUserFavoriteList()
+                reset('loginForm');
                 return navigateTo({
                     name:'PROFILE_INFO'
                 });

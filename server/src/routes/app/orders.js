@@ -25,7 +25,7 @@ router.post('/',async (req,res)=>{
     const orderID=req.query.orderID
     const userID=req.headers.id
     if(orderID){
-        const getBasketIem=await database('basket').join('product','basket.productID','=','product.id').select('basket.*','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link').where({orderID:orderID,userID});
+        const getBasketIem=await database('basket').join('product','basket.productID','=','product.id').join('product_specification','product.specification','=','product_specification.id').select('basket.*','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link','product_specification.color as color','product_specification.size as size').where({orderID:orderID,userID});
         res.status(200).send(responseHandler(false,null,changeToBoolean(addImageBase(getBasketIem,'primary_image'),'off')))
     }else{
         res.status(200).send(responseHandler(true,'missing required query',null))

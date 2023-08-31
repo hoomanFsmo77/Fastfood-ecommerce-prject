@@ -17,8 +17,8 @@
               </v-column>
             </v-row>
               <FormKit   id="loginForm" type="form" ref="loginForm"  @submit="loginSubmit"  :actions="false" >
-                <v-row class="my-1">
-                  <v-column class="justify-center" col="12">
+                <v-row class="my-1 justify-center">
+                  <v-column class="justify-center" col="8">
                     <FormKit
                         type="custom_text"
                         label="email, phone or username*"
@@ -29,8 +29,8 @@
                     />
                   </v-column>
                 </v-row>
-                <v-row class="my-1  ">
-                  <v-column class="justify-center" col="12">
+                <v-row class="my-1 justify-center ">
+                  <v-column class="justify-center" col="8">
                     <FormKit
                         type="custom_password"
                         label="password*"
