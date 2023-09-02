@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const database=require('../../database/database')
 const {body ,validationResult,matchedData, param,query} = require('express-validator');
-const {responseHandler,addImageBase,changeToBoolean,calculateSum,today,pagination} = require("../../utils");
+const {responseHandler,addImageBase,changeToBoolean,calculateSum,today,pagination,calculateTotalPrice,getCustomProductDescription} = require("../../utils");
 const bodyParser = require("body-parser");
 const mw=require('../../middleware/profile')
 router.use(bodyParser.urlencoded({extended:true}));
@@ -19,13 +19,20 @@ router.get('/',async (req,res)=>{
     const userActiveOrder=await database('orders').join('order_status','orders.statusID','=','order_status.id').join('payment_status','orders.paymentStatusID','=','payment_status.id').join('coupons','orders.couponID','=','coupons.id').where('orders.userID','=',userID).where('orders.statusID','=',2).where('orders.paymentStatusID','=',3).select('orders.*','order_status.status','payment_status.status as payment_status','coupons.code as coupons_code','coupons.percent as coupons_percent');
     if(userActiveOrder.length>0){
         const activeOrderId=userActiveOrder[0].id
-        const userActiveBasket=await database('basket').
+        const userReadyActiveBasket=await database('basket').
         join('users','basket.userID','=','users.id').
         join('product','basket.productID','=','product.id').
         join('product_specification','product.specification','=','product_specification.id').
-        select('basket.*','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link','product_specification.color as color','product_specification.size as size').where({orderID:activeOrderId});
+        select('basket.type','basket.id','basket.price','basket.quantity','basket.subtotal','basket.orderID','product.primary_image','product.title','product.quantity as product_quantity','product.off','product.off_percent','product.link','product_specification.color as color','product_specification.size as size','users.id as userID').where({orderID:activeOrderId,type:'ready'});
+
+        const userReadyBasket=changeToBoolean(addImageBase(userReadyActiveBasket,'primary_image'),'off')
+
+        const userCustomActiveBasket=await database('basket').
+        join('users','basket.userID','=','users.id').
+        select('basket.type','basket.id','basket.price','basket.quantity','basket.subtotal','basket.orderID','basket.description').where({orderID:activeOrderId,type:'custom'});
+
         res.status(200).send(responseHandler(false,null,{
-            items:changeToBoolean(addImageBase(userActiveBasket,'primary_image'),'off'),
+            items:[...userReadyBasket,...userCustomActiveBasket],
             order:userActiveOrder[0]
         }))
     }else{
@@ -37,14 +44,17 @@ router.get('/',async (req,res)=>{
 
 
 ////// add basket item
-router.post('/',body(['productID','quantity']).notEmpty(),async (req,res)=>{
-    const result = validationResult(req);
-    if (result.isEmpty()) {
-        const body = matchedData(req);
-        const userID=req.headers.id;
-        const userBasket=await database('basket').where({userID:userID}).select('*')
+router.post('/',async (req,res)=>{
+    const body=req.body
+    const userID=req.headers.id;
+    //// get user data
+    const userBasket=await database('basket').where({userID:userID}).select('*')
+    const userActiveOrders=await database('orders').join('coupons','orders.couponID','=','coupons.id').select('orders.*','coupons.percent as coupons_percent').where({paymentStatusID:3,statusID:2,userID:userID});
+
+    ///////
+    if(body.productID && body.type==='ready' && body.quantity){
+        /// type ready
         const product=await database('product').where({id:body.productID}).select('price','off','off_percent');
-        const userActiveOrders=await database('orders').join('coupons','orders.couponID','=','coupons.id').select('orders.*','coupons.percent as coupons_percent').where({paymentStatusID:3,statusID:2,userID:userID});
         const productPrice=Number(product[0].price)
         const subtotal=product[0].off===1 ? Math.floor(((productPrice*product[0].off_percent)/100))*Number(body.quantity) : productPrice*Number(body.quantity);
         if(userBasket.length===0 || userActiveOrders.length===0){
@@ -61,7 +71,7 @@ router.post('/',body(['productID','quantity']).notEmpty(),async (req,res)=>{
             });
             res.status(200).send(responseHandler(false,'basket item added',null))
         }else{
-            const previousTotalAmount=Number(userActiveOrders[0].total_amount)
+            const previousTotalAmount=Number(userActiveOrders[0].total_amount);
             const orderID=userActiveOrders[0].id;
             const isExist=userBasket.some(item=>item.productID==body.productID && item.orderID==orderID)
             if(isExist){
@@ -82,8 +92,64 @@ router.post('/',body(['productID','quantity']).notEmpty(),async (req,res)=>{
             }
         }
 
+////////////////////////////////////////////
+    }else if(body.type==='custom' && body.toppingID && body.cheeseID && body.saucesID && body.sizeID && body.templateID && body.quantity && body.custom_pieces){
+        /// type custom
+        const {toppingID,cheeseID,saucesID,sizeID,templateID,quantity,additional_info,custom_pieces}=body;
+        //// topping
+        const topping=toppingID===0 ? null :await database('product_toppings').select('*').where({id:toppingID});
+        //// cheese
+        const cheese=cheeseID===0 ? null :await database('product_cheese').select('*').where({id:cheeseID});
+        //// sauces
+        const sauces=saucesID===0 ? null : await database('product_sauces').select('*').where({id:saucesID});
+        /// size
+        const size=await database('product_size').select('*').where({id:sizeID})
+        const template=await database('product_templates').select('*').where({id:templateID})
+
+        //// total price
+        const totalPrice=calculateTotalPrice(topping[0]?.price || 0, cheese[0]?.price || 0,sauces[0]?.price || 0, size[0].price, template[0].price)
+
+        const subtotal=Number(quantity)* Number(totalPrice);
+
+        //// description
+        const description=getCustomProductDescription(topping,cheese,sauces,size,template,additional_info,custom_pieces)
+
+
+        if(userBasket.length===0 || userActiveOrders.length===0){
+            const createOrder=await database('orders').insert({userID:userID,created_at:today,total_amount:subtotal,payment_amount:subtotal});
+            const orderID=createOrder[0];
+            await database('basket').
+            insert({
+                userID:userID,
+                productID:10,
+                price:totalPrice,
+                quantity:quantity,
+                description,
+                type:'custom',
+                orderID:orderID,
+                subtotal
+            })
+            res.status(200).send(responseHandler(false,'basket item added',null))
+        }else{
+            const previousTotalAmount=Number(userActiveOrders[0].total_amount);
+            const orderID=userActiveOrders[0].id;
+            const couponPercent=userActiveOrders[0].coupons_percent===0 ? 100 : userActiveOrders[0].coupons_percent;
+            const addNewTotalAmountToOrder=await database('orders').where({id:orderID}).update({total_amount:previousTotalAmount+subtotal,payment_amount:userActiveOrders[0].payment_amount+((subtotal*couponPercent)/100)});
+            await database('basket').
+            insert({
+                userID:userID,
+                productID:10,
+                price:totalPrice,
+                quantity:quantity,
+                description,
+                type:'custom',
+                orderID:orderID,
+                subtotal
+            })
+            res.status(200).send(responseHandler(false,'basket item added',null))
+        }
     }else{
-        res.status(200).send(responseHandler(true,result.array() ,null));
+        res.status(200).send(responseHandler(true,'request body params does not match!',null))
     }
 })
 

@@ -56,7 +56,8 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
                const req=await $fetch('/api/profile/basket/add',{
                    query:{
                        productID:product_data ? product_data.value?.id : productId,
-                       quantity:product_data ? productPageData.quantity :1
+                       quantity:product_data ? productPageData.quantity :1,
+                       type:'ready'
                    }
                })
                 $toast('success').fire({

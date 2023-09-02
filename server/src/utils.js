@@ -346,6 +346,21 @@ const transferPaymentStatus = (source) => {
     })
 }
 
+
+const calculateTotalPrice = (...args) => {
+    let sum=0
+    args.forEach(p1=>{
+        sum+=p1
+    })
+    return sum
+
+}
+
+
+const getCustomProductDescription = (topping,cheese,sauces,size,template,additional_info,custom_pieces) => {
+    return `<div class="order-container"><div class="order-image"><img alt="${template[0].image}" src="${imageBase+template[0].image}" srcset="${imageBase+template[0].image}"/></div><div class="order-data"><div><h6>Sizes ($${template[0].price.toFixed(2)}):</h6><p>${size[0].size}</p></div><div><h6>Sauces ${sauces[0]?.price ? `($${sauces[0]?.price.toFixed(2)})` : ''}:</h6><p>${sauces[0]?.sauces || 'none'}</p></div><div><h6>Cheese ${cheese[0]?.price ? `($${cheese[0]?.price.toFixed(2)})` : ''}:</h6><p>${cheese[0]?.cheese || 'none'}</p></div><div><h6>Toppings ${topping[0]?.price ? `($${topping[0]?.price.toFixed(2)})` : ''}:</h6><p>${topping[0]?.toppings || 'none'}</p></div><div><h6>Additional Info:</h6><p>${additional_info}</p></div><div><h6>Custom Pieces:</h6><p>${custom_pieces}</p></div></div></div>`
+}
+
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId,calculateTotalPrice,getCustomProductDescription
 }
