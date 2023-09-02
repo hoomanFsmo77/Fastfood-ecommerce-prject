@@ -12,6 +12,7 @@
 @import "../components/blog.css";
 @import "../components/menu.css";
 @import "../components/contact.css";
+@import "../components/tooltip.css";
 @tailwind components;
 
 @layer components {

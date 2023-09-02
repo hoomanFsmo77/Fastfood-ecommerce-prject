@@ -8,10 +8,33 @@ const upload = require("../../database/upload");
 const bodyParser = require("body-parser");
 router.use(mw)
 
-router.get('/sizes',async (req,res)=>{
-    const result=await database('product_size').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
+
+
+router.get('/options',async (req,res)=>{
+    const sizes=await database('product_size').select('*');
+    const sauces=await database('product_sauces').select('*');
+    const cheese=await database('product_cheese').select('*');
+    const toppings=await database('product_toppings').select('*');
+    const templates=await database('product_templates').select('*');
+    res.status(200).send(responseHandler(false,null,{
+        sizes:addImageBase(sizes,'image'),
+        sauces:addImageBase(sauces,'image'),
+        cheese:addImageBase(cheese,'image'),
+        toppings:addImageBase(toppings,'image'),
+        templates:addImageBase(templates,'image'),
+    }))
+
 })
+
+
+
+
+
+
+
+
+
+
 
 
 router.post('/sizes',upload.single('image'),body(['size','price']).notEmpty(),async (req,res)=>{
@@ -32,10 +55,6 @@ router.post('/sizes',upload.single('image'),body(['size','price']).notEmpty(),as
 })
 
 
-router.get('/sauces',async (req,res)=>{
-    const result=await database('product_sauces').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
 
 
 router.post('/sauces',upload.single('image'),body(['sauces','price']).notEmpty(),async (req,res)=>{
@@ -55,10 +74,6 @@ router.post('/sauces',upload.single('image'),body(['sauces','price']).notEmpty()
 })
 
 
-router.get('/cheese',async (req,res)=>{
-    const result=await database('product_cheese').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
 
 
 router.post('/cheese',upload.single('image'),body(['cheese','price']).notEmpty(),async (req,res)=>{
@@ -77,11 +92,6 @@ router.post('/cheese',upload.single('image'),body(['cheese','price']).notEmpty()
     }
 })
 
-
-router.get('/toppings',async (req,res)=>{
-    const result=await database('product_toppings').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
 
 
 router.post('/toppings',upload.single('image'),body(['toppings','price']).notEmpty(),async (req,res)=>{
@@ -102,10 +112,7 @@ router.post('/toppings',upload.single('image'),body(['toppings','price']).notEmp
 
 
 
-router.get('/templates',async (req,res)=>{
-    const result=await database('product_templates').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
+
 
 
 router.post('/templates',upload.single('image'),body(['price']).notEmpty(),async (req,res)=>{

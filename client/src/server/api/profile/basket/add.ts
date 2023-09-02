@@ -7,29 +7,24 @@ export default defineEventHandler(async ev=>{
     const query=await getQuery(ev);
     const {api_base,access_key}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
-    if(query.type==='ready'){
-        try {
-            const req=await $fetch<IResponse<any>>('/basket',{
-                baseURL:api_base,
-                method:'POST',
-                body:urlEncodeBody(query),
-                headers:{
-                    access_key,
-                    token,
-                    'Content-Type':'application/x-www-form-urlencoded'
-                }
-            })
-            if(req.error){
-                sendNoContent(ev,400)
-            }else{
-                return req
+    try {
+        const req=await $fetch<IResponse<any>>('/basket',{
+            baseURL:api_base,
+            method:'POST',
+            body:urlEncodeBody(query),
+            headers:{
+                access_key,
+                token,
+                'Content-Type':'application/x-www-form-urlencoded'
             }
-        }catch (err) {
+        })
+        if(req.error){
             sendNoContent(ev,400)
+        }else{
+            return req
         }
-    }else{
-
-
+    }catch (err) {
+        sendNoContent(ev,400)
     }
 
 })

@@ -109,7 +109,7 @@ router.post('/',async (req,res)=>{
         //// total price
         const totalPrice=calculateTotalPrice(topping[0]?.price || 0, cheese[0]?.price || 0,sauces[0]?.price || 0, size[0].price, template[0].price)
 
-        const subtotal=Number(quantity)* Number(totalPrice);
+        const subtotal=calculateTotalPrice(topping[0]?.price || 0, cheese[0]?.price || 0,sauces[0]?.price || 0, size[0].price, template[0].price*Number(quantity))
 
         //// description
         const description=getCustomProductDescription(topping,cheese,sauces,size,template,additional_info,custom_pieces)

@@ -15,7 +15,8 @@ export default defineNuxtConfig({
         '~/assets/Tailwind.config/Tailwind.base.css',
         '~/assets/Tailwind.config/Tailwind.component.css',
         '~/assets/Tailwind.config/Tailwind.utilities.css',
-        'animate.css/animate.min.css'
+        'animate.css/animate.min.css',
+        'vue-inner-image-zoom/lib/vue-inner-image-zoom.css',
     ],
     app:{
         rootId:'v-app',

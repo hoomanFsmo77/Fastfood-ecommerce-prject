@@ -56,3 +56,7 @@ export const submitForm = (form:Ref<null|HTMLElement>) => {
         node.submit()
     }
 };
+
+export const filterCustomProduct = (src:{id:number}[],id:number) => {
+  return src.filter(i=>i.id===id)[0]
+}

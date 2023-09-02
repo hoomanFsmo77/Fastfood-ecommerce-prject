@@ -4,7 +4,7 @@ const props=defineProps<{
   direction:'down' | 'right'
 }>()
 const dropdownFlag=shallowRef<boolean>(false);
-const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value
+const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value;
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value
       <slot name="top"/>
     </div>
     <Transition :name="direction==='down' ? 'drop_down': 'drop_right'">
-      <div class="dropdown-main" :class="{'top-[90px] left-0':direction==='down','right-[-100%] top-0':direction==='right'}" v-if="dropdownFlag">
+      <div class="dropdown-main" :class="{'top-[75px] left-0':direction==='down','right-[-100%] top-0':direction==='right'}" v-if="dropdownFlag">
         <ul :class="{'!border-t-0':!hasSub}">
           <slot name="main"/>
         </ul>
@@ -29,10 +29,10 @@ const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value
     @apply transition-all duration-500 ease-in-out
   }
   .drop_down-enter-from,.drop_down-leave-to{
-    @apply opacity-0 invisible top-[100px]
+    @apply opacity-0 invisible top-[85px]
   }
   .drop_down-enter-to,.drop_down-leave-from{
-    @apply opacity-100 visible top-[90px]
+    @apply opacity-100 visible top-[75px]
   }
 
 

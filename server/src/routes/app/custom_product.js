@@ -8,31 +8,20 @@ const mw=require('../../middleware/profile')
 router.use(mw)
 
 
-router.get('/sizes',async (req,res)=>{
-    const result=await database('product_size').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
+router.get('/options',async (req,res)=>{
+    const sizes=await database('product_size').select('*');
+    const sauces=await database('product_sauces').select('*');
+    const cheese=await database('product_cheese').select('*');
+    const toppings=await database('product_toppings').select('*');
+    const templates=await database('product_templates').select('*');
+    res.status(200).send(responseHandler(false,null,{
+        sizes:addImageBase(sizes,'image'),
+        sauces:addImageBase(sauces,'image'),
+        cheese:addImageBase(cheese,'image'),
+        toppings:addImageBase(toppings,'image'),
+        templates:addImageBase(templates,'image'),
+    }))
 
-
-
-router.get('/sauces',async (req,res)=>{
-    const result=await database('product_sauces').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
-
-router.get('/cheese',async (req,res)=>{
-    const result=await database('product_cheese').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
-
-router.get('/toppings',async (req,res)=>{
-    const result=await database('product_toppings').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
-})
-
-router.get('/templates',async (req,res)=>{
-    const result=await database('product_templates').select('*');
-    res.status(200).send(responseHandler(false,null,addImageBase(result,'image')))
 })
 
 module.exports=router

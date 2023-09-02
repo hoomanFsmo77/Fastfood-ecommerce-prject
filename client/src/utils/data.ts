@@ -80,7 +80,7 @@ export const navbar:Navbar[]=[
                 hasSub:false,
                 link:{name:'PRODUCT_LIST'}
             },{
-                title:'Build you product',
+                title:'Build your product',
                 hasSub:false,
                 link:{name:'PRODUCT_BUILD'}
             },

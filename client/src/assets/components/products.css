@@ -37,4 +37,11 @@
     .rate-hover.active{
         @apply [&_*]:!text-secondary-light-2
     }
+
+    #not-login{
+        @apply py-5 flex justify-center items-center
+    }
+    #build-product{
+        @apply bg-[url("/contact-bg.jpg")] bg-no-repeat py-5 bg-cover
+    }
 }
