@@ -49,11 +49,12 @@ router.put('/register-coupon',query(['code','orderID']).notEmpty(),async (req,re
         const targetOrder=await database('orders').where(queryCondition).select('total_amount');
         if(targetCoupon.length>0 ){
             if(targetOrder.length>0){
+                const differentPrice=(Number(targetOrder[0].total_amount)*targetCoupon[0].percent)/100;
                 database('orders').
                 where(queryCondition).
                 update({
                     couponID:targetCoupon[0].id,
-                    payment_amount:(Number(targetOrder[0].total_amount)*targetCoupon[0].percent)/100
+                    payment_amount:Number(targetOrder[0].total_amount)-Number(differentPrice)
                 }).
                 then(response=>{
                     if(response===0){

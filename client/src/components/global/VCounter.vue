@@ -1,31 +1,36 @@
 <script setup lang="ts">
-const props=defineProps<{
-  counter:number
+const {counter=1,disable=false}=defineProps<{
+  counter:number,
+  disable?:boolean
 }>()
 
 const emit=defineEmits<{
   (e:'fire',val:number):void
+  (e:'increase',val:number):void
+  (e:'decrease',val:number):void
 }>()
-const counter=ref<number>(props?.counter || 1)
+const counterRef=ref<number>(counter || 1)
 const plus = () => {
-  counter.value++
-  emit('fire',counter.value)
+  counterRef.value++
+  emit('fire',counterRef.value)
+  emit('increase',counterRef.value)
 }
 
 const minus = () => {
-  if(counter.value>1){
-    counter.value--
-    emit('fire',counter.value)
+  if(counterRef.value>1){
+    counterRef.value--
+    emit('fire',counterRef.value)
+    emit('decrease',counterRef.value)
   }
 }
 
 const inputHandler = (value:any) => {
   if(typeof value==='string'){
-    counter.value=1
+    counterRef.value=1
   }else{
-    counter.value=value
+    counterRef.value=value
   }
-  emit('fire',counter.value)
+  emit('fire',counterRef.value)
 }
 
 </script>
@@ -35,7 +40,7 @@ const inputHandler = (value:any) => {
     <button @click="minus" class="w-2  bg-secondary-light-1 flex justify-center items-center transition-all hover:bg-primary-dark-2 group h-full">
       <Icon class="group-hover:text-[#fff] transition-all" name="ri:subtract-fill"/>
     </button>
-    <input :value="counter" @change="inputHandler($event.target.value)"  type="text" class="input number-input !w-3 !h-2.5 !px-0.5 text-center">
+    <input :disabled="disable" :value="counterRef" @change="inputHandler($event.target.value)"  type="text" class="input number-input !w-3 !h-2.5 !px-0.5 text-center">
     <button @click="plus" class="w-2  bg-secondary-light-1 flex justify-center items-center transition-all hover:bg-primary-dark-2 group h-full">
       <Icon class="group-hover:text-[#fff] transition-all" name="ri:add-fill"/>
     </button>

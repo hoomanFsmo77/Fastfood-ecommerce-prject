@@ -6,8 +6,8 @@
           <nuxt-img  src="/logo-small.webp" class="block h-full"/>
         </NuxtLink>
       </v-column>
-      <v-column col="7">
-        <ul class="navbar-items-container " >
+      <v-column col="7" >
+        <ul class="navbar-items-container ml-auto" >
           <NavbarItem
               v-for="item in navbar"
               :title="item.title"

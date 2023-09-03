@@ -159,10 +159,10 @@ const {customProductData,customPieceHandler,quantityHandler,customProductAddToCa
          <v-column col="12" class="!block">
            <div class="flex justify-between items-center mb-0.7">
              <p class="font-600 ">
-               {{customProductData.quantity}}x Build your own Product
+                Build your own Product
              </p>
              <p class=" text-1">
-               ${{($filterCustomProduct(data.templates,customProductData.templateID).price*customProductData.quantity).toFixed(2)}}
+               ${{$filterCustomProduct(data.templates,customProductData.templateID).price.toFixed(2)}}
              </p>
            </div>
            <div class="flex justify-between items-center mb-0.7">
@@ -195,6 +195,14 @@ const {customProductData,customPieceHandler,quantityHandler,customProductAddToCa
              </p>
              <p class=" text-1">
                ${{$filterCustomProduct(data.toppings,customProductData.toppingID).price.toFixed(2)}}
+             </p>
+           </div>
+           <div  class="flex justify-between items-center mb-0.7">
+             <p class="font-600 ">
+               Quantity
+             </p>
+             <p class=" text-1">
+               x{{customProductData.quantity}}
              </p>
            </div>
 

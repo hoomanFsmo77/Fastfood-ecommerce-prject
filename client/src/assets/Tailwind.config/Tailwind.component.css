@@ -13,6 +13,8 @@
 @import "../components/menu.css";
 @import "../components/contact.css";
 @import "../components/tooltip.css";
+@import "../components/cart.css";
+@import "../components/table.css";
 @tailwind components;
 
 @layer components {

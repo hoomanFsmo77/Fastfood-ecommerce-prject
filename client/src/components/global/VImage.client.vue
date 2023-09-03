@@ -2,7 +2,8 @@
 defineProps<{
   src:string,
   loaderClass?:string,
-  imageClass?:string
+  imageClass?:string,
+  width?:string|number
 }>();
 const flag=shallowRef<boolean>(false)
 const loadImage = () => {
@@ -16,6 +17,7 @@ const loadMetaData = () => {
 <template>
   <div class="flex justify-center h-full w-full">
     <nuxt-img  :alt="src"
+               :width="width"
                @load="loadImage"
                @loadedmetadata="loadMetaData"
                class="transition-all w-full"

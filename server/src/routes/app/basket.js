@@ -109,7 +109,7 @@ router.post('/',async (req,res)=>{
         //// total price
         const totalPrice=calculateTotalPrice(topping[0]?.price || 0, cheese[0]?.price || 0,sauces[0]?.price || 0, size[0].price, template[0].price)
 
-        const subtotal=calculateTotalPrice(topping[0]?.price || 0, cheese[0]?.price || 0,sauces[0]?.price || 0, size[0].price, template[0].price*Number(quantity))
+        const subtotal=Number(totalPrice)*Number(quantity)
 
         //// description
         const description=getCustomProductDescription(topping,cheese,sauces,size,template,additional_info,custom_pieces)
@@ -161,15 +161,21 @@ router.put('/',async (req,res)=>{
     const basketItem=await database('basket').where({id:id}).select('quantity','price','orderID');
     const targetOrder=await database('orders').where({userID:userID,'orders.id':basketItem[0].orderID}).join('coupons','orders.couponID','=','coupons.id').select('coupons.percent as coupons_percent','orders.*')
     const coupon_percent=targetOrder[0].coupons_percent;
+
     const newBasketItems=await database('basket').select('subtotal').where({orderID:basketItem[0].orderID})
+
     if(status==='increase' || status==='decrease'){
         const previousQuantity= Number(basketItem[0].quantity);
         if(previousQuantity===1 && status==='decrease'){
-            const deleteBasketItem=await database('basket').where({id:id,userID:userID}).del()
+            const deleteBasketItem=await database('basket').where({id:id,userID:userID}).del();
+
+            const newTotalPrice=Number(calculateSum(newBasketItems,'subtotal'));
+            const differentPrice=Number((newTotalPrice*coupon_percent)/100);
+
             const updateOrder=await database('orders').
             where({id:basketItem[0].orderID}).update({
-                total_amount:calculateSum(newBasketItems,'subtotal'),
-                payment_amount:(calculateSum(newBasketItems,'subtotal')*coupon_percent)/100
+                total_amount:newTotalPrice,
+                payment_amount:coupon_percent===0 ?newTotalPrice :newTotalPrice-differentPrice
             })
             res.status(200).send(responseHandler(false,'basket item removed',null))
         }else{
@@ -178,21 +184,31 @@ router.put('/',async (req,res)=>{
                 subtotal: status==='increase' ? (previousQuantity+1)*Number(basketItem[0].price) :  (previousQuantity-1)*Number(basketItem[0].price)
             });
 
+            const newBasketItemUpdated=await database('basket').select('subtotal').where({orderID:basketItem[0].orderID});
+            const newTotalPrice=Number(calculateSum(newBasketItemUpdated,'subtotal'));
+
+            const differentPrice=Number((newTotalPrice*coupon_percent)/100);
+
             const updateOrder=await database('orders').
             where({id:basketItem[0].orderID}).update({
-                total_amount:calculateSum(newBasketItems,'subtotal'),
-                payment_amount:(calculateSum(newBasketItems,'subtotal')*coupon_percent)/100
+                total_amount:newTotalPrice,
+                payment_amount:coupon_percent===0 ? newTotalPrice:newTotalPrice-differentPrice
             })
             res.status(200).send(responseHandler(false,'order item updated',null))
         }
     }else if(status==='delete'){
+
         const deleteBasket=await database('basket').where({id:id,userID:userID}).del()
-        const newBasketItems=await database('basket').select('subtotal').where({orderID:basketItem[0].orderID})
-        const updateOrder=await database('orders').
-        where({id:basketItem[0].orderID}).update({
-            total_amount:calculateSum(newBasketItems,'subtotal'),
-            payment_amount:(calculateSum(newBasketItems,'subtotal')*coupon_percent)/100
-        })
+        const newBasketItems=await database('basket').select('subtotal').where({orderID:basketItem[0].orderID});
+        if(newBasketItems.length===0){
+            await database('orders').where({id:basketItem[0].orderID}).del()
+        }else{
+            await database('orders').
+            where({id:basketItem[0].orderID}).update({
+                total_amount:calculateSum(newBasketItems,'subtotal'),
+                payment_amount:(calculateSum(newBasketItems,'subtotal')*coupon_percent)/100
+            })
+        }
 
         res.status(200).send(responseHandler(false,'basket item removed',null))
     }else{

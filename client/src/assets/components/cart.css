@@ -1,0 +1,7 @@
+@tailwind components;
+@layer components {
+    #cart-section{
+        @apply bg-[url("/contact-bg.jpg")] bg-no-repeat py-5 bg-cover
+    }
+
+}

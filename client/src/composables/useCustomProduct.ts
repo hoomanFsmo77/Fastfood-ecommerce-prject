@@ -32,7 +32,7 @@ export const useCustomProduct=(data:Ref)=>{
             const sauces=filterCustomProduct(data.value.sauces,customProductData.saucesID);
             const cheese=filterCustomProduct(data.value.cheese,customProductData.cheeseID);
             const toppings=filterCustomProduct(data.value.toppings,customProductData.toppingID);
-            customProductData.subtotal=(templates.price*customProductData.quantity)+sizes.price+(sauces?.price || 0)+(cheese?.price || 0)+(toppings?.price || 0)
+            customProductData.subtotal=(templates.price+sizes.price+(sauces?.price || 0)+(cheese?.price || 0)+(toppings?.price || 0))*customProductData.quantity
         }
 
     })
