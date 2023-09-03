@@ -1,5 +1,6 @@
 import {User_Information} from "~/utils/types";
 import {Favorite} from "~/store/Favorite";
+import {Cart} from "~/store/Cart";
 import {storeToRefs} from "pinia";
 
 export const useStates=()=>{
@@ -29,5 +30,17 @@ export const useFavoriteStore=()=>{
 
     return{
         favoriteStore,isProductExistInFAV,userFavoriteListFetchFlag
+    }
+}
+
+
+export const useCartStore=()=>{
+    const cartStore=Cart()
+    const {getCartListLength,cartListFetchFlag, cartListData, getOrderID}=storeToRefs(cartStore)
+
+
+
+    return{
+        cartStore,getCartListLength,cartListFetchFlag,cartListData,getOrderID
     }
 }

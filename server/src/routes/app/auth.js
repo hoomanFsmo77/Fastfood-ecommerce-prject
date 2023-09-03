@@ -17,8 +17,7 @@ router.post('/login',async (req,res)=>{
     const identity=req.body.identity.trim();
     const password=req.body.password.trim();
     if(identity && password){
-        const getUser=await database('users').where({email:identity}).orWhere({phone:identity}).orWhere({username:identity})
-
+        const getUser=await database('users').where({email:identity}).orWhere({phone:identity}).orWhere({username:identity});
         if(getUser.length>0){
             await bcrypt.compare(password, getUser[0].password, function(err, result) {
                 if(result){

@@ -10,7 +10,9 @@ const props=defineProps<{
   price:number,
   quantity:number,
   subtotal:number,
-  link:string|null
+  link:string|null,
+  off:boolean | null
+  off_percent:number|null
 }>()
 
 const {removeBasketItem,increaseQuantity,decreaseQuantity}=useCart(props)
@@ -39,9 +41,27 @@ const {removeBasketItem,increaseQuantity,decreaseQuantity}=useCart(props)
       <div v-html="description"></div>
     </td>
     <td>
-      <p class="font-400">
-        ${{price.toFixed(2)}}
-      </p>
+
+      <template v-if="type==='ready'">
+        <div class="" v-if="off">
+          <p class="font-400 text-secondary-light-2 text-1.1">
+            ${{$calculate_off_price(price,off_percent).toFixed(2)}}
+          </p>
+          <p class="font-400 line-through">
+            ${{price.toFixed(2)}}
+          </p>
+        </div>
+        <p class="font-400" v-else>
+          ${{price.toFixed(2)}}
+        </p>
+      </template>
+      <template v-else>
+        <p  class="font-400">
+          ${{price.toFixed(2)}}
+        </p>
+      </template>
+
+
     </td>
     <td>
       <VCounter :disable="true" @increase="increaseQuantity" @decrease="decreaseQuantity" :counter="quantity"/>

@@ -11,7 +11,8 @@ interface Props {
     link:string|null
 }
 
-export const useCart=(props?:Props,orderID?:number)=>{
+export const useCart=(props?:Props)=>{
+    const {cartStore,getOrderID}=useCartStore()
     const {$toast}=useNuxtApp();
     const couponData=reactive({
         code:'' as string,
@@ -45,7 +46,7 @@ export const useCart=(props?:Props,orderID?:number)=>{
                 icon: 'error',
             })
         }finally {
-            await refreshNuxtData('cart_list')
+          await cartStore.fetchUserCartData()
         }
     }
 
@@ -69,7 +70,7 @@ export const useCart=(props?:Props,orderID?:number)=>{
                 icon: 'error',
             })
         }finally {
-            await refreshNuxtData('cart_list')
+            await cartStore.fetchUserCartData()
         }
     }
 
@@ -92,7 +93,7 @@ export const useCart=(props?:Props,orderID?:number)=>{
                 icon: 'error',
             })
         }finally {
-            await refreshNuxtData('cart_list')
+            await cartStore.fetchUserCartData()
         }
     }
 
@@ -103,7 +104,7 @@ export const useCart=(props?:Props,orderID?:number)=>{
               const req=await $fetch('/api/profile/order/coupon',{
                   query:{
                       code:couponData.code,
-                      orderID:orderID
+                      orderID:getOrderID.value
                   }
               })
                 if(req.code===200){
@@ -119,7 +120,7 @@ export const useCart=(props?:Props,orderID?:number)=>{
                 couponData.message='error in connecting to server!'
             }finally {
                 couponData.btnFlag=false
-                await  refreshNuxtData('cart_list')
+                await cartStore.fetchUserCartData()
             }
 
       }

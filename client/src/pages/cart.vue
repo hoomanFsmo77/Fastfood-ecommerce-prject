@@ -2,14 +2,14 @@
 
   <client-only>
     <section id="cart-section" v-if="isLogin">
-        <v-container v-if="data.items && data.items.length>0">
+        <v-container v-if="cartListData.items.length>0">
           <v-row>
             <v-column col="12" class="!block">
               <h1 class="font-600 text-primary-dark-3">Cart</h1>
 
-              <VTable :flag="pending" :head="['','product','price','quantity','subtotal']">
+              <VTable :flag="!cartListFetchFlag" :head="['','product','price','quantity','subtotal']">
                 <CartRow
-                  v-for="row in data.items"
+                  v-for="row in cartListData.items"
                   :image="row?.primary_image || null"
                   :type="row.type"
                   :cart-id="row.id"
@@ -19,6 +19,8 @@
                   :subtotal="row.subtotal"
                   :title="row.title"
                   :link="row?.link || null"
+                  :off="row?.off || null"
+                  :off_percent="row?.off_percent || null"
                 />
               </VTable>
 
@@ -53,19 +55,19 @@
               <div class="py-1 flex justify-between border-y-2 border-[rgba(0,0,0,0.1)]">
                 <p class="font-600 text-1">Subtotal</p>
                 <p class="font-400 text-1">
-                  ${{Number(data.order.total_amount).toFixed(2)}}
+                  ${{Number(cartListData.order.total_amount).toFixed(2)}}
                 </p>
               </div>
-              <div v-if="data.order.coupons_code" class="py-1 flex justify-between border-b-2 border-[rgba(0,0,0,0.1)]">
+              <div v-if="cartListData.order.coupons_code" class="py-1 flex justify-between border-b-2 border-[rgba(0,0,0,0.1)]">
                 <p class="font-600 text-1">Coupon</p>
                 <p class="font-400 text-1">
-                  -{{data.order.coupons_percent}}%
+                  -{{cartListData.order.coupons_percent}}%
                 </p>
               </div>
               <div class="py-1 flex justify-between border-b-2 border-[rgba(0,0,0,0.1)]">
                 <p class="font-600 text-1">Total</p>
                 <p class="font-400 text-1">
-                  ${{Number(data.order.payment_amount).toFixed(2)}}
+                  ${{Number(cartListData.order.payment_amount).toFixed(2)}}
                 </p>
               </div>
 
@@ -79,7 +81,6 @@
               </NuxtLink>
             </v-column>
           </v-row>
-
 
         </v-container>
       <v-container v-else>
@@ -99,6 +100,8 @@
 </template>
 
 <script lang="ts" setup>
+import {ca} from "@formkit/i18n";
+
 definePageMeta({
   name:'SHOPPING_CART',
   path:'/shopping-cart',
@@ -116,14 +119,12 @@ definePageMeta({
     }
   ]
 });
-
-
-const {isLogin}=useStates()
-const {data,pending}=await useFetch('/api/profile/basket',{
-  key:'cart_list'
+const {isLogin}=useStates();
+const {cartListFetchFlag,cartListData,cartStore}=useCartStore();
+const {submitCoupon,couponData}=useCart(undefined);
+onMounted(async ()=>{
+  await cartStore.fetchUserCartData()
 })
-
-const {submitCoupon,couponData}=useCart(undefined,data.value?.order?.id as number)
 </script>
 
 <style scoped>
