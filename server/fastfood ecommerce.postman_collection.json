@@ -51,6 +51,18 @@
 										"products",
 										":link"
 									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
 									"variable": [
 										{
 											"key": "link",
@@ -67,7 +79,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api_base}}/menu?page=3&per=8",
+									"raw": "{{api_base}}/menu?sortBy=3&page=1&per=6&category=Beverages",
 									"host": [
 										"{{api_base}}"
 									],
@@ -82,17 +94,16 @@
 										},
 										{
 											"key": "sortBy",
-											"value": "1",
-											"description": "1 => most expensive  2 => less expensive  3 => best sellers  4 => with off",
-											"disabled": true
+											"value": "3",
+											"description": "1 => most expensive  2 => less expensive  3 => best sellers  4 => with off"
 										},
 										{
 											"key": "page",
-											"value": "3"
+											"value": "1"
 										},
 										{
 											"key": "per",
-											"value": "8",
+											"value": "6",
 											"description": "default : 6"
 										},
 										{
@@ -102,8 +113,7 @@
 										},
 										{
 											"key": "category",
-											"value": "pizza",
-											"disabled": true
+											"value": "Beverages"
 										}
 									]
 								}
@@ -162,6 +172,41 @@
 											"key": "",
 											"value": "",
 											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comments by product id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/products/comments/:productID?page=2&per=3",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"products",
+										"comments",
+										":productID"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "per",
+											"value": "3"
+										}
+									],
+									"variable": [
+										{
+											"key": "productID",
+											"value": "10"
 										}
 									]
 								}
@@ -508,7 +553,7 @@
 										},
 										{
 											"key": "categoryID",
-											"value": "0",
+											"value": "1",
 											"description": "optional",
 											"disabled": true
 										},
@@ -523,6 +568,41 @@
 											"value": "4",
 											"description": "optional",
 											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comments by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base}}/blog/comments/:blogID?page=1&per=3",
+									"host": [
+										"{{api_base}}"
+									],
+									"path": [
+										"blog",
+										"comments",
+										":blogID"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per",
+											"value": "3"
+										}
+									],
+									"variable": [
+										{
+											"key": "blogID",
+											"value": "7"
 										}
 									]
 								}
@@ -941,7 +1021,7 @@
 							"name": "basket",
 							"item": [
 								{
-									"name": "add basket",
+									"name": "add ready product to basket",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -956,39 +1036,21 @@
 											"urlencoded": [
 												{
 													"key": "productID",
-													"value": "12",
+													"value": "13",
 													"type": "text"
 												},
 												{
 													"key": "quantity",
 													"value": "3",
 													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "ready",
+													"type": "text"
 												}
 											]
 										},
-										"url": {
-											"raw": "{{api_base}}/basket",
-											"host": [
-												"{{api_base}}"
-											],
-											"path": [
-												"basket"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "increase or decrease",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "token",
-												"value": "{{token}}",
-												"type": "text"
-											}
-										],
 										"url": {
 											"raw": "{{api_base}}/basket?status=decrease&id=103",
 											"host": [
@@ -1000,12 +1062,45 @@
 											"query": [
 												{
 													"key": "status",
-													"value": "decrease",
-													"description": "increase|decrease|delete"
+													"value": "decrease"
 												},
 												{
 													"key": "id",
 													"value": "103"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "increase or decrease or delete",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/basket?status=increase&id=120",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "increase",
+													"description": "increase|decrease|delete"
+												},
+												{
+													"key": "id",
+													"value": "120"
 												}
 											]
 										}
@@ -1046,6 +1141,79 @@
 												"type": "text"
 											}
 										],
+										"url": {
+											"raw": "{{api_base}}/basket",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"basket"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "add custom product to basket",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "toppingID",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "cheeseID",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "saucesID",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "sizeID",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "templateID",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "additional_info",
+													"value": "additional",
+													"type": "text"
+												},
+												{
+													"key": "custom_pieces",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "custom",
+													"type": "text"
+												}
+											]
+										},
 										"url": {
 											"raw": "{{api_base}}/basket",
 											"host": [
@@ -1110,7 +1278,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{api_base}}/orders?orderID=43",
+											"raw": "{{api_base}}/orders?orderID=48",
 											"host": [
 												"{{api_base}}"
 											],
@@ -1120,7 +1288,7 @@
 											"query": [
 												{
 													"key": "orderID",
-													"value": "43"
+													"value": "48"
 												}
 											]
 										}
@@ -1139,7 +1307,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{api_base}}/orders/register-coupon?code=g678d@&orderID=46",
+											"raw": "{{api_base}}/orders/register-coupon?code=frfrfr@&orderID=46",
 											"host": [
 												"{{api_base}}"
 											],
@@ -1150,7 +1318,7 @@
 											"query": [
 												{
 													"key": "code",
-													"value": "g678d@"
+													"value": "frfrfr@"
 												},
 												{
 													"key": "orderID",
@@ -1514,6 +1682,35 @@
 							]
 						},
 						{
+							"name": "custom product",
+							"item": [
+								{
+									"name": "options",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{api_base}}/custom-product/options",
+											"host": [
+												"{{api_base}}"
+											],
+											"path": [
+												"custom-product",
+												"options"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "submit payment",
 							"request": {
 								"method": "POST",
@@ -1659,7 +1856,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api_base}}/search/:cat/:search",
+									"raw": "{{api_base}}/search/:cat/:search?page=1&per=3",
 									"host": [
 										"{{api_base}}"
 									],
@@ -1676,13 +1873,11 @@
 										},
 										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "1"
 										},
 										{
 											"key": "per",
-											"value": "3",
-											"disabled": true
+											"value": "3"
 										}
 									],
 									"variable": [
@@ -1693,7 +1888,7 @@
 										},
 										{
 											"key": "search",
-											"value": "piz"
+											"value": "5"
 										}
 									]
 								}
@@ -3625,6 +3820,250 @@
 											"key": "id",
 											"value": ""
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "custom product",
+					"item": [
+						{
+							"name": "get options",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/options",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"options"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add size",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/10-slices.png"
+										},
+										{
+											"key": "size",
+											"value": "large size",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "20",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/sizes",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"sizes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add sauces",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/salsa-sauce-150x150.png"
+										},
+										{
+											"key": "sauces",
+											"value": "Salsa sauces",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/sauces",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"sauces"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add toppings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/tomatoes-150x150.png"
+										},
+										{
+											"key": "toppings",
+											"value": "tomatoes",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/toppings",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"toppings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add cheese",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/cheese-150x150.png"
+										},
+										{
+											"key": "cheese",
+											"value": "cheese",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/cheese",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"cheese"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add toppings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/hooman/Desktop/pizza-5.jpg"
+										},
+										{
+											"key": "price",
+											"value": "15",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{panel_api_base}}/custom-product/templates",
+									"host": [
+										"{{panel_api_base}}"
+									],
+									"path": [
+										"custom-product",
+										"templates"
 									]
 								}
 							},
