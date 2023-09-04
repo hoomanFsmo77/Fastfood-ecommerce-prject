@@ -219,6 +219,10 @@ module.exports = {
         'body':{
           overflowX:'hidden'
         },
+        'body *::selection':{
+          backgroundColor:'#a41a13',
+          color:'#f3f3f3'
+        },
         'h1,h2,h3,h4,h5,h6':{
           lineHeight:'1.5',
           fontWeight:'500',

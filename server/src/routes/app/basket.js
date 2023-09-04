@@ -56,7 +56,7 @@ router.post('/',async (req,res)=>{
         /// type ready
         const product=await database('product').where({id:body.productID}).select('price','off','off_percent');
         const productPrice=Number(product[0].price)
-        const subtotal=product[0].off===1 ? Math.floor(((productPrice*product[0].off_percent)/100))*Number(body.quantity) : productPrice*Number(body.quantity);
+        const subtotal=product[0].off===1 ? Math.floor(productPrice-Number(((productPrice*product[0].off_percent)/100)))*Number(body.quantity) : productPrice*Number(body.quantity);
         if(userBasket.length===0 || userActiveOrders.length===0){
             const createOrder=await database('orders').insert({userID:userID,created_at:today,total_amount:subtotal,payment_amount:subtotal});
             const orderID=createOrder[0];
@@ -78,7 +78,10 @@ router.post('/',async (req,res)=>{
                 res.status(200).send(responseHandler(true,'product already exist',null))
             }else{
                 const couponPercent=userActiveOrders[0].coupons_percent===0 ? 100 : userActiveOrders[0].coupons_percent;
-                const addNewTotalAmountToOrder=await database('orders').where({id:orderID}).update({total_amount:previousTotalAmount+subtotal,payment_amount:userActiveOrders[0].payment_amount+((subtotal*couponPercent)/100)});
+                const addNewTotalAmountToOrder=await database('orders').where({id:orderID}).update({
+                    total_amount:previousTotalAmount+subtotal,
+                    payment_amount:userActiveOrders[0].payment_amount+((subtotal*couponPercent)/100)
+                });
                 const addToBasket=await database('basket').
                 insert({
                     userID:userID,

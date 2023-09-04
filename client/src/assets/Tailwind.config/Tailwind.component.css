@@ -21,6 +21,9 @@
     .text{
         @apply text-1 text-[#848484] font-400 leading-1.8
     }
+    .txt-2{
+        @apply text-0.9 text-primary-dark-3 font-400 leading-1.6 my-1
+    }
     .horizontal-line{
         @apply w-[1px] h-full bg-gray-200/40
     }
@@ -44,6 +47,9 @@
     }
     .underline-active-left{
         @apply before:absolute relative before:left-0 before:bottom-0 before:w-5 before:h-[4px] before:bg-secondary-light-3
+    }
+    .underline-active-top{
+        @apply before:absolute relative before:left-0 before:top-0 before:w-5 before:h-[1px] before:bg-primary-light-1
     }
     .text-hidden{
         @apply overflow-hidden text-ellipsis whitespace-nowrap;
