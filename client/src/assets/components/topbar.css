@@ -5,7 +5,7 @@
     }
 
     .topbar-icon{
-        @apply text-primary-light-3 mr-1.3 text-1 transition-all hover:text-white cursor-pointer
+        @apply text-primary-light-3 mr-1.3 text-1 transition-all hover:text-white cursor-pointer relative
     }
     .basket-icon-wrapper{
         @apply relative text-primary-light-3

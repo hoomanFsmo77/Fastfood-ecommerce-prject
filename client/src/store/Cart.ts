@@ -4,7 +4,7 @@ import {defineStore} from "pinia";
 export const Cart=defineStore('Cart',{
     state:()=>{
         return{
-            cartListData:{} as {items:any[],order:object},
+            cartListData:{items:[],order:{}} as {items:any[],order:object},
             cartListFetchFlag:true as boolean
         }
     },
@@ -18,7 +18,8 @@ export const Cart=defineStore('Cart',{
         },
         getOrderID(state){
             return state.cartListData.order?.id
-        }
+        },
+
 
     },
     actions:{

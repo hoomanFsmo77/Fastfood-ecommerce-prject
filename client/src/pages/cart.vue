@@ -2,7 +2,7 @@
 
   <client-only>
     <section id="cart-section" v-if="isLogin">
-        <v-container v-if="cartListData.items.length>0">
+        <v-container v-if="cartListData.items && cartListData.items.length>0">
           <v-row>
             <v-column col="12" class="!block">
               <h1 class="font-600 text-primary-dark-3">Cart</h1>
@@ -28,15 +28,20 @@
             </v-column>
           </v-row>
           <v-row class="mt-1">
-            <v-column col="8" class="!block">
+            <v-column col="12" class="!block">
               <v-row>
-                <v-column col="4" class="!block">
+                <v-column col="3" class="!block">
                   <VInput v-model="couponData.code" input-class="input-sm placeholder:!text-[#333] !text-[#333]" id="coupon-code" type="text" placeholder="Coupon Code"/>
 
                 </v-column>
                 <v-column col="4" class="!block">
                   <VBtnLoader :flag="couponData.btnFlag" @click="submitCoupon" class="btn btn-secondary btn-sm ml-1">
                     apply coupon
+                  </VBtnLoader>
+                </v-column>
+                <v-column col="4" class="justify-end ml-auto">
+                  <VBtnLoader :flag="clearCartBtnFlag" @click="clearCart" class="btn btn-secondary btn-sm ml-1">
+                    clear cart
                   </VBtnLoader>
                 </v-column>
               </v-row>
@@ -100,7 +105,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ca} from "@formkit/i18n";
+
 
 definePageMeta({
   name:'SHOPPING_CART',
@@ -121,7 +126,7 @@ definePageMeta({
 });
 const {isLogin}=useStates();
 const {cartListFetchFlag,cartListData,cartStore}=useCartStore();
-const {submitCoupon,couponData}=useCart(undefined);
+const {submitCoupon,couponData,clearCart,clearCartBtnFlag}=useCart(undefined);
 onMounted(async ()=>{
   await cartStore.fetchUserCartData()
 })

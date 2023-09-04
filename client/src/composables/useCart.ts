@@ -25,10 +25,11 @@ export const useCart=(props?:Props)=>{
             this.errorFlag=false
         }
     })
+    const clearCartBtnFlag=ref<boolean>(false)
 
 
-    const removeBasketItem =async () => {
-      const basketID=props ? props.cartId : null
+    const removeBasketItem =async (id?:number) => {
+      const basketID=props ? props.cartId : id
         try {
           const req=await $fetch('/api/profile/basket/update',{
               query:{
@@ -127,7 +128,27 @@ export const useCart=(props?:Props)=>{
 
     }
 
+
+    const clearCart = async () => {
+        clearCartBtnFlag.value=true
+        try {
+            await $fetch('/api/profile/basket/clear')
+            $toast('success').fire({
+                text: 'basket cleared!',
+                icon: 'success',
+            })
+        }catch (err) {
+            $toast('error').fire({
+                text: 'error in connecting to server!',
+                icon: 'error',
+            })
+        }finally {
+            clearCartBtnFlag.value=false
+            await cartStore.fetchUserCartData()
+        }
+    }
+
     return{
-        removeBasketItem,increaseQuantity,decreaseQuantity,submitCoupon,couponData
+        removeBasketItem,increaseQuantity,decreaseQuantity,submitCoupon,couponData,clearCart,clearCartBtnFlag
     }
 }
