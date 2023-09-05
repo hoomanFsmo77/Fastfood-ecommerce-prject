@@ -6,8 +6,20 @@
 definePageMeta({
   name:'PROFILE_ADDRESS',
   path:'/profile/address',
-  layout:'pages',
-  middleware:'auth'
+  layout:'profile',
+  middleware:'auth',
+  page_title:'Addresses',
+  breadcrumb:[
+    {
+      name:'Home',
+      link:{name:'HOME'},
+      on:false
+    },{
+      name:'Addresses',
+      link:{name:'PROFILE_ADDRESS'},
+      on:true
+    }
+  ]
 });
 </script>
 

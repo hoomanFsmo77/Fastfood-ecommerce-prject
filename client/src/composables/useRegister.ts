@@ -44,9 +44,11 @@ export const useRegister=()=>{
             }else{
                 signInData.errors=req.errors
             }
-            signInData.loaderButtonFlag=false
+
         }catch (err){
             console.log(err)
+        }finally {
+            signInData.loaderButtonFlag=false
         }
     }
 

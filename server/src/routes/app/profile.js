@@ -5,6 +5,7 @@ const {body ,validationResult,matchedData, param,query} = require('express-valid
 const {responseHandler,addImageBase,changeToBoolean,calculateSum,today,pagination} = require("../../utils");
 const bodyParser = require("body-parser");
 const mw=require('../../middleware/profile')
+const upload = require("../../database/upload");
 router.use(bodyParser.urlencoded({extended:true}));
 
 
@@ -24,20 +25,25 @@ router.get('/info',(req,res)=>{
     })
 })
 
-router.post('/info',body(['firstname','lastname','username','phone']).notEmpty(),body('email').isEmail(),(req,res)=>{
+const requiredBodyValidation=()=>body(['username','firstname','lastname','phone']).notEmpty();
+const emailValidation=()=>body(['email']).isEmail();
+
+
+router.post('/info',upload.single('profile_image'),requiredBodyValidation(),emailValidation(),async (req,res)=>{
     const token=req.headers.token
     const result = validationResult(req);
     if(result.isEmpty()) {
         const body = matchedData(req);
-        database('users').
-        update(body).
-        where({token}).
-        then(response=>{
+        if(req?.file?.filename ){
+            await database('users').update({
+                ...body,
+                profile_image:req.file.filename
+            }).where({token});
             res.status(200).send(responseHandler(false,'user data updated',null))
-        }).catch(err=>{
-            res.status(200).send(responseHandler(true,'error in db',null))
-        })
-
+        }else{
+            await database('users').update(body).where({token});
+            res.status(200).send(responseHandler(false,'user data updated',null))
+        }
     }else{
         res.status(200).send(responseHandler(true,result.array(),null))
     }

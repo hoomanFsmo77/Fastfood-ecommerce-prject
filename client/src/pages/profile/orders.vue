@@ -6,8 +6,20 @@
 definePageMeta({
   name:'PROFILE_ORDERS',
   path:'/profile/orders',
-  layout:'pages',
-  middleware:'auth'
+  layout:'profile',
+  middleware:'auth',
+  page_title:'Orders',
+  breadcrumb:[
+    {
+      name:'Home',
+      link:{name:'HOME'},
+      on:false
+    },{
+      name:'Orders',
+      link:{name:'PROFILE_ORDERS'},
+      on:true
+    }
+  ]
 });
 </script>
 

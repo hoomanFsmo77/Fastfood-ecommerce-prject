@@ -12,7 +12,8 @@
 definePageMeta({
   name:'HOME',
   path:'/home',
-  layout:'default'
+  layout:'default',
+  page_title:'Home'
 });
 
 

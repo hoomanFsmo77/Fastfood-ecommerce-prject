@@ -141,3 +141,27 @@ export const sortByOption=[
         name:'Off'
     }
 ]
+
+export const profileSideBarList=[
+    {
+        title:'profile info',
+        link:'PROFILE_INFO'
+    },
+    {
+        title:'addresses',
+        link:'PROFILE_ADDRESS'
+    },
+
+    {
+        title:'orders',
+        link:'PROFILE_ORDERS'
+    },
+    {
+        title:'transactions',
+        link:'PROFILE_TRANSACTIONS'
+    },
+    {
+        title:'favorites',
+        link:'PROFILE_FAVORITE'
+    },
+]

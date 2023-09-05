@@ -15,6 +15,7 @@
 @import "../components/tooltip.css";
 @import "../components/cart.css";
 @import "../components/table.css";
+@import "../components/profile.css";
 @tailwind components;
 
 @layer components {
