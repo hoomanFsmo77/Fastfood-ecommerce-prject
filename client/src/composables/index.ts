@@ -1,0 +1,1 @@
+export {useInfo} from './profile/useInfo'

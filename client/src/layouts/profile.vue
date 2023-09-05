@@ -14,7 +14,7 @@ const {logoutHandler}=useLogout()
   <section id="profile">
     <v-container>
       <div class="grid grid-cols-[1fr_3fr] gap-2">
-        <aside >
+        <aside class="sticky top-[120px] ">
           <ul class="flex flex-col bg-primary-dark-1 rounded-4 overflow-hidden">
             <li v-for="item in profileSideBarList" class="w-full  ">
               <NuxtLink class="text-primary-light-1 transition-all  duration-500 hover:bg-secondary-light-2  border-b-primary-light-3/40 border-[1px] px-1 py-0.7 flex justify-between items-center text-1 capitalize" exact-active-class="!bg-secondary-light-2" :to="{name:item.link}">
