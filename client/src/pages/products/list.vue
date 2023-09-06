@@ -61,15 +61,12 @@ definePageMeta({
 
   ]
 });
-const route=useRoute();
-const pageQuery=ref<number>(1)
+
+const {pageQuery}=usePagination()
 
 
-watchEffect(()=>{
-  pageQuery.value=route.query.page ? Number(route.query.page) :1;
-})
 
-const {data,pending,refresh}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list?per=8`,{query:{page:pageQuery}}
+const {data,pending}=await useFetch<{products:IProduct[],meta:Response_Meta}>(`/api/products/list?per=8`,{query:{page:pageQuery}}
 );
 
 </script>

@@ -56,5 +56,9 @@
         border-top-left-radius: 40px;
         border-bottom-right-radius: 40px;
     }
-
+    .modal-lg{
+        width: 60vw !important;
+        max-height: 500px !important;
+        overflow-y: auto;
+    }
 }

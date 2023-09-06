@@ -252,13 +252,8 @@ const {data:product_data,pending:product_data_flag}=await useFetch<IProduct>(`/a
 
 /////////////////////////
 const {isLogin}=useStates();
-const pageQuery=ref(1)
 const {replySubmit,changeQuantity,minusQuantity,plusQuantity,addToCart,productPageData,addToFav,removeFav}=useProduct(product_data)
-
-watchEffect(()=>{
-  pageQuery.value=route.query.page ? Number(route.query.page) :1;
-})
-
+const {pageQuery}=usePagination()
 //// comments
 const {data:product_comments,pending:product_comments_flag}=await useFetch<IProduct>(`/api/products/comments?productID=${product_data.value && product_data.value.id}&per=3`,{
   query:{

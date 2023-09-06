@@ -12,7 +12,8 @@ const props=defineProps<{
   subtotal:number,
   link:string|null,
   off:boolean | null
-  off_percent:number|null
+  off_percent:number|null,
+  editable:boolean
 }>()
 
 const {removeBasketItem,increaseQuantity,decreaseQuantity}=useCart(props)
@@ -21,7 +22,7 @@ const {removeBasketItem,increaseQuantity,decreaseQuantity}=useCart(props)
 
 <template>
   <tr>
-    <td>
+    <td v-if="editable">
       <button @click="removeBasketItem" class="cursor-pointer">
         <Icon size="1.3rem" name="bi:x" class="text-gray-500 font-600 transition-all hover:text-primary-dark-3" />
       </button>
@@ -63,8 +64,13 @@ const {removeBasketItem,increaseQuantity,decreaseQuantity}=useCart(props)
 
 
     </td>
-    <td>
+    <td v-if="editable">
       <VCounter :disable="true" @increase="increaseQuantity" @decrease="decreaseQuantity" :counter="quantity"/>
+    </td>
+    <td v-else>
+      <p class=" font-400">
+        {{quantity}}
+      </p>
     </td>
     <td>
       <p class="font-400">

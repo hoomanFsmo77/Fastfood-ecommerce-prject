@@ -56,13 +56,7 @@ definePageMeta({
     }
   ]
 });
-const route=useRoute();
-const pageQuery=ref<number>(1)
-
-
-watchEffect(()=>{
-  pageQuery.value=route.query.page ? Number(route.query.page) :1;
-})
+const {pageQuery}=usePagination()
 
 const {data,pending}=await useFetch<{blogs:IBlogs[],meta:Response_Meta}>(`/api/blog/list?per=6`,{query:{page:pageQuery}}
 );

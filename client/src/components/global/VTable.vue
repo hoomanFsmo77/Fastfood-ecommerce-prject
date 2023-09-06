@@ -10,7 +10,7 @@ import { HalfCircleSpinner } from 'epic-spinners';
 <template>
 
   <div class="table-responsive md:!overflow-visible">
-    <table>
+    <table >
       <thead>
       <tr>
         <th :colspan="item.length===0 && 0" v-for="item in head">

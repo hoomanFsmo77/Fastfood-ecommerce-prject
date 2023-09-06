@@ -119,10 +119,7 @@ definePageMeta({
 });
 
 const route=useRoute();
-const pageQuery=ref<number>(1)
-watchEffect(()=>{
-  pageQuery.value=route.query.page ? Number(route.query.page) :1;
-})
+const {pageQuery}=usePagination()
 ///// blog detail
 const {data:blog_data,pending:blog_data_pending}=await useFetch<IBlogs>(`/api/blog/${route.params.link}`)
 

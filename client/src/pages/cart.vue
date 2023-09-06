@@ -5,7 +5,7 @@
         <v-container v-if="cartListData.items && cartListData.items.length>0">
           <v-row>
             <v-column col="12" class="!block">
-              <h1 class="font-600 text-primary-dark-3">Cart</h1>
+              <h1 class="font-600 text-primary-dark-3 mb-1.5">Cart</h1>
 
               <VTable :flag="!cartListFetchFlag" :head="['','product','price','quantity','subtotal']">
                 <CartRow
@@ -21,6 +21,7 @@
                   :link="row?.link || null"
                   :off="row?.off || null"
                   :off_percent="row?.off_percent || null"
+                  :editable="true"
                 />
               </VTable>
 

@@ -5,8 +5,12 @@
       <VPreloader/>
     </div>
   </NuxtLayout>
+
+  <VModal :modal-class="modalOptions.modalClass" :fade-outside="modalOptions.outsideFade" v-model="modalOpenFlag"></VModal>
 </template>
 <script setup lang="ts">
+import {useModal} from "~/composables/useModal";
+
 const route=useRoute();
 useHead({
   titleTemplate(){
@@ -17,5 +21,6 @@ useHead({
     }
 
   }
-})
+});
+const {modalOpenFlag,modalOptions}=useModal()
 </script>
