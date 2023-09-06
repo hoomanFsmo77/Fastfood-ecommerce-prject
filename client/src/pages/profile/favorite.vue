@@ -1,5 +1,20 @@
 <template>
-  favorite
+
+  <div v-if="userFavoriteListFetchFlag" class="grid  grid-cols-[repeat(3,1fr)] gap-2">
+    <VProductCard
+        class="border-[1px]"
+        v-for="item in userFavoriteList"
+        :primary_image="item.primary_image"
+        :title="item.title"
+        :caption="item.caption"
+        :price="item.price"
+        :link="item.link"
+        :status="item.status"
+        :off="item.off"
+        :off_percent="item.off_percent"
+        :product-id="item.id"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +36,8 @@ definePageMeta({
     }
   ]
 });
+
+const {userFavoriteList,userFavoriteListFetchFlag}=useFavoriteStore()
 </script>
 
 <style scoped>

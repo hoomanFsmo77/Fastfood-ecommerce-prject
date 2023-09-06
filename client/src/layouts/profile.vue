@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {profileSideBarList} from "~/utils/data";
-import {useLogout} from "~/composables/useLogout";
+import {useLogout} from "~/composables/auth/useLogout";
 const {logoutHandler}=useLogout()
 
 </script>

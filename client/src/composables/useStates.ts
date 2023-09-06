@@ -25,11 +25,11 @@ export const useStates=()=>{
 
 export const useFavoriteStore=()=>{
     const favoriteStore=Favorite()
-    const {userFavoriteListFetchFlag,isProductExistInFAV}=storeToRefs(favoriteStore)
+    const {userFavoriteListFetchFlag,isProductExistInFAV,userFavoriteList}=storeToRefs(favoriteStore)
 
 
     return{
-        favoriteStore,isProductExistInFAV,userFavoriteListFetchFlag
+        favoriteStore,isProductExistInFAV,userFavoriteListFetchFlag,userFavoriteList
     }
 }
 

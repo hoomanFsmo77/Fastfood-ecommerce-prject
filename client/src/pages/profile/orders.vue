@@ -69,8 +69,6 @@
 
 <script setup lang="ts">
 
-import {useModal} from "~/composables/useModal";
-
 definePageMeta({
   name:'PROFILE_ORDERS',
   path:'/profile/orders',
@@ -92,36 +90,7 @@ definePageMeta({
 const {pageQuery}=usePagination()
 const {data,pending}=await useFetch('/api/profile/order',{query:{method:'GET',per:6,page:pageQuery}});
 
-const {openModal,modalOpenFlag}=useModal({
-  outsideFade:true,
-  modalClass:'modal-lg'
-});
-
-const productList=shallowReactive({
-  data:[],
-  flag:false
-})
-
-const showProducts =async (orderID:number) => {
-  productList.flag=true
-  productList.data=[]
-  try {
-    const req=await $fetch('/api/profile/order',{
-      query:{
-        method:'POST',
-        orderID:orderID
-      }
-    })
-    productList.data=req
-    openModal()
-  }catch (err) {
-    console.log(err)
-  }finally {
-    productList.flag=false
-  }
-
-
-}
+const {showProducts,productList,modalOpenFlag}=useOrder()
 
 </script>
 

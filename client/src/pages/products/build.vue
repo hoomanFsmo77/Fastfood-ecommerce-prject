@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InnerImageZoom from 'vue-inner-image-zoom';
-import {useCustomProduct} from "~/composables/useCustomProduct";
+import {useCustomProduct} from "~/composables/product/useCustomProduct";
 
 definePageMeta({
   name:'PRODUCT_BUILD',
