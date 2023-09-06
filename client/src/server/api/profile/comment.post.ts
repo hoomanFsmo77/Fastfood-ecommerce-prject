@@ -6,7 +6,7 @@ export default defineEventHandler(async ev=>{
     const query=await getQuery(ev);
     const {api_base,access_key}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
-    if(query.type==='product'){
+    if(query.type==='product' && query.method==='POST'){
         try {
             const req=await $fetch<IResponse<any>>('/product-comments',{
                 baseURL:api_base,
@@ -28,7 +28,7 @@ export default defineEventHandler(async ev=>{
             return err
         }
 
-    }else if(query.type==='blog'){
+    }else if(query.type==='blog' && query.method==='POST'){
         try {
             const req=await $fetch<IResponse<any>>('/blog-comments',{
                 baseURL:api_base,
@@ -44,6 +44,52 @@ export default defineEventHandler(async ev=>{
                 sendNoContent(ev,400)
             }else{
                 return req
+            }
+
+        }catch (err) {
+            return err
+        }
+    }else if(query.type==='product' && query.method==='GET'){
+        try {
+            const req=await $fetch<IResponse<any>>('/product-comments/user',{
+                baseURL:api_base,
+                query:{
+                    per:query.per,
+                    page:query.page,
+                },
+                headers:{
+                    access_key,
+                    token,
+                }
+            })
+            if(req.error){
+                sendNoContent(ev,400)
+            }else{
+                return req.data
+            }
+
+        }catch (err) {
+            return err
+        }
+
+
+    }else if(query.type==='blog' && query.method==='GET'){
+        try {
+            const req=await $fetch<IResponse<any>>('/blog-comments/user',{
+                baseURL:api_base,
+                query:{
+                    per:query.per,
+                    page:query.page,
+                },
+                headers:{
+                    access_key,
+                    token,
+                }
+            })
+            if(req.error){
+                sendNoContent(ev,400)
+            }else{
+                return req.data
             }
 
         }catch (err) {

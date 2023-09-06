@@ -1,7 +1,7 @@
 <template>
   <template v-if="!pending && data.transactions && data.transactions.length>0">
     <VTable  class="[&_th_p]:!text-center" :head="['transaction id','Pay amount','Status','issue tracking','date']">
-      <tr class="[&_p]:!font-400 [&_p]:!text-center" v-for="item in data.transactions">
+      <tr class="[&_p]:!font-400 tr-hover [&_p]:!text-center" v-for="item in data.transactions">
         <td>
           <p >{{item.id}}</p>
         </td>

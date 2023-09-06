@@ -37,6 +37,10 @@ const submitReply = async () => {
       try {
         const req=await $fetch('/api/profile/comment',{
           method:'POST',
+          query:{
+            type:'product',
+            method:'POST'
+          },
           body:{
             date:replyDate,
             productID:props.productId,
@@ -44,7 +48,7 @@ const submitReply = async () => {
             body:replyData.body,
             isReply:props.isReply ? 1 : 0,
             replyID:props.isReply ? props.commentId : 0,
-            type:'product'
+
           }
         })
         emit('reply-submit','Thanks for sharing your comment! after review you can see here.')

@@ -161,6 +161,10 @@ export const profileSideBarList=[
         link:'PROFILE_TRANSACTIONS'
     },
     {
+        title:'comments',
+        link:'PROFILE_COMMENTS'
+    },
+    {
         title:'favorites',
         link:'PROFILE_FAVORITE'
     },

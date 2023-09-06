@@ -35,13 +35,16 @@ const submitReply = async () => {
       try {
         const req=await $fetch('/api/profile/comment',{
           method:'POST',
+          query:{
+            type:'blog',
+            method:'POST'
+          },
           body:{
             date:replyDate,
             blogID:props.blogId,
             body:replyData.body,
             isReply:props.isReply ? 1 : 0,
             replyID:props.isReply ? props.commentId : 0,
-            type:'blog'
           }
         })
         emit('reply-submit','Thanks for sharing your comment! after review you can see here.')

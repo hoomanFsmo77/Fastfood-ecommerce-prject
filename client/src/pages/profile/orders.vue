@@ -3,7 +3,7 @@
 
   <template v-if="!pending && data.orders && data.orders.length>0">
     <VTable :flag="productList.flag" class="[&_th_p]:!text-center" :head="['Order id','Address','Status','Payment status','Pay amount','date','']">
-      <tr class="[&_p]:!font-400 [&_p]:!text-center" v-for="item in data.orders">
+      <tr class="[&_p]:!font-400 tr-hover [&_p]:!text-center" v-for="item in data.orders">
         <td>
           <p >{{item.id}}</p>
         </td>

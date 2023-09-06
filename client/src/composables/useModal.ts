@@ -1,7 +1,7 @@
 
 
 interface Options {
-    modalClass:string,
+    modalClass?:string,
     outsideFade?:boolean
 }
 
