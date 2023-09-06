@@ -1,5 +1,35 @@
 <template>
-  transactions
+  <template v-if="!pending && data.transactions && data.transactions.length>0">
+    <VTable  class="[&_th_p]:!text-center" :head="['transaction id','Pay amount','Status','issue tracking','date']">
+      <tr class="[&_p]:!font-400 [&_p]:!text-center" v-for="item in data.transactions">
+        <td>
+          <p >{{item.id}}</p>
+        </td>
+        <td>
+          <p >${{Number(item.amount).toFixed(2)}}</p>
+        </td>
+        <td>
+          <p :class="{'text-green-500':item.status==='1','text-red-500':item.status==='0'}">{{item.status==='1' ?  'success': 'failed'}}</p>
+        </td>
+        <td>
+          <p>
+            {{item.issueTracking}}
+          </p>
+        </td>
+        <td>
+          <p >{{item.date}}</p>
+        </td>
+      </tr>
+
+    </VTable>
+
+    <VPagination
+        :current_page="data.meta.current_page"
+        :prev-page="data.meta.prevPage"
+        :next-page="data.meta.nextPage"
+        :total="data.meta.total"
+    />
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +51,10 @@ definePageMeta({
     }
   ]
 });
+
+
+const {pageQuery}=usePagination()
+const {data,pending}=await useFetch('/api/profile/transaction',{query:{method:'GET',per:6,page:pageQuery}});
 </script>
 
 <style scoped>
