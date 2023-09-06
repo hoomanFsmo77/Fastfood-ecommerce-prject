@@ -53,11 +53,12 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
         if(isLogin.value){
            productPageData.btnLoaderFlag=true
             try {
-               const req=await $fetch('/api/profile/basket/add',{
+               const req=await $fetch('/api/profile/basket',{
                    query:{
                        productID:product_data ? product_data.value?.id : productId,
                        quantity:product_data ? productPageData.quantity :1,
-                       type:'ready'
+                       type:'ready',
+                       method:'POST'
                    }
                })
                 $toast('success').fire({
@@ -86,10 +87,10 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
     const addToFav = async () => {
         productPageData.FAVBtnLoaderFlag=true
         try {
-            const req=await $fetch('/api/profile/product/fav',{
-                method:'POST',
+            const req=await $fetch('/api/profile/fav',{
                 query:{
                     productID:product_data ? product_data.value?.id : 0,
+                    method:'POST'
                 }
             })
 
@@ -120,10 +121,10 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
         const favID=favoriteStore.getFavID(product_data?.value?.id)
         productPageData.removeFAVBtnLoaderFlag=true
         try {
-            const req=await $fetch('/api/profile/product/fav',{
-                method:'DELETE',
+            const req=await $fetch('/api/profile/fav',{
                 query:{
-                    favID
+                    favID,
+                    method:'DELETE'
                 }
             })
 

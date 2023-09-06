@@ -31,10 +31,11 @@ export const useCart=(props?:Props)=>{
     const removeBasketItem =async (id?:number) => {
       const basketID=props ? props.cartId : id
         try {
-          const req=await $fetch('/api/profile/basket/update',{
+          const req=await $fetch('/api/profile/basket',{
               query:{
                   status:'delete',
-                  id:basketID
+                  id:basketID,
+                  method:'PUT'
               }
           })
             $toast('success').fire({
@@ -55,10 +56,11 @@ export const useCart=(props?:Props)=>{
     const increaseQuantity = async () => {
         const basketID=props ? props.cartId : null
         try {
-            const req=await $fetch('/api/profile/basket/update',{
+            const req=await $fetch('/api/profile/basket',{
                 query:{
                     status:'increase',
-                    id:basketID
+                    id:basketID,
+                    method:'PUT'
                 }
             })
             $toast('success').fire({
@@ -78,10 +80,11 @@ export const useCart=(props?:Props)=>{
     const decreaseQuantity =async () => {
         const basketID=props ? props.cartId : null
         try {
-            const req=await $fetch('/api/profile/basket/update',{
+            const req=await $fetch('/api/profile/basket',{
                 query:{
                     status:'decrease',
-                    id:basketID
+                    id:basketID,
+                    method:'PUT'
                 }
             })
             $toast('success').fire({
@@ -102,7 +105,7 @@ export const useCart=(props?:Props)=>{
       if(couponData.code.length>0){
           couponData.init()
             try {
-              const req=await $fetch('/api/profile/order/coupon',{
+              const req=await $fetch('/api/profile/coupon',{
                   query:{
                       code:couponData.code,
                       orderID:getOrderID.value
@@ -132,7 +135,11 @@ export const useCart=(props?:Props)=>{
     const clearCart = async () => {
         clearCartBtnFlag.value=true
         try {
-            await $fetch('/api/profile/basket/clear')
+            await $fetch('/api/profile/basket',{
+                query:{
+                    method:'DELETE'
+                }
+            })
             $toast('success').fire({
                 text: 'basket cleared!',
                 icon: 'success',

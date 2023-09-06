@@ -27,7 +27,11 @@ export const Favorite=defineStore('Favorite',{
         async fetchUserFavoriteList(){
             this.userFavoriteListFetchFlag=false
             try {
-                const req=await $fetch<IResponse<any>>('/api/profile/product/fav')
+                const req=await $fetch<IResponse<any>>('/api/profile/fav',{
+                    query:{
+                        method:'GET'
+                    }
+                })
                 if(req.error){
                     console.log(req.errors)
                 }else{

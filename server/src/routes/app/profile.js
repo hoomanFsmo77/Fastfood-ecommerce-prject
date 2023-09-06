@@ -50,18 +50,23 @@ router.post('/info',upload.single('profile_image'),requiredBodyValidation(),emai
 
 })
 
-router.post('/address',body(['title','address','provinceID','cityID','postal_code','phone']).notEmpty(),(req,res)=>{
+router.post('/address',body(['title','address','provinceID','cityID','postal_code','phone']).notEmpty(),async (req,res)=>{
     const result = validationResult(req);
     if(result.isEmpty()) {
         const body = matchedData(req);
-        const userID=req.headers.id
-        database('user_address').
-        insert({...body,userID}).
-        then(response=>{
-            res.status(200).send(responseHandler(false,'new address added.',null))
-        }).catch(err=>{
-            res.status(200).send(responseHandler(true,'error in db',null))
-        })
+        const userID=req.headers.id;
+        const userAddresses=await database('user_address').select('*').where({userID});
+        if(userAddresses.length===3){
+            res.status(200).send(responseHandler(true,'you can only add 3 addresses!',null))
+        }else{
+            database('user_address').
+            insert({...body,userID}).
+            then(response=>{
+                res.status(200).send(responseHandler(false,'new address added.',null))
+            }).catch(err=>{
+                res.status(200).send(responseHandler(true,'error in db',null))
+            })
+        }
     }else{
         res.status(200).send(responseHandler(true,result.array(),null))
     }
@@ -137,6 +142,7 @@ router.delete('/address/:addressID',param('addressID').notEmpty(),(req,res)=>{
         then(response=>{
             res.status(200).send(responseHandler(false,'address deleted.',null))
         }).catch(err=>{
+            console.log(err)
             res.status(200).send(responseHandler(true,'error in db',null))
         })
     }else{

@@ -45,7 +45,7 @@ export const useCustomProduct=(data:Ref)=>{
     const customProductAddToCart = async () => {
         customProductData.btnLoaderFlag=true
       try {
-            const req=await $fetch('/api/profile/basket/add',{
+            const req=await $fetch('/api/profile/basket',{
                 query:{
                     type:'custom',
                     toppingID:customProductData.toppingID,
@@ -55,7 +55,8 @@ export const useCustomProduct=(data:Ref)=>{
                     templateID:customProductData.templateID,
                     quantity:customProductData.quantity,
                     additional_info:customProductData.additional_info,
-                    custom_pieces:customProductData.custom_pieces
+                    custom_pieces:customProductData.custom_pieces,
+                    method:'POST'
                 }
             })
           $toast('success').fire({

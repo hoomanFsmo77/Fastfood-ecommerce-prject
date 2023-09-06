@@ -361,6 +361,15 @@ const getCustomProductDescription = (topping,cheese,sauces,size,template,additio
     return `<div class="order-container"><div class="order-image"><img alt="${template[0].image}" src="${imageBase+template[0].image}" srcset="${imageBase+template[0].image}"/></div><div class="order-data"><div><h6>Sizes ($${template[0].price.toFixed(2)}):</h6><p>${size[0].size}</p></div><div><h6>Sauces ${sauces[0]?.price ? `($${sauces[0]?.price.toFixed(2)})` : ''}:</h6><p>${sauces[0]?.sauces || 'none'}</p></div><div><h6>Cheese ${cheese[0]?.price ? `($${cheese[0]?.price.toFixed(2)})` : ''}:</h6><p>${cheese[0]?.cheese || 'none'}</p></div><div><h6>Toppings ${topping[0]?.price ? `($${topping[0]?.price.toFixed(2)})` : ''}:</h6><p>${topping[0]?.toppings || 'none'}</p></div><div><h6>Additional Info:</h6><p>${additional_info}</p></div><div><h6>Custom Pieces:</h6><p>${custom_pieces}</p></div></div></div>`
 }
 
+
+
+const warpAddress = async (addressData) => {
+    const {address,provinceID,cityID,postal_code,phone}=addressData;
+    const province=await database('provinces').select('*').where({id:provinceID});
+    const city=await database('cities').select('*').where({id:cityID});
+    return `${province[0].title} - ${city[0].city} - ${address} - postal code: ${postal_code} - phone: ${phone}`
+}
+
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId,calculateTotalPrice,getCustomProductDescription
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId,calculateTotalPrice,getCustomProductDescription,warpAddress
 }

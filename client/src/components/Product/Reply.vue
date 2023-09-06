@@ -35,7 +35,7 @@ const submitReply = async () => {
     if(replyData.body.length>0 && replyData.rate>0 && replyData.rate<6){
       replyData.init()
       try {
-        const req=await $fetch('/api/profile/product/comment',{
+        const req=await $fetch('/api/profile/comment',{
           method:'POST',
           body:{
             date:replyDate,
@@ -43,7 +43,8 @@ const submitReply = async () => {
             rating:replyData.rate,
             body:replyData.body,
             isReply:props.isReply ? 1 : 0,
-            replyID:props.isReply ? props.commentId : 0
+            replyID:props.isReply ? props.commentId : 0,
+            type:'product'
           }
         })
         emit('reply-submit','Thanks for sharing your comment! after review you can see here.')

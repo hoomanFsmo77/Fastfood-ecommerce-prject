@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router();
 const database=require('../../database/database')
 const bodyParser=require('body-parser')
-const {responseHandler, pagination, changeToBoolean, addImageBase} = require("../../utils");
+const {responseHandler, pagination, changeToBoolean, addImageBase,warpAddress} = require("../../utils");
 const {query, validationResult, matchedData, body} = require("express-validator");
 const mw=require('../../middleware/profile')
 router.use(bodyParser.urlencoded({extended:true}))
@@ -16,7 +16,7 @@ router.get('/',async (req,res)=>{
     const userID=req.headers.id
     const page=Number(req.query.page) || 1;
     const per_page=Number(req.query.per) || 6;
-    const userActiveOrder=await database('orders').join('order_status','orders.statusID','=','order_status.id').join('payment_status','orders.paymentStatusID','=','payment_status.id').join('coupons','orders.couponID','=','coupons.id').join('user_address','orders.addressID','=','user_address.id').where('orders.userID','=',userID).select('orders.*','order_status.status','payment_status.status as payment_status','coupons.code as coupons_code','coupons.percent as coupons_percent','user_address.title as address_title');
+    const userActiveOrder=await database('orders').join('order_status','orders.statusID','=','order_status.id').join('payment_status','orders.paymentStatusID','=','payment_status.id').join('coupons','orders.couponID','=','coupons.id').where('orders.userID','=',userID).select('orders.*','order_status.status','payment_status.status as payment_status','coupons.code as coupons_code','coupons.percent as coupons_percent');
     res.status(200).send(responseHandler(false,null,pagination(userActiveOrder,page,per_page,req.originalUrl,'orders')))
 })
 
@@ -82,20 +82,28 @@ router.put('/register-coupon',query(['code','orderID']).notEmpty(),async (req,re
 
 
 ////// add address for payment
-router.put('/address-payment',query(['addressID','orderID']).notEmpty(),(req,res)=>{
+router.put('/address-payment',query(['addressID','orderID']).notEmpty(),async (req,res)=>{
     const result = validationResult(req);
     const userID=req.headers.id
 
     if (result.isEmpty()) {
         const query = matchedData(req);
-        database('orders').
-        where({userID:userID,id:query.orderID}).
-        update({addressID:query.addressID}).
-        then(response=>{
-            res.status(200).send(responseHandler(false,'address changed!',null));
-        }).catch(err=>{
-            res.status(200).send(responseHandler(true,'error in db',null));
-        })
+        const address=await database('user_address').select('*').where({id:query.addressID,userID:userID});
+        if(address.length>0){
+            const addressDetail=await warpAddress(address[0])
+            database('orders').
+            where({userID:userID,id:query.orderID}).
+            update({addressID:query.addressID,addressTitle:address[0].title,addressDetail:addressDetail}).
+            then(response=>{
+                res.status(200).send(responseHandler(false,'address changed!',null));
+            }).catch(err=>{
+                res.status(200).send(responseHandler(true,'error in db',null));
+            })
+        }else{
+            res.status(200).send(responseHandler(true,'address not found!',null));
+        }
+
+
     }else{
         res.status(200).send(responseHandler(true,result.array() ,null));
     }

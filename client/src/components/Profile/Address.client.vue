@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {submitForm} from "~/utils/functions";
-
+import {useAddress} from "~/composables";
 const props=defineProps<{
   title?:string,
   phone?:string,
@@ -13,69 +12,20 @@ const props=defineProps<{
   addressId?:number,
   type:'create' | 'show'
 }>();
+const emit=defineEmits<{
+  (e:'create'):void
+}>()
 
-const {$toast}=useNuxtApp()
-const addressForm=ref<HTMLElement|null>(null);
-const submitAddressForm=()=>submitForm(addressForm);
-
-const editAddress =async (formData:any) => {
-  addressData.editBtnFlag=true
-  try {
-    const req=await $fetch('/api/profile/address/update',{
-      method:'POST',
-      body:{
-        title:formData.address_title,
-        address:formData.address_body,
-        provinceID:addressData.provinceID,
-        cityID:addressData.cityID,
-        postal_code:formData.address_post,
-        phone:formData.address_phone,
-        addressID:props.addressId
-      }
-    })
-    $toast('success').fire({
-      text: 'address updated!',
-      icon: 'success',
-    })
-    await reloadNuxtApp()
-  }catch (err) {
-    $toast('error').fire({
-      text: 'error in connecting to server!',
-      icon: 'error',
-    })
-  }finally {
-    addressData.editBtnFlag=false
-  }
-}
+const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,submitAddressForm,addressData}=useAddress(props,emit)
 
 
-const confirmAddressForm =async (formData:any) => {
-  if(props.type==='show'){
-    await editAddress(formData)
-  }else if(props.type==='create'){
-
-  }
-}
-
-const addressData=reactive({
-  provinceID:props.provinceId|| undefined as number | undefined,
-  cityID:props.cityId || undefined as number | undefined,
-  editBtnFlag:false as boolean
-})
-
-const changeProvince = (provinceID:number) =>{
-  addressData.provinceID=provinceID
-  addressData.cityID=undefined
-};
-const changeCity = (cityID:number) => {
-  addressData.cityID=cityID
-};
 
 </script>
 
 <template>
-  <v-row >
-    <FormKit   id="addressForm" type="form" ref="addressForm"  @submit="confirmAddressForm"  :actions="false" >
+
+  <v-row class="p-1.5">
+    <FormKit   :id="props.type==='show' ? 'addressForm' : 'addressForm-create'" type="form" ref="addressForm"  @submit="confirmAddressForm"  :actions="false" >
       <v-row >
         <v-column  col="4" class="pr-0.5">
           <FormKit
@@ -133,23 +83,24 @@ const changeCity = (cityID:number) => {
           />
         </v-column>
       </v-row>
-      <v-row v-if="type==='show'">
-        <v-column col="12" class="justify-between items-center">
-          <VBtnLoader :flag="addressData.editBtnFlag" @click="submitAddressForm" class="btn btn-secondary btn-sm">
-            edit
-          </VBtnLoader>
-          <VBtnLoader class="btn btn-remove btn-sm">
-            delete
-          </VBtnLoader>
-
-        </v-column>
-
-      </v-row>
-      <v-row v-else>
-
-      </v-row>
-
     </FormKit>
+    <v-row class="w-full" v-if="type==='show'">
+      <v-column col="12" class="justify-between items-center">
+        <VBtnLoader type="submit" :flag="addressData.editBtnFlag" @click="submitAddressForm" class="btn btn-secondary btn-sm">
+          edit
+        </VBtnLoader>
+        <VBtnLoader @click="deleteAddress" :flag="addressData.deleteBtnFlag" class="btn btn-remove btn-sm">
+          delete
+        </VBtnLoader>
+
+      </v-column>
+
+    </v-row>
+    <v-row v-else>
+      <VBtnLoader type="submit" :flag="addressData.createBtnFlag" @click="submitAddressForm" class="btn btn-secondary btn-sm">
+        create
+      </VBtnLoader>
+    </v-row>
   </v-row>
 
 

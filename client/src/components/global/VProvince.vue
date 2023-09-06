@@ -8,7 +8,11 @@ const emit=defineEmits<{
 const {$choice}:any=useNuxtApp();
 const provinceEl=shallowRef<HTMLElement|null>(null);
 let choice:any=null;
-const {data,pending}=await useFetch('/api/loc/province')
+const {data,pending}=await useFetch('/api/loc',{
+  query:{
+    which:'province'
+  }
+})
 
 watchEffect(()=>{
 
@@ -75,7 +79,9 @@ const choiceHandler = (ev:any) => {
   .choices *{
     @apply !text-gray-500 !font-400 !text-1
   }
-
+  .choices__list--dropdown, .choices__list[aria-expanded]{
+      @apply !z-[999999]
+   }
 
 }
 

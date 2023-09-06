@@ -26,7 +26,11 @@ export const Cart=defineStore('Cart',{
         async fetchUserCartData(){
             this.cartListFetchFlag=false
             try {
-                const req=await $fetch('/api/profile/basket')
+                const req=await $fetch('/api/profile/basket',{
+                    query:{
+                        method:'GET'
+                    }
+                })
                 this.cartListData=req
             }catch (err) {
                 this.cartListData={items:[],order:{}}

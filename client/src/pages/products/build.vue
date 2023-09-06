@@ -26,7 +26,7 @@ definePageMeta({
 });
 
 const {isLogin}=useStates()
-const {data,pending}=await useFetch<{templates:any[],sizes:any[],sauces:any[],cheese:any[],toppings:any[]}>('/api/profile/product/options');
+const {data,pending}=await useFetch<{templates:any[],sizes:any[],sauces:any[],cheese:any[],toppings:any[]}>('/api/profile/product-options');
 
 const {customProductData,customPieceHandler,quantityHandler,customProductAddToCart}=useCustomProduct(data)
 </script>

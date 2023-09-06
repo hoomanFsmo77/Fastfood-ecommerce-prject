@@ -10,8 +10,9 @@ const {$choice}:any=useNuxtApp();
 const cityEl=shallowRef<HTMLElement|null>(null);
 const provinceID=ref<number|undefined>(props.provinceId || undefined)
 let choice:any=null;
-const {data,pending}=await useFetch('/api/loc/city',{
+const {data,pending}=await useFetch('/api/loc',{
   query: {
+    which:'city',
     provinceID: provinceID
   }
 })
