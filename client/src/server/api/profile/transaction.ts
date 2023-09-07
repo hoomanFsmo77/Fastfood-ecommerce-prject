@@ -27,6 +27,26 @@ export default defineEventHandler(async ev=>{
         }catch (err) {
             return err
         }
+    }else if(query.method==='POST'){
+        try {
+            const req=await $fetch<IResponse<any>>(api_base+`/transaction`,{
+                method:'POST',
+                headers:{
+                    access_key,
+                    token
+                },
+                query:{
+                    tracking_number:query.tracking_number,
+                }
+            })
+            if(req.error){
+                sendNoContent(ev,400)
+            }else{
+                return req.data
+            }
+        }catch (err) {
+            return err
+        }
     }
 
 })

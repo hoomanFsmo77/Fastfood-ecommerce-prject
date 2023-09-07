@@ -30,6 +30,9 @@
         :total="data.meta.total"
     />
   </template>
+  <div v-else class="border-[1px] mb-1.5 p-1.5 rounded-4">
+    <p class="text-center">No Transaction founded!</p>
+  </div>
 </template>
 
 <script setup lang="ts">

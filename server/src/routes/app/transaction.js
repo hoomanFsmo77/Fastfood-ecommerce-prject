@@ -10,12 +10,11 @@ const mw=require('../../middleware/profile')
 router.use(mw)
 
 
-router.post('/',query(['tracking_number','orderID','status']).notEmpty(),async (req,res)=>{
+router.post('/',query(['tracking_number']).notEmpty(),async (req,res)=>{
     const result = validationResult(req);
     const userID=req.headers.id
     if (result.isEmpty()) {
         const query = matchedData(req);
-        const deactiveOrder=await database('orders').where({id:query.orderID}).update({statusID:1,paymentStatusID:query.status=='1' ? 1 : 2});
         database('transactions').join('orders','transactions.orderID','=','orders.id').where({'transactions.issueTracking':query.tracking_number,'orders.userID':userID}).select('transactions.*').then(response=>{
             res.status(200).send(responseHandler(false,null ,response[0]));
         }).catch(err=>{

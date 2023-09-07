@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="userFavoriteListFetchFlag" class="grid  grid-cols-[repeat(3,1fr)] gap-2">
+  <div v-if="userFavoriteListFetchFlag && userFavoriteList &&userFavoriteList.length>0" class="grid  grid-cols-[repeat(3,1fr)] gap-2">
     <VProductCard
         class="border-[1px]"
         v-for="item in userFavoriteList"
@@ -14,6 +14,9 @@
         :off_percent="item.off_percent"
         :product-id="item.id"
     />
+  </div>
+  <div v-else class="border-[1px] mb-1.5 p-1.5 rounded-4">
+    <p class="text-center">No favorite founded!</p>
   </div>
 </template>
 

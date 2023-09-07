@@ -109,7 +109,12 @@ router.put('/address-payment',query(['addressID','orderID']).notEmpty(),async (r
     }
 })
 
+router.get('/address',async (req,res)=>{
+    const userID=req.headers.id;
+    const userAddresses=await database('user_address').select('title','id').where({userID});
+    res.status(200).send(responseHandler(false,null,userAddresses))
 
+})
 
 
 

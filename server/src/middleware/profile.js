@@ -3,7 +3,7 @@ const {responseHandler} = require("../utils");
 module.exports=(req,res,next)=>{
     const token=req.headers.token
     const url=req.originalUrl
-    if(url!=='/api/payment/verify'){
+    if(!url.includes('/app/payment/verify')){
         if(token){
             database('users').select(['token','id']).where({token}).then(response=>{
                 if(response.length>0){

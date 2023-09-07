@@ -63,10 +63,10 @@ const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,su
       </v-row>
       <v-row class="my-2">
         <v-column  col="4" class="pr-0.5 !block">
-          <VProvince @fire="changeProvince" :province-id="addressData.provinceID"  />
+          <ProfileProvince @fire="changeProvince" :province-id="addressData.provinceID"  />
         </v-column>
         <v-column col="4" class="pl-0.5 !block">
-          <VCity @fire="changeCity" :city-id="addressData.cityID" :province-id="addressData.provinceID"/>
+          <ProfileCity @fire="changeCity" :city-id="addressData.cityID" :province-id="addressData.provinceID"/>
         </v-column>
       </v-row>
       <v-row class="mb-1">

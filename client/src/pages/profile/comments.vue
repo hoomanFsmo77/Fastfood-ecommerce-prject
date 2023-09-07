@@ -56,7 +56,7 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/pr
   </teleport>
 
 
-  <section class="mb-2">
+  <section v-if="!product_comments_pending && product_comments.comments && product_comments.comments.length>0" class="mb-2">
     <h3 class="mb-1">Your Product comments</h3>
     <VTable  class="[&_th_p]:!text-center" :head="['id','product','Status','rating','date','']">
       <tr class="[&_p]:!font-400 tr-hover" v-for="comment in product_comments.comments">
@@ -107,7 +107,11 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/pr
     />
   </section>
 
-  <section class="mb-2">
+  <div v-else class="border-[1px] mb-1.5 p-1.5 rounded-4">
+    <p class="text-center">No comment founded!</p>
+  </div>
+
+  <section v-if="!blog_comments_pending && blog_comments.comments && blog_comments.comments.length>0" class="mb-2">
     <h3 class="mb-1">Your Blog comments</h3>
     <VTable  class="[&_th_p]:!text-center" :head="['id','blog','Status','date','']">
       <tr class="[&_p]:!font-400 tr-hover" v-for="comment in blog_comments.comments">
@@ -153,7 +157,9 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/pr
     />
   </section>
 
-
+  <div v-else class="border-[1px] mb-1.5 p-1.5 rounded-4">
+    <p class="text-center">No comment founded!</p>
+  </div>
 </template>
 
 <style scoped>

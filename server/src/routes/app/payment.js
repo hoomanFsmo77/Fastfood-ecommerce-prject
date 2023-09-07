@@ -31,7 +31,7 @@ router.post('/',query(['orderID']).notEmpty(),(req,res)=>{
                     "phone": `${response[0].phone}`,
                     "mail": `${response[0].email}`,
                     "desc": "fake order",
-                    "callback":process.env.CALL_BACK
+                    "callback":process.env.CALL_BACK+`?userID=${userID}`
                 }
                 f(process.env.IDPAY,{
                     method:'POST',
@@ -58,19 +58,24 @@ router.post('/',query(['orderID']).notEmpty(),(req,res)=>{
 
 
 router.post('/verify',(req,res)=>{
+    const userID=req.query.userID
     const {order_id,id,amount,date,status}=req.body;
-    const transaction_date=`${dt.getUTCFullYear(date)}-${dt.getUTCMonth(date)}-${dt.getUTCDate(date)+1}`
-    database('transactions').insert({
-        amount:amount/10000,
-        status:status==='1' ? 1 : 0,
-        issueTracking:id,
-        date:transaction_date,
-        orderID:order_id
-    }).then(response=>{
-        res.redirect(`${process.env.CLIENT_CALLBACK}?orderID=${order_id}&tracking_number=${id}&status=${status}`)
-    }).catch(err=>{
-        console.log(err)
-    })
+    if(order_id && id && amount && date && status){
+        const transaction_date=`${dt.getUTCFullYear(date)}-${dt.getUTCMonth(date)}-${dt.getUTCDate(date)+1}`
+        database('transactions').insert({
+            amount:amount/10000,
+            status:status==='1' ? 1 : 0,
+            issueTracking:id,
+            date:transaction_date,
+            orderID:order_id
+        }).then(async  response=>{
+            await database('orders').where({id:order_id,userID:userID}).update({statusID:1,paymentStatusID:status=='1' ? 1 : 2});
+            res.redirect(`${process.env.CLIENT_CALLBACK}?orderID=${order_id}&tracking_number=${id}&status=${status}`)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
 })
 
 
