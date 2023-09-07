@@ -4,12 +4,12 @@ import {IResponse} from "~/utils/types";
 import {serializeError,nodeFormDataBody} from "~/utils/functions";
 import * as fs from "fs";
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const { fields, files } = await readFiles(ev, {includeFields: true});
     try {
         const request=await $fetch<IResponse<any>>(api_base+'/auth/register',{
             method:'POST',
-            headers:{access_key},
+            headers:{access},
             body:nodeFormDataBody({
                 username:fields.username[0],
                 firstname:fields.firstname[0],

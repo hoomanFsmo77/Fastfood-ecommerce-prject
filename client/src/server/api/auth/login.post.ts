@@ -4,13 +4,13 @@ import {readBody,setCookie} from "h3";
 import {urlEncodeBody,serializeError} from "~/utils/functions";
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const body=await readBody(ev);
     try {
         const request=await $fetch<IResponse<any>>(api_base+'/auth/login',{
             method:'POST',
             headers:{
-                access_key,
+                access,
                 "Content-Type":"application/x-www-form-urlencoded"
             },
             body:urlEncodeBody({

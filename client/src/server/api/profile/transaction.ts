@@ -3,14 +3,14 @@ import {IResponse} from "~/utils/types";
 
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     const query=await getQuery(ev);
     if(query.method==='GET'){
         try {
             const req=await $fetch<IResponse<any>>(api_base+`/transaction`,{
                 headers:{
-                    access_key,
+                    access,
                     token
                 },
                 query:{
@@ -32,7 +32,7 @@ export default defineEventHandler(async ev=>{
             const req=await $fetch<IResponse<any>>(api_base+`/transaction`,{
                 method:'POST',
                 headers:{
-                    access_key,
+                    access,
                     token
                 },
                 query:{

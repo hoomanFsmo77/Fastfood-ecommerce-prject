@@ -5,7 +5,7 @@ import {urlEncodeBody} from "~/utils/functions";
 
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const query=await getQuery(ev);
     const body=await readBody(ev);
     const token=getCookie(ev,'x_wengdo_x');
@@ -13,7 +13,7 @@ export default defineEventHandler(async ev=>{
         try {
             const req=await $fetch<IResponse<any>>('/profile/address',{
                 baseURL:api_base,
-                headers:{access_key, token}
+                headers:{access, token}
             })
             if(req.error){
                 sendNoContent(ev,400)
@@ -31,7 +31,7 @@ export default defineEventHandler(async ev=>{
                 baseURL:api_base,
                 body:urlEncodeBody(body),
                 headers:{
-                    access_key,
+                    access,
                     token,
                     "Content-Type":"application/x-www-form-urlencoded"
                 }
@@ -50,7 +50,7 @@ export default defineEventHandler(async ev=>{
             const req=await $fetch<IResponse<any>>(`/profile/address/${query.addressID}`,{
                 method:'DELETE',
                 baseURL:api_base,
-                headers:{access_key, token}
+                headers:{access, token}
             });
             if(req.error){
                 sendNoContent(ev,400)
@@ -67,7 +67,7 @@ export default defineEventHandler(async ev=>{
                 baseURL:api_base,
                 body:urlEncodeBody(body),
                 headers:{
-                    access_key,
+                    access,
                     token,
                     "Content-Type":"application/x-www-form-urlencoded"
                 }
@@ -90,7 +90,7 @@ export default defineEventHandler(async ev=>{
         try {
             const req=await $fetch<IResponse<any>>('/orders/address',{
                 baseURL:api_base,
-                headers:{access_key, token}
+                headers:{access, token}
             })
             if(req.error){
                 sendNoContent(ev,400)
@@ -110,7 +110,7 @@ export default defineEventHandler(async ev=>{
                     orderID:query.orderID
                 },
                 headers:{
-                    access_key,
+                    access,
                     token,
                     "Content-Type":"application/x-www-form-urlencoded"
                 }

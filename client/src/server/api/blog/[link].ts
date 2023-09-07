@@ -3,11 +3,11 @@ import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=>{
     const link=ev.context.params.link
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     try {
         const req=await $fetch<IResponse<any>>(api_base+`/blog`,{
             headers:{
-                access_key
+                access
             },
             query:{
                 link

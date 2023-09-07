@@ -2,7 +2,7 @@ import {getCookie} from "h3";
 import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     const query=await getQuery(ev);
     if(query.method==='GET'){
@@ -10,7 +10,7 @@ export default defineEventHandler(async ev=>{
             const req=await $fetch<IResponse<any>>('/favorite',{
                 baseURL:api_base,
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/json'
                 }
@@ -33,7 +33,7 @@ export default defineEventHandler(async ev=>{
                     productID:query.productID
                 },
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/json'
                 }
@@ -63,7 +63,7 @@ export default defineEventHandler(async ev=>{
                     favID:query.favID
                 },
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/json'
                 }

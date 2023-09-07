@@ -3,7 +3,7 @@ import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=> {
     const query = await getQuery(ev);
-    const {api_base, access_key} = useRuntimeConfig();
+    const {api_base, access} = useRuntimeConfig();
     const token = getCookie(ev, 'x_wengdo_x');
     if(query.method==='POST'){
         try {
@@ -13,7 +13,7 @@ export default defineEventHandler(async ev=> {
                 query:{
                     orderID:query.orderID
                 },
-                headers:{access_key, token,}
+                headers:{access, token,}
             });
             if(req.error){
                 return {

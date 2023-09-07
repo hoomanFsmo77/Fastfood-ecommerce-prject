@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2023 at 07:27 PM
+-- Generation Time: Sep 07, 2023 at 04:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -117,8 +117,13 @@ INSERT INTO `basket` (`id`, `userID`, `productID`, `price`, `quantity`, `subtota
 (123, 10, 9, 29, 1, 9, 48, NULL, 'ready'),
 (124, 10, 10, 40, 2, 55, 48, '<div class=\"order-container\"><div class=\"order-image\"><img alt=\"1693506120724.jpeg\" src=\"http://localhost:3001/storage/image/1693506120724.jpeg\" srcset=\"http://localhost:3001/storage/image/1693506120724.jpeg\"/></div><div class=\"order-data\"><div><h6>Sizes ($15.00):</h6><p>medium size</p></div><div><h6>Sauces ($2.00):</h6><p>Salsa sauces</p></div><div><h6>Cheese ($5.00):</h6><p>cheese</p></div><div><h6>Toppings ($3.00):</h6><p>mushrooms</p></div><div><h6>Additional Info:</h6><p>additional</p></div><div><h6>Custom Pieces:</h6><p>5</p></div></div></div>', 'custom'),
 (125, 10, 10, 45, 2, 60, 48, '<div class=\"order-container\"><div class=\"order-image\"><img alt=\"1693506130180.jpeg\" src=\"http://localhost:3001/storage/image/1693506130180.jpeg\" srcset=\"http://localhost:3001/storage/image/1693506130180.jpeg\"/></div><div class=\"order-data\"><div><h6>Sizes ($15.00):</h6><p>large size</p></div><div><h6>Sauces ($2.00):</h6><p>Salsa sauces</p></div><div><h6>Cheese ($5.00):</h6><p>cheese</p></div><div><h6>Toppings ($3.00):</h6><p>mushrooms</p></div><div><h6>Additional Info:</h6><p>thanks</p></div><div><h6>Custom Pieces:</h6><p>12</p></div></div></div>', 'custom'),
-(145, 10, 12, 25, 2, 50, 52, NULL, 'ready'),
-(146, 10, 11, 35, 1, 35, 52, NULL, 'ready');
+(165, 10, 9, 29, 1, 29, 61, NULL, 'ready'),
+(166, 10, 18, 24, 1, 24, 61, NULL, 'ready'),
+(167, 10, 10, 45, 2, 90, 61, '<div class=\"order-container\"><div class=\"order-image\"><img alt=\"1693506125748.jpeg\" src=\"http://localhost:3001/storage/image/1693506125748.jpeg\" srcset=\"http://localhost:3001/storage/image/1693506125748.jpeg\"/></div><div class=\"order-data\"><div><h6>Sizes ($15.00):</h6><p>large size</p></div><div><h6>Sauces ($2.00):</h6><p>Pesto sauces</p></div><div><h6>Cheese ($5.00):</h6><p>cheese</p></div><div><h6>Toppings ($3.00):</h6><p>broccoli</p></div><div><h6>Additional Info:</h6><p></p></div><div><h6>Custom Pieces:</h6><p>12</p></div></div></div>', 'custom'),
+(168, 10, 10, 24, 1, 24, 62, NULL, 'ready'),
+(169, 10, 18, 24, 1, 24, 63, NULL, 'ready'),
+(170, 10, 10, 47, 1, 47, 63, '<div class=\"order-container\"><div class=\"order-image\"><img alt=\"1693506125748.jpeg\" src=\"http://localhost:3001/storage/image/1693506125748.jpeg\" srcset=\"http://localhost:3001/storage/image/1693506125748.jpeg\"/></div><div class=\"order-data\"><div><h6>Sizes ($15.00):</h6><p>large size</p></div><div><h6>Sauces ($2.00):</h6><p>Pesto sauces</p></div><div><h6>Cheese ($5.00):</h6><p>cheese</p></div><div><h6>Toppings ($5.00):</h6><p>tomatoes</p></div><div><h6>Additional Info:</h6><p>gooood</p></div><div><h6>Custom Pieces:</h6><p>12</p></div></div></div>', 'custom'),
+(171, 10, 17, 12, 1, 12, 64, NULL, 'ready');
 
 -- --------------------------------------------------------
 
@@ -457,21 +462,26 @@ CREATE TABLE `orders` (
   `userID` int(100) NOT NULL,
   `couponID` int(100) DEFAULT 7,
   `created_at` varchar(100) NOT NULL,
-  `payment_amount` int(100) NOT NULL
+  `payment_amount` int(100) NOT NULL,
+  `addressTitle` varchar(100) DEFAULT NULL,
+  `addressDetail` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `addressID`, `statusID`, `paymentStatusID`, `total_amount`, `userID`, `couponID`, `created_at`, `payment_amount`) VALUES
-(37, 2, 1, 1, '94', 10, 7, '2023-7-6', 94),
-(43, 3, 1, 1, '40', 10, 3, '2023-7-6', 20),
-(44, 3, 1, 1, '8', 10, 7, '2023-7-6', 8),
-(46, 2, 1, 2, '110', 10, 3, '2023-7-6', 55),
-(47, 2, 2, 1, '167', 10, 7, '2023-8-29', 167),
-(48, 3, 2, 1, '228', 10, 4, '2023-9-2', 79),
-(52, NULL, 2, 3, '85', 10, 3, '2023-9-3', 43);
+INSERT INTO `orders` (`id`, `addressID`, `statusID`, `paymentStatusID`, `total_amount`, `userID`, `couponID`, `created_at`, `payment_amount`, `addressTitle`, `addressDetail`) VALUES
+(37, 2, 1, 1, '94', 10, 7, '2023-7-6', 94, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(43, 3, 1, 1, '40', 10, 3, '2023-7-6', 20, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(44, 3, 1, 1, '8', 10, 7, '2023-7-6', 8, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(46, 2, 1, 2, '110', 10, 3, '2023-7-6', 55, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(47, 2, 2, 1, '167', 10, 7, '2023-8-29', 167, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(48, 3, 2, 1, '228', 10, 4, '2023-9-2', 79, 'Home', 'Ohio - Toledo - hellooooo - postal code: 12345 - phone: 09921929654'),
+(61, 9, 1, 2, '143', 10, 3, '2023-9-4', 72, 'Home', 'Texas - Dallas -  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus! - postal code: 56789 - phone: 09921929654'),
+(62, 9, 1, 2, '24', 10, 7, '2023-9-7', 24, 'Home', 'Texas - Dallas -  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus! - postal code: 56789 - phone: 09921929654'),
+(63, 9, 1, 1, '71', 10, 7, '2023-9-7', 71, 'Home', 'Texas - Dallas -  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus! - postal code: 56789 - phone: 09921929654'),
+(64, 9, 1, 1, '12', 10, 7, '2023-9-7', 12, 'Home', 'Texas - Dallas -  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus! - postal code: 56789 - phone: 09921929654');
 
 -- --------------------------------------------------------
 
@@ -675,7 +685,9 @@ INSERT INTO `product_comments` (`id`, `userID`, `date`, `productID`, `rating`, `
 (46, 10, 'September 28, 2023', 10, 5, 'gooooood', 1, 0, 0),
 (47, 10, 'September 28, 2023', 10, 4, 'thank you', 1, 1, 46),
 (48, 10, 'September 28, 2023', 8, 5, 'delicious!', 1, 0, 0),
-(49, 10, 'September 28, 2023', 8, 4, 'thank you very much hooman', 1, 1, 48);
+(49, 10, 'September 28, 2023', 8, 4, 'thank you very much hooman', 1, 1, 48),
+(50, 10, 'October 6, 2023', 18, 5, 'very goood!', 0, 0, 0),
+(51, 10, 'October 6, 2023', 18, 5, 'ok thanks', 0, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -946,7 +958,14 @@ CREATE TABLE `transactions` (
 
 INSERT INTO `transactions` (`id`, `amount`, `status`, `issueTracking`, `date`, `orderID`) VALUES
 (1, 80000, '1', 'c77f14b928720c7a7d35d8adbe853e39', '2023-6-7', 44),
-(4, 55, '0', 'ab65b59788f048d51b17a895d6350cfa', '2023-6-7', 46);
+(4, 55, '0', 'ab65b59788f048d51b17a895d6350cfa', '2023-6-7', 46),
+(5, 72, '0', '3970f043d88846a11a484833ba22cd5b', '2023-8-8', 61),
+(6, 24, '0', 'f1eca30430d5711fd66c4feb50b8d1cc', '2023-8-8', 62),
+(7, 24, '0', '4bc44872f29bac6bf4c88500e8382fbc', '2023-8-8', 62),
+(8, 24, '0', '4bc44872f29bac6bf4c88500e8382fbc', '2023-8-8', 62),
+(9, 24, '0', '7e83fd0aff1f8487dfcb98d76d523d62', '2023-8-8', 62),
+(10, 71, '1', 'd82c84030eaab6d57e001d76aae778d4', '2023-8-8', 63),
+(11, 12, '1', '23515beee8c695d1e2b0c097bdb19681', '2023-8-8', 64);
 
 -- --------------------------------------------------------
 
@@ -978,7 +997,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `profile_image`,
 (5, 'Belley', 'George', 'george_Belley', '1688207155137.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09012564789', 'belly@gmail.com', 's03qEPz4fjCejvb2xuY83ZArwxwRxBL37f9kUg0fLS4xtahx', 0, '10 March. 2022'),
 (6, 'Adam', 'Smith', 'adam_smith', '1688207214478.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09012564789', 'smith@gmail.com', 'fmJ0sNTgXjtxAdvjrsS9vleLtCP2GVAtyMY6eVfE67mDcF4O', 0, '15 March. 2022'),
 (7, 'Nasir', 'Jalali', 'nasir_jalali', '1688207258297.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09012564789', 'nasir@gmail.com', 'lmQH83jCLvDRw0wfZGfVAdZHXrhYXJ1GYgfWAT6BnYzcUNra', 0, '12 March. 2022'),
-(10, 'hooman', 'mousavi', 'hooman_77', '1688207258297.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09921929653', 'hoomanmousavi77@gmail.com', '81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d', 1, '18 March. 2022'),
+(10, 'hooman', 'mousavi', 'hooman_77', '1693926891853.jpeg', '$2b$10$j86VpwhTqZr40fqvxFdoLO9ZNJKNCNzU9.bGxRQ6Ev.uVUrqUBpBC', '09921929653', 'hoomanmousavi77@gmail.com', '81wde-hN-grxKyVaRMmRs-yGWVS97Nuk_WHpdJWK-fs4EW5d', 1, '18 March. 2022'),
 (12, 'test', 'test', 'test', '1688207258297.jpeg', '$2b$10$myVkFnxtQvJNiSaQDxb37OH8oOp2KbhkQgMzlBbXjE7uYIOmeeUIa', '09921929853', 'test33@gmail.com', 'b_J8r8GTFwxaTMsQqv-oKC7TIuTBWQSw7iWYBfg4jf6tnJJT', 0, '18 March. 2022'),
 (18, 'hooman', 'mousavi', 'hooman_23', '1693046208066.jpeg', '$2b$10$13BrqrsIdpu8mrixqnmdo.8YFjqJ3zv/9/o6Xq4C.Hvmgh.y7xSpW', '09921829653', 'hoomanmousavi66@gmail.com', 'HqMj8yTCpsGcbHrEuIgr6MLyVf5cY3LUZVNL0zQrHgxRldaD', 0, '2023-8-26'),
 (19, 'alireza', 'alikhani', 'alireza_98', '1693051209474.jpeg', '$2b$10$R4am8/6X6prYvG/JxOuSTe62g3Gtw5cvbh6GXKzZ5hX0f8e0MbXvy', '09129154038', 'ali77@gmail.com', 'D5FX-tlNXHY16clLdLXj6InCPD2jvtPTfEqrmxI7INF60rgC', 0, '2023-8-26');
@@ -1005,8 +1024,8 @@ CREATE TABLE `user_address` (
 --
 
 INSERT INTO `user_address` (`id`, `title`, `address`, `provinceID`, `cityID`, `postal_code`, `phone`, `userID`) VALUES
-(2, 'Home', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ', 1, 1, 1234, '09921929653', 10),
-(3, 'Work', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ', 2, 5, 1234, '09921929653', 10);
+(9, 'Home', ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus!', 2, 6, 56789, '09921929654', 10),
+(10, 'Work', ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consequuntur doloremque et officia quia quisquam veniam! Asperiores atque culpa illo, libero optio qui quis, quo sint soluta totam vitae voluptatibus!', 7, 21, 56987, '091219154038', 10);
 
 -- --------------------------------------------------------
 
@@ -1291,7 +1310,7 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -1363,7 +1382,7 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -1399,7 +1418,7 @@ ALTER TABLE `product_cheese`
 -- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `product_image`
@@ -1459,7 +1478,7 @@ ALTER TABLE `sales_chart`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1471,7 +1490,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `visitors_chart`
@@ -1530,7 +1549,6 @@ ALTER TABLE `favorite`
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`couponID`) REFERENCES `coupons` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`addressID`) REFERENCES `user_address` (`id`),
   ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`statusID`) REFERENCES `order_status` (`id`),
   ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`paymentStatusID`) REFERENCES `payment_status` (`id`);
 

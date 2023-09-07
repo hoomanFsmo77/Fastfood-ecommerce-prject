@@ -5,14 +5,14 @@ import {serializeError,urlEncodeBody} from "~/utils/functions";
 
 export default defineEventHandler(async ev=>{
     const body=await readBody(ev);
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     try {
         const request=await $fetch<IResponse<any>>(`/contact-us`,{
             method:'POST',
             baseURL:api_base,
             body:urlEncodeBody(body),
             headers:{
-                access_key,
+                access,
                 "Content-Type":"application/x-www-form-urlencoded"
             }
         })

@@ -3,13 +3,13 @@ import {IResponse, User_Information} from "~/utils/types";
 import {getCookie,setCookie} from "h3";
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=await getCookie(ev,'x_wengdo_x');
     if(token){
         try {
             const request=await $fetch<IResponse<User_Information>>(api_base+'/auth/me',{
                 headers:{
-                    access_key,
+                    access,
                     token
                 }
             });

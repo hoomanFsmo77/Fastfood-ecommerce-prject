@@ -5,7 +5,7 @@ import {serializeError,nodeFormDataBody} from "~/utils/functions";
 import * as fs from "fs";
 import {getCookie} from "h3";
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const { fields, files } = await readFiles(ev, {includeFields: true});
     const token=getCookie(ev,'x_wengdo_x');
     const body=(files.profile_image && files.profile_image[0] && files.profile_image[0].filepath) ? {
@@ -26,7 +26,7 @@ export default defineEventHandler(async ev=>{
     try {
         const request=await $fetch<IResponse<any>>(api_base+'/profile/info',{
             method:'POST',
-            headers:{access_key,token},
+            headers:{access,token},
             body:nodeFormDataBody(body)
         });
         if(request.error){

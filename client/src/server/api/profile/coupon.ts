@@ -5,14 +5,14 @@ import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=>{
     const query=await getQuery(ev);
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     try {
         const req=await $fetch<IResponse<any>>('/orders/register-coupon',{
             baseURL:api_base,
             method:'PUT',
             query,
-            headers:{access_key, token,}
+            headers:{access, token,}
         })
         if(req.error){
             return {

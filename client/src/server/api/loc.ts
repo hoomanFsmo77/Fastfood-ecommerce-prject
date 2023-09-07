@@ -4,13 +4,13 @@ import {IResponse} from "~/utils/types";
 
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const query=await getQuery(ev);
     if(query.which==='province'){
         try {
             const req=await $fetch<IResponse<any>>('/loc/provinces',{
                 baseURL:api_base,
-                headers:{access_key}
+                headers:{access}
             })
             if(req.error){
                 sendNoContent(ev,400)
@@ -25,7 +25,7 @@ export default defineEventHandler(async ev=>{
         try {
             const req=await $fetch<IResponse<any>>(`/loc/city/${query.provinceID}`,{
                 baseURL:api_base,
-                headers:{access_key}
+                headers:{access}
             })
             if(req.error){
                 sendNoContent(ev,400)

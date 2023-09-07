@@ -5,14 +5,14 @@ import {urlEncodeBody} from "~/utils/functions";
 
 export default defineEventHandler(async ev=>{
     const query=await getQuery(ev);
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     if(query.method==='GET'){
         try {
             const req=await $fetch<IResponse<any>>('/basket',{
                 baseURL:api_base,
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/x-www-form-urlencoded'
                 }
@@ -32,7 +32,7 @@ export default defineEventHandler(async ev=>{
                 baseURL:api_base,
                 method:'PUT',
                 query,
-                headers:{access_key, token,}
+                headers:{access, token,}
             })
             if(req.error){
                 sendNoContent(ev,400)
@@ -49,7 +49,7 @@ export default defineEventHandler(async ev=>{
                 method:'POST',
                 body:urlEncodeBody(query),
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/x-www-form-urlencoded'
                 }
@@ -68,7 +68,7 @@ export default defineEventHandler(async ev=>{
                 baseURL:api_base,
                 method:'DELETE',
                 headers:{
-                    access_key,
+                    access,
                     token,
 
                 }

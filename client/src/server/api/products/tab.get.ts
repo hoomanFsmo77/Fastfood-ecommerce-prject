@@ -2,10 +2,10 @@
 import {IResponse} from "~/utils/types";
 
 export default defineEventHandler(async ev=>{
-    const {api_base,access_key}=useRuntimeConfig()
+    const {api_base,access}=useRuntimeConfig()
     try {
         const request=await $fetch<IResponse<any>>(api_base+'/products/tab',{
-            headers:{access_key}
+            headers:{access}
         });
         if(request.error){
             sendNoContent(ev,400)

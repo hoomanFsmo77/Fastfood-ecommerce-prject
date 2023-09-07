@@ -4,7 +4,7 @@ import {IResponse} from "~/utils/types";
 export default defineEventHandler(async ev=>{
     const body=await readBody(ev);
     const query=await getQuery(ev);
-    const {api_base,access_key}=useRuntimeConfig();
+    const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     if(query.type==='product' && query.method==='POST'){
         try {
@@ -13,7 +13,7 @@ export default defineEventHandler(async ev=>{
                 method:'POST',
                 body,
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/json'
                 }
@@ -35,7 +35,7 @@ export default defineEventHandler(async ev=>{
                 method:'POST',
                 body,
                 headers:{
-                    access_key,
+                    access,
                     token,
                     'Content-Type':'application/json'
                 }
@@ -58,7 +58,7 @@ export default defineEventHandler(async ev=>{
                     page:query.page,
                 },
                 headers:{
-                    access_key,
+                    access,
                     token,
                 }
             })
@@ -82,7 +82,7 @@ export default defineEventHandler(async ev=>{
                     page:query.page,
                 },
                 headers:{
-                    access_key,
+                    access,
                     token,
                 }
             })
