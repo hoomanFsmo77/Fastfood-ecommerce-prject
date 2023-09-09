@@ -9,32 +9,32 @@ const {prevSlide,prevImageSrc,nextImageSrc,imageClasses, nextSlide,changeSlideHa
 
   <v-container v-if="!pending" class="relative h-full !m-0 !ml-auto ">
     <v-row  v-for="(slide,index) in banner_data" :key="slide.id" v-bind="rowClass(index)">
-      <v-column col="7" class="flex-col items-start">
+      <v-column col="12" md="7" class="flex-col items-start">
         <div class="relative">
           <p  v-bind="textClasses(index)"
-              class=" text-secondary-light-1 italic text-2 font-600"
+              class=" text-secondary-light-1 text-1.5 md:text-2 text-center md:text-left italic  font-600"
           >
             {{slide.caption}}
           </p>
 
-          <h1 v-bind="textClasses(index)" class="text-4.5 text-primary-light-1 font-600 mb-0.5 ">
+          <h1 v-bind="textClasses(index)" class="md:text-4.5 text-center md:text-left text-3 text-primary-light-1 font-600 mb-0.5 ">
             {{slide.first_text}}
           </h1>
 
-          <h3 v-bind="textClasses(index)" class="text-primary-light-1 mb-1  ">
+          <h3 v-bind="textClasses(index)" class="text-primary-light-1 text-center md:text-left mb-1  ">
             {{slide.middle_text}}
           </h3>
 
-          <h5 v-bind="textClasses(index)" class="text-primary-light-1 mb-2.5 italic">{{slide.last_text}}</h5>
+          <h5 v-bind="textClasses(index)" class="text-primary-light-1 mb-2.5 md:text-1.2 text-1 text-center md:text-left italic">{{slide.last_text}}</h5>
           <div v-carousel="changeSlideHandler" class="carousel-cover"></div>
         </div>
-        <NuxtLink :to="{name:'PRODUCT_DETAIL',params:{link:slide.link}}" v-bind="textClasses(index)"  class="btn btn-primary !font-poppins">
+        <NuxtLink :to="{name:'PRODUCT_DETAIL',params:{link:slide.link}}" v-bind="textClasses(index)"  class="btn btn-primary md:mx-0 mx-auto !font-poppins">
           order now
         </NuxtLink>
 
       </v-column>
 
-      <v-column  col="5" class="flex justify-end relative">
+      <v-column col="12"  md="5" class="flex md:justify-end justify-center md:mt-0 mt-4 relative">
         <nuxt-img v-bind="imageClasses(index)"  width="500" :src="slide.image"/>
         <div v-carousel="changeSlideHandler" class="carousel-cover"></div>
       </v-column>

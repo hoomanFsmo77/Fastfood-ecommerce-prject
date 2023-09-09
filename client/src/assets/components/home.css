@@ -5,7 +5,7 @@
         @apply my-5
     }
     .content-img{
-        @apply absolute inset-0  h-full w-full z-[2] py-1.5
+        @apply absolute inset-0  h-full w-full z-[2] md:py-1.5
     }
     #products{
         @apply my-2 mb-5

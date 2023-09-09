@@ -18,7 +18,7 @@ const currentTabIndex=ref<number>(0)
       </v-row>
       <v-row class="mt-3">
         <v-column col="12" >
-          <ul class="products-tab">
+          <ul class="products-tab md:overflow-x-hidden overflow-y-hidden overflow-x-auto md:gap-0 gap-2">
             <li v-for="(item,index) in data" @click="currentTabIndex=index" class="products-tab-item " >
                 <span :class="{'active':currentTabIndex===index}" class="underline-active-hover products-tab-inside ">
                   {{item.tab}}
@@ -27,7 +27,7 @@ const currentTabIndex=ref<number>(0)
           </ul>
         </v-column>
       </v-row>
-      <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
+      <div class="grid mt-3 sm:grid-cols-[repeat(4,1fr)] grid-cols-1 gap-2">
         <VProductCard
             v-for="tab_item in data[currentTabIndex].list"
             :primary_image="tab_item.primary_image"
