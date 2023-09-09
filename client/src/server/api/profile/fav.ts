@@ -5,7 +5,7 @@ export default defineEventHandler(async ev=>{
     const {api_base,access}=useRuntimeConfig();
     const token=getCookie(ev,'x_wengdo_x');
     const query=await getQuery(ev);
-    if(query.method==='GET'){
+    if(query.method==='GET' && !query.type && query.type!=='pagination'){
         try {
             const req=await $fetch<IResponse<any>>('/favorite',{
                 baseURL:api_base,
@@ -83,6 +83,29 @@ export default defineEventHandler(async ev=>{
             }
         }catch (err) {
             sendNoContent(ev,400)
+        }
+    }else if(query.method==='GET' && query.type==='pagination'){
+        try {
+            const req=await $fetch<IResponse<any>>('/favorite',{
+                baseURL:api_base,
+                query:{
+                  page:query.page || 1,
+                  per:query.per || 6
+                },
+                headers:{
+                    access,
+                    token,
+                    'Content-Type':'application/json'
+                }
+            })
+            if(req.error){
+                sendNoContent(ev,400)
+            }else{
+                return req.data
+            }
+
+        }catch (err) {
+            return err
         }
     }
 

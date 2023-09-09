@@ -14,11 +14,12 @@ export const useStates=()=>{
             email:'',
             phone:''
         }
-    })
+    });
+    const navbarMenuFlag=useState<boolean>('navbarMenuFlag',()=>false)
 
 
     return{
-        isLogin,userInformation
+        isLogin,userInformation,navbarMenuFlag
     }
 }
 

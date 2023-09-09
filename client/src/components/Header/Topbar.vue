@@ -23,7 +23,7 @@
         <v-container >
             <v-row>
                 <v-column col="12" lg="7" md="8" class="sm:flex-row sm:justify-start flex-col justify-center items-center">
-                    <NuxtLink :to="{name:'HOME'}">
+                    <NuxtLink class=" hidden xlg:block" :to="{name:'HOME'}">
                       <h6
                           class="text-primary-light-3 font-500 text-left">
                         Serving to whole New York
@@ -31,7 +31,7 @@
                     </NuxtLink>
                    <a 
                    href="mailto:hoomanmousavi77@gmail.com"
-                   class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-1.5">
+                   class="text-primary-light-3 transition-all hover:text-white font-500 text-left ml-1.5 hidden xlg:block">
                     <Icon name="bi:envelope" class="mr-0.6"/>
                     info@wengdo.com
                    </a>

@@ -2,7 +2,7 @@
 
 @layer components {
     #navbar-sticky{
-        @apply transition-all duration-300 ease-in-out bg-[#fff]  fixed top-0 left-0 w-full shadow-xl
+        @apply transition-all duration-300 ease-in-out bg-[#fff]  fixed top-0 left-0 w-full shadow-xl lg:block hidden
     }
     #header-navbar{
         @apply bg-secondary-light-5 before:bg-[url("/wave.webp")] before:h-[18px] before:absolute relative before:bg-repeat-x before:w-full  before:animate-navbar before:block before:bottom-[-18px]   before:right-0 before:left-0  before:z-[999]
@@ -31,5 +31,8 @@
     }
     #navbar-sticky.active .navbar-item-link.navbar-active{
         @apply !text-secondary-light-1
+    }
+    #sidebar-menu{
+        @apply fixed left-[-100%] transition-all duration-500 top-0 h-[100vh] sm:w-[60vw] w-[100vw] bg-primary-dark-3 z-[999999999]
     }
 }

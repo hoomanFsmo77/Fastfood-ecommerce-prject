@@ -52,7 +52,7 @@ router.delete('/',(req,res)=>{
 
 router.get('/',async (req,res)=>{
     const userID=req.headers.id;
-    const favoriteItems=await database('favorite').where({'favorite.userID':userID}).join('product','favorite.userID','=','product.id').join('product_category','product.categoryID','=','product_category.id').join('product_specification','product.specification','=','product_specification.id').select('product.*','product_category.name as product_category','product_specification.color as color','product_specification.size as size','favorite.id as favoriteID','favorite.productID as productID')
+    const favoriteItems=await database('favorite').where({'favorite.userID':userID}).join('product','favorite.productID','=','product.id').join('product_category','product.categoryID','=','product_category.id').join('product_specification','product.specification','=','product_specification.id').select('product.*','product_category.name as product_category','product_specification.color as color','product_specification.size as size','favorite.id as favoriteID','favorite.productID as productID')
     if(req.query.page && req.query.per){
         const page=Number(req.query.page) || 1;
         const per_page=Number(req.query.per) || 6;

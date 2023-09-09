@@ -1,5 +1,5 @@
 
-import {getCookie} from "h3";
+
 import {IResponse} from "~/utils/types";
 
 

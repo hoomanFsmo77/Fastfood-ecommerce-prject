@@ -1,5 +1,5 @@
 <template>
-    <div @click="searchData.toggleSearchBox()" class="topbar-icon mr-0">
+    <div v-bind="$attrs" @click="searchData.toggleSearchBox()" class="topbar-icon mr-0">
         <Icon name="bi:search" size="1.1rem"/>
     </div>
     <teleport to='body' >
@@ -94,7 +94,10 @@
 <script setup lang="ts">
 import { CirclesToRhombusesSpinner } from 'epic-spinners'
 import {useSearch} from "~/composables/useSearch";
-const {initSearch,searchData}=useSearch();
+const emit=defineEmits<{
+  (e:'fire'):void
+}>()
+const {initSearch,searchData}=useSearch(emit);
 const {data,pending}=await useFetch('/api/products/category')
 </script>
 

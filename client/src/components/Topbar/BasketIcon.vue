@@ -7,7 +7,7 @@
             </span>
       <Icon class="text-primary-light-3 " size="1.2rem" name="bi:cart3"/>
     </div>
-    <div v-if="flag" class="absolute  bg-primary-dark-2 w-[24rem] p-1 top-[2.6rem] right-0 z-[999999999]">
+    <div v-if="flag" :class="dropClass" class="absolute  bg-primary-dark-2 w-[24rem] p-1 top-[2.6rem] right-0 z-[999999999]">
       <template  v-if="cartListData && cartListData.items && cartListData.items.length>0 && cartListData.order">
         <ul class="max-h-20 overflow-y-auto">
           <li v-for="cart in cartListData.items" class=" mb-1 gap-1 grid grid-cols-[1.3rem_50px_1fr] items-center " :class="{'!grid-cols-[1.3rem_1fr]':cart.type==='custom'}">
@@ -78,6 +78,9 @@
     
 </template>
 <script lang="ts" setup>
+defineProps<{
+  dropClass?:string
+}>()
 const flag=ref<boolean>(false)
 const {getCartListLength,cartListData}=useCartStore()
 const router=useRouter()

@@ -1,8 +1,10 @@
 import {IResponse,IProduct} from "~/utils/types";
 
+interface Emit {
+    (e:'fire'):void
+}
 
-
-export const useSearch=()=>{
+export const useSearch=(emit:Emit)=>{
 
     //// states
     const searchData=shallowReactive({
@@ -17,6 +19,7 @@ export const useSearch=()=>{
             this.searchResult=[]
             this.loaderFlag=false
             this.showResultFlag=false
+            emit('fire')
         },
         initSearch(){
             this.showResultFlag=true
@@ -35,6 +38,7 @@ export const useSearch=()=>{
         },
         toggleSearchBox(){
             this.openSearchBoxFlag=!this.openSearchBoxFlag
+            emit('fire')
         }
 
     })
