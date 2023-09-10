@@ -4,7 +4,7 @@
       <section class="!bg-[#fff] py-8">
         <v-container>
           <v-row  >
-            <v-column col="6" class="!block">
+            <v-column md="6" col="12" class="!block">
               <h2 class="font-800">Some Words About Us & Our Fast Food</h2>
               <p class="txt-2">
                 Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further.
@@ -16,8 +16,8 @@
                 order now
               </NuxtLink>
             </v-column>
-            <v-column col="2"></v-column>
-            <v-column  col="4">
+            <v-column md="2" col="0"></v-column>
+            <v-column  col="0" md="4">
               <div class="relative w-full">
                 <nuxt-img width="270" class="absolute inset-0  m-3" src="/about/1.jpg"/>
                 <nuxt-img width="270" class="absolute inset-0 " src="/about/2.jpg"/>
@@ -29,7 +29,7 @@
       </section>
       <section  class="py-5">
         <v-container>
-          <div class="grid grid-cols-3 gap-1">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
             <div v-for="i in [3,4,5]" class="w-full relative ">
               <nuxt-img class="w-full" :src="`/about/${i}.jpg`"/>
               <div class="bg-[#fff] p-1">
@@ -70,7 +70,7 @@
       <section class="py-6 bg-[#fff]">
         <v-container>
           <v-row>
-            <v-column col="6" class="!block mx-auto">
+            <v-column md="6" col="12" class="!block mx-auto">
               <h2 class="font-700 text-center">
                 Our Chef
               </h2>
@@ -79,7 +79,7 @@
               </p>
             </v-column>
           </v-row>
-          <div class="grid grid-cols-4 gap-1.3 ">
+          <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-4 gap-1.3 ">
             <div v-for="i in [7,8,9,10]" class="group">
               <nuxt-img class="w-full group-hover:translate-y-[-1rem] transition-all group-hover:border-primary-dark-3 radius-odd border-l-[8px] border-t-[8px] border-secondary-light-2" :src="`/about/${i}.jpg`" />
               <h4 class="text-center font-700 mt-2 mb-1">John michale</h4>
@@ -109,7 +109,7 @@
             </v-column>
           </v-row>
           <div class="my-2">
-            <carousel ref="myCarousel" :wrapAround="false" :items-to-show="3">
+            <carousel ref="myCarousel" :wrapAround="false" :breakpoints="{768:{itemsToShow:3}}" :items-to-show="1">
               <slide v-for="(i,index) in [12,13,12,13,12]" :key="index">
                 <div  class="flex justify-center flex-col items-center">
                   <nuxt-img width="250" :src="`/about/${i}.jpg`"/>
@@ -137,7 +137,7 @@
       </section>
       <section class="py-5 bg-[#fff]">
         <v-container>
-          <div class="grid grid-cols-4 gap-1.5">
+          <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-4 gap-1.5">
             <div v-for="i in [1,2,3,4]" class="border-dotted shadow-md border-[1px] border-primary-dark-3/70 px-1 hover:shadow-2xl transition-all py-2 flex justify-center items-center flex-col">
               <nuxt-img width="100" :src="`/home/service-${i}.webp`"/>
               <h6 class="font-700 my-1">

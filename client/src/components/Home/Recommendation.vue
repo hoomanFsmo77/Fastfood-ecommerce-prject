@@ -7,7 +7,7 @@
   <section id="recommendation">
     <v-container>
       <v-row >
-        <v-column class="relative" col="12" md="6">
+        <v-column class="relative" col="12" lg="6">
           <div class="content-img w-[60%] ml-auto">
               <h1 class="text-primary-light-1 font-600 text-left md:mt-2 mt-1 md:text-2.5  text-1.5">Pizza Calabriz </h1>
               <h5 class="text-primary-light-1 md:!h5 !h6 italic mb-0.5 text-left"> Mascarpone · Nduja Spicy</h5>
@@ -18,8 +18,8 @@
           <VImage loader-class="w-full"  image-class="w-full  h-full" src="/home/pizza.webp"/>
 
         </v-column>
-        <v-column class="md:my-0 my-1" col="12" md="3" >
-          <div class="md:px-1 relative w-full h-full">
+        <v-column class="lg:my-0 my-1" col="12" lg="3" >
+          <div class="lg:px-1 relative w-full h-full">
             <div class="content-img  w-[50%] ml-auto">
               <h3 class="uppercase font-800 leading-[8px] mt-1 text-primary-light-1">Iced  <span class="text-primary-dark-1 h3 uppercase font-800">Coffee</span></h3>
               <h4 class="uppercase font-300 text-primary-light-1 mb-0.7">Summer</h4>
@@ -30,7 +30,7 @@
             <VImage loader-class="w-full"  image-class="w-full  h-full" src="/home/drink.webp"/>
           </div>
         </v-column>
-        <v-column col="12" md="3" class="relative">
+        <v-column col="12" lg="3" class="relative">
           <div class="content-img w-[50%] ml-auto">
             <h4 class="text-primary-light-1 font-300 mt-1">Get your</h4>
             <h3 class="text-primary-light-1 uppercase font-700 ">FREE</h3>

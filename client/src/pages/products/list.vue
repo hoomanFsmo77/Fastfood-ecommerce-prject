@@ -4,7 +4,7 @@
       <v-row>
         <v-column col="12" class="!block">
             <h1 class="text-center font-700 underline-active pb-1 mx-auto">Our Products</h1>
-          <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
+          <div class="grid mt-3 md:grid-cols-2 grid-cols-1 lg:grid-cols-[repeat(4,1fr)] gap-2">
             <VProductCard
                 v-for="tab_item in data.products"
                 :primary_image="tab_item.primary_image"

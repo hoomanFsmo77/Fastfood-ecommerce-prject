@@ -31,17 +31,17 @@
           <v-row class="mt-1">
             <v-column col="12" class="!block">
               <v-row>
-                <v-column col="3" class="!block">
+                <v-column md="3" col="6" class="!block">
                   <VInput v-model="couponData.code" input-class="input-sm placeholder:!text-[#333] !text-[#333]" id="coupon-code" type="text" placeholder="Coupon Code"/>
 
                 </v-column>
-                <v-column col="4" class="!block">
-                  <VBtnLoader :flag="couponData.btnFlag" @click="submitCoupon" class="btn btn-secondary btn-sm ml-1">
+                <v-column md="4" col="6" class="!block">
+                  <VBtnLoader :flag="couponData.btnFlag" @click="submitCoupon" class="btn btn-secondary btn-sm  ml-1">
                     apply coupon
                   </VBtnLoader>
                 </v-column>
-                <v-column col="4" class="justify-end ml-auto">
-                  <VBtnLoader :flag="clearCartBtnFlag" @click="clearCart" class="btn btn-secondary btn-sm ml-1">
+                <v-column md="4" col="12" class="md:justify-end  ml-auto">
+                  <VBtnLoader :flag="clearCartBtnFlag" @click="clearCart" class="btn btn-secondary btn-sm md:ml-1 mt-1 md:mt-0">
                     clear cart
                   </VBtnLoader>
                 </v-column>

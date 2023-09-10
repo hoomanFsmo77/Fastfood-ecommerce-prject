@@ -8,21 +8,22 @@ defineProps<{
   status:boolean,
   off:boolean
   off_percent:number,
-  productId:number
+  productId:number,
+  isFavorite?:boolean
 }>()
 
-const {addToCart,productPageData}=useProduct()
+const {addToCart,productPageData,removeFav}=useProduct()
 
 </script>
 
 <template>
-  <div class="product-card ">
+  <div class="product-card " :class="{'border-[1px]':isFavorite}">
     <div class="product-card-image">
-      <VImage loader-class="h-11 w-11 rounded-full"  image-class="object-cover w-full"  :src="primary_image"/>
+      <VImage loader-class="lg:h-11 !w-14 !h-12  lg:w-11 rounded-full"  image-class="lg:object-cover lg:!w-full !w-14 !h-12 "  :src="primary_image"/>
 
     </div>
     <div class="product-card-content">
-        <h5 class="product-card-title  ">{{title}}</h5>
+      <h5 class="product-card-title  ">{{title}}</h5>
       <p class="product-card-caption ">
         {{caption}}
       </p>
@@ -44,9 +45,9 @@ const {addToCart,productPageData}=useProduct()
       </h4>
     </div>
     <div class="product-card-lower">
-        <NuxtLink class="btn btn-secondary !rounded-b-[0px]  z-[9999] btn-sm px-0.8 text-0.7" :to="{name:'PRODUCT_DETAIL',params:{link}}">
-          see details
-        </NuxtLink>
+      <NuxtLink class="btn btn-secondary !rounded-b-[0px]  z-[9999] btn-sm px-0.8 text-0.7" :to="{name:'PRODUCT_DETAIL',params:{link}}">
+        see details
+      </NuxtLink>
       <VBtnLoader :flag="productPageData.btnLoaderFlag" @click="addToCart(productId)" class="btn btn-secondary ml-0.5 !rounded-b-[0px]  z-[9999] btn-sm px-0.8 text-0.7" :class="{'!text-0.6 !px-0.5':productPageData.btnLoaderFlag}">
         order now
       </VBtnLoader>
@@ -61,6 +62,12 @@ const {addToCart,productPageData}=useProduct()
     </div>
     <NuxtLink class="product-card-link" :to="{name:'PRODUCT_DETAIL',params:{link}}">
     </NuxtLink>
+
+  </div>
+  <div v-if="isFavorite" class="flex justify-center mt-2">
+    <button @click="removeFav(productId)" class="btn btn-remove btn-sm">
+      remove
+    </button>
   </div>
 </template>
 

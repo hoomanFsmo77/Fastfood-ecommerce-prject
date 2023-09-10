@@ -1,9 +1,9 @@
 <template>
   <section v-if="!pending" id="search-section">
     <v-container>
-      <h3 class="mb-1">Search result for "{{$route.params.slug[1]}}" in {{$route.params.slug[0]}}</h3>
-      <h3 >found {{data.meta.total_items}} items</h3>
-      <div v-if="$route.params.slug[0]==='product' && data.products && data.products.length>0" class="grid my-3 grid-cols-[repeat(4,1fr)] gap-2">
+      <h3 class="mb-1 md:h3 h5">Search result for "{{$route.params.slug[1]}}" in {{$route.params.slug[0]}}</h3>
+      <h3 class="md:h3 h5">found {{data.meta.total_items}} items</h3>
+      <div v-if="$route.params.slug[0]==='product' && data.products && data.products.length>0" class="grid my-3 md:grid-cols-2 grid-cols-1 lg:grid-cols-[repeat(4,1fr)] gap-2">
         <VProductCard
             v-for="tab_item in data.products"
             :primary_image="tab_item.primary_image"

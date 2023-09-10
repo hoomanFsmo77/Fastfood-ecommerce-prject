@@ -33,11 +33,20 @@ const replySubmit = (msg:string) => {
 
 <template>
   <div class="blog-comment">
-    <VImage image-class="product-comment-image" loader-class="w-3 h-3" class="!w-[60px] !h-auto" :src="image"/>
-    <div class="pl-1 w-full">
-      <h6 class="font-600 mb-0.7 font-robot">{{name}}</h6>
+    <div class="md:block flex ">
+      <VImage image-class="product-comment-image" loader-class="w-3 h-3" class="!w-[60px] !h-auto" :src="image"/>
+      <div class="md:hidden block  ml-1">
+        <h6 class="font-600 mb-0.7 font-robot ">{{name}}</h6>
+        <p class="text-gray-500  font-robot font-400">{{date}} <span v-if="isLogin" class="mx-1">|</span>
+          <button @click="addReply" v-if="isLogin" class="text-secondary-light-2 font-robot">reply</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="md:pl-1 md:mt-0 mt-1 w-full">
+      <h6 class="font-600 mb-0.7 font-robot md:block hidden">{{name}}</h6>
       <p class="text-gray-500 leading-1.8 font-robot h6 mb-0.7 font-400">{{content}}</p>
-      <p class="text-gray-500 mb-1 font-robot font-400">{{date}} <span v-if="isLogin" class="mx-1">|</span>
+      <p class="text-gray-500 mb-1 font-robot font-400 md:block hidden">{{date}} <span v-if="isLogin" class="mx-1">|</span>
         <button @click="addReply" v-if="isLogin" class="text-secondary-light-2 font-robot">reply</button>
       </p>
       <h6 v-if="replyData.message" class="text-green-500 my-1">{{replyData.message}}</h6>

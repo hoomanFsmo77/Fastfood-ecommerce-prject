@@ -6,7 +6,7 @@
         <v-container>
           <v-row>
             <v-column col="12">
-              <h1 class="font-700 text-[#fff] text-4">
+              <h1 class="font-700 text-[#fff] md:text-4 text-3">
                 We are available
                 <br>
                 in your city with tasty food
@@ -20,7 +20,7 @@
       <section id="contact-content">
         <v-container>
           <v-row>
-            <v-column col="8">
+            <v-column md="8" col="12">
               <div class="contact-form">
                 <div class="mb-2">
                   <h3 class="text-primary-dark-3 font-600 mb-1">We Love To Hear From You</h3>
@@ -37,7 +37,7 @@
                 </v-row>
                 <FormKit   id="contactForm" class="w-full" type="form" ref="contactForm"  @submit="submitContact"  :actions="false" >
                   <v-row class="my-1 w-full">
-                    <v-column class="justify-center" col="6">
+                    <v-column class="justify-center md:mb-0 mb-1" md="6" col="12">
                       <FormKit
                           type="custom_text"
                           label="email*"
@@ -47,7 +47,7 @@
                           validation-label="email"
                       />
                     </v-column>
-                    <v-column class="justify-center pl-1" col="6">
+                    <v-column class="justify-center md:pl-1" md="6" col="12">
                       <FormKit
                           type="custom_text"
                           label="name*"
@@ -100,12 +100,12 @@
 
               </div>
             </v-column>
-            <v-column col="4" class="mt-4">
-              <div class="pl-2">
+            <v-column md="4" col="12" class="mt-4 md:mb-0 mb-2">
+              <div class="md:pl-2">
                 <h4 class="text-primary-dark-3 font-600 before:bg-primary-dark-3 before:h-[2px] underline-active-left pb-1">
                   Our Office Address
                 </h4>
-                <div class="pl-2">
+                <div class="md:pl-2 pl-1">
                   <h5 class="text-primary-dark-3 font-600 mt-1.5">Main Restaurant </h5>
                   <p class="font-400 text-gray-600 mt-1">
                     587, Dartmouthi Street, Boston, Massachusetts 0658, PO Box 16122 United States

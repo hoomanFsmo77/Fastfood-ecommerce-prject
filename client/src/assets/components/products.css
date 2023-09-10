@@ -14,22 +14,22 @@
         @apply w-full
     }
     .product-tab-item{
-        @apply bg-secondary-light-2 text-primary-light-1 px-1.5 py-0.9 font-600 cursor-pointer hover:bg-[#fff] hover:text-primary-dark-1 transition-all duration-500 before:absolute relative before:top-0 before:left-0 before:w-full before:h-[3px] before:bg-secondary-light-2 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible before:transition-all before:duration-500 border-x-[1px] after:absolute after:bottom-[-1px] after:left-0 after:w-full after:h-[3px] after:bg-[#fff] after:opacity-0 after:invisible hover:after:opacity-100 hover:after:visible after:transition-all after:duration-300
+        @apply md:text-1 text-0.8 bg-secondary-light-2 text-primary-light-1 px-1 md:px-1.5 py-0.9 font-600 cursor-pointer hover:bg-[#fff] hover:text-primary-dark-1 transition-all duration-500 before:absolute relative before:top-0 before:left-0 before:w-full before:h-[3px] before:bg-secondary-light-2 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible before:transition-all before:duration-500 border-x-[1px] after:absolute after:bottom-[-1px] after:left-0 after:w-full after:h-[3px] after:bg-[#fff] after:opacity-0 after:invisible hover:after:opacity-100 hover:after:visible after:transition-all after:duration-300
     }
     .product-tab-item.active{
         @apply !text-primary-dark-1 !bg-[#fff] before:!opacity-100 before:!visible  after:!opacity-100 after:!visible
     }
     .product-tab-content{
-        @apply border-[1px] p-2
+        @apply border-[1px] md:p-2 p-1
     }
     .product-comment{
-        @apply flex items-start my-1.5
+        @apply flex md:flex-row flex-col md:items-start my-1.5
     }
     .product-comment-image{
         @apply w-[60px] object-cover
     }
     .product-comment-content{
-        @apply w-full border-[1px] p-1 ml-1 transition-all hover:shadow-lg
+        @apply w-full border-[1px] p-1 md:ml-1 md:mt-0 mt-1 transition-all hover:shadow-lg
     }
     .rate-hover:hover{
         @apply [&_*]:!text-secondary-light-2 transition-all

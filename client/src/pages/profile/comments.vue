@@ -66,7 +66,7 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/pr
           </p>
         </td>
         <td>
-          <div class="flex items-center">
+          <div class="flex items-center md:w-auto w-15">
             <nuxt-img width="80" :src="comment.product_image"/>
             <NuxtLink class="text-secondary-light-2 text-center font-400 transition-all hover:text-primary-dark-3" :to="{name:'PRODUCT_DETAIL',params:{link:comment.product_link}}">
               {{comment.product_title}}
@@ -121,7 +121,7 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/pr
           </p>
         </td>
         <td>
-          <div class="flex items-center">
+          <div class="flex items-center md:w-auto w-15">
             <nuxt-img width="80" :src="comment.blog_image"/>
             <NuxtLink class="text-secondary-light-2 text-hidden w-7 block font-400 transition-all hover:text-primary-dark-3 ml-0.5" :to="{name:'BLOG_DETAIL',params:{link:comment.blog_link}}">
               {{comment.blog_title}}

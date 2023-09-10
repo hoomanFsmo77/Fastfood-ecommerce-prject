@@ -1,13 +1,20 @@
 <script setup lang="ts">
 const {data,pending}=await useFetch('/api/home/gallery')
 
-
+const carouselBreakpoints={
+  1200:{
+    itemsToShow:5
+  },
+  768:{
+    itemsToShow:3
+  },
+}
 </script>
 
 <template>
   <section v-if="!pending" id="gallery">
     <photo-provider>
-      <carousel :wrapAround="true" :items-to-show="5">
+      <carousel :wrapAround="true" :breakpoints="carouselBreakpoints" :items-to-show="2">
         <slide v-for="slide in data" :key="slide">
           <photo-consumer :intro="slide.title" :key="slide.id" :src="slide.image">
             <div class="w-full h-full">

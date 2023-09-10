@@ -22,7 +22,7 @@
 
 @layer components {
     .text{
-        @apply text-1 text-[#848484] font-400 leading-1.8
+        @apply md:text-1 text-0.9 text-[#848484] font-400 leading-1.8
     }
     .txt-2{
         @apply text-0.9 text-primary-dark-3 font-400 leading-1.6 my-1

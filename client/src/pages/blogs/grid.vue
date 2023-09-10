@@ -1,7 +1,7 @@
 <template>
   <section v-if="!pending" id="blog-grid">
     <v-container>
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2  gap-2">
         <BlogCard
             v-for="blog in data.blogs"
             :image="blog.image_lg"

@@ -17,7 +17,7 @@
               <div class="search-box">
                 <div class="search-box-inner relative">
                   <input placeholder="Search here..." v-model="searchData.searchContext" class="search-input" />
-                  <button  @click="initSearch" class="search-button">
+                  <button  @click="initSearch" class="search-button lg:block hidden">
                     search now!
                   </button>
 
@@ -27,6 +27,9 @@
                   </div>
 
                 </div>
+                <button  @click="initSearch" class="search-button lg:hidden flex justify-center items-center mt-1 rounded-4">
+                  search now!
+                </button>
 
 <!--                search box result-->
                 <div  v-fade:30="searchData.showResultFlag" class="search-result-box scroller">
@@ -75,12 +78,12 @@
 
 <!--              key word section-->
               <div class="keywords mt-2 ">
-                <p class="font-playFair text-center h3 text-white">
+                <p class="font-playFair text-center lg:h3 h5 text-white">
                   Recent Search Keywords
                 </p>
-                <ul v-if="!pending" class="flex flex-row mt-2 justify-center">
+                <ul v-if="!pending" class="flex flex-row lg:gap-0 gap-1 flex-wrap mt-2 justify-center">
                   <li v-for="item in data" class="">
-                    <NuxtLink :to="{name:'SEARCH',params:{slug:['product',item.name]}}" class="text-white block mr-1 p-1  border-[1px] border-white cursor-pointer transition-all hover:text-secondary-light-2 hover:border-secondary-light-2">
+                    <NuxtLink :to="{name:'SEARCH',params:{slug:['product',item.name]}}" class="text-white block mr-1 lg:p-1 p-0.5 lg:text-1 text-0.8 border-[1px] border-white cursor-pointer transition-all hover:text-secondary-light-2 hover:border-secondary-light-2">
                       {{item.name}}
                     </NuxtLink>
                   </li>

@@ -28,7 +28,7 @@ const initSearch = (value:string) => {
     <section id="blogs-list" class="[&_*]:font-robot">
       <v-container>
         <v-row class="items-start">
-          <v-column  col="9" class="!block">
+          <v-column  lg="9" col="12" class="!block">
             <v-row class="mb-2" v-if="$route.query.category && $route.query.category!=='all' && blog_categories">
               <v-column col="12">
                 <h3 class="font-600 capitalize ">category: {{blog_categories.filter(item=>item.id==$route.query.category)[0].name}}</h3>
@@ -36,8 +36,8 @@ const initSearch = (value:string) => {
             </v-row>
             <slot/>
           </v-column>
-          <v-column col="3" class="sticky top-[120px]">
-            <aside class="pl-2">
+          <v-column lg="3" col="12" class="lg:sticky lg:mt-0 mt-3 lg:top-[120px]">
+            <aside class="lg:pl-2 px-0.5">
               <VInput
                   @icon-fire="initSearch($event)"
                   icon="ri:search-2-line"

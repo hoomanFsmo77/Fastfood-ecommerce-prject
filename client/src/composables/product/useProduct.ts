@@ -18,7 +18,7 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
             this.removeFAVBtnLoaderFlag=false
         }
     })
-    const {$toast}=useNuxtApp()
+    const {$toast}:any=useNuxtApp()
     const {isLogin}=useStates();
 
 
@@ -117,8 +117,8 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
         }
     }
 
-    const removeFav = async () => {
-        const favID=favoriteStore.getFavID(product_data?.value?.id)
+    const removeFav = async (id?:number) => {
+        const favID=product_data?.value ? favoriteStore.getFavID(product_data?.value?.id) : id ?  favoriteStore.getFavID(id) : null;
         productPageData.removeFAVBtnLoaderFlag=true
         try {
             const req=await $fetch('/api/profile/fav',{
@@ -145,7 +145,8 @@ export const useProduct=(product_data?:Ref<IProduct|null>)=>{
                 icon: 'error',
             })
         }finally {
-            await favoriteStore.fetchUserFavoriteList()
+            await favoriteStore.fetchUserFavoriteList();
+            id && await refreshNuxtData('favorite_list');
             productPageData.reset()
         }
 

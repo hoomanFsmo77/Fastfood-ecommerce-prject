@@ -1,20 +1,21 @@
 <template>
 
   <template v-if="!pending && data.items.length>0">
-    <div  class="grid  grid-cols-[repeat(3,1fr)] gap-2">
-      <VProductCard
-          class="border-[1px]"
-          v-for="item in data.items"
-          :primary_image="item.primary_image"
-          :title="item.title"
-          :caption="item.caption"
-          :price="item.price"
-          :link="item.link"
-          :status="item.status"
-          :off="item.off"
-          :off_percent="item.off_percent"
-          :product-id="item.id"
-      />
+    <div  class="grid grid-cols-1 md:grid-cols-[repeat(3,1fr)] gap-2">
+      <div v-for="item in data.items">
+        <VProductCard
+            :primary_image="item.primary_image"
+            :title="item.title"
+            :caption="item.caption"
+            :price="item.price"
+            :link="item.link"
+            :status="item.status"
+            :off="item.off"
+            :off_percent="item.off_percent"
+            :product-id="item.id"
+            :is-favorite="true"
+        />
+      </div>
 
     </div>
     <VPagination
@@ -57,7 +58,8 @@ const {data,pending}=await useFetch('/api/profile/fav',{
     type:'pagination',
     page:pageQuery,
     per:6
-  }
+  },
+  key:'favorite_list'
 })
 
 </script>

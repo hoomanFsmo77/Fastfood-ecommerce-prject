@@ -26,7 +26,7 @@
   </template>
 
   <v-row v-else>
-    <v-column col="9" class="justify-center mb-4" >
+    <v-column col="12" class="justify-center mb-4" >
       <client-only>
         <half-circle-spinner
             :animation-duration="1000"

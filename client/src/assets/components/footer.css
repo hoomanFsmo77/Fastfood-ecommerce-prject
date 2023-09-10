@@ -1,6 +1,6 @@
 @tailwind components;
 @layer components {
     #footer{
-        @apply bg-[url(/footer.webp)] bg-no-repeat bg-right-top pt-4 bg-primary-dark-2 before:absolute relative before:inset-0 before:bg-[rgba(15,25,36,0.85)] w-full h-full
+        @apply bg-[url(/footer.webp)]  bg-no-repeat bg-cover bg-right-top pt-4 bg-primary-dark-2 before:absolute relative before:inset-0 before:bg-[rgba(15,25,36,0.85)] w-full h-full
     }
 }

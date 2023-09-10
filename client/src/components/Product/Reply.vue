@@ -112,7 +112,7 @@ const submitReply = async () => {
         <VBtnLoader type="submit" class="btn btn-primary btn-sm btn-light" :flag="replyData.btnFlag">
           submit now
         </VBtnLoader>
-        <h6 class="text-red-600 ml-1" v-if="replyData.error">
+        <h6 class="text-red-600 md:ml-1 mt-1 md:mt-0" v-if="replyData.error">
           {{replyData.error}}
         </h6>
       </v-row>

@@ -9,7 +9,7 @@
   <v-row v-if="isLogin && userInformation">
     <FormKit   id="infoForm" type="form" ref="infoForm"  @submit="confirmEditData"  :actions="false" >
       <v-row >
-        <v-column  col="4" class="pr-0.5">
+        <v-column  md="4" col="12" class="md:pr-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_text"
               label="firstname"
@@ -21,7 +21,7 @@
               validation-label="firstname"
           />
         </v-column>
-        <v-column col="4" class="px-0.5">
+        <v-column md="4" col="12" class="md:px-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_text"
               label="lastname"
@@ -33,7 +33,7 @@
               validation-label="lastname"
           />
         </v-column>
-        <v-column  col="4" class="pl-0.5">
+        <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_text"
               label="username"
@@ -46,8 +46,8 @@
           />
         </v-column>
       </v-row>
-      <v-row class="my-2">
-        <v-column  col="4" class="pr-0.5">
+      <v-row class="md:my-2">
+        <v-column  md="4" col="12" class="md:pr-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_text"
               label="email"
@@ -59,7 +59,7 @@
               validation-label="email"
           />
         </v-column>
-        <v-column col="4" class="pl-0.5">
+        <v-column md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_text"
               label="phone"
@@ -73,7 +73,7 @@
         </v-column>
       </v-row>
       <v-row class="mb-1">
-        <v-column col="5" class="!block">
+        <v-column md="5" col="12" class="!block">
           <div v-show="imageData.show">
             <p class="label">profile image</p>
             <div class="relative" >

@@ -3,7 +3,7 @@
     <v-container>
       <v-row class="items-start">
 <!--        //// login-->
-        <v-column col="6" class="pr-1">
+        <v-column col="12" md="6" class="md:pr-1 md:mb-0 mb-2">
           <div class="w-full relative bg-[#fff] rounded-4 py-2  transition-all shadow-md hover:shadow-lg">
               <div class="flex items-center justify-center">
                 <nuxt-img width="80" src="/logo-small.webp"/>
@@ -18,7 +18,7 @@
             </v-row>
               <FormKit   id="loginForm" type="form" ref="loginForm"  @submit="loginSubmit"  :actions="false" >
                 <v-row class="my-1 justify-center">
-                  <v-column class="justify-center" col="8">
+                  <v-column class="justify-center" col="10" md="8">
                     <FormKit
                         type="custom_text"
                         label="email, phone or username*"
@@ -30,7 +30,7 @@
                   </v-column>
                 </v-row>
                 <v-row class="my-1 justify-center ">
-                  <v-column class="justify-center" col="8">
+                  <v-column class="justify-center" col="10" md="8">
                     <FormKit
                         type="custom_password"
                         label="password*"
@@ -56,7 +56,7 @@
 
         </v-column>
 <!--        //// sign up-->
-        <v-column col="6" class="pl-1">
+        <v-column col="12" md="6" class="md:pl-1">
 
           <div class="w-full   bg-[#fff] rounded-4 py-2  transition-all shadow-md hover:shadow-lg">
             <div class="flex items-center justify-center">

@@ -25,16 +25,16 @@
         </v-column>
       </v-row>
       <v-row class="items-end">
-        <v-column col="3" class="">
+        <v-column md="3" col="12" class="md:mb-0 mb-2">
           <VSelect :select-id="cartListData.order.addressID || undefined" @fire="chooseAddress" label="Address" id="choose-address" :data="user_address" />
         </v-column>
-        <v-column col="4"></v-column>
+        <v-column md="4" col="0"></v-column>
 
-        <v-column col="3" class=" ">
+        <v-column md="3" col="6" class=" ">
           <VInput v-model="couponData.code" input-class="input-sm placeholder:!text-[#333] !text-[#333]" id="coupon-code" type="text" placeholder="Coupon Code"/>
 
         </v-column>
-        <v-column col="2" class="justify-end ">
+        <v-column md="2" col="6" class="justify-end ">
           <VBtnLoader :flag="couponData.btnFlag" @click="submitCoupon" class="btn btn-secondary btn-sm ml-1">
             apply coupon
           </VBtnLoader>

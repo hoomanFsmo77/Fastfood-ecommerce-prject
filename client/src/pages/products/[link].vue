@@ -2,7 +2,7 @@
   <section v-if="!product_data_flag" id="product-detail">
    <v-container>
      <v-row>
-       <div class="grid grid-cols-2 gap-2">
+       <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
          <div class="left-content">
 
            <carousel :wrapAround="true" :items-to-show="1">
@@ -62,15 +62,15 @@
            </div>
            <!--           /// add to card-->
            <div class="flex items-center flex-wrap gap-1 mt-2">
-             <VBtnLoader :flag="productPageData.btnLoaderFlag" :disabled="!product_data.status" @click="addToCart" class="btn btn-secondary btn-md btn-light">
+             <VBtnLoader :flag="productPageData.btnLoaderFlag" :disabled="!product_data.status" @click="addToCart" class="btn btn-secondary btn-sm md:btn-md btn-light">
                add to card
              </VBtnLoader>
 
              <template v-if="userFavoriteListFetchFlag && isLogin">
-               <VBtnLoader  v-if="!isProductExistInFAV(product_data.id)" :flag="productPageData.FAVBtnLoaderFlag"  @click="addToFav" class="btn btn-fav btn-md">
+               <VBtnLoader  v-if="!isProductExistInFAV(product_data.id)" :flag="productPageData.FAVBtnLoaderFlag"  @click="addToFav" class="btn btn-fav btn-sm md:btn-md">
                  add to favorite
                </VBtnLoader>
-               <VBtnLoader  v-else :flag="productPageData.removeFAVBtnLoaderFlag"  @click="removeFav" class="btn btn-remove btn-md">
+               <VBtnLoader  v-else :flag="productPageData.removeFAVBtnLoaderFlag"  @click="removeFav" class="btn btn-remove btn-sm md:btn-md">
                  remove from favorites
                </VBtnLoader>
              </template>
@@ -198,7 +198,7 @@
       <v-row>
         <v-column col="12" class="!block">
           <h1 class="text-center w-full  font-700 underline-active pb-1 mx-auto">Similar Products</h1>
-          <div class="grid mt-3 grid-cols-[repeat(4,1fr)] gap-2">
+          <div class="grid mt-3 md:grid-cols-2 grid-cols-1 lg:grid-cols-[repeat(4,1fr)] gap-2">
             <VProductCard
                 v-for="product in similar_products.products"
                 :primary_image="product.primary_image"

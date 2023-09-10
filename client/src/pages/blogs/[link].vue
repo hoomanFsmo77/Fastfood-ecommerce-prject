@@ -12,15 +12,15 @@
         <p class="text-gray-600 font-500 font-robot capitalize mr-0.2">
           By :
         </p>
-        <p class="font-500 capitalize font-robot text-secondary-light-2 text-1">
+        <p class="font-500 capitalize font-robot text-secondary-light-2 text-0.9 md:text-1">
            {{blog_data.author_firstname}} {{blog_data.author_lastname}}
         </p>
         <span class="mx-0.5 text-gray-600">/</span>
-        <p class="font-500 capitalize font-robot text-secondary-light-2 text-1">
+        <p class="font-500 capitalize font-robot text-secondary-light-2 text-0.9 md:text-1">
           {{ blog_data.category }}
         </p>
         <span class="mx-0.5 text-gray-600">/</span>
-        <p class="font-500 capitalize font-robot text-secondary-light-2 text-1">
+        <p class="font-500 capitalize font-robot text-secondary-light-2 text-0.9 md:text-1">
           comments: {{ blog_data.total_comments }}
         </p>
       </div>
@@ -28,7 +28,7 @@
     <hr class="mx-1"/>
     <div class="blog-detail-content">
       <v-row class="items-end">
-        <v-column v-for="row in blog_data.content" :col="row.col || 12" class="!block mb-1.5">
+        <v-column v-for="row in blog_data.content" col="12" :md="row.col || 12" class="!block mb-1.5">
           <h3 class="mb-1 font-600 text-primary-dark-3 font-robot" v-if="row.title">{{row.title}}</h3>
           <p class="text-primary-dark-3 font-robot  leading-2 h6 font-400">{{row.text}}</p>
         </v-column>

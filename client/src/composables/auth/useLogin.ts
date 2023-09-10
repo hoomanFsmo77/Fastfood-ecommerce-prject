@@ -33,9 +33,8 @@ export const useLogin=()=>{
                 loginProcessData.errors=req.errors
             }
         }catch (err) {
-            console.log(err)
-        }finally {
             loginProcessData.errors=['Error in connecting to server!']
+        }finally {
             loginProcessData.buttonLoaderFlag=false
         }
     }

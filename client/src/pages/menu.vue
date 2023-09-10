@@ -2,9 +2,9 @@
   <section class="my-6">
       <v-container>
         <v-row class="items-start">
-          <v-column col="9" class="!block">
+          <v-column md="9" col="12" class=" order-2  !block">
             <template v-if="!menu_products_pending && menu_products.products.length>0">
-              <div  class="grid  grid-cols-[repeat(3,1fr)] gap-1.5 pr-1">
+              <div  class="grid grid-cols-1 md:grid-cols-[repeat(3,1fr)] gap-1.5 md:pr-1">
                 <VProductCard
                     v-for="tab_item in menu_products.products"
                     :primary_image="tab_item.primary_image"
@@ -40,7 +40,7 @@
             </div>
 
           </v-column>
-          <v-column col="3" class="sticky top-[120px]">
+          <v-column md="3" col="12" class=" order-1 md:mb-0 mb-2 md:sticky md:top-[120px]">
             <aside class="p-2 bg-[#fff] ">
               <VInput
                   input-class="placeholder:!text-0.9"

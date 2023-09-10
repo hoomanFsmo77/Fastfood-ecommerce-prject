@@ -2,7 +2,7 @@
   <section class="py-5 bg-[#fff]">
     <v-container>
       <v-row class="justify-center">
-        <v-column col="4">
+        <v-column col="10" md="4">
           <div class="p-1.5 border-[1px] w-full rounded-4 shadow-md ">
             <span :class="data.status==='1' ? 'bg-green-600' : 'bg-red-600'" class="w-2.5 h-2.5 flex justify-center items-center mx-auto rounded-full ">
               <Icon :name=" data.status==='1' ? 'ri:check-fill' :'bi:x' " size="2rem" class="text-primary-light-1" />

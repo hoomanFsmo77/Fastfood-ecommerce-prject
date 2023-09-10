@@ -33,7 +33,7 @@ const subscribeHandler =async () => {
     <section id="services">
       <v-container>
         <v-row class="justify-center">
-          <v-column v-for="item in services" col="3">
+          <v-column v-for="item in services" md="6" col="12" lg="3">
             <div class="py-1.5 px-2 flex flex-col justify-center w-full items-center">
               <nuxt-img width="120" :src="item.image"/>
               <h5 class="font-700 text-center my-1">{{item.title}}</h5>
@@ -42,13 +42,13 @@ const subscribeHandler =async () => {
           </v-column>
         </v-row>
         <v-row class="my-3">
-          <v-column col="12" class="bg-primary-light-5 p-3">
+          <v-column col="12" class="bg-primary-light-5 md:p-3 p-1">
             <v-row class="w-full items-center">
-              <v-column col="6" class="!block">
+              <v-column md="6" col="12" class="!block md:mb-0 mb-2">
                 <h2 class="text-primary-dark-2 font-800">Subscribe to newsletter</h2>
                 <h6 class="italic">Get weekly offer and discounts</h6>
               </v-column>
-              <v-column col="6" class="!block">
+              <v-column md="6" col="12" class="!block">
                 <form @submit.prevent="subscribeHandler" class="w-full flex">
                   <input v-model="subscribeData.email" class="input" placeholder="enter your email address"/>
                   <button type="submit" class="btn btn-simple btn-sm !rounded-[0px]">

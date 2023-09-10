@@ -36,10 +36,10 @@ const {customProductData,customPieceHandler,quantityHandler,customProductAddToCa
     <section  id="build-product" v-if="!pending && isLogin">
      <v-container>
        <v-row>
-         <v-column col="5">
+         <v-column lg="5" col="10">
            <inner-image-zoom :src="data.templates.filter(i=>i.id===customProductData.templateID)[0].image" :zoomSrc="data.templates.filter(i=>i.id===customProductData.templateID)[0].image"  />
          </v-column>
-         <v-column col="3" class="flex-col">
+         <v-column lg="3" col="2" class="flex-col">
             <div class="pl-1">
               <nuxt-img @click="customProductData.templateID=item.id" width="80" :class="{'!opacity-100':item.id===customProductData.templateID}" class="mb-1 opacity-50 cursor-pointer transition-all hover:opacity-100" v-for="item in data.templates" :src="item.image"/>
             </div>

@@ -26,15 +26,15 @@ defineProps<{
         {{date}}
       </p>
       <div class="flex items-center" v-if="type==='list'">
-        <p class="font-600 capitalize text-primary-light-3 text-1">
+        <p class="font-600 capitalize text-primary-light-3 text-0.9 lg:text-1">
           By: {{author_firstname}} {{author_lastname}}
         </p>
         <span class="mx-0.5 text-primary-light-3">/</span>
-        <p class="font-600 capitalize text-primary-light-3 text-1">
+        <p class="font-600 capitalize text-primary-light-3 text-0.9 lg:text-1">
           {{ category }}
         </p>
         <span class="mx-0.5 text-primary-light-3">/</span>
-        <p class="font-600 capitalize text-primary-light-3 text-1">
+        <p class="font-600 capitalize text-primary-light-3 text-0.9 lg:text-1">
           comments: {{ total_comments }}
         </p>
       </div>

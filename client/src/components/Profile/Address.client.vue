@@ -24,10 +24,10 @@ const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,su
 
 <template>
 
-  <v-row class="p-1.5">
+  <v-row class="md:p-1.5 p-1">
     <FormKit   :id="props.type==='show' ? 'addressForm' : 'addressForm-create'" type="form" ref="addressForm"  @submit="confirmAddressForm"  :actions="false" >
       <v-row >
-        <v-column  col="4" class="pr-0.5">
+        <v-column  md="4" col="12" class="md:pr-0.5 mb-1 md:mb-0">
           <FormKit
               type="custom_text"
               label="title"
@@ -38,7 +38,7 @@ const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,su
               validation-label="title"
           />
         </v-column>
-        <v-column col="4" class="px-0.5">
+        <v-column md="4" col="12" class="md:px-0.5 mb-1 md:mb-0">
           <FormKit
               type="custom_text"
               label="phone"
@@ -49,7 +49,7 @@ const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,su
               validation-label="phone"
           />
         </v-column>
-        <v-column  col="4" class="pl-0.5">
+        <v-column  md="4" col="12" class="md:pl-0.5 mb-1 md:mb-0">
           <FormKit
               type="custom_text"
               label="Postal Code"
@@ -61,11 +61,11 @@ const {changeCity,changeProvince,addressForm,deleteAddress,confirmAddressForm,su
           />
         </v-column>
       </v-row>
-      <v-row class="my-2">
-        <v-column  col="4" class="pr-0.5 !block">
+      <v-row class="md:my-2">
+        <v-column  md="4" col="12" class=" md:pr-0.5 mb-1 md:mb-0 !block">
           <ProfileProvince @fire="changeProvince" :province-id="addressData.provinceID"  />
         </v-column>
-        <v-column col="4" class="pl-0.5 !block">
+        <v-column md="4" col="12" class=" md:pl-0.5 mb-1 md:mb-0 !block">
           <ProfileCity @fire="changeCity" :city-id="addressData.cityID" :province-id="addressData.provinceID"/>
         </v-column>
       </v-row>
