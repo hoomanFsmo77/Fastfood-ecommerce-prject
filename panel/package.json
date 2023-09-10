@@ -1,0 +1,43 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/image-edge": "^1.0.0-rc.1-28164352.ad7c010",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia/nuxt": "^0.4.11",
+    "@types/leaflet": "^1.9.3",
+    "@types/node": "^18.17.0",
+    "autoprefixer": "^10.4.14",
+    "epic-spinners": "^2.0.0",
+    "nprogress": "^0.2.0",
+    "nuxt": "^3.6.5",
+    "nuxt-icon": "^0.4.2",
+    "pinia": "^2.1.6",
+    "postcss": "^8.4.27",
+    "sass": "^1.64.1"
+  },
+  "dependencies": {
+    "@formkit/addons": "^0.18.4",
+    "@formkit/nuxt": "^0.18.4",
+    "@formkit/themes": "^0.18.5",
+    "@types/nprogress": "^0.2.0",
+    "animate.css": "^4.1.1",
+    "choices.js": "^10.2.0",
+    "form-data": "^4.0.0",
+    "h3-formidable": "^0.3.8",
+    "leaflet": "^1.9.4",
+    "vue-inner-image-zoom": "^2.0.0",
+    "vue-sweetalert2": "^5.0.5",
+    "vue3-carousel-nuxt": "^1.1.0",
+    "vue3-google-map": "^0.17.1",
+    "vue3-photo-preview": "^0.3.0"
+  }
+}

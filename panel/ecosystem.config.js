@@ -1,0 +1,10 @@
+module.exports={
+    apps:[
+        {
+            name:'wengdo-panel',
+            port:'3006',
+            exec_mode:'fork',
+            script:'./.output/server/index.mjs'
+        }
+    ]
+}

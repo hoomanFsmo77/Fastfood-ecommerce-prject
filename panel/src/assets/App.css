@@ -1,0 +1,48 @@
+:root {
+    --animate-delay: 0.5s;
+}
+
+body .scroller{
+    scrollbar-width:thin;
+    scrollbar-color: #ccc #fff;
+}
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-thumb{
+    background:#8391a2;
+}
+::-webkit-scrollbar-track{
+    background:  #3a444e ;
+}
+.box-is-loading{
+    background: #eee;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+    position: relative;
+    z-index: 9999;
+}
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+#nprogress .bar{
+    background: #a41a13 !important;
+    height: 3px !important;
+}
+.formkit-wrapper .input-hint{
+    color: #3a444e;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+ .formkit-message{
+    color: #e93030;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}

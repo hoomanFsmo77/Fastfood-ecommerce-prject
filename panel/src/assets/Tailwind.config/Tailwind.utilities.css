@@ -1,0 +1,72 @@
+@tailwind utilities;
+@layer utilities {
+    .col-0{
+        width: 0px;
+        display: none;
+    }
+    .col-1{
+        width:  calc((1 * 100%) / 12);
+         display: flex;
+    }
+    .col-2{
+        width: calc((2 * 100%) / 12);
+         display: flex;
+    }
+    .col-3{
+        width:   calc((3 * 100%) / 12);
+         display: flex;
+    }
+    .col-4{
+        width:   calc((4 * 100%) / 12);
+         display: flex;
+    }
+    .col-5{
+        width:  calc((5 * 100%) / 12);
+         display: flex;
+    }
+    .col-6{
+        width:   calc((6 * 100%) / 12);
+         display: flex;
+    }
+    .col-7{
+        width:   calc((7 * 100%) / 12);
+         display: flex;
+    }
+    .col-8{
+        width:  calc((8 * 100%) / 12);
+         display: flex;
+    }
+    .col-9{
+        width:  calc((9 * 100%) / 12);
+         display: flex;
+    }
+    .col-10{
+        width:   calc((10 * 100%) / 12);
+         display: flex;
+    }
+    .col-11{
+        width:  calc((11 * 100%) / 12);
+         display: flex;
+    }
+    .col-12{
+        width: 100% ;
+         display: flex;
+    }
+    .radius-odd{
+        border-top-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+    }
+    .modal-lg{
+        width: 100vw !important;
+        max-height: 500px !important;
+        overflow-y: auto;
+    }
+    
+    @media (min-width: 768px) {
+        .modal-lg{
+            width: 60vw !important;
+            max-height: 500px !important;
+            overflow-y: auto;
+        }
+    }
+}

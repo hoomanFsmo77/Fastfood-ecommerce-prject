@@ -1,0 +1,35 @@
+@tailwind components;
+
+@layer components {
+    .table-responsive{
+        @apply overflow-x-auto w-0 min-w-full relative;
+    }
+    table{
+        @apply w-full mb-2
+    }
+    table tr th, table tr td{
+        @apply p-1 align-middle
+    }
+
+
+    table tr th p {
+        @apply font-600 capitalize text-primary-dark-3 text-1 text-left
+    }
+    table tr td p{
+        @apply  capitalize text-primary-dark-3 text-1 text-left
+    }
+    table tr th{
+        @apply border-y-2 border-[rgba(0,0,0,0.1)]
+    }
+    table tr td{
+        @apply border-b-2 border-[rgba(0,0,0,0.1)]
+    }
+    .table-loader{
+        @apply absolute inset-0 w-full h-full bg-[rgba(255,255,255,0.2)] z-10 flex justify-center items-center
+    }
+    .tr-hover{
+        @apply transition-all cursor-pointer hover:bg-gray-100/80
+    }
+
+
+}

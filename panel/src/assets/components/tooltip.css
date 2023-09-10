@@ -1,0 +1,10 @@
+@tailwind components;
+
+@layer components {
+    .tooltip-wrapper{
+        @apply relative
+    }
+    .tooltip-content{
+        @apply absolute w-[8.5rem] p-0.5 bg-[#333] rounded-2
+    }
+}
