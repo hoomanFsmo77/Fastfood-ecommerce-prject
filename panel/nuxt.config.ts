@@ -35,10 +35,16 @@ export default defineNuxtConfig({
     },
     srcDir: './src',
     modules: [
-        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt','@formkit/nuxt'
+        '@pinia/nuxt','@nuxt/image-edge','@nuxtjs/tailwindcss','nuxt-icon','vue3-carousel-nuxt','@formkit/nuxt','@sidebase/nuxt-auth'
     ],
     runtimeConfig:{
         api_base:process.env.API_BASE,
-        access:process.env.ACCESS
-    }
+        access:process.env.ACCESS,
+
+        public:{
+            callback_login:process.env.CALLBACK_LOGIN,
+            callback_logout:process.env.CALLBACK_LOGOUT,
+        }
+    },
+    auth: {    globalAppMiddleware: true   }
 })
