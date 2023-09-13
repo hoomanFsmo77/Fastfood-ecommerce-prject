@@ -1,6 +1,7 @@
 <template>
   <NuxtLayout>
     <NuxtPage />
+    <VPreloader/>
   </NuxtLayout>
 </template>
 <script setup lang="ts">

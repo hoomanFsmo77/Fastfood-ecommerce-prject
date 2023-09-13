@@ -1,16 +1,14 @@
 
 export default {
-    'primary-light-1':'#f3f3f3', // body
-    'primary-light-2':'#7d7d7d',
-    'primary-light-3':'#b1b1b1',
-    'primary-light-4':'#187a8f',
-    'primary-light-5':'#eec300',
-    'primary-dark-1':'#242424', /// text
-    'primary-dark-2':'#0f1924', /// btn
-    'primary-dark-3':'#111', /// btn
-    'secondary-light-1':'#f7b82d',
-    'secondary-light-2':'#a41a13',
-    'secondary-light-3':'#e93030',
-    'secondary-light-4':'#ccb265',
-    'secondary-light-5':'#a40301',
+    'primary-light-1':'#00bac7', /// btn
+    'primary-light-2':'#bcc0c6', /// titles
+    'primary-light-3':'rgb(188,192,198)', /// text
+    'primary-light-4':'#fff', /// text 2
+
+    'primary-dark-1':'#343a40', /// body
+    'primary-dark-2':'rgb(27,27,28)', /// sidebar
+    'primary-dark-3':'#2d2d2d', /// card
+    'primary-dark-4':'#323232', /// dropdown
+    'primary-dark-5':'#3e3e3e', /// dropdown hover
+    'primary-dark-6':'#252626', /// input bg
 }

@@ -22,6 +22,10 @@ export default {
     column-gap: v-bind(columnGaps);
     row-gap: v-bind(rowGaps);
   }
+  .row > * {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 </style>

@@ -217,22 +217,26 @@ module.exports = {
           fontFamily:'theme(fontFamily.poppins)'
         },
         'body':{
-          overflowX:'hidden'
+          overflowX:'hidden',
+          backgroundColor:'theme(colors[primary-dark-1])'
         },
         'body *::selection':{
-          backgroundColor:'#a41a13',
-          color:'#f3f3f3'
+          backgroundColor:'theme(colors[primary-light-1])',
+          color:'theme(colors[primary-light-4])'
         },
         'h1,h2,h3,h4,h5,h6':{
-          lineHeight:'1.5',
+          lineHeight:'1.6',
           fontWeight:'500',
-          color:'#333'
+          color:'theme(colors[primary-light-2])'
         },
         'p,span,a':{
           fontSize:'0.9rem',
           fontWeight:'500',
-          lineHeight:'1.6',
-          color:'#333'
+          lineHeight:'1.5',
+          color:'theme(colors[primary-light-3])'
+        },
+        'button':{
+          color:'theme(colors[primary-light-4])'
         }
       })
     })

@@ -5,18 +5,17 @@ definePageMeta({
   layout:false,
   auth: false
 })
-const { status, data, signIn, signOut } = useAuth()
-const {public:{callback_login}}:any=useRuntimeConfig()
-const loginHandler = () => {
-  signIn(undefined,{callbackUrl:callback_login})
-}
+const {  data, signIn } = useAuth()
+const {public:{callback_login}}:any=useRuntimeConfig();
 </script>
 
 <template>
+  <section class="flex justify-center items-center h-[100vh]">
+    <button @click="signIn(undefined,{callbackUrl:callback_login})" class="btn btn-primary btn-lg">
+      login
+    </button>
+  </section>
 
-  <button @click="loginHandler">
-    login github
-  </button>
 </template>
 
 <style scoped>

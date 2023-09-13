@@ -5,13 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @tailwind base;
 @layer base {
-    body{
-        @apply bg-primary-light-1 overflow-x-hidden
-    }
     *,::before,::after{
         box-sizing: border-box!important;
     }
-
     h1,.h1{
         @apply  md:text-2.5 text-1.7 capitalize
     }

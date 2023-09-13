@@ -28,19 +28,21 @@ const calculateRootPath = (page:number)=>{
 
 <template>
   <v-row class="mt-2">
-    <v-column col="12" class="justify-center">
-      <NuxtLink :to="calculateRootPath(prevPage)" class="pagination-btn mx-0.5">
-        <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
-      </NuxtLink>
-      <template v-for="(item,index) in total">
-
-        <NuxtLink :to="calculateRootPath(index+1)" class="pagination-btn mx-0.5" :class="{'active':current_page===index+1}" >
-          {{index+1}}
+    <v-column col="12" >
+      <div class="rounded-4 flex">
+        <NuxtLink :to="calculateRootPath(prevPage)" class="pagination-btn rounded-l-8 border-r-[1px] border-primary-dark-1">
+          <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
         </NuxtLink>
-      </template>
-      <NuxtLink :to="calculateRootPath(nextPage)" class="pagination-btn mx-0.5" >
-        <Icon size="1.5rem" name="ri:arrow-right-s-line"/>
-      </NuxtLink>
+        <template v-for="(item,index) in total">
+
+          <NuxtLink :to="calculateRootPath(index+1)" class="pagination-btn  border-r-[1px] border-primary-dark-1" :class="{'active':current_page===index+1}" >
+            {{index+1}}
+          </NuxtLink>
+        </template>
+        <NuxtLink :to="calculateRootPath(nextPage)" class="pagination-btn rounded-r-8" >
+          <Icon size="1.5rem" name="ri:arrow-right-s-line"/>
+        </NuxtLink>
+      </div>
     </v-column>
   </v-row>
 </template>

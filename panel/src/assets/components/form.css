@@ -1,68 +1,47 @@
 @tailwind components;
 @layer components {
     .btn{
-        @apply bg-[#fff] uppercase md:tracking-[4px] tracking-[3px] md:leading-[60px] leading-[50px] md:px-4 px-2 md:text-1 text-0.8 font-500 rounded-4 cursor-pointer  relative z-[1] inline-block disabled:!bg-gray-400 disabled:before:!hidden before:block  before:h-full before:absolute before:mx-auto before:w-full before:opacity-0  before:invisible hover:before:opacity-100  hover:before:visible hover:before:w-full before:duration-500  before:ease-in-out before:transition-all before:z-[-1] before:rounded-4
+        @apply outline-none rounded-full transition-all duration-500 px-1.5 py-0.7 text-1 font-500
     }
-
     .btn-primary{
-        @apply   before:top-0  before:bg-secondary-light-1  before:left-0   before:scale-x-[0.5] before:scale-y-[1]   hover:before:scale-x-[1] hover:before:scale-y-[1]
+        @apply   bg-primary-light-1 hover:bg-primary-light-1/70
     }
-    .btn-simple{
-        @apply  bg-secondary-light-2 text-primary-light-1
-    }
-    .btn-primary-2{
-        @apply   bg-secondary-light-2 hover:bg-secondary-light-1 text-primary-light-1 transition-all duration-500
-    }
-
-    .btn-md{
-        @apply  tracking-[3px] leading-[50px] px-2 text-1
-    }
-
-    .btn-fav{
-        @apply   before:top-0   before:bg-primary-dark-2 before:left-0  before:scale-x-[0.5] before:scale-y-[1]  hover:before:scale-x-[1] hover:before:scale-y-[1]  bg-secondary-light-1 text-primary-light-1
-    }
-    .btn-remove{
-        @apply before:top-0   before:bg-secondary-light-2  before:left-0  before:scale-x-[0.5] before:scale-y-[1]   hover:before:scale-x-[1] hover:before:scale-y-[1] bg-secondary-light-4 text-primary-light-1
-    }
-
-    .btn-sm{
-        @apply  tracking-[2px] leading-[40px] px-1 text-0.8
-    }
-    .btn-xsm{
-        @apply tracking-[1px] leading-[25px] px-1 text-0.6
-    }
-    .btn-light{
-       @apply !bg-secondary-light-2 !text-primary-light-1
-    }
-
-
     .btn-secondary{
-        @apply bg-secondary-light-2 text-primary-light-1   before:top-0   before:bg-primary-dark-2  before:left-0   before:scale-x-[1] before:scale-y-[0.5]   hover:before:scale-x-[1] hover:before:scale-y-[1]
+        @apply bg-transparent border-[1px] border-primary-light-1 !text-primary-light-1 hover:bg-primary-light-1
     }
+    .btn-lg{
+        @apply text-1.5 px-2 py-1
+    }
+    .btn-sm{
+        @apply text-0.8 px-1 py-0.5
+    }
+
+
     .input-reset{
         @apply outline-none focus:outline-none
     }
     .input{
-        @apply py-0.8 pl-1.5 pr-2 w-full bg-[#fff] outline-none focus:outline-none placeholder:text-gray-400 placeholder:capitalize placeholder:text-1 text-gray-500
+        @apply border-[1px] border-primary-dark-2 p-0.7 w-full bg-primary-dark-6 outline-none focus:outline-none placeholder:text-primary-light-3 placeholder:capitalize placeholder:text-0.9 text-0.9 text-primary-light-3 rounded-20 transition-all duration-500
     }
+
     .input-sm{
         @apply  py-0.5 pl-0.8 placeholder:text-0.8
     }
     .input-primary{
-        @apply border-[1px] transition-all focus:border-secondary-light-2
+        @apply   focus:border-primary-light-1 focus:shadow-primary-light-1/40 focus:shadow-[0_0_1rem_0.01rem]
     }
 
     .pagination-btn{
-        @apply w-3 h-3 rounded-full border-[2px] border-secondary-light-2 flex justify-center items-center font-600 text-secondary-light-2 hover:bg-secondary-light-2 transition-all duration-500 ease-in-out hover:text-[#fff]
+        @apply w-2.5 h-2.5  bg-primary-dark-2 flex justify-center items-center font-600 text-primary-light-1 hover:bg-primary-light-1 transition-all duration-500 ease-in-out hover:text-[#fff]
     }
     .pagination-btn.active{
-        @apply !text-[#fff] !bg-secondary-light-2
+        @apply !text-[#fff] !bg-primary-light-1
     }
     .number-input{
         @apply w-4 h-3 border-[1px] transition-all duration-500 focus:border-[#80bdff] text-1 text-gray-700 border-[#ced4da] p-1
     }
     .label{
-        @apply text-0.9 text-[#848484] capitalize block mb-0.2
+        @apply text-0.9 text-[#848484] capitalize block mb-0.4
     }
     .input-wrapper{
         @apply w-full relative
@@ -77,7 +56,7 @@
         @apply absolute inset-0 w-full h-full appearance-none opacity-0 cursor-pointer
     }
     .input-radio{
-        @apply appearance-none w-[16px] h-[16px] p-[8px] rounded-full border-[1px] border-gray-400  focus:ring-4 focus:ring-secondary-light-2/50 checked:bg-secondary-light-2 checked:text-white
+        @apply appearance-none w-[16px] h-[16px] p-[8px] rounded-full border-[1px] border-gray-400  focus:ring-4 focus:ring-primary-light-1/50 checked:bg-primary-light-1 checked:text-white
         checked:bg-[url("/check.svg")] checked:bg-center  checked:rounded-full checked:w-[18px] checked:h-[18px] outline-0 checked:border-[0px]
         ;
     }
