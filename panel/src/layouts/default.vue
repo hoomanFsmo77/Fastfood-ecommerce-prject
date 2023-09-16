@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <div>
+  <div id="main-content">
+    <LayoutSidebar />
     <slot/>
   </div>
 </template>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-
+const error=useError()
 </script>
 
 <template>
-
-  404 page
+  <p>
+    {{error}}
+  </p>
 </template>
 
 <style scoped>

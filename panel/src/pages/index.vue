@@ -12,9 +12,10 @@ definePageMeta({
 
 <template>
 
-  <FormKit type="custom_text" label="email"/>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at consectetur dignissimos distinctio earum illum, impedit ipsum officiis optio provident, quaerat sunt tempora, tenetur veniam voluptates. Beatae eius error nam.
+  </p>
 
-  <VPagination  :current_page="3" :prev-page="2" :next-page="4" :total="1"/>
 </template>
 
 <style scoped>

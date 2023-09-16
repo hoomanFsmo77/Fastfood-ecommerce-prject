@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name:'USERS_CREATE',
-  page_title:'Create user'
+  name:'CATEGORIES_CREATE',
+  page_title:'Create category'
 })
 
 

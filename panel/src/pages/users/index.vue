@@ -1,13 +1,9 @@
 <script setup lang="ts">
-definePageMeta({
-  name:'USERS',
-  page_title:'Users'
-})
 
 </script>
 
 <template>
-  users
+  <NuxtPage />
 </template>
 
 <style scoped>

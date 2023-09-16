@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  name:'PRODUCT_CREATE',
+  name:'PRODUCTS_CREATE',
   page_title:'Create product'
 })
 

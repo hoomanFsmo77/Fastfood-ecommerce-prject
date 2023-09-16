@@ -1,14 +1,12 @@
 <script setup lang="ts">
 definePageMeta({
-  name:'CATEGORY_CREATE',
-  page_title:'Create category'
+  name:'CATEGORIES',
+  page_title:'Categories'
 })
-
-
 </script>
 
 <template>
-  create {{$route.params.type}}
+  cat
 </template>
 
 <style scoped>

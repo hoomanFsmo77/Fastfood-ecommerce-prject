@@ -1,10 +1,12 @@
 <script setup lang="ts">
-
-
+definePageMeta({
+  name:'BLOGS',
+  page_title:'Products'
+})
 </script>
 
 <template>
-  <NuxtPage />
+  bl
 </template>
 
 <style scoped>
