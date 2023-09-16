@@ -1,11 +1,11 @@
 <template>
-  <div v-bind="$attrs" class="row flex flex-wrap"><slot/></div>
+  <div v-bind="$attrs" :class="{'[&_.col]:!p-0':noP}" class="row flex flex-wrap"><slot/></div>
 </template>
 
 <script>
 export default {
   name: "VRow",
-  props:['colGap','rowGap'],
+  props:['colGap','rowGap','noP'],
   data(){
     return{
       columnGaps:this.colGap || 0,
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @tailwind components;
 @layer components {
   .row{

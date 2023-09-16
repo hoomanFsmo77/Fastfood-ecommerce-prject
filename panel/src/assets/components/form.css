@@ -21,7 +21,7 @@
         @apply outline-none focus:outline-none
     }
     .input{
-        @apply border-[1px] border-primary-dark-2 p-0.7 w-full bg-primary-dark-6 outline-none focus:outline-none placeholder:text-primary-light-3 placeholder:capitalize placeholder:text-0.9 text-0.9 text-primary-light-3 rounded-20 transition-all duration-500
+        @apply border-[1px] border-primary-dark-2 p-0.7 w-full bg-[rgb(29,29,30)] outline-none focus:outline-none placeholder:text-primary-light-3 placeholder:capitalize placeholder:text-0.9 text-0.9 text-primary-light-3 rounded-20 transition-all duration-500
     }
 
     .input-sm{

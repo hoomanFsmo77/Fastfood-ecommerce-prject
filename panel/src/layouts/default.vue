@@ -3,8 +3,9 @@
 </script>
 
 <template>
+  <LayoutSidebar />
   <div id="main-content">
-    <LayoutSidebar />
+    <LayoutHeader />
     <slot/>
   </div>
 </template>

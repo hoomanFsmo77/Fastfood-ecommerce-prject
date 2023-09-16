@@ -5,18 +5,19 @@ const props=defineProps<{
 }>()
 const dropdownFlag=shallowRef<boolean>(false);
 const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value;
+const close = () => {
+  dropdownFlag.value=false
+}
 </script>
 
 <template>
-  <div v-drop="toggleDropDown"  class="dropdown-wrapper">
+  <div v-click-out="close" v-drop="toggleDropDown"  class="dropdown-wrapper">
     <div class="dropdown-top">
       <slot name="top"/>
     </div>
     <Transition :name="direction==='down' ? 'drop_down': 'drop_right'">
-      <div class="dropdown-main" :class="{'top-[75px] left-0':direction==='down','right-[-100%] top-0':direction==='right'}" v-if="dropdownFlag">
-        <ul :class="{'!border-t-0':!hasSub}">
-          <slot name="main"/>
-        </ul>
+      <div class="dropdown-main" :class="{'top-[60px] right-0':direction==='down','right-[-100%] top-0':direction==='right'}" v-if="dropdownFlag">
+        <slot name="main"/>
       </div>
     </Transition>
   </div>
@@ -29,10 +30,10 @@ const toggleDropDown = () => dropdownFlag.value=!dropdownFlag.value;
     @apply transition-all duration-500 ease-in-out
   }
   .drop_down-enter-from,.drop_down-leave-to{
-    @apply opacity-0 invisible top-[85px]
+    @apply opacity-0 invisible top-[75px]
   }
   .drop_down-enter-to,.drop_down-leave-from{
-    @apply opacity-100 visible top-[75px]
+    @apply opacity-100 visible top-[60px]
   }
 
 

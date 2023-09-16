@@ -1,7 +1,7 @@
 
 body .scroller{
     scrollbar-width:thin;
-    scrollbar-color: #ccc #fff;
+    scrollbar-color: #bcc0c6 rgb(27,27,28);
 }
 ::-webkit-scrollbar{
     width: 8px;

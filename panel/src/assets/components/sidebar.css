@@ -2,16 +2,16 @@
 
 @layer components {
     #sidebar{
-        @apply md:w-[260px] bg-primary-dark-2 h-[100vh] fixed left-0 top-0
+        @apply md:w-[260px] bg-primary-dark-2 h-[100vh] fixed left-0 top-0 overflow-y-auto
     }
     .sidebar-link{
         @apply pl-2.5 font-400 py-0.8 rounded-r-full flex items-center gap-0.8 hover:text-primary-light-1 transition-all
     }
     .sidebar-link.active{
-        @apply bg-primary-light-1/30 !text-primary-light-1
+        @apply bg-primary-light-1/20 !text-primary-light-1
     }
     .sidebar-link-sub{
-        @apply text-0.8 transition-all hover:text-primary-light-4 block pb-1 capitalize before:block relative before:absolute before:left-[-25px] before:w-0.5 before:h-0.5 before:bg-primary-light-3/50 before:rounded-full before:top-[5px] after:block  after:absolute after:left-[-21px] after:w-[1px] after:h-0.9 after:bg-primary-light-3/50 after:top-[19px]
+        @apply text-0.8 transition-all hover:text-primary-light-4  pb-1 capitalize before:block relative before:absolute before:left-[-25px] before:w-0.5 before:h-0.5 before:bg-primary-light-3/50 before:rounded-full before:top-[5px] after:block  after:absolute after:left-[-21px] after:w-[1px] after:h-0.9 after:bg-primary-light-3/50 after:top-[19px] flex items-center
     }
     .sidebar-link-sub.active{
         @apply !text-primary-light-4 before:!bg-primary-light-1

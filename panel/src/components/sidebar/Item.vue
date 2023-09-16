@@ -29,6 +29,7 @@ watch(
     <ul v-if="hasSub" v-collapse="openItemFlag" :class="{'v-collapse':!(route.name as string).includes(props.link.name)}" class=" transition-all pl-4.5 ">
       <li v-for="(subItem,index) in sub" class="first:pt-1 ">
         <NuxtLink exact-active-class="active" :to="subItem.link" :class="{'after:!hidden':sub?.length===index+1}" class="sidebar-link-sub">
+          <Icon size="0.9rem" class="mr-0.5" :name="subItem.icon"/>
           {{subItem.title}}
         </NuxtLink>
       </li>
