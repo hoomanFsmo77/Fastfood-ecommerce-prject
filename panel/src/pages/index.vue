@@ -3,15 +3,14 @@ definePageMeta({
   name:'DASHBOARD',
   page_title:'Dashboard'
 })
-// const { status, data, signIn, signOut } = useAuth()
-// const {public:{callback_logout}}:any=useRuntimeConfig()
-// const logoutHandler = () => {
-//   signOut({callbackUrl:callback_logout})
-// }
+const {data:sales_data}=await useFetch('/api/chart',{query:{type:'sales'}})
+const {data:visitors_data}=await useFetch('/api/chart',{query:{type:'visitors'}})
+
 </script>
 
 <template>
-
+  {{sales_data}}
+  {{visitors_data}}
   <p>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at consectetur dignissimos distinctio earum illum, impedit ipsum officiis optio provident, quaerat sunt tempora, tenetur veniam voluptates. Beatae eius error nam.
   </p>

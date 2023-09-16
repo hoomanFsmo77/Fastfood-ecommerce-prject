@@ -24,7 +24,9 @@ router.post('/register',requiredBodyValidation(),emailValidation(),passwordValid
         where({email:body.email,username:body.username}).
         then( async response=>{
             if(response.length>0){
-                res.status(200).send(responseHandler(true,'email or username already exist!',null))
+                res.status(200).send(responseHandler(true,'email or username already exist!',{
+                    token:response[0].token
+                }))
             }else{
                 const token=nanoid(48);
                 database('admins').
@@ -37,7 +39,7 @@ router.post('/register',requiredBodyValidation(),emailValidation(),passwordValid
                     token:token
                 }).
                 then(response=>{
-                    res.status(200).send(responseHandler(false,'you are registered.',null))
+                    res.status(200).send(responseHandler(false,'you are registered.', {token:token}))
                 }).catch(err=>{
                     res.status(503).send('error in db')
                 })
