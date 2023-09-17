@@ -3,7 +3,7 @@
 @import "../components/form.css";
 @import "../components/sidebar.css";
 @import "../components/header.css";
-/*@import "../components/card.css";*/
+@import "../components/card.css";
 /*@import "../components/tooltip.css";*/
 /*@import "../components/table.css";*/
 /*@import "../components/modal.css";*/
@@ -24,7 +24,7 @@
         @apply overflow-hidden text-ellipsis whitespace-nowrap;
     }
     #main-content{
-        @apply md:ml-[260px] before:h-13 before:bg-[#252626] before:block before:absolute before:top-0 before:right-0 before:w-full before:z-[-1] px-2.5
+        @apply md:ml-[260px] before:h-10 before:bg-[#252626] before:block before:absolute before:top-0 before:right-0 before:w-full before:z-[-1] lg:px-2.5 md:px-1.5 px-0.7
     }
 
 }

@@ -37,7 +37,7 @@ watch(
   </li>
 </template>
 
-<style scoped>
+<style >
 
 @tailwind components;
 @layer components {

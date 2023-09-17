@@ -2,7 +2,7 @@
 
 @layer components {
     #sidebar{
-        @apply md:w-[260px] bg-primary-dark-2 h-[100vh] fixed left-0 top-0 overflow-y-auto
+        @apply md:w-[260px] md:block hidden bg-primary-dark-2 h-[100vh] fixed left-0 top-0 overflow-y-auto
     }
     .sidebar-link{
         @apply pl-2.5 font-400 py-0.8 rounded-r-full flex items-center gap-0.8 hover:text-primary-light-1 transition-all
@@ -15,5 +15,8 @@
     }
     .sidebar-link-sub.active{
         @apply !text-primary-light-4 before:!bg-primary-light-1
+    }
+    #mobile-navbar{
+        @apply md:hidden block bg-primary-dark-2
     }
 }

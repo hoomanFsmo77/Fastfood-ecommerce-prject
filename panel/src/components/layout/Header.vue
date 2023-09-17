@@ -6,7 +6,7 @@ const {public:{callback_logout}}:any=useRuntimeConfig()
 <template>
   <header id="header">
     <v-row :no-p="true">
-      <v-column col="12" class="flex justify-end gap-1">
+      <v-column col="12" class="flex md:justify-end justify-center gap-1">
         <div class="relative">
           <input class="input input-primary" placeholder="search ..." type="text" />
           <span class="flex justify-center items-center p-0.3 rounded-2 right-0 cursor-pointer transition-all hover:bg-primary-light-1/50 bottom-[-8px] absolute bg-primary-light-1 m-1">
