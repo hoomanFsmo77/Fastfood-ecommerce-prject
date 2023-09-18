@@ -53,6 +53,7 @@ const chartsRoute=require('./routes/panel/charts')
 const statisticRoute=require('./routes/panel/statistic')
 const offersRoute=require('./routes/panel/offer')
 const customProductRoute=require('./routes/panel/product_custom')
+const orderRoute=require('./routes/panel/orders')
 
 //// app routes
 app.use('/storage/image',storageRoute)
@@ -95,6 +96,7 @@ app.use('/panel/charts',chartsRoute)
 app.use('/panel/statistic',statisticRoute)
 app.use('/panel/offer',offersRoute)
 app.use('/panel/custom-product',customProductRoute)
+app.use('/panel/orders',orderRoute)
 
 
 
