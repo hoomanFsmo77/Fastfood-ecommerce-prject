@@ -5,30 +5,33 @@
         @apply overflow-x-auto w-0 min-w-full relative;
     }
     table{
-        @apply w-full mb-2
+        @apply w-full
     }
-    table tr th, table tr td{
+
+
+    table tr th,table tr td{
         @apply p-1 align-middle
     }
-
-
+    table thead{
+        @apply bg-[rgba(178,182,188,0.1)]
+    }
     table tr th p {
-        @apply font-600 capitalize text-primary-dark-3 text-1 text-left
+        @apply font-500 capitalize text-primary-light-3 text-0.8 text-left
     }
     table tr td p{
-        @apply  capitalize text-primary-dark-3 text-1 text-left
+        @apply  capitalize text-primary-light-2 text-0.8 text-left
     }
-    table tr th{
-        @apply border-y-2 border-[rgba(0,0,0,0.1)]
+
+
+    table tbody tr {
+        @apply border-b-[1px] border-primary-light-2/60 last:!border-b-[0px]
     }
-    table tr td{
-        @apply border-b-2 border-[rgba(0,0,0,0.1)]
-    }
+
     .table-loader{
         @apply absolute inset-0 w-full h-full bg-[rgba(255,255,255,0.2)] z-10 flex justify-center items-center
     }
     .tr-hover{
-        @apply transition-all cursor-pointer hover:bg-gray-100/80
+        @apply transition-all cursor-pointer hover:bg-primary-light-1/20
     }
 
 

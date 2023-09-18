@@ -50,6 +50,20 @@ export default defineEventHandler(async event=>{
             }catch (err) {
                 sendNoContent(event,400)
             }
+        }else if(query.type==='popular'){
+            try {
+                const req=await $fetch<IResponse<any>>('/statistic/popular',{
+                    baseURL:api_base,
+                    headers:{access,token:token.jwt}
+                })
+                if(req.error){
+                    sendNoContent(event,400)
+                }else{
+                    return req.data
+                }
+            }catch (err) {
+                sendNoContent(event,400)
+            }
         }
     }
 

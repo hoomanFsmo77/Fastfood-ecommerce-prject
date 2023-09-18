@@ -5,7 +5,7 @@
 @import "../components/header.css";
 @import "../components/card.css";
 /*@import "../components/tooltip.css";*/
-/*@import "../components/table.css";*/
+@import "../components/table.css";
 /*@import "../components/modal.css";*/
 
 @tailwind components;

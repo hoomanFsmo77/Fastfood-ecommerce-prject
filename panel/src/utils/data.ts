@@ -313,7 +313,7 @@ export const visitorChartSetup=(el:Ref<HTMLElement|null>,data:Ref<any>)=>{
 
 
 
-export const reviewChartSetup=(el:Ref<HTMLElement|null>,data:Ref<any>)=>{
+export const pieChartChartSetup=(el:Ref<HTMLElement|null>,data:Ref<any>)=>{
     const {
         $am5,$am5xy, $am5themes_Animated,$am5percent
     }:any=useNuxtApp();
@@ -338,8 +338,9 @@ export const reviewChartSetup=(el:Ref<HTMLElement|null>,data:Ref<any>)=>{
     }));
 
     const transferData=Object.entries(data.value).map(item=>{
+        const str=item[0].split('_').join(' ')
         return {
-            item:item[0],
+            item:str[0].toUpperCase()+str.slice(1),
             value:item[1]
         }
     })

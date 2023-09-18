@@ -1,6 +1,6 @@
 @tailwind components;
 @layer components {
     .card{
-        @apply bg-primary-dark-3 w-full p-1.5 rounded-8
+        @apply bg-primary-dark-3 w-full p-1.5 rounded-8 shadow-[0_0_5px_rgba(255,255,255,0.3)]
     }
 }
