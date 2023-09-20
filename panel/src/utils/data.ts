@@ -107,11 +107,25 @@ export const sidebar_items=[
         hasSub:false
     },
     {
-        title:'Offers',
-        link:{name:'OFF'},
+        title:'Coupons',
+        link:{name:'COUPONS'},
         icon:'ri:percent-line',
-        hasSub:false
-    },
+        hasSub:true,
+        sub:[
+            {
+                title:'Coupon list'  ,
+                icon:'ri:percent-line',
+                link:{name:'COUPONS'},
+                hasSub:false
+            },
+            {
+                title:'Create Coupon'  ,
+                link:{name:'COUPONS_CREATE'},
+                icon:'ri:percent-line',
+                hasSub:false
+            },
+        ]
+    }
 ]
 
 

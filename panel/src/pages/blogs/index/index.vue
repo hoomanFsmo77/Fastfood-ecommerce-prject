@@ -56,7 +56,7 @@ const {public:{blog_page}}=useRuntimeConfig()
             </p>
           </td>
           <td>
-            <NuxtLink :to="{name:'BLOG_DETAIL',params:{id:blog.id}}" class="btn btn-primary btn-sm">
+            <NuxtLink :to="{name:'BLOGS_DETAIL',params:{id:blog.id}}" class="btn btn-primary btn-sm">
               Show
             </NuxtLink>
           </td>

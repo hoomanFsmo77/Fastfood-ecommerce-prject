@@ -70,7 +70,7 @@ const {public:{product_page}}=useRuntimeConfig()
             </p>
           </td>
           <td>
-            <NuxtLink :to="{name:'PRODUCT_DETAIL',params:{id:product.id}}" class="btn btn-primary btn-sm">
+            <NuxtLink :to="{name:'PRODUCTS_DETAIL',params:{id:product.id}}" class="btn btn-primary btn-sm">
               Show
             </NuxtLink>
           </td>

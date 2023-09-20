@@ -37,8 +37,9 @@ router.get('/',async (req,res)=>{
         join('users','orders.userID','=','users.id').
         join('payment_status','orders.paymentStatusID','=','payment_status.id').
         join('coupons','orders.couponID','=','coupons.id').
-        select('orders.*','order_status.status','payment_status.status as payment_status','coupons.code as coupons_code','coupons.percent as coupons_percent','users.firstname as user_firstname','users.lastname as user_lastname','users.username as user_username');
-        res.status(200).send(responseHandler(false,null,pagination(userActiveOrder,page,per_page,req.originalUrl,'orders')))
+        select('orders.*','order_status.status','payment_status.status as payment_status','coupons.code as coupons_code','coupons.percent as coupons_percent','users.firstname as user_firstname','users.lastname as user_lastname','users.username as user_username','users.profile_image as user_image');
+        const addImage=addImageBase(userActiveOrder,'user_image')
+        res.status(200).send(responseHandler(false,null,pagination(addImage,page,per_page,req.originalUrl,'orders')))
     }
 
 })

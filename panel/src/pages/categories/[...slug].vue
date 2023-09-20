@@ -1,14 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  name:'BLOGS_DETAIL',
-  page_title:'Blog detail'
+  name:'CATEGORIES_DETAIL',
+  page_title:'Category detail'
 })
 
 
 </script>
 
 <template>
-  blog detail {{$route.params.id}}
+  category detail {{$route.params.slug}}
 </template>
 
 <style scoped>

@@ -16,9 +16,9 @@ router.get('/',commentQueryValidation(),async (req,res)=>{
         .join('product','product_comments.productID','=','product.id')
         .join('users','product_comments.userID','=','users.id').
         where({isReply:0,isAccept:0})
-        .select('product_comments.*','product.title as product_title','product.primary_image as product_image','product.link as product_link','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username');
-    const convertNumberToBoolean=changeToBoolean(comments,['isAccept','isReply','replyID'])
-    const result=addImageBase(convertNumberToBoolean,'product_image')
+        .select('product_comments.*','product.title as product_title','product.primary_image as product_image','product.link as product_link','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image');
+    const convertNumberToBoolean=changeToBoolean(comments,['isAccept','isReply'])
+    const result=addImageBase(convertNumberToBoolean,['product_image','author_image'])
     res.status(200).send(responseHandler(false,null,pagination(result,page,per_page,req.originalUrl,'comments')));
 })
 

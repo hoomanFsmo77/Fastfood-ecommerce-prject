@@ -46,7 +46,7 @@ const {data,pending}=await useFetch('/api/users',{
           </td>
           <td>
 
-            <NuxtLink :to="{name:'USER_DETAIL',params:{id:user.id}}" class="btn btn-primary btn-sm">
+            <NuxtLink :to="{name:'USERS_DETAIL',params:{id:user.id}}" class="btn btn-primary btn-sm">
               Show
             </NuxtLink>
           </td>

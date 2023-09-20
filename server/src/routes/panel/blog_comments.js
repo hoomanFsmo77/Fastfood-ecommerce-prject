@@ -19,9 +19,9 @@ router.get('/',commentQueryValidation(),async (req,res)=>{
         .join('blog','blog_comments.blogID','=','blog.id')
         .join('users','blog_comments.userID','=','users.id').
         where({isReply:0,isAccept:0})
-        .select('blog_comments.*','blog.title as blog_title','blog.image_sm as blog_image_sm','blog.image_xs as blog_image_xs','blog.image_lg as blog_image_lg','blog.link as blog_link','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username');
-    const convertNumberToBoolean=changeToBoolean(comments,['isAccept','isReply','replyID'])
-    const result=addImageBase(convertNumberToBoolean,['blog_image_xs','blog_image_sm','blog_image_lg'])
+        .select('blog_comments.*','blog.title as blog_title','blog.image_sm as blog_image_sm','blog.image_xs as blog_image_xs','blog.image_lg as blog_image_lg','blog.link as blog_link','users.firstname as author_firstname','users.lastname as author_lastname','users.username as author_username','users.profile_image as author_image');
+    const convertNumberToBoolean=changeToBoolean(comments,['isAccept','isReply'])
+    const result=addImageBase(convertNumberToBoolean,['blog_image_xs','blog_image_sm','blog_image_lg','author_image'])
     res.status(200).send(responseHandler(false,null,pagination(result,page,per_page,req.originalUrl,'comments')));
 })
 

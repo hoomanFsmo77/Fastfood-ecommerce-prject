@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  name:'USER_DETAIL',
+  name:'USERS_DETAIL',
   page_title:'User detail'
 })
 

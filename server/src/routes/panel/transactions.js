@@ -23,11 +23,12 @@ router.get('/',async (req,res)=>{
         const result=changeToBoolean(addImage,'off')
         res.status(200).send(responseHandler(false,null,result));
     }else{
-        const transactions=await database('transactions').join('orders','transactions.orderID','=','orders.id').join('users','orders.userID','=','users.id').select('transactions.*','transactions.status as transaction_status','orders.statusID as order_status','orders.paymentStatusID as payment_status','users.firstname as order_firstname','users.lastname as order_lastname','users.username as order_username');
+        const transactions=await database('transactions').join('orders','transactions.orderID','=','orders.id').join('users','orders.userID','=','users.id').select('transactions.*','transactions.status as transaction_status','orders.statusID as order_status','orders.paymentStatusID as payment_status','users.firstname as order_firstname','users.lastname as order_lastname','users.username as order_username','users.profile_image as user_image');
         const transferTranStatus=transferTransactionStatus(transactions);
         const transferOrdStatus=transferOrderStatus(transferTranStatus)
         const transferPayStatus=transferPaymentStatus(transferOrdStatus)
-        res.status(200).send(responseHandler(false,null,pagination(transferPayStatus,page,per_page,req.originalUrl,'transactions')))
+        const addImage=addImageBase(transferPayStatus,'user_image')
+        res.status(200).send(responseHandler(false,null,pagination(addImage,page,per_page,req.originalUrl,'transactions')))
     }
 })
 
