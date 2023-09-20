@@ -11,7 +11,9 @@
       {{$route.meta.page_title}}
     </h2>
     <slot/>
+    <LayoutFooter />
   </div>
+
 </template>
 
 <style scoped>

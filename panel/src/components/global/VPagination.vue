@@ -27,9 +27,9 @@ const calculateRootPath = (page:number)=>{
 </script>
 
 <template>
-  <v-row class="mt-2">
+  <v-row class="my-2 justify-center">
     <v-column col="12" >
-      <div class="rounded-4 flex">
+      <div class="rounded-4 flex justify-center">
         <NuxtLink :to="calculateRootPath(prevPage)" class="pagination-btn rounded-l-8 border-r-[1px] border-primary-dark-1">
           <Icon size="1.5rem" name="ri:arrow-left-s-line"/>
         </NuxtLink>

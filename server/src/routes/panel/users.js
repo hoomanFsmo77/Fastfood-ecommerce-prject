@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router();
 const database=require('../../database/database')
 const bodyParser=require('body-parser')
-const {responseHandler,today, pagination}=require('../../utils')
+const {responseHandler,today, pagination, addImageBase}=require('../../utils')
 const mw=require('../../middleware/admin')
 const upload = require("../../database/upload");
 const {validationResult, matchedData, body, param} = require("express-validator");
@@ -25,7 +25,7 @@ router.get('/',(req,res)=>{
     const per_page=Number(req.query.per) || 6;
     if(userID){
         database('users').
-        select(['email','firstname','lastname','username','phone','registered_at','id']).
+        select(['email','firstname','lastname','username','phone','registered_at','id','profile_image']).
         where({id:userID}).
         then(response=>{
             res.status(200).send(responseHandler(false,null,response[0]))
@@ -34,9 +34,10 @@ router.get('/',(req,res)=>{
         })
     }else{
         database('users').
-        select(['email','firstname','lastname','username','phone','registered_at','id']).
+        select(['email','firstname','lastname','username','phone','registered_at','id','profile_image']).
         then(response=>{
-            res.status(200).send(responseHandler(false,null,pagination(response,page,per_page,req.originalUrl,'users')))
+            const addImage=addImageBase(response,'profile_image')
+            res.status(200).send(responseHandler(false,null,pagination(addImage,page,per_page,req.originalUrl,'users')))
         }).catch(err=>{
             res.status(503).send('error in db')
         })
