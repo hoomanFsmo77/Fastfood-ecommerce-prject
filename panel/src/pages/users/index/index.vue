@@ -45,14 +45,10 @@ const {data,pending}=await useFetch('/api/users',{
             </p>
           </td>
           <td>
-            <div class="flex gap-0.5">
-              <button class="btn btn-primary btn-sm">
-                Show
-              </button>
-              <NuxtLink :to="{name:'USER_DETAIL',params:{id:user.id}}" class="btn btn-primary btn-sm">
-                Edit
-              </NuxtLink>
-            </div>
+
+            <NuxtLink :to="{name:'USER_DETAIL',params:{id:user.id}}" class="btn btn-primary btn-sm">
+              Show
+            </NuxtLink>
           </td>
         </tr>
       </VTable>

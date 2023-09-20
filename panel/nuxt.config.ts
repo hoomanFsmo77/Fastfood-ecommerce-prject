@@ -44,7 +44,10 @@ export default defineNuxtConfig({
         public:{
             callback_login:process.env.CALLBACK_LOGIN,
             callback_logout:process.env.CALLBACK_LOGOUT,
-            product_page:process.env.PRODUCT_LINK
+            product_page:process.env.PRODUCT_LINK,
+            blog_page:process.env.BLOG_LINK,
+
+
         }
     },
     auth: {    globalAppMiddleware: true   }

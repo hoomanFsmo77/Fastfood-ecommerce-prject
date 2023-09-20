@@ -23,7 +23,7 @@ router.get('/',async (req,res)=>{
     }else{
         const page=Number(req.query.page) || 1;
         const per_page=Number(req.query.per) || 6;
-        const productList=await database('product').join('product_category','product.categoryID','=','product_category.id').select('product.title','product.primary_image','product.categoryID','product.price','product.quantity','product.status','product_category.name as product_category');
+        const productList=await database('product').join('product_category','product.categoryID','=','product_category.id').select('product.title','product.primary_image','product.categoryID','product.price','product.quantity','product.status','product_category.name as product_category','product.off_percent','product.link','product.id','product.off');
         const changeToBool=changeToBoolean(productList,['status','off'])
         const result=addImageBase(changeToBool,'primary_image')
         res.status(200).send(responseHandler(false,null,pagination(result,page,per_page,req.originalUrl,'products')))
