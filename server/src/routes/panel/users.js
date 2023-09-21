@@ -28,7 +28,7 @@ router.get('/',(req,res)=>{
         select(['email','firstname','lastname','username','phone','registered_at','id','profile_image']).
         where({id:userID}).
         then(response=>{
-            res.status(200).send(responseHandler(false,null,response[0]))
+            res.status(200).send(responseHandler(false,null,addImageBase(response,'profile_image')[0]))
         }).catch(err=>{
             res.status(503).send('error in db')
         })
