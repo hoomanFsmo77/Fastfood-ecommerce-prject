@@ -24,6 +24,41 @@ export default defineEventHandler(async event=>{
             }catch (err) {
                 sendNoContent(event,400)
             }
+        }else if(query.method==='PUT'){
+            try {
+                const req=await $fetch<IResponse<any>>(`/blog-comments/change-status/${query.commentID}`,{
+                    method:'PUT',
+                    baseURL:api_base,
+                    headers:{access,token:token.jwt},
+                })
+                if(req.error){
+                    sendNoContent(event,400)
+                }else{
+                    sendNoContent(event,200)
+                }
+            }catch (err) {
+                sendNoContent(event,400)
+            }
+
+        }else if(query.method==='DELETE'){
+            try {
+                const req=await $fetch<IResponse<any>>(`/blog-comments`,{
+                    method:'DELETE',
+                    baseURL:api_base,
+                    headers:{access,token:token.jwt},
+                    query:{
+                        id:query.id
+                    }
+                })
+                if(req.error){
+                    sendNoContent(event,400)
+                }else{
+                    sendNoContent(event,200)
+                }
+            }catch (err) {
+                sendNoContent(event,400)
+            }
+
         }
     }
 

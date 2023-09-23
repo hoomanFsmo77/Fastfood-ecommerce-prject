@@ -1,11 +1,35 @@
 import {Ref} from "vue";
 
-export const useUser=(userData?:Ref<{id:number}>)=>{
+export const useUser=(show_image:boolean,userData?:Ref<{id:number,profile_image:string}>)=>{
     const editUserFlag=ref<boolean>(false);
     const editUserData=reactive({
         errors:null as string[]|string|null,
         flag:false as boolean
     })
+
+    const imageData=reactive({
+        show:show_image as boolean,
+        src:userData ? userData?.value?.profile_image : null,
+        isChanged:false as boolean
+    })
+
+    const profileImageChange = (ev:Event) => {
+        const fileReader=new FileReader()
+        if(ev[0]){
+            fileReader.readAsDataURL(ev[0].file)
+            fileReader.onload=(data)=>{
+                imageData.src=data.explicitOriginalTarget.result as string
+                imageData.show=true
+                imageData.isChanged=true
+            }
+        }else{
+            imageData.src=null
+            imageData.show=false
+            imageData.isChanged=false
+        }
+
+    }
+
     const {$toast,$formDataBody}:any=useNuxtApp();
     const removeUser = async () => {
         try {
@@ -29,16 +53,19 @@ export const useUser=(userData?:Ref<{id:number}>)=>{
         }
     }
 
-    const editUser =async () => {
+    const editUser =async (formData:any) => {
+        let body=null;
+        if(imageData.isChanged){
+            body={
+                ...formData,
+                profile_image:formData?.profile_image[0].file
+            }
+        }else{
+            delete formData.profile_image;
+            body=formData
+        }
         editUserData.flag=true
         editUserData.errors=null
-        const body={
-            username:'ededede',
-            firstname:'ededede',
-            lastname:'ededede',
-            email:'fefe4@gmail.com',
-            phone:'09921929654',
-        }
         try {
             const req=await $fetch<{code:number,errors:string[]}>('/api/users',{
                 method:'POST',
@@ -68,17 +95,19 @@ export const useUser=(userData?:Ref<{id:number}>)=>{
         }
     }
 
-    const createUser = async () => {
+    const createUser = async (formData:any) => {
+        let body=null;
+        if(imageData.isChanged){
+            body={
+                ...formData,
+                profile_image:formData?.profile_image[0].file
+            }
+        }else{
+            delete formData.profile_image;
+            body=formData
+        }
         editUserData.flag=true
         editUserData.errors=null
-        const body={
-            username:'ededede',
-            firstname:'ededede',
-            lastname:'ededede',
-            email:'fefe4e@gmail.com',
-            phone:'09921929654',
-            password:'13777731Ho@@'
-        }
         try {
             const req=await $fetch<{code:number,errors:string[]}>('/api/users',{
                 method:'POST',
@@ -109,6 +138,6 @@ export const useUser=(userData?:Ref<{id:number}>)=>{
 
 
     return{
-        removeUser,editUser,createUser,editUserFlag,editUserData
+        removeUser,editUser,createUser,editUserFlag,editUserData,imageData,profileImageChange
     }
 }
