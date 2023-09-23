@@ -13,11 +13,12 @@ const addProductBodyValidation=()=>body(['categoryID','title','caption','price',
 router.get('/',async (req,res)=>{
     const productID=req.query.productID;
     if(productID){
-        const productTarget=await database('product').join('product_category','product.categoryID','=','product_category.id').select('product.*','product_category.name as product_category').where({'product.id':productID});
+        const productTarget=await database('product').join('product_category','product.categoryID','=','product_category.id').join('product_specification','product.specification','=','product_specification.id').select('product.*','product_category.name as product_category','product_specification.color as specification_color','product_specification.size as specification_size').where({'product.id':productID});
         const productImages=await database('product_image').select('*').where({productID})
-        const result=addImageBase(productTarget,'primary_image')
+        const addImage=addImageBase(productTarget,'primary_image');
+        const addBool=changeToBoolean(addImage,['status','off'])
         res.send({
-            ...result[0],
+            ...addBool[0],
            product_images: addImageBase(productImages,'image')
         })
     }else{

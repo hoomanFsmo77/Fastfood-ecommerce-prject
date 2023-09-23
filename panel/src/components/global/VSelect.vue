@@ -3,7 +3,8 @@ const props=defineProps<{
   id:number,
   label:string
   data:{id:number,title:string}[],
-  selectId?:number
+  selectId?:number,
+  disabled:boolean
 }>();
 const emit=defineEmits<{
   (e:'fire',value:number):void
@@ -40,8 +41,13 @@ watchEffect(()=>{
       choices:selectData,
       allowHTML:true,
       searchChoices:false,
-      searchEnabled:false
+      searchEnabled:false,
     });
+    if(props.disabled){
+      choice.disable()
+    }else{
+      choice.enable()
+    }
   }
 
 
@@ -49,6 +55,8 @@ watchEffect(()=>{
 const choiceHandler = (ev:any) => {
   emit('fire',ev.detail.choice.customProperties.id)
 }
+
+
 </script>
 
 <template>
@@ -62,11 +70,20 @@ const choiceHandler = (ev:any) => {
 @tailwind components;
 
 @layer components {
+  .choices__inner,.choices.is-disabled .choices__inner, .choices.is-disabled .choices__input{
+    @apply bg-primary-dark-2
+  }
+  .choices__list.choices__list--dropdown{
+    @apply !bg-primary-dark-2
+  }
   .choices__inner{
-    @apply bg-[#fff]
+    @apply !border-primary-dark-5 rounded-full
+  }
+  .choices__list--dropdown .choices__item--selectable.is-highlighted,.choices__list[aria-expanded] .choices__item--selectable.is-highlighted{
+    @apply !bg-primary-dark-1
   }
   .choices *{
-    @apply !text-gray-500 !font-400 !text-1
+    @apply !text-primary-light-2 !font-400 !text-1
   }
   .choices__list--dropdown, .choices__list[aria-expanded]{
     @apply !z-[999999]

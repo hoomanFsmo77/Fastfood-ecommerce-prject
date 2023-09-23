@@ -140,31 +140,22 @@ export const custom_number_schema:FormKitTypeDefinition={
     schema: wrapper(
         $attrs(
             {
-                class:'input-effect-wrapper'
+                class:"input-wrapper"
             },
             inner(
                 $attrs(
                     {
-                        class:'input-effect',
-                        required:true,
-
-                    },
-                    textInput()
-                ),
-                $attrs(
-                    {
-                        class:'input-effect-label'
+                        class:'label'
                     },
                     label('$label')
                 ),
                 $attrs(
                     {
-                        class: 'focus-border',
+                        class:'input input-primary',
                     },
-                    label(
-                        label()
-                    )
+                    textInput()
                 ),
+
 
             ),
         ),

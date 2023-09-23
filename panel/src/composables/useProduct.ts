@@ -1,13 +1,15 @@
 import {Ref} from "vue";
 
 
-export const useProduct=(productDetail?:Ref<{id:number}>)=>{
+export const useProduct=(productDetail?:Ref<{id:number,off:boolean}>)=>{
     const {$toast,$formDataBody}:any=useNuxtApp();
     const editProductFlag=ref<boolean>(false)
     const productData=reactive({
         errors:null as string[]|string|null,
         flag:false as boolean
     })
+
+    const off=ref<boolean|undefined>(productDetail?.value.off)
 
     const createProduct = async () => {
         productData.flag=true
@@ -135,6 +137,6 @@ export const useProduct=(productDetail?:Ref<{id:number}>)=>{
     }
 
     return{
-        createProduct,editProduct,removeProduct,productData,editProductFlag
+        createProduct,editProduct,removeProduct,productData,editProductFlag,off
     }
 }
