@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useProduct} from "~/composables/useProduct";
 import {submitForm} from "~/utils/functions";
+const date=new Date();
 definePageMeta({
   name:'PRODUCTS_DETAIL',
   page_title:'Product detail',
@@ -30,16 +31,15 @@ const {data:product_category,pending:product_category_pending}=await useFetch('/
     })
   }
 })
-const {removeProduct,editProduct,productData,editProductFlag,off}=useProduct(data)
+const {removeProduct,editProduct,productData,editProductFlag,selectData,offHandler,statusHandler,categoryHandler,extraImageData,extraImageHandler}=useProduct(data)
 const form=ref<HTMLElement|null>(null)
 const editProductForm = () => submitForm(form)
 
-const offHandler = (id:number) => {
-  off.value = id === 1;
-}
+
 </script>
 
 <template>
+
   <v-row v-if="productData.errors" class="mb-1 justify-center">
     <v-column class="justify-center" col="7">
       <ul class="bg-primary-dark-5 p-1 rounded-4" >
@@ -89,11 +89,11 @@ const offHandler = (id:number) => {
       </v-row>
       <v-row class="mb-1.5">
         <v-column  md="4" col="12" class="md:pr-0.5 md:mb-0 mb-1">
-          <VSelect :disabled="!editProductFlag" label="Status"  :select-id="data.status ? 1 : 2" :data="[{id:1,title:'Available'},{id:2,title:'Unavailable'}]" />
+          <VSelect @fire="statusHandler" :disabled="!editProductFlag" label="Status"  :select-id="data.status ? 1 : 2" :data="[{id:1,title:'Available'},{id:2,title:'Unavailable'}]" />
 
         </v-column>
         <v-column md="4" col="12" class="md:px-0.5 md:mb-0 mb-1">
-          <VSelect :disabled="!editProductFlag" label="Category" :select-id="data.categoryID" v-if="!product_category_pending"  :data="product_category" />
+          <VSelect @fire="categoryHandler" :disabled="!editProductFlag" label="Category" :select-id="data.categoryID" v-if="!product_category_pending"  :data="product_category" />
 
         </v-column>
         <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
@@ -116,16 +116,46 @@ const offHandler = (id:number) => {
         </v-column>
         <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
           <FormKit
-              v-if="off"
-
+              v-if="selectData.off===1"
               type="custom_number"
               label="off percent"
               id="off_percent"
+              min="1"
+              value="1"
+              max="99"
               :disabled="!editProductFlag"
               :value="data.off_percent"
               name="off_percent"
               validation="required"
               validation-label="off percent"
+          />
+        </v-column>
+        <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
+          <FormKit
+              v-if="selectData.off===1"
+              type="custom_date"
+              label="sale from"
+              id="date_on_sale_from"
+              :disabled="!editProductFlag"
+              :value="data.date_on_sale_from ? `${new Date(data.date_on_sale_from).getFullYear()}-${new Date(data.date_on_sale_from).getMonth()+1}-${new Date(data.date_on_sale_from).getDate()}` : `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`"
+              name="date_on_sale_from"
+              validation="required"
+              validation-label="sale from"
+          />
+        </v-column>
+      </v-row>
+      <v-row class="mb-1.5">
+        <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
+          <FormKit
+              v-if="selectData.off===1"
+              type="custom_date"
+              label="sale to"
+              id="date_on_sale_to"
+              :disabled="!editProductFlag"
+              :value="data.date_on_sale_to ? `${new Date(data.date_on_sale_to).getFullYear()}-${new Date(data.date_on_sale_to).getMonth()+1}-${new Date(data.date_on_sale_to).getDate()} `:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`"
+              name="date_on_sale_to"
+              validation="required"
+              validation-label="sale to"
           />
         </v-column>
       </v-row>
@@ -165,6 +195,19 @@ const offHandler = (id:number) => {
               validation="required"
               validation-label="description"
           />
+        </v-column>
+      </v-row>
+      <v-row class="mb-1.5">
+        <v-column  md="4" col="12" class="md:pr-0.5  mb-1">
+          <VImage :width="150" :show_image="true" :profile_image="data.primary_image" :editFlag="editProductFlag" :multiple="false" id="primary_image" label="Primary Image"/>
+        </v-column>
+        <v-column v-for="(item,index) in data.product_images" md="4" col="12" class="md:px-0.5  mb-1">
+          <VImage @fire="extraImageHandler" :multiple="false" :image-id="item.id" :width="150" :show_image="true" :profile_image="item.image" :editFlag="editProductFlag" :id="`image_${index+1}`" :label="`Image `+(index+1)"/>
+        </v-column>
+      </v-row>
+      <v-row class="mb-1.5" >
+        <v-column  md="12" class="md:pr-0.5 md:mb-0 mb-1">
+          <VImage  @fire="extraImageHandler"  :width="150" :show_image="false"  :editFlag="editProductFlag" :multiple="true" id="new_images" label="Add New Image"/>
         </v-column>
       </v-row>
     </FormKit>

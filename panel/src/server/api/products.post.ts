@@ -3,6 +3,7 @@ import {IResponse} from "~/utils/types";
 import {nodeFormDataBody, serializeError} from "~/utils/functions";
 import {readFiles} from "h3-formidable";
 import * as fs from "fs";
+import Form from "form-data";
 export default defineEventHandler(async event=>{
     const {api_base,access}=useRuntimeConfig();
     const query=await getQuery(event);
@@ -46,27 +47,31 @@ export default defineEventHandler(async event=>{
             }
         }else if(query.method==='PUT' || query.method==='POST'){
             let body=null
+            const form=new Form();
             if(query.method==='PUT'){
-                body= {
-                    categoryID:fields.categoryID[0],
-                    link:fields.link[0],
-                    title:fields.title[0],
-                    price:fields.price[0],
-                    caption:fields.caption[0],
-                    description:fields.description[0],
-                    brief:fields.brief[0],
-                    specification:fields.specification[0],
-                    quantity:fields.quantity[0],
-                    status:fields.status[0],
-                    off:fields.off[0],
-                    off_percent:fields.off_percent[0],
-                    date_on_sale_from:fields.date_on_sale_from[0],
-                    date_on_sale_to:fields.date_on_sale_to[0],
-                    image1_id:fields.image1_id[0],
-                    image2_id:fields.image2_id[0],
-                    primary_image:fs.createReadStream(files.primary_image[0].filepath),
-                    image_1:fs.createReadStream(files.image_1[0].filepath),
-                    image_2:fs.createReadStream(files.image_2[0].filepath),
+                form.append('categoryID',fields.categoryID[0])
+                form.append('link',fields.link[0])
+                form.append('title',fields.title[0])
+                form.append('price',fields.price[0])
+                form.append('caption',fields.caption[0])
+                form.append('description',fields.description[0])
+                form.append('brief',fields.brief[0])
+                form.append('quantity',fields.quantity[0])
+                form.append('status',fields.status[0])
+                form.append('off',fields.off[0])
+                form.append('off_percent',fields.off_percent[0])
+                fields.date_on_sale_from && form.append('date_on_sale_from',fields.date_on_sale_from[0]);
+                fields.date_on_sale_to && form.append('date_on_sale_to',fields.date_on_sale_to[0]);
+                files.primary_image && form.append('primary_image',fs.createReadStream(files.primary_image[0].filepath));
+                if(files.image && files.image.length>0){
+                    files.image.forEach(item=>{
+                        form.append('image',fs.createReadStream(item.filepath));
+                    })
+                }
+                if(files.add_image && files.add_image.length>0){
+                    files.add_image.forEach(item=>{
+                        form.append('add_image',fs.createReadStream(item.filepath));
+                    })
                 }
             }else{
                 body={
@@ -96,7 +101,7 @@ export default defineEventHandler(async event=>{
                     method:query.method,
                     baseURL:api_base,
                     headers:{access,token:token.jwt},
-                    body:nodeFormDataBody(body)
+                    body:form
                 });
                 if(request.error){
                     return {
@@ -110,6 +115,7 @@ export default defineEventHandler(async event=>{
                     }
                 }
             }catch (err) {
+                console.log(err)
                 return  err
             }
         }else if(query.method==='DELETE'){

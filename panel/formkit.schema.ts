@@ -179,39 +179,22 @@ export const custom_date_schema:FormKitTypeDefinition={
     schema: wrapper(
         $attrs(
             {
-                class:'input-effect-wrapper w-full'
+                class:"input-wrapper"
             },
             inner(
                 $attrs(
                     {
-                        class:'input-effect',
-                        required:true,
-                        'data-wide':true,
-                        placeholder:'$label'
-                    },
-                    textInput()
-                ),
-                $attrs(
-                    {
-                        class:'input-effect-label'
+                        class:'label'
                     },
                     label('$label')
                 ),
                 $attrs(
                     {
-                        class: 'focus-border',
+                        class:'input input-primary',
                     },
-                    label(
-                        label()
-                    )
+                    textInput()
                 ),
-                suffix(),
-                $attrs(
-                    {
-                        class:'password-icon'
-                    },
-                    icon('suffix')
-                )
+
 
             ),
         ),

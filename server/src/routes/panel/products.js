@@ -79,16 +79,19 @@ router.delete('/',async (req,res)=>{
 })
 
 
-const updateProductBodyValidation=()=>body(['categoryID','title','caption','price','description','brief','specification','link','quantity','status','off_percent','off','date_on_sale_from','date_on_sale_to','image1_id','image2_id']).notEmpty();
 
-router.put('/:id',upload.fields([{name:'primary_image'},{name:'image_1'},{name:'image_2'}]),updateProductBodyValidation(),param('id').notEmpty(), async (req,res)=>{
-    const primary_image=req?.files.primary_image[0].filename;
-    const image_1=req?.files.image_1[0].filename;
-    const image_2=req?.files.image_2[0].filename;
+const updateProductBodyValidation=()=>body(['categoryID','title','caption','price','description','brief','link','quantity','status','off_percent','off']).notEmpty();
+
+const optionalBody=()=>body('image[*]','delImage[*]','date_on_sale_from','date_on_sale_to').optional()
+
+router.put('/:id',upload.fields([{name:'primary_image',maxCount:1},{name:'image',maxCount:6},{name:'add_image',maxCount:6}]),updateProductBodyValidation(),optionalBody(),param('id').notEmpty(), async (req,res)=>{
+    const primary_image=req?.files?.primary_image ? req?.files?.primary_image[0]?.filename : null;
+    const extra_images=req?.files?.image || null;
+    const add_images=req?.files?.add_image || null;
     const result =await validationResult(req);
-    if(result.isEmpty() && primary_image && image_1 && image_2) {
+    if(result.isEmpty()) {
         const data = matchedData(req);
-        const updateProductData=await database('product').update({
+        const body={
             categoryID:data.categoryID,
             title:data.title,
             caption:data.caption,
@@ -104,9 +107,25 @@ router.put('/:id',upload.fields([{name:'primary_image'},{name:'image_1'},{name:'
             date_on_sale_from:data.date_on_sale_from,
             date_on_sale_to:data.date_on_sale_to,
             primary_image:primary_image
-        }).where({id:data.id});
-        const updateImage1=await database('product_image').where({productID:data.id,id:data.image1_id}).update({image:image_1});
-        const updateImage2=await database('product_image').where({productID:data.id,id:data.image2_id}).update({image:image_2});
+        }
+
+        if(!primary_image){
+            delete body.primary_image
+        }
+        await database('product').update(body).where({id:data.id});
+
+
+        if(extra_images && data.image && extra_images.length>0 && data.image.length>0 && data.image.length===extra_images.length){
+            await Promise.all(data.image.map((id,index)=>database('product_image').where({productID:data.id,id:Number(id)}).update({image:extra_images[index].filename})))
+        }
+        if(add_images && add_images.length>0){
+            await Promise.all(add_images.map(item=> database('product_image').insert({image:item.filename,productID:data.id})))
+        }
+        if(data.delImage && data.delImage.length>0){
+            await Promise.all(data.delImage.map(id=> database('product_image').del().where({id:Number(id),productID:data.id})))
+        }
+
+
         res.status(200).send(responseHandler(false,'product updated',null));
     }else{
         res.status(200).send(responseHandler(true,result.array(),null))
