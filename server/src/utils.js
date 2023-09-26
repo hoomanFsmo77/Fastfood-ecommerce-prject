@@ -7,7 +7,13 @@ const pageRegx=/page=\d+/g
 const querySerialize = (obj) => {
   return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&');
 }
+const getToday = () => {
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  const date=new Date()
 
+
+    return `${date.getDate()} ${months[date.getMonth()]}.${date.getFullYear()}`
+}
 const  removeDuplicate = (arr,key) => {
     const uniqueItems = [];
     return arr.filter(element => {
@@ -371,5 +377,5 @@ const warpAddress = async (addressData) => {
 }
 
 module.exports={
-    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId,calculateTotalPrice,getCustomProductDescription,warpAddress
+    querySerialize,responseHandler,changeToBoolean,sortByCategory,addImageBase,getAllProductFilter,getProductByLinkFilter,getProductByCondition,getRandomProduct,pagination,getBlogByLinkFilter,calculateSum,today,getAllBlogs,getBlogByCategory,transferTransactionStatus,transferOrderStatus,transferPaymentStatus,removeDuplicate,getCommentsByLink,getBlogCommentsByBlogId,calculateTotalPrice,getCustomProductDescription,warpAddress,getToday
 }

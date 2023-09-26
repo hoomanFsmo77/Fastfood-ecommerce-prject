@@ -3,23 +3,24 @@ const router=express.Router();
 const database=require('../../database/database')
 const {body, validationResult, matchedData, param} = require("express-validator");
 const upload = require("../../database/upload");
-const {responseHandler, getBlogByLinkFilter, getBlogByCategory, getAllBlogs, addImageBase, pagination} = require("../../utils");
+const {responseHandler, getBlogByLinkFilter, getBlogByCategory, getAllBlogs, addImageBase, pagination,getToday} = require("../../utils");
 const mw=require('../../middleware/admin')
 router.use(mw)
 ////  add blog
-const addBlogBodyValidation=()=>body(['categoryID','title','date','brief','link']).notEmpty();
+const addBlogBodyValidation=()=>body(['categoryID','title','brief','link']).notEmpty();
 
 router.post('/',upload.fields([{name:'image_sm'},{name:'image_xs'},{name:'image_lg'}]),addBlogBodyValidation(),(req,res)=>{
     const result = validationResult(req);
-    if(result.isEmpty() && req?.files?.image_xs && req?.files?.image_lg) {
+    const image_xs=req?.files?.image_xs ? req.files.image_xs[0].filename : null;
+    const image_sm=req?.files?.image_sm ? req?.files?.image_sm[0]?.filename : null;
+    const image_lg=req?.files?.image_lg ? req.files.image_lg[0].filename : null;
+    if(result.isEmpty() && image_xs && image_sm && image_lg) {
         const body = matchedData(req);
-        const adminID=req.headers.admin_id
-        const image_xs=req.files.image_xs[0].filename;
-        const image_sm=req?.files?.image_sm ? req?.files?.image_sm[0]?.filename : '';
-        const image_lg=req.files.image_lg[0].filename;
+        const adminID=req.headers.admin_id;
         database('blog').
         insert({
             ...body,
+            date:getToday(),
             adminID,
             image_xs, image_sm, image_lg
         }).
@@ -82,20 +83,28 @@ router.delete('/',async (req,res)=>{
     }
 })
 
+
+const updateBlogBodyValidation=()=>body(['categoryID','title','brief','link']).notEmpty();
 /// update blog
-router.put('/:id',upload.fields([{name:'image_sm'},{name:'image_xs'},{name:'image_lg'}]),addBlogBodyValidation(),param('id').notEmpty(),(req,res)=>{
+router.put('/:id',upload.fields([{name:'image_sm'},{name:'image_xs'},{name:'image_lg'}]),updateBlogBodyValidation(),param('id').notEmpty(),(req,res)=>{
     const result = validationResult(req);
-    if(result.isEmpty() && req?.files?.image_xs && req?.files?.image_lg) {
+    const image_xs=req?.files?.image_xs ? req.files.image_xs[0].filename : null;
+    const image_sm=req?.files?.image_sm ? req?.files?.image_sm[0]?.filename : null;
+    const image_lg=req?.files?.image_lg ? req.files.image_lg[0].filename : null;
+    if(result.isEmpty()) {
         const body = matchedData(req);
-        const image_xs=req.files.image_xs[0].filename;
-        const image_sm=req?.files?.image_sm ? req?.files?.image_sm[0]?.filename : '';
-        const image_lg=req.files.image_lg[0].filename;
+        const updateBody={
+            ...body,
+            date:getToday(),
+            image_xs, image_sm, image_lg
+        };
+        !updateBody.image_xs && delete updateBody.image_xs;
+        !updateBody.image_sm && delete updateBody.image_sm;
+        !updateBody.image_lg && delete updateBody.image_lg;
+
         database('blog').
         where({id:body.id}).
-        update({
-            ...body,
-            image_xs, image_sm, image_lg
-        }).
+        update(updateBody).
         then(response=>{
             res.status(200).send(responseHandler(false,'blog updated',null))
         }).catch(err=>{
@@ -103,23 +112,7 @@ router.put('/:id',upload.fields([{name:'image_sm'},{name:'image_xs'},{name:'imag
             res.status(503).send('error in db')
         });
     }else{
-        if(result.array().length>0 && req?.file?.filename){
-            res.status(200).send(responseHandler(true,result.array(),null))
-        }else{
-            res.status(200).send(responseHandler(true,[...result.array(),{
-                "type": "field",
-                "msg": "Invalid value",
-                "path": "image_xs",
-                "location": "body"
-            },
-                {
-                    "type": "field",
-                    "msg": "Invalid value",
-                    "path": "image_lg",
-                    "location": "body"
-                }
-            ],null));
-        }
+        res.status(200).send(responseHandler(true,result.array(),null));
     }
 })
 

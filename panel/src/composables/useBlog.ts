@@ -8,18 +8,21 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
         flag:false as boolean
     })
     const {$toast,$formDataBody}:any=useNuxtApp();
-    const createBlog =async () => {
+    const categoryID=ref<number>(1)
+    const categoryHandler=(id:number)=>categoryID.value=id;
+
+    const createBlog =async (formData:any) => {
         blogData.flag=true
         blogData.errors=null
         const body={
-            categoryID:'',
-            title:'',
-            date:'',
-            brief:'',
-            link:'',
-            image_sm:'',
-            image_xs:'',
-            image_lg:'',
+            ...formData,
+            categoryID:categoryID.value,
+            title:formData.title,
+            brief:formData.brief,
+            link:formData.link,
+            image_sm:formData.image_sm && formData.image_sm[0] ? formData.image_sm[0].file : null,
+            image_xs:formData.image_xs && formData.image_xs[0] ? formData.image_xs[0].file : null,
+            image_lg:formData.image_lg &&formData.image_lg[0] ? formData.image_lg[0].file : null,
         }
         try {
             const req=await $fetch<{code:number,errors:string[]}>('/api/blogs',{
@@ -50,21 +53,24 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
         }
     }
 
-    const editBlog = async () => {
+    const editBlog = async (formData:any) => {
         blogData.flag=true
         blogData.errors=null
         const body={
-            categoryID:'',
-            title:'',
-            date:'',
-            brief:'',
-            link:'',
-            image_sm:'',
-            image_xs:'',
-            image_lg:'',
+            ...formData,
+            categoryID:categoryID.value,
+            title:formData.title,
+            brief:formData.brief,
+            link:formData.link,
+            image_sm:formData.image_sm && formData.image_sm[0] ? formData.image_sm[0].file : null,
+            image_xs:formData.image_xs && formData.image_xs[0] ? formData.image_xs[0].file : null,
+            image_lg:formData.image_lg &&formData.image_lg[0] ? formData.image_lg[0].file : null,
         }
+        !body.image_sm  && delete  body.image_sm;
+        !body.image_xs  && delete  body.image_xs;
+        !body.image_lg  && delete  body.image_lg;
         try {
-            const req=await $fetch<{code:number,errors:string[]}>('/api/products',{
+            const req=await $fetch<{code:number,errors:string[]}>('/api/blogs',{
                 method:'POST',
                 query:{
                     method:'PUT',
@@ -115,6 +121,6 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
     }
 
     return{
-        createBlog,editBlog,removeBlog,editBlogFlag,blogData
+        createBlog,editBlog,removeBlog,editBlogFlag,blogData,categoryHandler
     }
 }

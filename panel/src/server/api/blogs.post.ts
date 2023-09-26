@@ -49,14 +49,15 @@ export default defineEventHandler(async event=>{
             let body={
                 categoryID:fields.categoryID[0],
                 title:fields.title[0],
-                date:fields.date[0],
                 brief:fields.brief[0],
                 link:fields.link[0],
-                image_sm:fs.createReadStream(files.image_sm[0].filepath),
-                image_xs:fs.createReadStream(files.image_xs[0].filepath),
-                image_lg:fs.createReadStream(files.image_lg[0].filepath),
+                image_sm:files.image_sm && files.image_sm[0] ? fs.createReadStream(files.image_sm[0].filepath): null,
+                image_xs:files.image_xs && files.image_xs[0] ? fs.createReadStream(files.image_xs[0].filepath): null,
+                image_lg:files.image_lg && files.image_lg[0] ? fs.createReadStream(files.image_lg[0].filepath): null,
             }
-
+            !body.image_sm  && delete  body.image_sm;
+            !body.image_xs  && delete  body.image_xs;
+            !body.image_lg  && delete  body.image_lg;
 
             const routeUrl=query.method==='PUT' ? `/blog/${query.blogID}` : `/blog`
             try {

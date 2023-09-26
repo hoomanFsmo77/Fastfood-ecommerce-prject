@@ -121,6 +121,7 @@ const removeMultiple = (index:number) => {
           :id="id"
           :multiple="multiple"
           :name="id"
+          :disabled="!editFlag"
           input-class="focus-visible:!border-[1px] focus-visible:!border-red-600"
           accept=".jpg,.png,.jpeg,.webp"
           label-class="label !font-600 font-poppins"
