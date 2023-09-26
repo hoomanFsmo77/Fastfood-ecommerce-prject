@@ -73,26 +73,34 @@ export default defineEventHandler(async event=>{
                         form.append('add_image',fs.createReadStream(item.filepath));
                     })
                 }
-            }else{
-                body={
-                    categoryID:fields.categoryID[0],
-                    link:fields.link[0],
-                    title:fields.title[0],
-                    price:fields.price[0],
-                    caption:fields.caption[0],
-                    description:fields.description[0],
-                    brief:fields.brief[0],
-                    specification:fields.specification[0],
-                    quantity:fields.quantity[0],
-                    status:fields.status[0],
-                    off:fields.off[0],
-                    off_percent:fields.off_percent[0],
-                    date_on_sale_from:fields.date_on_sale_from[0],
-                    date_on_sale_to:fields.date_on_sale_to[0],
-                    primary_image:fs.createReadStream(files.primary_image[0].filepath),
-                    image_1:fs.createReadStream(files.image_1[0].filepath),
-                    image_2:fs.createReadStream(files.image_2[0].filepath),
+
+                const filterIds=Object.entries(fields).filter(item=>item[0].startsWith('delImage')|| item[0].startsWith('image['));
+                if(filterIds.length>0){
+                    filterIds.forEach(item=>{
+                        form.append(item[0],item[1][0])
+                    })
                 }
+            }else{
+                form.append('categoryID',fields.categoryID[0])
+                form.append('link',fields.link[0])
+                form.append('title',fields.title[0])
+                form.append('price',fields.price[0])
+                form.append('caption',fields.caption[0])
+                form.append('description',fields.description[0])
+                form.append('brief',fields.brief[0])
+                form.append('quantity',fields.quantity[0])
+                form.append('status',fields.status[0])
+                form.append('off',fields.off[0])
+                form.append('off_percent',fields.off_percent[0])
+                fields.date_on_sale_from && form.append('date_on_sale_from',fields.date_on_sale_from[0]);
+                fields.date_on_sale_to && form.append('date_on_sale_to',fields.date_on_sale_to[0]);
+                files.primary_image && form.append('primary_image',fs.createReadStream(files.primary_image[0].filepath));
+                if(files.image && files.image.length>0){
+                    files.image.forEach(item=>{
+                        form.append('image',fs.createReadStream(item.filepath));
+                    })
+                }
+
             }
 
             const routeUrl=query.method==='PUT' ? `/products/${query.productID}` : `/products`
