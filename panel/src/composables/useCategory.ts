@@ -9,10 +9,11 @@ export const useCategory=(type?:'product' | 'blog',categoryDetail?:Ref<{id:numbe
         flag:false as boolean
     })
 
-    const createCategory = async (type:'product' | 'blog') => {
-        const reqQuery= type==='product' ? {category:'ceefe',description:'edededede'} : {category:'rfrfrfrfr'};
+    const createBlogCategory = async (formData:any) => {
+        categoryData.flag=true
+        const reqQuery= {category:formData.category};
         try {
-            const req=await $fetch(type==='product' ? '/api/product-category' : '/api/blog-category',{
+            const req=await $fetch('/api/blog-category',{
                 method:'POST',
                 query:{
                     method:'POST',
@@ -39,8 +40,41 @@ export const useCategory=(type?:'product' | 'blog',categoryDetail?:Ref<{id:numbe
         }
     }
 
-    const editCategory =async () => {
-        const reqQuery= type==='product' ? {category:'ceefe',description:'edededede'} : {category:'rfrfrfrfr'};
+    const createProductCategory = async (formData:any) => {
+        categoryData.flag=true
+        const reqQuery= {category:formData.category,description:formData.description};
+        try {
+            const req=await $fetch('/api/product-category',{
+                method:'POST',
+                query:{
+                    method:'POST',
+                    ...reqQuery
+                }
+            })
+            if(req.code===200){
+                categoryData.errors=null
+                $toast('success').fire({
+                    text: 'category created!',
+                    icon: 'success',
+                })
+                return navigateTo({name:'CATEGORIES'})
+            }else{
+                categoryData.errors=req.errors
+            }
+        }catch (err) {
+            $toast('error').fire({
+                text: 'error in server!',
+                icon: 'error',
+            })
+        }finally {
+            categoryData.flag=false
+        }
+    }
+
+
+    const editCategory =async (formData:any) => {
+        categoryData.flag=true
+        const reqQuery= type==='product' ? {category:formData.category,description:formData.description} : {category:formData.category};
         try {
             const req=await $fetch(type==='product' ? '/api/product-category' : '/api/blog-category',{
                 method:'POST',
@@ -93,6 +127,6 @@ export const useCategory=(type?:'product' | 'blog',categoryDetail?:Ref<{id:numbe
     }
 
     return{
-        createCategory,editCategory,removeCategory,editCategoryFlag,categoryData
+        createBlogCategory,createProductCategory,editCategory,removeCategory,editCategoryFlag,categoryData
     }
 }
