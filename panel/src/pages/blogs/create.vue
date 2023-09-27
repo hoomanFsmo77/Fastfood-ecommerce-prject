@@ -22,7 +22,14 @@ const {data:blog_category,pending:blog_category_pending}=await useFetch('/api/bl
 const {blogData,createBlog,categoryHandler}=useBlog()
 const form=ref<HTMLElement|null>(null)
 const createBlogForm = () => submitForm(form)
+const addBlogCounter=ref<number>(0)
+const addContent = () => {
+  addBlogCounter.value++
+}
 
+const deleteAddBlog = (num:number) => {
+  addBlogCounter.value--
+}
 </script>
 
 <template>
@@ -58,6 +65,12 @@ const createBlogForm = () => submitForm(form)
           />
         </v-column>
         <v-column  md="4" col="12" class="md:pl-0.5 md:mb-0 mb-1">
+          <VSelect @fire="categoryHandler" :disabled="false" label="Category" :select-id="1" v-if="!blog_category_pending"  :data="blog_category" />
+
+        </v-column>
+      </v-row>
+      <v-row class="mb-1.5">
+        <v-column col="12" class="md:pr-0.5 md:mb-0 mb-1">
           <FormKit
               type="custom_area"
               label="brief"
@@ -67,11 +80,6 @@ const createBlogForm = () => submitForm(form)
               validation-label="brief"
           />
 
-        </v-column>
-      </v-row>
-      <v-row class="mb-1.5">
-        <v-column  md="4" col="12" class="md:pr-0.5 md:mb-0 mb-1">
-          <VSelect @fire="categoryHandler" :disabled="false" label="Category" :select-id="1" v-if="!blog_category_pending"  :data="blog_category" />
         </v-column>
 
       </v-row>
@@ -89,6 +97,44 @@ const createBlogForm = () => submitForm(form)
         </v-column>
       </v-row>
 
+      <v-row class="mb-1.5">
+        <v-column col="12">
+          <template v-if="addBlogCounter>0">
+            <v-column v-for="item in addBlogCounter" col="12" class="mb-1.5">
+              <div class="mb-1 flex justify-between items-center">
+                <h6 class="">
+                  Paragraph {{addBlogCounter}}
+                </h6>
+                <div   @click="deleteAddBlog(item)"  class="btn btn-secondary btn-sm cursor-pointer">
+                  delete
+                </div>
+              </div>
+              <FormKit
+                  wrapper-class="mb-1"
+                  type="custom_text"
+                  label="Title"
+                  :id="`add_title_${item}`"
+                  :name="`add_title_${item}`"
+              />
+              <FormKit
+                  type="custom_area"
+                  label="Content"
+                  :id="`add_content_${item}`"
+                  :name="`add_content_${item}`"
+                  validation="required"
+                  validation-label="Content"
+              />
+            </v-column>
+          </template>
+
+          <div class="flex justify-start">
+            <div   @click="addContent" class="btn btn-primary cursor-pointer btn-sm flex  items-center gap-0.5">
+              <Icon name="fluent-mdl2:add-to" class="text-primary-light-4 " size="1.5rem"/>
+              Add Content
+            </div>
+          </div>
+        </v-column>
+      </v-row>
     </FormKit>
 
   </v-row>
@@ -104,6 +150,13 @@ const createBlogForm = () => submitForm(form)
 
 </template>
 
-<style scoped>
+<style >
 
+#form{
+  width: 100% !important;
+}
+.formkit-wrapper{
+  width: 100% !important;
+  max-width: 100% !important;
+}
 </style>

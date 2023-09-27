@@ -10,7 +10,8 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
     const {$toast,$formDataBody}:any=useNuxtApp();
     const categoryID=ref<number>(1)
     const categoryHandler=(id:number)=>categoryID.value=id;
-
+    const delContentData = reactive<any>({})
+    const addBlogCounter=ref<number>(0)
     const createBlog =async (formData:any) => {
         blogData.flag=true
         blogData.errors=null
@@ -58,6 +59,7 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
         blogData.errors=null
         const body={
             ...formData,
+            ...delContentData,
             categoryID:categoryID.value,
             title:formData.title,
             brief:formData.brief,
@@ -121,6 +123,6 @@ export const useBlog=(blogDetail?:Ref<{id:number}>)=>{
     }
 
     return{
-        createBlog,editBlog,removeBlog,editBlogFlag,blogData,categoryHandler
+        createBlog,editBlog,removeBlog,editBlogFlag,blogData,categoryHandler,delContentData,addBlogCounter
     }
 }
