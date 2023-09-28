@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useProduct} from "~/composables/useProduct";
-import {submitForm} from "~/utils/functions";
+import {getDateDetail, submitForm} from "~/utils/functions";
 const date=new Date();
 definePageMeta({
   name:'PRODUCTS_DETAIL',
@@ -137,7 +137,7 @@ const editProductForm = () => submitForm(form)
               label="sale from"
               id="date_on_sale_from"
               :disabled="!editProductFlag"
-              :value="data.date_on_sale_from ? `${new Date(data.date_on_sale_from).getFullYear()}-${new Date(data.date_on_sale_from).getMonth()+1}-${new Date(data.date_on_sale_from).getDate()}` : `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`"
+              :value="data.date_on_sale_from ?  getDateDetail(data.date_on_sale_from) : getDateDetail(date.toISOString())"
               name="date_on_sale_from"
               validation="required"
               validation-label="sale from"
@@ -152,7 +152,7 @@ const editProductForm = () => submitForm(form)
               label="sale to"
               id="date_on_sale_to"
               :disabled="!editProductFlag"
-              :value="data.date_on_sale_to ? `${new Date(data.date_on_sale_to).getFullYear()}-${new Date(data.date_on_sale_to).getMonth()+1}-${new Date(data.date_on_sale_to).getDate()} `:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`"
+              :value="data.date_on_sale_to ? getDateDetail(data.date_on_sale_to):`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`"
               name="date_on_sale_to"
               validation="required"
               validation-label="sale to"

@@ -2,7 +2,8 @@
 
 export const useComment=()=>{
     const {$toast}:any=useNuxtApp();
-    const tableFlag=ref<boolean>(false)
+    const tableFlag=ref<boolean>(false);
+
     const acceptComment=async (type:'product'|'blog',commentID:number)=>{
         tableFlag.value=true
         try {
@@ -24,6 +25,7 @@ export const useComment=()=>{
             })
         }finally {
             tableFlag.value=false
+            type==='product' ? await refreshNuxtData('product_comments') : await refreshNuxtData('blog_comments');
         }
 
     }
@@ -49,9 +51,11 @@ export const useComment=()=>{
             })
         }finally {
             tableFlag.value=false
+            type==='product' ? await refreshNuxtData('product_comments') : await refreshNuxtData('blog_comments');
         }
 
     }
+
 
 
     return{

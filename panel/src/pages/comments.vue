@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {useComment} from "~/composables/useComment";
+
 definePageMeta({
   name:'COMMENTS',
   page_title:'Comments'
@@ -19,7 +21,8 @@ const {data:blog_comments,pending:blog_comments_pending}=await useFetch('/api/bl
     method:'GET',
     page:blogPageQuery,
     per:6
-  }
+  },
+  key:'blog_comments'
 })
 const {data:product_comments,pending:product_comments_pending}=await useFetch('/api/product-comment',{
   method:'POST',
@@ -27,12 +30,31 @@ const {data:product_comments,pending:product_comments_pending}=await useFetch('/
     method:'GET',
     page:productPageQuery,
     per:6
-  }
+  },
+  key:'product_comments'
 })
-
+const {acceptComment,deleteComment}=useComment()
+const commentBody=shallowRef<string>('')
+const {openModal,modalOpenFlag}=useModal({
+  outsideFade:true
+});
+const showComment = (type:'product'|'blog',body:string) => {
+  commentBody.value=body
+  openModal()
+}
 </script>
 
 <template>
+
+  <teleport v-if="modalOpenFlag" to=".modal-body">
+    <h5 class="font-500 mb-1">
+      Comment body:
+    </h5>
+    <p>
+      {{commentBody}}
+    </p>
+  </teleport>
+
   <v-row v-if="!product_comments_pending" class="mb-3">
     <v-column col="12">
       <h6 class="mb-1">Product Comments</h6>
@@ -74,13 +96,13 @@ const {data:product_comments,pending:product_comments_pending}=await useFetch('/
           </td>
           <td>
            <div class="flex gap-0.5 items-center">
-             <button  class="btn btn-primary btn-sm">
+             <button @click="showComment('product',comment.body)" class="btn btn-primary btn-sm">
                Show
              </button>
-             <button  class="btn btn-primary btn-sm">
+             <button @click="acceptComment('product',comment.id)" class="btn btn-primary btn-sm">
                Accept
              </button>
-             <button  class="btn btn-primary btn-sm">
+             <button @click="deleteComment('product',comment.id)" class="btn btn-primary btn-sm">
                Delete
              </button>
            </div>
@@ -133,13 +155,13 @@ const {data:product_comments,pending:product_comments_pending}=await useFetch('/
           </td>
           <td>
             <div class="flex gap-0.5 items-center">
-              <button  class="btn btn-primary btn-sm">
+              <button @click="showComment('blog',comment.body)" class="btn btn-primary btn-sm">
                 Show
               </button>
-              <button  class="btn btn-primary btn-sm">
+              <button @click="acceptComment('blog',comment.id)" class="btn btn-primary btn-sm">
                 Accept
               </button>
-              <button  class="btn btn-primary btn-sm">
+              <button @click="deleteComment('blog',comment.id)" class="btn btn-primary btn-sm">
                 Delete
               </button>
             </div>

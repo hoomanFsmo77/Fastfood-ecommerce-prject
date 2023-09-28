@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useProduct} from "~/composables/useProduct";
-import {submitForm} from "~/utils/functions";
+import {getDateDetail, submitForm} from "~/utils/functions";
 
 definePageMeta({
   name:'PRODUCTS_CREATE',
@@ -113,7 +113,7 @@ const createProductForm = () => submitForm(form)
               type="custom_date"
               label="sale from"
               id="date_on_sale_from"
-              :value="`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`"
+              :value="getDateDetail(date.toISOString())"
               name="date_on_sale_from"
               validation="required"
               validation-label="sale from"

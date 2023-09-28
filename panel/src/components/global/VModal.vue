@@ -6,9 +6,9 @@
           <div  class="modal-header">
             <div class="flex gap-1 items-center">
               <nuxt-img   src="/logo-small.webp"/>
-              <h5 class="text-gray-800 dark:text-primary-dark-3" > WENGDO</h5>
+              <h5 class="text-primary-light-4 " > WENGDO</h5>
             </div>
-            <Icon @click="closeByIcon" size="2rem" name="bi:x"  class="text-gray-800  dark:text-primary-dark-3 cursor-pointer"  />
+            <Icon @click="closeByIcon" size="2rem" name="bi:x"  class="text-primary-light-4   cursor-pointer"  />
           </div>
           <div class="modal-body">
             <slot />

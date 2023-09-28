@@ -1,4 +1,6 @@
 <script setup lang="ts">
+
+
 definePageMeta({
   name:'ORDERS',
   page_title:'Orders'
@@ -11,6 +13,8 @@ const {data,pending}=await useFetch('/api/orders',{
     per:6
   }
 })
+
+const {showOrderProduct,orderData,modalOpenFlag}=useOrder()
 </script>
 
 <template>
@@ -50,7 +54,7 @@ const {data,pending}=await useFetch('/api/orders',{
             </p>
           </td>
           <td>
-            <button class="btn btn-primary btn-sm">
+            <button @click="showOrderProduct(order.id)" class="btn btn-primary btn-sm">
               Show
             </button>
           </td>
@@ -66,6 +70,31 @@ const {data,pending}=await useFetch('/api/orders',{
 
     </v-column>
   </v-row>
+
+
+  <teleport v-if="modalOpenFlag && !orderData.flag" to=".modal-body">
+    <h5 class="font-500 mb-1.5">
+      Products for order number {{orderData.products[0].orderID}}
+    </h5>
+    <VTable  :head="['product','price','quantity','subtotal']">
+      <VCartRow
+          v-for="row in orderData.products"
+          :image="row?.primary_image || null"
+          :type="row.type"
+          :cart-id="row.id"
+          :description="row?.description || null"
+          :price="row.price"
+          :quantity="row.quantity"
+          :subtotal="row.subtotal"
+          :title="row.title"
+          :link="row?.link || null"
+          :off="row?.off || null"
+          :off_percent="row?.off_percent || null"
+          :editable="false"
+      />
+    </VTable>
+
+  </teleport>
 </template>
 
 <style scoped>

@@ -9,11 +9,11 @@ export const useCoupon=(couponDetail?:Ref<{id:number}>)=>{
         flag:false as boolean
     })
 
-    const addCoupon = async () => {
+    const addCoupon = async (formData:any) => {
       const reqQuery={
-          code:'',
-          percent:'',
-          expired_at:'',
+          code:formData.code,
+          percent:formData.percent,
+          expired_at:new Date(formData.expired_at).toISOString(),
       }
         couponData.flag=true
         couponData.errors=null
@@ -46,14 +46,14 @@ export const useCoupon=(couponDetail?:Ref<{id:number}>)=>{
         }
 
     }
-    const editCoupon = async () => {
-        const reqQuery={
-            code:'',
-            percent:'',
-            expired_at:'',
-        }
+    const editCoupon = async (formData:any) => {
         couponData.flag=true
         couponData.errors=null
+        const reqQuery={
+            code:formData.code,
+            percent:formData.percent,
+            expired_at:new Date(formData.expired_at).toISOString(),
+        }
         try {
             const req=await $fetch<{code:number,errors:string[]}>('/api/coupons',{
                 method:'POST',

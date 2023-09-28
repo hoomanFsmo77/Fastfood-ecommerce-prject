@@ -2,7 +2,7 @@ import {useModal} from "~/composables/useModal";
 
 
 export const useOrder=()=>{
-    const {openModal}=useModal({outsideFade:true,modalClass:'modal-lg'})
+    const {openModal,modalOpenFlag}=useModal({outsideFade:true,modalClass:'modal-lg'})
     const orderData=reactive({
         products:[] as any[],
         flag:false as boolean
@@ -29,6 +29,6 @@ export const useOrder=()=>{
 
 
     return{
-        showOrderProduct
+        showOrderProduct,orderData,modalOpenFlag
     }
 }

@@ -60,3 +60,25 @@ export const submitForm = (form:Ref<null|HTMLElement>) => {
 export const filterCustomProduct = (src:{id:number}[],id:number) => {
   return src.filter(i=>i.id===id)[0]
 }
+
+export const getDateDetail=(date:Date)=>{
+    const d=new Date(date)
+    const year=d.getFullYear()
+    const month=d.getMonth()+1
+    const day=d.getDate()
+    /// 10  2
+    if(month>9 && day<10){
+        return `${year}-${month}-0${day}`
+    }
+
+    // 9 13
+    if(month<10 && day>10){
+        return `${year}-0${month}-${day}`
+    }
+
+    // 3 9
+    if(month<10 && day<10){
+        return `${year}-0${month}-0${day}`
+
+    }
+}
