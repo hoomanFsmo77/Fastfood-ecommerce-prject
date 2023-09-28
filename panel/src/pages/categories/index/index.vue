@@ -23,7 +23,7 @@ const {data:product_category,pending:product_category_pending}=await useFetch('/
     <v-column col="12">
       <h6 class="mb-1">Product Category</h6>
       <VTable :head="['Category','Description','']">
-        <tr class="tr-hover " v-for="cat in product_category">
+        <tr class="tr-hover " v-if="product_category.length>0" v-for="cat in product_category">
           <td>
             <p>{{cat.name}}</p>
           </td>
@@ -38,14 +38,22 @@ const {data:product_category,pending:product_category_pending}=await useFetch('/
             </NuxtLink>
           </td>
         </tr>
+        <tr v-else class="">
+          <td colspan="3">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
     </v-column>
   </v-row>
+  <VLoader :flag="product_category_pending" />
   <v-row v-if="!blog_category_pending">
     <v-column col="12">
       <h6 class="mb-1">Blog Category</h6>
       <VTable :head="['Category','']">
-        <tr class="tr-hover " v-for="cat in blog_category">
+        <tr class="tr-hover " v-if="blog_category.length>0" v-for="cat in blog_category">
           <td>
             <p>{{cat.name}}</p>
           </td>
@@ -57,10 +65,18 @@ const {data:product_category,pending:product_category_pending}=await useFetch('/
             </div>
           </td>
         </tr>
+
+        <tr v-else class="">
+          <td colspan="3">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
     </v-column>
   </v-row>
-
+  <VLoader :flag="blog_category_pending" />
 </template>
 
 <style scoped>

@@ -17,7 +17,7 @@ const {data,pending}=await useFetch('/api/coupons',{
   <v-row v-if="!pending">
     <v-column col="12">
       <VTable :head="['Code','Percent','Expire at','']">
-        <template v-for="coupon in data">
+        <template v-if="data.length>0" v-for="coupon in data">
           <tr v-if="coupon.percent!==0" class="tr-hover " >
             <td>
               <p>
@@ -42,10 +42,18 @@ const {data,pending}=await useFetch('/api/coupons',{
           </tr>
         </template>
 
+        <tr v-else class="">
+          <td colspan="5">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
 
     </v-column>
   </v-row>
+  <VLoader :flag="pending" />
 </template>
 
 <style scoped>

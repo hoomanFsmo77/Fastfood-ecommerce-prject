@@ -53,7 +53,7 @@ onMounted(()=>{
     </v-column>
   </v-row>
   <v-row class="mb-2">
-    <v-column v-if="!transactions_data_pending" col="6" class="!pl-0">
+    <v-column v-if="!transactions_data_pending" md="6" col="12" class="md:!pl-0 mb-2 md:mb-0">
       <div  class="card">
         <div class="mb-1.5 ml-1.3">
           <h5 class="uppercase font-600">transactions : {{total_data.transactions}}</h5>
@@ -61,7 +61,7 @@ onMounted(()=>{
         <div  class="h-[200px]" ref="transactionChart"></div>
       </div>
     </v-column>
-    <v-column v-if="!orders_data_pending" col="6" class="!pr-0">
+    <v-column v-if="!orders_data_pending" md="6" col="12" class="md:!pr-0">
       <div  class="card">
         <div class="mb-1.5 ml-1.3">
           <h5 class="uppercase font-600">orders : {{total_data.orders}}</h5>
@@ -71,7 +71,7 @@ onMounted(()=>{
     </v-column>
   </v-row>
   <v-row class="mb-2" v-if="!total_data_pending" :no-p="true" col-gap="1rem">
-    <v-column col="3" >
+    <v-column col="12" class="mb-1.5 md:mb-0" md="3" >
       <div class="card">
         <div class="flex justify-between items-center mb-0.5">
           <div>
@@ -90,7 +90,7 @@ onMounted(()=>{
         </p>
       </div>
     </v-column>
-    <v-column col="4">
+    <v-column col="12" class="mb-1.5 md:mb-0" md="4">
       <div class="card ">
         <div class="flex justify-between items-center mb-0.5">
           <div>
@@ -109,7 +109,7 @@ onMounted(()=>{
         </p>
       </div>
     </v-column>
-    <v-column col="3" >
+    <v-column col="12" class="mb-1.5 md:mb-0" md="3" >
       <div class="card ">
         <div class="flex justify-between items-center mb-0.5">
           <div>
@@ -130,7 +130,7 @@ onMounted(()=>{
     </v-column>
   </v-row>
   <v-row class="mb-2" v-if="!total_data_pending" :no-p="true" col-gap="1rem">
-    <v-column col="3" >
+    <v-column  col="12" class="mb-1.5 md:mb-0" md="3" >
       <div class="card">
         <div class="flex justify-between items-center mb-0.5">
           <div>
@@ -149,7 +149,7 @@ onMounted(()=>{
         </p>
       </div>
     </v-column>
-    <v-column col="4" >
+    <v-column  col="12" class="mb-1.5 md:mb-0" md="4" >
       <div class="card ">
         <div class="flex justify-between items-center mb-0.5">
           <div>
@@ -178,7 +178,7 @@ onMounted(()=>{
         <VTable :head="['product','link','price','status']">
           <tr class="tr-hover " v-for="product in popular_data">
             <td>
-              <div class="flex gap-1.5 items-center">
+              <div class="flex md:flex-row flex-col gap-1.5 items-center">
                 <nuxt-img width="70" :src="product.primary_image"/>
                 <p>
                   {{product.caption}}

@@ -20,7 +20,7 @@ const {data,pending}=await useFetch('/api/users',{
   <v-row v-if="!pending">
     <v-column col="12">
       <VTable :head="['Full Name','Email','Phone','Registered at','']">
-        <tr class="tr-hover " v-for="user in data.users">
+        <tr v-if="data.users.length>0" class="tr-hover " v-for="user in data.users">
           <td>
             <div class="flex items-center gap-1">
               <nuxt-img width="40" height="40" class="rounded-full h-[40px] object-cover w-[40px]" :src="user.profile_image" />
@@ -51,9 +51,17 @@ const {data,pending}=await useFetch('/api/users',{
             </NuxtLink>
           </td>
         </tr>
+        <tr v-else class="">
+          <td colspan="5">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
 
       <VPagination
+          v-if="data.users.length>0"
         :total="data.meta.total"
         :current_page="data.meta.current_page"
         :next-page="data.meta.nextPage"
@@ -63,7 +71,7 @@ const {data,pending}=await useFetch('/api/users',{
     </v-column>
   </v-row>
 
-
+  <VLoader :flag="pending" />
 
 </template>
 

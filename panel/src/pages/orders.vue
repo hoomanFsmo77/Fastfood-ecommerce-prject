@@ -21,7 +21,7 @@ const {showOrderProduct,orderData,modalOpenFlag}=useOrder()
   <v-row v-if="!pending">
     <v-column col="12">
       <VTable :head="['Order Num.','User','Status','Payment Status','Pay Amount','Create at','Products']">
-        <tr class="tr-hover " v-for="order in data.orders">
+        <tr class="tr-hover " v-if="data.orders.length>0" v-for="order in data.orders">
           <td>
             <p>{{order.id}}</p>
           </td>
@@ -59,9 +59,17 @@ const {showOrderProduct,orderData,modalOpenFlag}=useOrder()
             </button>
           </td>
         </tr>
+        <tr v-else class="">
+          <td colspan="5">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
 
       <VPagination
+          v-if="data.orders.length>0"
           :total="data.meta.total"
           :current_page="data.meta.current_page"
           :next-page="data.meta.nextPage"
@@ -70,7 +78,7 @@ const {showOrderProduct,orderData,modalOpenFlag}=useOrder()
 
     </v-column>
   </v-row>
-
+  <VLoader :flag="pending" />
 
   <teleport v-if="modalOpenFlag && !orderData.flag" to=".modal-body">
     <h5 class="font-500 mb-1.5">

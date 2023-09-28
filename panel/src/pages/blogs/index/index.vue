@@ -21,7 +21,7 @@ const {public:{blog_page}}=useRuntimeConfig()
   <v-row v-if="!pending">
     <v-column col="12">
       <VTable :head="['blog','title','category','link','Author','Date','Comments','']">
-        <tr class="tr-hover " v-for="blog in data.blogs">
+        <tr class="tr-hover " v-if="data.blogs.length>0" v-for="blog in data.blogs">
           <td>
             <nuxt-img width="70" :src="blog.image_xs"/>
           </td>
@@ -61,10 +61,17 @@ const {public:{blog_page}}=useRuntimeConfig()
             </NuxtLink>
           </td>
         </tr>
-
+        <tr v-else class="">
+          <td colspan="5">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
 
       <VPagination
+          v-if="data.blogs.length>0"
           :total="data.meta.total"
           :current_page="data.meta.current_page"
           :next-page="data.meta.nextPage"
@@ -73,6 +80,7 @@ const {public:{blog_page}}=useRuntimeConfig()
 
     </v-column>
   </v-row>
+  <VLoader :flag="pending" />
 </template>
 
 <style scoped>

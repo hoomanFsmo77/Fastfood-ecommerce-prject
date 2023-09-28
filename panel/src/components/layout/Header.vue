@@ -22,7 +22,7 @@ const {public:{callback_logout}}:any=useRuntimeConfig()
         <VDropdown :has-sub="false" direction="down">
           <template #top>
            <div class="relative">
-             <nuxt-img width="40" class="rounded-full cursor-pointer" :src="data?.user?.image || '/cover.jpeg'"/>
+             <nuxt-img width="40" class="rounded-full cursor-pointer md:w-[40px] w-[55px]" :src="data?.user?.image || '/cover.jpeg'"/>
              <span class="absolute right-0 bottom-0 w-0.7 h-0.7 rounded-full bg-green-600 "></span>
            </div>
           </template>

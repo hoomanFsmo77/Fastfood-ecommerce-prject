@@ -21,7 +21,7 @@ const {public:{product_page}}=useRuntimeConfig()
   <v-row v-if="!pending">
     <v-column col="12">
       <VTable :head="['product','title','category','link','price','quantity','status','']">
-        <tr class="tr-hover " v-for="product in data.products">
+        <tr class="tr-hover " v-if="data.products.length>0" v-for="product in data.products">
           <td>
             <nuxt-img width="70" :src="product.primary_image"/>
           </td>
@@ -75,10 +75,18 @@ const {public:{product_page}}=useRuntimeConfig()
             </NuxtLink>
           </td>
         </tr>
+        <tr v-else class="">
+          <td colspan="5">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
 
       </VTable>
 
       <VPagination
+          v-if="data.products.length>0"
           :total="data.meta.total"
           :current_page="data.meta.current_page"
           :next-page="data.meta.nextPage"
@@ -87,6 +95,7 @@ const {public:{product_page}}=useRuntimeConfig()
 
     </v-column>
   </v-row>
+  <VLoader :flag="pending" />
 </template>
 
 <style scoped>

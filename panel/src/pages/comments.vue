@@ -59,7 +59,7 @@ const showComment = (type:'product'|'blog',body:string) => {
     <v-column col="12">
       <h6 class="mb-1">Product Comments</h6>
       <VTable :head="['Author','Product','rating','status','date','']">
-        <tr class="tr-hover " v-for="comment in product_comments.comments">
+        <tr class="tr-hover " v-if="product_comments.comments.length>0" v-for="comment in product_comments.comments">
           <td>
             <div class="flex items-center gap-1">
               <nuxt-img width="40" height="40" class="rounded-full h-[40px] object-cover w-[40px]" :src="comment.author_image" />
@@ -108,9 +108,17 @@ const showComment = (type:'product'|'blog',body:string) => {
            </div>
           </td>
         </tr>
+        <tr v-else class="">
+          <td colspan="6">
+            <p class="text-center">
+              No Data.
+            </p>
+          </td>
+        </tr>
       </VTable>
 
       <VPagination
+          v-if="product_comments.comments.length>0"
           :total="product_comments.meta.total"
           :current_page="product_comments.meta.current_page"
           :next-page="product_comments.meta.nextPage"
@@ -119,11 +127,12 @@ const showComment = (type:'product'|'blog',body:string) => {
       />
     </v-column>
   </v-row>
+  <VLoader :flag="product_comments_pending" />
   <v-row v-if="!blog_comments_pending">
     <v-column col="12">
       <h6 class="mb-1">Blog Comments</h6>
         <VTable :head="['Author','Blog','status','date','']">
-        <tr class="tr-hover " v-for="comment in blog_comments.comments">
+        <tr class="tr-hover " v-if="blog_comments.comments.length>0" v-for="comment in blog_comments.comments">
           <td>
             <div class="flex items-center gap-1">
               <nuxt-img width="40" height="40" class="rounded-full h-[40px] object-cover w-[40px]" :src="comment.author_image" />
@@ -167,9 +176,17 @@ const showComment = (type:'product'|'blog',body:string) => {
             </div>
           </td>
         </tr>
+          <tr v-else class="">
+            <td colspan="5">
+              <p class="text-center">
+                No Data.
+              </p>
+            </td>
+          </tr>
       </VTable>
 
       <VPagination
+          v-if="blog_comments.comments.length>0"
           :total="blog_comments.meta.total"
           :current_page="blog_comments.meta.current_page"
           :next-page="blog_comments.meta.nextPage"
@@ -180,6 +197,7 @@ const showComment = (type:'product'|'blog',body:string) => {
 
     </v-column>
   </v-row>
+  <VLoader :flag="blog_comments_pending" />
 </template>
 
 <style scoped>
